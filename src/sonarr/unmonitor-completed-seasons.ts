@@ -5,7 +5,7 @@ import * as throttler from 'async-throttle'
 
 import { Episode, Series, SeriesSeason } from './models'
 
-const rooturl = 'http://storage.nativecode.local:8989/api'
+const rooturl = process.env.SONARR_ENDPOINT || 'http://storage.nativecode.local:8989/api'
 const throttle = throttler(os.cpus().length)
 const log: debug.IDebugger = debug('nativecode:nas-scripts')
 
@@ -103,7 +103,7 @@ const disableSeasonMonitor = async (seriesId: number, seasonNumber: number): Pro
   throw new Error(`Failed to update season ${seasonNumber} for series ${series.id}.`)
 }
 
-const main = async (): Promise<void> => {
+export const UnmonitorCompletedSeasons = async (): Promise<void> => {
   log(`Checking for completed monitored seasons, throttled to ${os.cpus().length}...`)
   const shows = await getSeries()
   await Promise.all(shows.map(series => throttle(async () => {
@@ -117,4 +117,4 @@ const main = async (): Promise<void> => {
   })))
 }
 
-main()
+UnmonitorCompletedSeasons()
