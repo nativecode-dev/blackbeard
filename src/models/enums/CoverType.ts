@@ -1,4 +1,4 @@
-export enum SeriesCoverType {
+export enum CoverType {
   Banner = "banner",
   FanArt = "fanart",
   Poster = "poster",

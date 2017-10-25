@@ -1,4 +1,4 @@
-import { Quality } from './Quality'
+import { Quality } from '../../models'
 
 export interface EpisodeFile {
   dateAdded: Date

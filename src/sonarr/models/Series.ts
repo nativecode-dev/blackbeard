@@ -1,6 +1,5 @@
 import { SeriesStatus, SeriesType } from './enums'
-import { Rating } from './Rating'
-import { SeriesImage } from './SeriesImage'
+import { Image, Rating } from '../../models'
 import { SeriesSeason } from './SeriesSeason'
 import { SeriesStatistics } from './SeriesStatistics'
 import { SeriesTitle } from './SeriesTitle'
@@ -16,7 +15,7 @@ export interface Series {
   firstAired: Date
   genres: string[]
   id: number
-  images: SeriesImage[]
+  images: Image[]
   imdbId: string
   lastInfoSync: Date
   monitored: boolean

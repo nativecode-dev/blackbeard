@@ -18,6 +18,7 @@
     "node-fetch": "^1.7.3"
   },
   "scripts": {
-    "start": "cross-env DEBUG=nativecode:nas-scripts:* ts-node src/sonarr/unmonitor-completed-seasons.ts"
+    "unmonitor-movies": "cross-env DEBUG=nativecode:nas-scripts:info* ts-node src/radarr/unmonitor-completed-movies.ts",
+    "unmonitor-shows": "cross-env DEBUG=nativecode:nas-scripts:info* ts-node src/sonarr/unmonitor-completed-seasons.ts"
   }
 }
