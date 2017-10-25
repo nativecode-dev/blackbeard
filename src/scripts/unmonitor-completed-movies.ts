@@ -1,7 +1,7 @@
 import * as fetch from 'node-fetch'
 import { Http, HttpMethod, LogDebug, LogError, LogInfo, PatchPutPost, Throttle } from '../http'
 
-import { Movie, MovieQuality } from './models'
+import { Movie, MovieQuality } from '../models/radarr'
 
 const Init = (method: HttpMethod = HttpMethod.Get, body: any = undefined): fetch.RequestInit => {
   return {
@@ -15,7 +15,7 @@ const Init = (method: HttpMethod = HttpMethod.Get, body: any = undefined): fetch
   }
 }
 
-const RootUrl = 'http://storage.nativecode.local:7878/api'
+const RootUrl = process.env.RADARR_ENDPOINT || 'http://storage.nativecode.local:7878/api'
 
 const getMovies = () => Http<Movie[]>(`${RootUrl}/movie`, Init())
 const getProfiles = () => Http<MovieQuality[]>(`${RootUrl}/profile`, Init())

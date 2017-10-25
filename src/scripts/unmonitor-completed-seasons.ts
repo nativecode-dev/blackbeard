@@ -1,12 +1,25 @@
-import { Http, Throttle, LogDebug, LogError, LogInfo } from '../http'
-import { Episode, Series, SeriesSeason } from './models'
+import * as debug from 'debug'
+import { Http, HttpMethod, Throttle, LogDebug, LogError, LogInfo, PatchPutPost } from '../http'
+import { Episode, Series, SeriesSeason } from '../models/sonarr'
 
-const rooturl = process.env.SONARR_ENDPOINT || 'http://storage.nativecode.local:8989/api'
+const Init = (method: HttpMethod = HttpMethod.Get, body: any = undefined): RequestInit => {
+  return {
+    body: PatchPutPost.some(x => x === method) ? body : undefined,
+    headers: {
+      'X-Api-Key': process.env.APIKEY_SONARR || '',
+      'accept': 'application/json,text/json',
+      'content-type': 'application/json'
+    },
+    method,
+  }
+}
 
-const getSeries = async (): Promise<Series[]> => Http<Series[]>(`${rooturl}/series`)
-const getSeriesById = async (seriesId: string): Promise<Series> => Http<Series>(`${rooturl}/series/${seriesId}`)
-const getEpisodes = async (seriesId: number): Promise<Episode[]> => Http<Episode[]>(`${rooturl}/episode?seriesId=${seriesId}`)
-const putSeries = async (series: Series): Promise<Series> => Http<Series>(`${rooturl}/series`, HttpMethod.Put, series)
+const RootUrl = process.env.SONARR_ENDPOINT || 'http://storage.nativecode.local:8989/api'
+
+const getSeries = async (): Promise<Series[]> => Http<Series[]>(`${RootUrl}/series`, Init())
+const getSeriesById = async (seriesId: string): Promise<Series> => Http<Series>(`${RootUrl}/series/${seriesId}`, Init())
+const getEpisodes = async (seriesId: number): Promise<Episode[]> => Http<Episode[]>(`${RootUrl}/episode?seriesId=${seriesId}`, Init())
+const putSeries = async (series: Series): Promise<Series> => Http<Series>(`${RootUrl}/series`, Init(HttpMethod.Put, series))
 
 const processSeason = async (series: Series, season: SeriesSeason, episodes: Episode[]): Promise<void> => {
   const key = `${series.id}`
@@ -61,7 +74,7 @@ const disableSeasonMonitor = async (seriesId: number, seasonNumber: number): Pro
 export const UnmonitorCompletedSeasons = async (): Promise<void> => {
   LogInfo(`Checking for completed monitored seasons...`)
   const shows = await getSeries()
-  await Promise.all(shows.map(series => throttle(async () => {
+  await Promise.all(shows.map(series => Throttle(async () => {
     try {
       await processSeries(series)
       LogDebug(`Processed ${series.title} (${series.year}).`)

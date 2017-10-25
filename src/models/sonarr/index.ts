@@ -1,5 +1,5 @@
 export * from './Episode'
-export * from './Episodeile'
+export * from './EpisodeFile'
 export * from './Series'
 export * from './SeriesSeason'
 export * from './SeriesStatistics'
