@@ -1,10 +1,13 @@
+import * as debug from 'debug'
 import * as fetch from 'node-fetch'
+import * as os from 'os'
 import * as throttler from 'async-throttle'
 
 import { Episode, Series, SeriesSeason } from './models'
 
 const rooturl = 'http://storage.nativecode.local:8989/api'
-const throttle = throttler(8)
+const throttle = throttler(os.cpus().length)
+const log: debug.IDebugger = debug('nativecode:nas-scripts')
 
 interface SeasonCompleted {
   seriesId: number
@@ -73,7 +76,7 @@ const processSeason = async (series: Series, season: SeriesSeason, episodes: Epi
       })
 
     if (completed) {
-      console.log(`Completed, but still monitoring: ${series.title}, season: ${seasonNumber}.`)
+      log(`Completed, but still monitoring: ${series.title}, season: ${seasonNumber}.`)
       await update(series.id, { seasonNumber, seriesId })
     }
   }
@@ -81,18 +84,25 @@ const processSeason = async (series: Series, season: SeriesSeason, episodes: Epi
 
 const processSeries = async (series: Series): Promise<void> => {
   const episodes = await getEpisodes(series.id)
-  series.seasons.forEach(async season => processSeason(series, season, episodes))
+  series.seasons.forEach(async season => {
+    try {
+      await processSeason(series, season, episodes)
+    } catch (error) {
+      log(error)
+    }
+  })
 }
 
 const update = async (seriesId: number, completed: SeasonCompleted): Promise<void> => {
   const series = await getSeriesById(seriesId.toString())
+  const logger = debug(`${log.namespace}:${series.cleanTitle}`)
   const seasonNumber = completed.seasonNumber
   const season = series.seasons.find(s => s.seasonNumber == seasonNumber)
 
   if (season) {
     season.monitored = false
     await putSeries(series)
-    console.log(`Turned off monitoring for season ${seasonNumber} of ${series.title}.`)
+    logger(`Turned off monitoring for ${series.title}, season ${seasonNumber}.`)
     return
   }
 
@@ -100,8 +110,17 @@ const update = async (seriesId: number, completed: SeasonCompleted): Promise<voi
 }
 
 const main = async (): Promise<void> => {
+  log(`Checking for completed monitored seasons, throttled to ${os.cpus().length}...`)
   const shows = await getSeries()
-  await Promise.all(shows.map(series => throttle(async () => processSeries(series))))
+  await Promise.all(shows.map(series => throttle(async () => {
+    try {
+      log(`Processing ${series.title} (${series.year})...`)
+      await processSeries(series)
+      log(`Processed ${series.title} (${series.year}).`)
+    } catch (error) {
+      log(error)
+    }
+  })))
 }
 
 main()

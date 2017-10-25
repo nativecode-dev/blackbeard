@@ -5,16 +5,19 @@
   "author": "Mike Pham <support@nativecode.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/debug": "^0.0.30",
     "@types/node-fetch": "^1.6.7",
+    "cross-env": "^5.1.0",
     "ts-node": "^3.3.0",
     "tslint": "^5.8.0",
     "typescript": "^2.5.3"
   },
   "dependencies": {
     "async-throttle": "^1.1.0",
+    "debug": "^3.1.0",
     "node-fetch": "^1.7.3"
   },
   "scripts": {
-    "start": "ts-node src/sonarr/unmonitor-completed-seasons.ts"
+    "start": "cross-env DEBUG=nativecode:nas-scripts:* ts-node src/sonarr/unmonitor-completed-seasons.ts"
   }
 }
