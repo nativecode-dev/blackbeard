@@ -9,11 +9,6 @@ const rooturl = 'http://storage.nativecode.local:8989/api'
 const throttle = throttler(os.cpus().length)
 const log: debug.IDebugger = debug('nativecode:nas-scripts')
 
-interface SeasonCompleted {
-  seriesId: number
-  seasonNumber: number
-}
-
 enum HttpMethod {
   Get = 'GET',
   Delete = 'DELETE',
@@ -56,7 +51,7 @@ const http = async <T>(url: string, method: HttpMethod = HttpMethod.Get, body: a
 const getSeries = async (): Promise<Series[]> => http<Series[]>(`${rooturl}/series`)
 const getSeriesById = async (seriesId: string): Promise<Series> => http<Series>(`${rooturl}/series/${seriesId}`)
 const getEpisodes = async (seriesId: number): Promise<Episode[]> => http<Episode[]>(`${rooturl}/episode?seriesId=${seriesId}`)
-const putSeries = async (series: Partial<Series>): Promise<Series> => http<Series>(`${rooturl}/series`, HttpMethod.Put, series)
+const putSeries = async (series: Series): Promise<Series> => http<Series>(`${rooturl}/series`, HttpMethod.Put, series)
 
 const processSeason = async (series: Series, season: SeriesSeason, episodes: Episode[]): Promise<void> => {
   const key = `${series.id}`
@@ -77,7 +72,7 @@ const processSeason = async (series: Series, season: SeriesSeason, episodes: Epi
 
     if (completed) {
       log(`Completed, but still monitoring: ${series.title}, season: ${seasonNumber}.`)
-      await update(series.id, { seasonNumber, seriesId })
+      await disableSeasonMonitor(series.id, seasonNumber)
     }
   }
 }
@@ -93,10 +88,9 @@ const processSeries = async (series: Series): Promise<void> => {
   })
 }
 
-const update = async (seriesId: number, completed: SeasonCompleted): Promise<void> => {
+const disableSeasonMonitor = async (seriesId: number, seasonNumber: number): Promise<void> => {
   const series = await getSeriesById(seriesId.toString())
   const logger = debug(`${log.namespace}:${series.cleanTitle}`)
-  const seasonNumber = completed.seasonNumber
   const season = series.seasons.find(s => s.seasonNumber == seasonNumber)
 
   if (season) {
