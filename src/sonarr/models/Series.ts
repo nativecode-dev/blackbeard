@@ -1,0 +1,47 @@
+import { SeriesStatus, SeriesType } from './enums'
+import { Rating } from './Rating'
+import { SeriesImage } from './SeriesImage'
+import { SeriesSeason } from './SeriesSeason'
+import { SeriesStatistics } from './SeriesStatistics'
+import { SeriesTitle } from './SeriesTitle'
+
+export interface Series {
+  added: Date
+  airTime: string
+  alternativeTitles: SeriesTitle[]
+  certification: string
+  cleanTitle: string
+  episodeCount: number
+  episodeFileCount: number
+  firstAired: Date
+  genres: string[]
+  id: number
+  images: SeriesImage[]
+  imdbId: string
+  lastInfoSync: Date
+  monitored: boolean
+  network: string
+  overview: string
+  path: string
+  previousAiring: Date
+  profileId: number
+  qualityProfileId: number
+  ratings: Rating
+  runtime: number
+  seriesType: SeriesType
+  seasonCount: number
+  seasonFolder: string
+  seasons: SeriesSeason[]
+  sizeOnDisk: number
+  sortTitle: string
+  status: SeriesStatus
+  tags: string[]
+  title: string
+  titleSlug: string
+  tvdbId: number
+  tvMazeId: number
+  tvRageId: number
+  totalEpisodeCount: number
+  useSceneNumbering: boolean
+  year: number
+}

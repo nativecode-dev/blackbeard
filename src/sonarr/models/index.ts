@@ -1,0 +1,7 @@
+export * from './Episode'
+export * from './Rating'
+export * from './Series'
+export * from './SeriesImage'
+export * from './SeriesSeason'
+export * from './SeriesStatistics'
+export * from './SeriesTitle'
