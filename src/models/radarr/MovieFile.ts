@@ -1,10 +1,11 @@
-import { MediaInfo } from '../../models'
+import { MediaInfo, Quality } from '../../models'
 
 export interface MovieFile {
   dateAdded: Date
   id: number
-  mediaInfo: MediaInfo  
+  mediaInfo: MediaInfo
   movieId: number
+  quality: Quality
   relativePath: string
   size: number
 }

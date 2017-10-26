@@ -39,7 +39,7 @@ export class UnmonitorCompletedMovies extends Script {
   }
 
   private async processMovie(movie: Movie, profile: MovieQuality): Promise<void> {
-    if (movie.hasFile && movie.monitored && movie.qualityProfileId === profile.cutoff.id) {
+    if (movie.hasFile && movie.monitored && movie.movieFile.quality.quality.id === profile.cutoff.id) {
       try {
         await this.radarr.toggleMonitor(movie.id, false)
       } catch (error) {
