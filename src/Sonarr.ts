@@ -27,7 +27,7 @@ export class Sonarr extends Client {
     const series = await this.show(seriesId)
     series.monitored = toggle
     await this.update(series)
-    this.log.info(`turned ${this.onoff(toggle)} monitoring for: ${series.title} (${series.year}).`)
+    this.log.info(`turned ${this.onoff(toggle)} monitoring for: "${series.title}" (${series.year}).`)
   }
 
   public async toggleSeasonMonitor(seriesId: number, seasonNumber: number, toggle: boolean): Promise<void> {
@@ -37,7 +37,7 @@ export class Sonarr extends Client {
     if (season) {
       season.monitored = toggle
       await this.update(series)
-      this.log.info(`turned ${this.onoff(toggle)} monitoring for: ${series.title} (${series.year}), season: ${seasonNumber}.`)
+      this.log.info(`turned ${this.onoff(toggle)} monitoring for: "${series.title}" (${series.year}), season: ${seasonNumber}.`)
       return
     }
 

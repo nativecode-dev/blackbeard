@@ -12,7 +12,7 @@ export class UnmonitorCompletedSeasons extends Script {
   }
 
   protected async run(...args: string[]): Promise<void> {
-    this.log.info(`checking for completed monitored seasons...`)
+    this.log.info('checking for seasons with quality cutoff met...')
 
     try {
       const shows = await this.sonarr.shows()
@@ -20,7 +20,7 @@ export class UnmonitorCompletedSeasons extends Script {
       await Promise.all(shows.map(series => this.throttle(async () => {
         try {
           await this.processSeries(this.sonarr, series)
-          this.log.trace(`processed ${series.title} (${series.year}).`)
+          this.log.trace(`processed "${series.title}" (${series.year}).`)
         } catch (error) {
           this.log.error(error)
         }

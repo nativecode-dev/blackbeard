@@ -12,7 +12,7 @@ export class UnmonitorCompletedMovies extends Script {
   }
 
   protected async run(...args: string[]): Promise<void> {
-    this.log.info('checking for completed monitored movies...')
+    this.log.info('checking for movies with quality cutoff met...')
 
     try {
       const profiles = await this.radarr.profiles()
@@ -22,8 +22,12 @@ export class UnmonitorCompletedMovies extends Script {
 
       await Promise.all(
         movies.map(async movie => this.throttle(async () => {
-          await this.processMovie(movie, profile(movie))
-          this.log.trace(`processed ${movie.title} (${movie.year}) [${movie.id}]`)
+          try {
+            await this.processMovie(movie, profile(movie))
+            this.log.trace(`processed "${movie.title}" (${movie.year}) [${movie.id}]`)
+          } catch (error) {
+            this.log.error(`failed to process "${movie.title}" (${movie.year}) [${movie.id}]: ${error}`)
+          }
         }))
       )
 

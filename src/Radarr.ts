@@ -32,7 +32,7 @@ export class Radarr extends Client {
     const movie = await this.movie(movieId)
     movie.monitored = toggle
     await this.update(movie)
-    this.log.info(`turned ${this.onoff(toggle)} monitoring for: ${movie.title} (${movie.year}).`)
+    this.log.info(`turned ${this.onoff(toggle)} monitoring for: "${movie.title}" (${movie.year}).`)
   }
 
   public update(movie: Movie): Promise<void> {
