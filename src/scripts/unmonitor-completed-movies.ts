@@ -12,7 +12,7 @@ export class UnmonitorCompletedMovies extends Script {
   }
 
   protected async run(...args: string[]): Promise<void> {
-    this.log.info('checking for movies with quality cutoff met...')
+    this.log.info('checking for movies with quality cutoff met')
 
     try {
       const profiles = await this.radarr.profiles()

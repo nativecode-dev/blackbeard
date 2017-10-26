@@ -12,7 +12,7 @@ export class UnmonitorCompletedSeasons extends Script {
   }
 
   protected async run(...args: string[]): Promise<void> {
-    this.log.info('checking for seasons with quality cutoff met...')
+    this.log.info('checking for seasons with quality cutoff met')
 
     try {
       const shows = await this.sonarr.shows()

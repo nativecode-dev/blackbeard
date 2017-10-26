@@ -1,4 +1,7 @@
 import * as fetch from 'node-fetch'
+import { ILogger, Logger } from './Logger'
+
+const log: ILogger = Logger.extend('http')
 
 export enum HttpMethod {
   Get = 'GET',
@@ -15,21 +18,19 @@ export const PatchPostPut: HttpMethod[] = [
   HttpMethod.Put,
 ]
 
-export async function Http<T>(url: string, init: RequestInit) {
-  try {
-    const request = new fetch.Request(url, init)
-    const response = await fetch.default(request)
+export async function Http<T>(url: string, init: RequestInit): Promise<T> {
+  log.trace(`sending request ${url}`)
+  const request = new fetch.Request(url, init)
+  const response = await fetch.default(request)
 
-    switch (response.status) {
-      case 200:
-      case 201:
-      case 202:
-        return await response.json() as T
-
-      default:
-        throw new Error(`[${response.status}]: ${response.statusText} - Failed to ${init.method} from ${url}.`)
+  if (response.ok) {
+    log.silly(`${response.status}:${response.statusText} ${url}`)
+    try {
+      return await response.json()
+    } catch (error) {
+      log.error(error)
     }
-  } catch (error) {
-    throw error
   }
+
+  throw new Error(`[${response.status}]: ${response.statusText} - Failed to ${init.method} from ${url}`)
 }

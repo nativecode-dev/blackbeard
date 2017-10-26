@@ -52,8 +52,9 @@ export class Sonarr extends Client {
     return Http<Series>(`${this.endpoint}/series/${seriesId}`, this.request())
   }
 
-  public shows(): Promise<Series[]> {
-    return Http<Series[]>(`${this.endpoint}/series`, this.request())
+  public async shows(): Promise<Series[]> {
+    const series = await Http<Series[]>(`${this.endpoint}/series`, this.request())
+    return series.sort((a, b) => a.sortTitle < b.sortTitle ? -1 : 1)
   }
 
   public update(series: Series): Promise<void> {
