@@ -1,11 +1,5 @@
-import { QualityType } from '../../models'
-import { MovieQualityType } from './MovieQualityType'
+import { Profile } from '../../models'
 
-export interface MovieQuality {
-  cutoff: QualityType
-  id: number
-  items: MovieQualityType[]
-  language: string
-  name: string
+export interface MovieQuality extends Profile {
   preferredTags: string
 }

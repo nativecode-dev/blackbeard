@@ -1,3 +1,5 @@
+export * from '../index'
+
 export * from './Episode'
 export * from './EpisodeFile'
 export * from './Series'

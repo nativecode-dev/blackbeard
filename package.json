@@ -8,8 +8,10 @@
     "@types/debug": "^0.0.30",
     "@types/node-fetch": "^1.6.7",
     "cross-env": "^5.1.0",
+    "rimraf": "^2.6.2",
     "ts-node": "^3.3.0",
     "tslint": "^5.8.0",
+    "tslint-config-standard": "^6.0.1",
     "typescript": "^2.5.3"
   },
   "dependencies": {
@@ -18,7 +20,12 @@
     "node-fetch": "^1.7.3"
   },
   "scripts": {
-    "unmonitor-movies": "cross-env DEBUG=nativecode:nas-scripts:info* ts-node src/scripts/unmonitor-completed-movies.ts",
-    "unmonitor-shows": "cross-env DEBUG=nativecode:nas-scripts:info* ts-node src/scripts/unmonitor-completed-seasons.ts"
+    "build": "tsc --project tsconfig.json",
+    "prebuild": "yarn run clean",
+    "postbuild": "yarn run lint",
+    "clean": "rimraf dist",
+    "lint": "tslint src/**/*.ts",
+    "unmonitor-movies": "cross-env DEBUG=nativecode:*,-*:trace ts-node src/scripts/unmonitor-completed-movies.ts",
+    "unmonitor-shows": "cross-env DEBUG=nativecode:*,-*:trace ts-node src/scripts/unmonitor-completed-seasons.ts"
   }
 }
