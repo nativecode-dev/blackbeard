@@ -35,13 +35,13 @@ export class Radarr extends Client {
     this.log.info(`turned ${this.onoff(toggle)} monitoring for: "${movie.title}" (${movie.year})`)
   }
 
-  public update(movie: Movie): Promise<void> {
-    return Http<void>(`${this.endpoint}/movie`, this.request<Movie>(HttpMethod.Put, movie))
+  public update(movie: Movie): Promise<Movie> {
+    return Http<Movie>(`${this.endpoint}/movie`, this.request<Movie>(HttpMethod.Put, movie))
   }
 
   private request<T>(method: HttpMethod = HttpMethod.Get, body?: T): RequestInit {
     return {
-      body: PatchPostPut.some(ppp => ppp.toLowerCase() === method.toLowerCase()) ? body : undefined,
+      body: PatchPostPut.some(ppp => ppp.toLowerCase() === method.toLowerCase()) ? JSON.stringify(body) : undefined,
       headers: {
         'accept': 'application/json,text/json',
         'content-type': 'application/json',

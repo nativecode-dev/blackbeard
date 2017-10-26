@@ -19,12 +19,17 @@ export const PatchPostPut: HttpMethod[] = [
 ]
 
 export async function Http<T>(url: string, init: RequestInit): Promise<T> {
-  log.trace(`sending request ${url}`)
+  log.trace(`sending request to ${url}`)
+
+  if (init.body) {
+    log.trace(JSON.stringify(init.body))
+  }
+
   const request = new fetch.Request(url, init)
   const response = await fetch.default(request)
 
   if (response.ok) {
-    log.silly(`${response.status}:${response.statusText} ${url}`)
+    log.trace(`${response.status}:${response.statusText} ${url}`)
     try {
       return await response.json()
     } catch (error) {
