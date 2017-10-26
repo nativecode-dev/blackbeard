@@ -26,12 +26,13 @@ export class UnmonitorCompletedMovies extends Script {
             await this.processMovie(movie, profile(movie))
             this.log.trace(`processed "${movie.title}" (${movie.year}) [${movie.id}]`)
           } catch (error) {
-            this.log.error(`failed to process "${movie.title}" (${movie.year}) [${movie.id}]: ${error}`)
+            this.log.error(error)
+            this.log.warn(`failed to process "${movie.title}" (${movie.year}) [${movie.id}]: ${error}`)
           }
         }))
       )
 
-      this.log.info('done.')
+      this.log.info('done')
     } catch (error) {
       this.log.error(error)
     }

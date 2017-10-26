@@ -20,15 +20,16 @@ export class UnmonitorCompletedSeasons extends Script {
       await Promise.all(shows.map(series => this.throttle(async () => {
         try {
           await this.processSeries(this.sonarr, series)
-          this.log.trace(`processed "${series.title}" (${series.year}).`)
+          this.log.trace(`processed "${series.title}" (${series.year})`)
         } catch (error) {
           this.log.error(error)
         }
       })))
 
-      this.log.info('done.')
+      this.log.info('done')
     } catch (error) {
       this.log.error(error)
+      this.log.warn(error)
     }
   }
 

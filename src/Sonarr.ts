@@ -13,7 +13,7 @@ export class Sonarr extends Client {
     this.apikey = apikey
     this.endpoint = endpoint
     this.log = Logger.extend('sonarr')
-    this.log.debug(`sonarr set to use ${endpoint}.`)
+    this.log.debug(`sonarr set to use ${endpoint}`)
   }
 
   public episodes(seriesId?: number): Promise<Episode[]> {
@@ -27,7 +27,7 @@ export class Sonarr extends Client {
     const series = await this.show(seriesId)
     series.monitored = toggle
     await this.update(series)
-    this.log.info(`turned ${this.onoff(toggle)} monitoring for: "${series.title}" (${series.year}).`)
+    this.log.info(`turned ${this.onoff(toggle)} monitoring for: "${series.title}" (${series.year})`)
   }
 
   public async toggleSeasonMonitor(seriesId: number, seasonNumber: number, toggle: boolean): Promise<void> {
@@ -37,11 +37,11 @@ export class Sonarr extends Client {
     if (season) {
       season.monitored = toggle
       await this.update(series)
-      this.log.info(`turned ${this.onoff(toggle)} monitoring for: "${series.title}" (${series.year}), season: ${seasonNumber}.`)
+      this.log.info(`turned ${this.onoff(toggle)} monitoring for: "${series.title}" (${series.year}), season: ${seasonNumber}`)
       return
     }
 
-    throw new Error(`season ${seasonNumber} not found for ${seriesId}.`)
+    throw new Error(`season ${seasonNumber} not found for ${seriesId}`)
   }
 
   public profiles(): Promise<QualityProfile[]> {

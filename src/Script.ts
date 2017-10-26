@@ -11,7 +11,7 @@ export abstract class Script {
   constructor(name: string, max: number = os.cpus().length) {
     this.logger = Logger.extend(name)
     this.throttler = throttle(max)
-    this.logger.debug(`throttling set to ${max}.`)
+    this.logger.debug(`throttling set to ${max}`)
   }
 
   public start(...args: string[]): Promise<void> {
