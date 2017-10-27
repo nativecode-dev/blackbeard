@@ -1,18 +1,25 @@
+import container from '../inversify.config'
+
+import { injectable } from 'inversify'
+import { LoggerFactory } from '../core'
 import { Episode, Series, SeriesSeason } from '../models/sonarr'
 import { Script, Sonarr } from '../index'
 
-export class UnmonitorCompletedSeasons extends Script {
+@injectable()
+export class UnMonitorCompletedSeasons extends Script implements UnMonitorCompletedSeasons {
   private readonly sonarr: Sonarr
 
-  constructor() {
-    super('unmonitor-completed-seasons')
-    const apikey = process.env.APIKEY_SONARR || ''
-    const url = process.env.SONARR_ENDPOINT || 'http://storage.nativecode.local:8989/api'
-    this.sonarr = new Sonarr(url, apikey)
+  constructor(logger: LoggerFactory, sonarr: Sonarr) {
+    super(logger)
+    this.sonarr = sonarr
+  }
+
+  public get name(): string {
+    return 'unmonitor-shows'
   }
 
   protected async run(...args: string[]): Promise<void> {
-    this.log.info('checking for seasons with quality cutoff met')
+    this.log.info('checking for seasons where quality cutoff is met')
 
     try {
       const shows = await this.sonarr.shows()
@@ -67,5 +74,3 @@ export class UnmonitorCompletedSeasons extends Script {
     })
   }
 }
-
-new UnmonitorCompletedSeasons().start()

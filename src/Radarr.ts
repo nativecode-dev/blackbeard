@@ -1,33 +1,36 @@
-import { Client, Http, HttpMethod, ILogger, Logger, PatchPostPut } from './core'
+import 'reflect-metadata'
+import { injectable } from 'inversify'
+import { Client, Logger, LoggerFactory, Variables } from './core'
 import { Movie, MovieQuality } from './models/radarr'
 
-export class Radarr extends Client {
+@injectable()
+export class Radarr extends Client implements Radarr {
   private readonly apikey: string
   private readonly endpoint: string
-  private readonly log: ILogger
+  private readonly log: Logger
 
-  constructor(endpoint: string, apikey: string) {
+  constructor(logger: LoggerFactory, vars: Variables) {
     super()
-    this.apikey = apikey
-    this.endpoint = endpoint
-    this.log = Logger.extend('radarr')
-    this.log.debug(`radarr set to use ${endpoint}`)
+    this.apikey = vars.get('RADARR_APIKEY')
+    this.endpoint = vars.get('RADARR_ENDPOINT', 'http://localhost:7878/api')
+    this.log = logger.create('radarr')
+    this.log.trace(`radarr set to use ${this.endpoint}`)
   }
 
   public movie(movieId: number): Promise<Movie> {
-    return Http<Movie>(`${this.endpoint}/movie/${movieId}`, this.request())
+    return this.get<Movie>(`${this.endpoint}/movie/${movieId}`)
   }
 
   public movies(): Promise<Movie[]> {
-    return Http<Movie[]>(`${this.endpoint}/movie`, this.request())
+    return this.get<Movie[]>(`${this.endpoint}/movie`)
   }
 
   public page(pageSize: number, start: number = 1): Promise<Movie[]> {
-    return Http<Movie[]>(`${this.endpoint}/movie?page=${start}&pageSize=${pageSize}`, this.request())
+    return this.get<Movie[]>(`${this.endpoint}/movie?page=${start}&pageSize=${pageSize}`)
   }
 
   public profiles(): Promise<MovieQuality[]> {
-    return Http<MovieQuality[]>(`${this.endpoint}/profile`, this.request())
+    return this.get<MovieQuality[]>(`${this.endpoint}/profile`)
   }
 
   public async toggleMonitor(movieId: number, toggle: boolean): Promise<void> {
@@ -38,18 +41,17 @@ export class Radarr extends Client {
   }
 
   public update(movie: Movie): Promise<Movie> {
-    return Http<Movie>(`${this.endpoint}/movie`, this.request<Movie>(HttpMethod.Put, movie))
+    return this.put<Movie, Movie>(`${this.endpoint}/movie`, movie)
   }
 
-  private request<T>(method: HttpMethod = HttpMethod.Get, body?: T): RequestInit {
+  protected init<T>(body?: T): RequestInit {
     return {
-      body: PatchPostPut.some(ppp => ppp.toLowerCase() === method.toLowerCase()) ? JSON.stringify(body) : undefined,
+      body: JSON.stringify(body),
       headers: {
         'accept': 'application/json,text/json',
         'content-type': 'application/json',
         'x-api-key': this.apikey,
       },
-      method,
     }
   }
 }

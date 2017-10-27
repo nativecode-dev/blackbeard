@@ -1,4 +1,7 @@
+import 'reflect-metadata'
+
 import * as fs from 'fs'
+import { injectable } from 'inversify'
 
 type NodeCallback<T> = (error: NodeJS.ErrnoException, result: T) => void
 type NodeFunction<T> = (...args: any[]) => void
@@ -15,6 +18,7 @@ function Promisify<T>(nodefn: NodeFunction<T>, ...args: any[]): Promise<T> {
   })
 }
 
+@injectable()
 export class FileSystem {
   public exists(filepath: string): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
@@ -44,5 +48,11 @@ export class FileSystem {
 
   public fileWrite(filepath: string, buffer: Buffer): Promise<void> {
     return Promisify<void>(fs.writeFile, filepath)
+  }
+
+  public async json<T>(filepath: string): Promise<T> {
+    const buffer = await this.fileRead(filepath)
+    const text = buffer.toString('utf8')
+    return JSON.parse(text)
   }
 }

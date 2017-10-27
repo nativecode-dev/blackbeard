@@ -1,24 +1,27 @@
-import { Client, Http, HttpMethod, ILogger, Logger, PatchPostPut } from './core'
+import 'reflect-metadata'
+import { injectable } from 'inversify'
+import { Client, Logger, LoggerFactory, Variables } from './core'
 import { Episode, QualityProfile, Series, SeriesSeason } from './models/sonarr'
 
+@injectable()
 export class Sonarr extends Client {
   private readonly apikey: string
   private readonly endpoint: string
-  private readonly log: ILogger
+  private readonly log: Logger
 
-  constructor(endpoint: string, apikey: string) {
+  constructor(logger: LoggerFactory, vars: Variables) {
     super()
-    this.apikey = apikey
-    this.endpoint = endpoint
-    this.log = Logger.extend('sonarr')
-    this.log.debug(`sonarr set to use ${endpoint}`)
+    this.apikey = vars.get('SONARR_APIKEY')
+    this.endpoint = vars.get('SONARR_ENDPOINT', 'http://localhost:8989/api')
+    this.log = logger.create('sonarr')
+    this.log.trace(`sonarr set to use ${this.endpoint}`)
   }
 
   public episodes(seriesId?: number): Promise<Episode[]> {
     if (seriesId) {
-      return Http<Episode[]>(`${this.endpoint}/episode?seriesId=${seriesId}`, this.request())
+      return this.get<Episode[]>(`${this.endpoint}/episode?seriesId=${seriesId}`)
     }
-    return Http<Episode[]>(`${this.endpoint}/episode`, this.request())
+    return this.get<Episode[]>(`${this.endpoint}/episode`)
   }
 
   public async toggleMonitor(seriesId: number, toggle: boolean): Promise<void> {
@@ -43,31 +46,30 @@ export class Sonarr extends Client {
   }
 
   public profiles(): Promise<QualityProfile[]> {
-    return Http<QualityProfile[]>(`${this.endpoint}/profile`, this.request())
+    return this.get<QualityProfile[]>(`${this.endpoint}/profile`)
   }
 
   public show(seriesId: number): Promise<Series> {
-    return Http<Series>(`${this.endpoint}/series/${seriesId}`, this.request())
+    return this.get<Series>(`${this.endpoint}/series/${seriesId}`)
   }
 
   public async shows(): Promise<Series[]> {
-    const series = await Http<Series[]>(`${this.endpoint}/series`, this.request())
+    const series = await this.get<Series[]>(`${this.endpoint}/series`)
     return series.sort((a, b) => a.sortTitle < b.sortTitle ? -1 : 1)
   }
 
   public update(series: Series): Promise<void> {
-    return Http<void>(`${this.endpoint}/series`, this.request(HttpMethod.Put, series))
+    return this.put<Series, void>(`${this.endpoint}/series`, series)
   }
 
-  private request<T>(method: HttpMethod = HttpMethod.Get, body?: T): RequestInit {
+  protected init<T>(body?: T): RequestInit {
     return {
-      body: PatchPostPut.some(ppp => ppp === method) ? JSON.stringify(body) : undefined,
+      body: JSON.stringify(body),
       headers: {
         'accept': 'application/json,text/json',
         'content-type': 'application/json',
         'x-api-key': this.apikey,
       },
-      method,
     }
   }
 }

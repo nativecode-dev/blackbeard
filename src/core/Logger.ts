@@ -1,7 +1,7 @@
 import * as debug from 'debug'
 
-export interface ILogger {
-  extend(namespace: string): ILogger
+export interface Logger {
+  extend(namespace: string): Logger
   debug(message: string, ...args: string[]): void
   error(message: string, ...args: string[]): void
   info(message: string, ...args: string[]): void
@@ -10,7 +10,7 @@ export interface ILogger {
   warn(message: string, ...args: string[]): void
 }
 
-class DebugLogger implements ILogger {
+export class DebugLogger implements Logger {
   private readonly writeDebug: debug.IDebugger
   private readonly writeError: debug.IDebugger
   private readonly writeInfo: debug.IDebugger
@@ -34,7 +34,7 @@ class DebugLogger implements ILogger {
     return new DebugLogger(namespace)
   }
 
-  public static derive(namespace: string): ILogger {
+  public static derive(namespace: string): Logger {
     return new DebugLogger(namespace, DefaultLogger)
   }
 
@@ -67,5 +67,4 @@ class DebugLogger implements ILogger {
   }
 }
 
-const DefaultLogger: DebugLogger = DebugLogger.create('nativecode:nas-scripts')
-export const Logger: ILogger = DefaultLogger
+export const DefaultLogger: DebugLogger = DebugLogger.create('nativecode:nas-scripts')

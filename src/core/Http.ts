@@ -1,25 +1,13 @@
+import 'reflect-metadata'
+
 import * as fetch from 'node-fetch'
-import { ILogger, Logger } from './Logger'
+import { injectable } from 'inversify'
+import { DefaultLogger, Logger } from './Logger'
 
-const log: ILogger = Logger.extend('http')
+const log: Logger = DefaultLogger.extend('http')
 
-export enum HttpMethod {
-  Get = 'GET',
-  Delete = 'DELETE',
-  Headers = 'HEAD',
-  Patch = 'PATCH',
-  Post = 'POST',
-  Put = 'PUT',
-}
-
-export const PatchPostPut: HttpMethod[] = [
-  HttpMethod.Patch,
-  HttpMethod.Post,
-  HttpMethod.Put,
-]
-
-export async function Http<T>(url: string, init: RequestInit): Promise<T> {
-  log.trace(`sending request to ${url}`)
+async function Http<T>(url: string, init: RequestInit): Promise<T> {
+  log.trace(`sending request to ${url}`, JSON.stringify(init))
 
   if (init.body) {
     log.trace(JSON.stringify(init.body))
@@ -38,4 +26,25 @@ export async function Http<T>(url: string, init: RequestInit): Promise<T> {
   }
 
   throw new Error(`[${response.status}]: ${response.statusText} - Failed to ${init.method} from ${url}`)
+}
+
+@injectable()
+export abstract class HTTP {
+  public delete<TResponse>(url: string): Promise<TResponse> {
+    return Http<TResponse>(url, this.init<void>())
+  }
+
+  public get<TResponse>(url: string): Promise<TResponse> {
+    return Http<TResponse>(url, this.init<void>())
+  }
+
+  public post<TRequest, TResponse>(url: string, body: TRequest): Promise<TResponse> {
+    return Http<TResponse>(url, this.init<TRequest>())
+  }
+
+  public put<TRequest, TResponse>(url: string, body: TRequest): Promise<TResponse> {
+    return Http<TResponse>(url, this.init<TRequest>())
+  }
+
+  protected abstract init<TRequest>(body?: TRequest): RequestInit
 }

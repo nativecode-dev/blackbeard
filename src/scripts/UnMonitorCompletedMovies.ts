@@ -1,18 +1,25 @@
+import container from '../inversify.config'
+
+import { injectable } from 'inversify'
+import { LoggerFactory } from '../core'
 import { Movie, MovieQuality } from '../models/radarr'
 import { Radarr, Script } from '../index'
 
-export class UnmonitorCompletedMovies extends Script {
+@injectable()
+export class UnMonitorCompletedMovies extends Script implements UnMonitorCompletedMovies {
   private readonly radarr: Radarr
 
-  constructor() {
-    super('unmonitor-completed-movies')
-    const apikey = process.env.APIKEY_RADARR || ''
-    const url = process.env.RADARR_ENDPOINT || 'http://storage.nativecode.local:7878/api'
-    this.radarr = new Radarr(url, apikey)
+  constructor(logger: LoggerFactory, radarr: Radarr) {
+    super(logger)
+    this.radarr = radarr
+  }
+
+  public get name(): string {
+    return 'unmonitor-movies'
   }
 
   protected async run(...args: string[]): Promise<void> {
-    this.log.info('checking for movies with quality cutoff met')
+    this.log.info('checking for movies where quality cutoff is met')
 
     try {
       const profiles = await this.radarr.profiles()
@@ -49,5 +56,3 @@ export class UnmonitorCompletedMovies extends Script {
     }
   }
 }
-
-new UnmonitorCompletedMovies().start()

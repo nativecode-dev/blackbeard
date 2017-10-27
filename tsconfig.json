@@ -4,13 +4,16 @@
     "diagnostics": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "lib": ["dom", "es2015"],
     "module": "commonjs",
+    "moduleResolution": "node",
     "noImplicitAny": false,
     "outDir": "dist",
     "pretty": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es2015"
+    "target": "es2015",
+    "types": ["reflect-metadata"]
   },
   "exclude": [
     "node_modules",
