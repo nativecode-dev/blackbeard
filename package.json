@@ -29,7 +29,9 @@
     "postbuild": "yarn run lint",
     "clean": "rimraf dist",
     "lint": "tslint src/**/*.ts",
-    "scripts": "cross-env DEBUG=nativecode:*,-*:trace ts-node src/scripts unmonitor-movies unmonitor-shows",
+    "start": "node dist/scripts all",
+    "startdev": "cross-env DEBUG=nativecode:*,-*:trace node dist/scripts all",
+    "prestartdev": "yarn run build",
     "unmonitor-movies": "cross-env DEBUG=nativecode:*,-*:trace ts-node src/scripts unmonitor-movies",
     "unmonitor-shows": "cross-env DEBUG=nativecode:*,-*:trace ts-node src/scripts unmonitor-shows"
   }

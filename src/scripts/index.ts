@@ -10,8 +10,12 @@ import { Script, ScriptType } from '../core'
 const args = process.argv
 
 if (args && args.length) {
-  const scriptname = (name: string): string => {
-    return args.find(scriptname => scriptname.toLowerCase() === name) || ''
+  console.log(args)
+  const scriptname = (name: string): boolean => {
+    if (args.some(arg => arg.toLowerCase() === 'all')) {
+      return true
+    }
+    return args.find(arg => arg.toLowerCase() === name) !== undefined
   }
 
   const scripts = container.getAll<Script>(ScriptType)
