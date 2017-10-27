@@ -7,13 +7,11 @@ import { Movie, MovieQuality } from './models/radarr'
 export class Radarr extends Client implements Radarr {
   private readonly apikey: string
   private readonly endpoint: string
-  private readonly log: Logger
 
   constructor(logger: LoggerFactory, vars: Variables) {
-    super()
+    super(logger)
     this.apikey = vars.get('RADARR_APIKEY')
     this.endpoint = vars.get('RADARR_ENDPOINT', 'http://localhost:7878/api')
-    this.log = logger.create('radarr')
     this.log.trace(`radarr set to use ${this.endpoint}`)
   }
 
@@ -42,6 +40,10 @@ export class Radarr extends Client implements Radarr {
 
   public update(movie: Movie): Promise<Movie> {
     return this.put<Movie, Movie>(`${this.endpoint}/movie`, movie)
+  }
+
+  protected get name(): string {
+    return 'radarr'
   }
 
   protected init<T>(body?: T): RequestInit {

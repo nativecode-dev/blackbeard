@@ -7,13 +7,11 @@ import { Episode, QualityProfile, Series, SeriesSeason } from './models/sonarr'
 export class Sonarr extends Client {
   private readonly apikey: string
   private readonly endpoint: string
-  private readonly log: Logger
 
   constructor(logger: LoggerFactory, vars: Variables) {
-    super()
+    super(logger)
     this.apikey = vars.get('SONARR_APIKEY')
     this.endpoint = vars.get('SONARR_ENDPOINT', 'http://localhost:8989/api')
-    this.log = logger.create('sonarr')
     this.log.trace(`sonarr set to use ${this.endpoint}`)
   }
 
@@ -60,6 +58,10 @@ export class Sonarr extends Client {
 
   public update(series: Series): Promise<void> {
     return this.put<Series, void>(`${this.endpoint}/series`, series)
+  }
+
+  protected get name(): string {
+    return 'sonarr'
   }
 
   protected init<T>(body?: T): RequestInit {
