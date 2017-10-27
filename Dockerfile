@@ -16,6 +16,7 @@ COPY package.json .
 
 RUN set -ex \
   && npm install --production \
+  && ls -lah \
   ;
 
 VOLUME ${APPDIR}

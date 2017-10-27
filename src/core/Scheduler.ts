@@ -2,22 +2,40 @@ import 'reflect-metadata'
 
 import * as schedule from 'node-schedule'
 import { injectable } from 'inversify'
-import { SchedulerJob } from './models'
 import { FileSystem } from './FileSystem'
+import { Script } from './Script'
+import { ScriptFactory } from './ScriptFactory'
+
+interface JobConfig {
+  schedule: schedule.RecurrenceRule | schedule.RecurrenceSpecDateRange | schedule.RecurrenceSpecObjLit
+  script: string
+}
 
 @injectable()
 export class Scheduler {
   private readonly files: FileSystem
+  private readonly scripts: Script[]
 
-  public async start(configfile: string): Promise<void> {
-    const config = await this.files.json<SchedulerJob[]>(configfile)
-    config.forEach((job: SchedulerJob) => this.createJob(job))
-    return Promise.resolve()
+  constructor(scripts: ScriptFactory) {
+    this.scripts = scripts.scripts()
   }
 
-  private createJob(job: SchedulerJob): schedule.Job {
-    return schedule.scheduleJob(job.name, job.schedule, (): void => {
-      // Do stuff
+  public async start(configfile: string): Promise<schedule.Job[]> {
+    return new Promise<schedule.Job[]>(async (resolve, reject) => {
+      try {
+        const config = await this.files.json<JobConfig[]>(configfile)
+        const jobs = config.map((config: JobConfig) => this.job(config))
+        return resolve(Promise.all(jobs))
+      } catch (error) {
+        reject(error)
+        throw error
+      }
+    })
+  }
+
+  private job(config: JobConfig): schedule.Job {
+    return schedule.scheduleJob(`job:${config.script}`, config.schedule, (): void => {
+      // Dispatch script execution
     })
   }
 }
