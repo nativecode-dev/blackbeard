@@ -4,5 +4,5 @@ import * as core from './core'
 
 const scheduler = container.get<core.Scheduler>(core.Scheduler)
 
-const filename = path.join(process.cwd(), '../schedule.json')
+const filename = path.join(process.cwd(), 'schedule.json')
 scheduler.start(filename)

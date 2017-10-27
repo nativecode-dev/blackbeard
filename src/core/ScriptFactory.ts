@@ -11,7 +11,7 @@ export class ScriptFactory {
     this.container = container
   }
 
-  public scripts(): Script[] {
+  public get(): Script[] {
     return this.container.getAll<Script>(ScriptType)
   }
 }

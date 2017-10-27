@@ -3,11 +3,17 @@ import * as debug from 'debug'
 export interface Logger {
   extend(namespace: string): Logger
   debug(message: string, ...args: string[]): void
+  debugJSON(mobject: any): void
   error(message: string, ...args: string[]): void
+  errorJSON(object: any): void
   info(message: string, ...args: string[]): void
+  infoJSON(object: any): void
   silly(message: string, ...args: string[]): void
+  sillyJSON(object: any): void
   trace(message: string, ...args: string[]): void
+  traceJSON(object: any): void
   warn(message: string, ...args: string[]): void
+  warnJSON(object: any): void
 }
 
 export class DebugLogger implements Logger {
@@ -46,24 +52,48 @@ export class DebugLogger implements Logger {
     this.writeDebug(message, ...args)
   }
 
+  public debugJSON(object: any): void {
+    this.debug(JSON.stringify(object))
+  }
+
   public error(message: string, ...args: string[]): void {
     this.writeError(message, ...args)
+  }
+
+  public errorJSON(object: any): void {
+    this.error(JSON.stringify(object))
   }
 
   public info(message: string, ...args: string[]): void {
     this.writeInfo(message, ...args)
   }
 
+  public infoJSON(object: any): void {
+    this.info(JSON.stringify(object))
+  }
+
   public silly(message: string, ...args: string[]): void {
     this.writeSilly(message, ...args)
+  }
+
+  public sillyJSON(object: any): void {
+    this.silly(JSON.stringify(object))
   }
 
   public trace(message: string, ...args: string[]): void {
     this.writeTrace(message, ...args)
   }
 
+  public traceJSON(object: any): void {
+    this.trace(JSON.stringify(object))
+  }
+
   public warn(message: string, ...args: string[]): void {
     this.writeWarn(message, ...args)
+  }
+
+  public warnJSON(object: any): void {
+    this.warn(JSON.stringify(object))
   }
 }
 

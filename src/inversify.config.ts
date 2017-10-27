@@ -18,10 +18,6 @@ container.bind<clients.Sonarr>(clients.Sonarr).toSelf()
 
 container.bind<core.Script>(core.ScriptType).to(scripts.UnMonitorCompletedMovies)
 container.bind<core.Script>(core.ScriptType).to(scripts.UnMonitorCompletedSeasons)
-
-container.bind<core.Script[]>(core.ScriptType)
-  .toDynamicValue(context => context.container.getAll<core.Script>(core.ScriptType))
-
 container.bind<core.ScriptFactory>(core.ScriptFactory).toSelf()
 
 export default container
