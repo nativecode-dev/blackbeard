@@ -1,7 +1,5 @@
-import { Client } from './Client'
-import { Http, HttpMethod, PatchPostPut } from './http'
+import { Client, Http, HttpMethod, ILogger, Logger, PatchPostPut } from './core'
 import { Movie, MovieQuality } from './models/radarr'
-import { ILogger, Logger } from './Logger'
 
 export class Radarr extends Client {
   private readonly apikey: string

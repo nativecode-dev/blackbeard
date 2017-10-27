@@ -1,7 +1,5 @@
-import { Client } from './Client'
-import { Http, HttpMethod, PatchPostPut } from './http'
+import { Client, Http, HttpMethod, ILogger, Logger, PatchPostPut } from './core'
 import { Episode, QualityProfile, Series, SeriesSeason } from './models/sonarr'
-import { ILogger, Logger } from './Logger'
 
 export class Sonarr extends Client {
   private readonly apikey: string
