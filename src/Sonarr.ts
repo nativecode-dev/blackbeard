@@ -63,7 +63,7 @@ export class Sonarr extends Client {
 
   private request<T>(method: HttpMethod = HttpMethod.Get, body?: T): RequestInit {
     return {
-      body: PatchPostPut.some(ppp => ppp === method) ? body : undefined,
+      body: PatchPostPut.some(ppp => ppp === method) ? JSON.stringify(body) : undefined,
       headers: {
         'accept': 'application/json,text/json',
         'content-type': 'application/json',

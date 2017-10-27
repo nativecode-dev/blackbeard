@@ -24,6 +24,10 @@ export class Radarr extends Client {
     return Http<Movie[]>(`${this.endpoint}/movie`, this.request())
   }
 
+  public page(pageSize: number, start: number = 1): Promise<Movie[]> {
+    return Http<Movie[]>(`${this.endpoint}/movie?page=${start}&pageSize=${pageSize}`, this.request())
+  }
+
   public profiles(): Promise<MovieQuality[]> {
     return Http<MovieQuality[]>(`${this.endpoint}/profile`, this.request())
   }
