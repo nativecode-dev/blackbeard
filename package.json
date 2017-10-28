@@ -2,7 +2,7 @@
   "author": "Mike Pham <me@mikepham.com>",
   "description": "Various, uh, tools...",
   "license": "MIT",
-  "main": "dist/run.js",
+  "main": "dist/index.js",
   "name": "blackbeard",
   "version": "1.0.0",
   "devDependencies": {
@@ -37,11 +37,12 @@
   "scripts": {
     "build": "gulp build",
     "clean": "gulp clean",
-    "start": "node apps scheduler",
-    "startdev": "cross-env DEBUG=nativecode:* ts-node src/apps scheduler",
+    "start": "node index.js scheduler",
+    "startdev": "cross-env DEBUG=nativecode:* ts-node src/index.ts scheduler",
+    "prestartdev": "yarn run build",
     "docker-push": "./docker-push.sh",
-    "predocker-push": "cross-env DOCKER_PUSH=yes gulp build",
+    "predocker-push": "cross-env DOCKER_PUSH=yes yarn run build",
     "docker-run": "cross-env DEBUG=nativecode:*,-*:trace ./docker-run.sh",
-    "predocker-run": "gulp build"
+    "predocker-run": "yarn run build"
   }
 }

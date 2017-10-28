@@ -10,4 +10,4 @@ if [ ! -f $APPDIR/config/nas-schedule.json ]; then
   cp $APPDIR/nas-schedule.json $APPDIR/config/nas-schedule.json
 fi
 
-$YARN run dist-start
+$YARN run start
