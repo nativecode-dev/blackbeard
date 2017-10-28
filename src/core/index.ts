@@ -1,4 +1,5 @@
 export * from './Client'
+export * from './Config'
 export * from './FileSystem'
 export * from './Http'
 export * from './LoggerFactory'

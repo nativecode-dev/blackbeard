@@ -40,4 +40,4 @@ RUN set -ex \
 
 VOLUME ${APPDIR}
 
-CMD [ "yarn", "${APPCMD}" ]
+CMD [ "yarn", "${APPCMD}/config" ]

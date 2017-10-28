@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./docker-env.sh
+source ./.env.sh
 
 $DOCKER run \
   --name $DOCKER_NAME \

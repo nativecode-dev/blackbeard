@@ -9,6 +9,7 @@ const container = new Container()
 
 container.bind<Container>(Container).toConstantValue(container)
 
+container.bind<core.Config>(core.Config).toSelf()
 container.bind<core.FileSystem>(core.FileSystem).toSelf()
 container.bind<core.LoggerFactory>(core.LoggerFactory).toSelf()
 container.bind<core.Scheduler>(core.Scheduler).toSelf()

@@ -35,12 +35,25 @@ gulp.task('build', ['build:ts'], () => {
   return script('docker-build.sh')
 })
 
-gulp.task('build:ts', ['clean'], () => {
+gulp.task('lint', () => {
   return gulp.src('src/**/*.ts')
     .pipe(plugin.debug({
-      title: '[.ts]'
+      title: '[tslint]'
     }))
-    .pipe(plugin.tslint())
+    .pipe(plugin.tslint({
+      formatter: 'prose'
+    }))
+    .pipe(plugin.tslint.report({
+      allowWarnings: true,
+      summarizeFailureOutput: true
+    }))
+})
+
+gulp.task('build:ts', ['clean', 'lint'], () => {
+  return gulp.src('src/**/*.ts')
+    .pipe(plugin.debug({
+      title: '[tsc]'
+    }))
     .pipe(plugin.typescript('tsconfig.json'))
     .pipe(gulp.dest('dist'))
 })
