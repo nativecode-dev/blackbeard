@@ -13,7 +13,12 @@
     "sourceMap": true,
     "strict": true,
     "target": "es2015",
-    "types": ["@types/node", "reflect-metadata"]
+    "types": [
+      "@types/node",
+      "@types/node-fetch",
+      "@types/node-schedule",
+      "reflect-metadata"
+    ]
   },
   "exclude": [
     "node_modules",

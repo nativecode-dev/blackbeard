@@ -9,8 +9,8 @@ ARG RADARR_ENDPOINT="http://localhot:7878/api"
 ARG SONARR_APIKEY=
 ARG SONARR_ENDPOINT="http://localhot:8989/api"
 
-ENV APPCMD=${APPCMD}}
-ENV APPDIR=${APPDIR}}
+ENV APPCMD=${APPCMD}
+ENV APPDIR=${APPDIR}
 
 ENV RADARR_APIKEY=${RADARR_APIKEY}
 ENV RADARR_ENDPOINT=${RADARR_ENDPOINT}
@@ -26,6 +26,8 @@ COPY nas-config.json .
 COPY nas-schedule.json .
 
 RUN set -ex \
+  # setup
+  && touch ~/.profile \
   # upgrade and install packages
   && apk update \
   && apk upgrade \
@@ -38,8 +40,13 @@ RUN set -ex \
   && rm ./install.sh \
   # install packages
   && yarn install --pure-lockfile \
+  # finalize
+  && mkdir -p ${APPDIR}/config \
+  && export PATH="$HOME/.yarn/bin:$PATH" \
   ;
 
-VOLUME ${APPDIR}
+COPY nas-config.json config/
+COPY nas-schedule.json config/
+VOLUME ${APPDIR}/config
 
-CMD [ "yarn", "${APPCMD}/config" ]
+CMD [ "yarn", "dist-scheduler" ]
