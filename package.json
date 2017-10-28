@@ -41,7 +41,7 @@
     "dist-start": "node run",
     "docker": "cross-env DEBUG=nativecode:*,-*:trace ./docker-run.sh",
     "docker-push": "./docker-push.sh",
-    "predocker-push": "gulp build",
+    "predocker-push": "cross-env DOCKER_PUSH=yes gulp build",
     "unmonitor-movies": "cross-env DEBUG=nativecode:*,-*:trace ts-node src/scripts/run unmonitor-movies",
     "unmonitor-shows": "cross-env DEBUG=nativecode:*,-*:trace ts-node src/scripts/run unmonitor-shows"
   }

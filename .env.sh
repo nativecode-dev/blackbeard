@@ -1,12 +1,22 @@
 #!/bin/bash
 
+# Check the version first, so we get the existing
+# one before anything else runs.
 if [ -f ./.env.version ]; then
-  DOCKER_VERSION=`cat .env.version`
+  export DOCKER_VERSION=`cat .env.version`
 else
-  DOCKER_VERSION="latest"
+  export DOCKER_VERSION="latest"
 fi
 
-DOCKER=`which docker`
-DOCKER_NAME="blackbeard"
-DOCKER_REPO="mikepham/$DOCKER_NAME"
-DOCKER_TAG="$DOCKER_REPO:$DOCKER_VERSION"
+# Increment the version if the DOCKER_PUSH env
+# is set to yes.
+if [[ $DOCKER_PUSH = "yes" ]]; then
+  DOCKER_VERSION=`echo $(expr $DOCKER_VERSION + 1)`
+  echo $DOCKER_VERSION > .env.version
+fi
+
+# Export all the variables.
+export DOCKER=`which docker`
+export DOCKER_NAME="blackbeard"
+export DOCKER_REPO="mikepham/$DOCKER_NAME"
+export DOCKER_TAG="$DOCKER_REPO:$DOCKER_VERSION"
