@@ -1,22 +1,19 @@
 import 'reflect-metadata'
 
-import * as os from 'os'
 import * as throttle from 'async-throttle'
 
 import { injectable } from 'inversify'
 import { Logger } from './Logger'
 import { LoggerFactory } from './LoggerFactory'
 
-export type IThrottle = (...args: any[]) => Promise<any>
-
 @injectable()
 export abstract class Script {
   private readonly logger: Logger
-  private readonly throttler: (callback: IThrottle) => Promise<any>
+  private readonly throttler: (callback: () => Promise<any>) => Promise<any>
 
   constructor(logger: LoggerFactory) {
-    const max = os.cpus().length
-    this.logger = logger.create(this.name)
+    const max = 8
+    this.logger = logger.create(`service:${this.name}`)
     this.throttler = throttle(max)
     this.logger.trace(`throttling set to ${max}`)
   }
@@ -29,7 +26,7 @@ export abstract class Script {
     return this.logger
   }
 
-  protected throttle(callback: throttle.IThrottleCallback): Promise<any> {
+  protected throttle<T>(callback: () => Promise<T>): Promise<T> {
     return this.throttler(async (...args: any[]) => await callback(...args))
   }
 

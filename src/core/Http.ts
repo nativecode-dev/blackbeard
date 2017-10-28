@@ -10,7 +10,7 @@ export abstract class HTTP {
   private readonly logger: Logger
 
   constructor(logger: LoggerFactory) {
-    this.logger = logger.create(`http:${this.name}`)
+    this.logger = logger.create(`service:http:${this.name}`)
   }
 
   public delete<TResponse>(url: string): Promise<TResponse> {

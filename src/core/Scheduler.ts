@@ -21,7 +21,7 @@ export class Scheduler {
 
   constructor(files: FileSystem, logger: LoggerFactory, scripts: ScriptFactory) {
     this.files = files
-    this.log = logger.create('scheduler')
+    this.log = logger.create('service:scheduler')
     this.scripts = scripts.get()
   }
 

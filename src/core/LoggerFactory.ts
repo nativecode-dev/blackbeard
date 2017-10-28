@@ -6,6 +6,6 @@ import { DefaultLogger, Logger } from './Logger'
 @injectable()
 export class LoggerFactory {
   public create(name: string): Logger {
-    return DefaultLogger.extend(name)
+    return DefaultLogger.extend(`service:${name}`)
   }
 }
