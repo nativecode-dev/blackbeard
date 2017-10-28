@@ -1,13 +1,16 @@
 FROM node:6-alpine
 LABEL AUTHOR "support@nativecode.com"
 
-ARG APPDIR=/app
 ARG APPCMD=scheduler
+ARG APPDIR=/app
 
 ARG RADARR_APIKEY=
 ARG RADARR_ENDPOINT="http://localhot:7878/api"
 ARG SONARR_APIKEY=
 ARG SONARR_ENDPOINT="http://localhot:8989/api"
+
+ENV APPCMD=${APPCMD}}
+ENV APPDIR=${APPDIR}}
 
 ENV RADARR_APIKEY=${RADARR_APIKEY}
 ENV RADARR_ENDPOINT=${RADARR_ENDPOINT}
@@ -37,4 +40,4 @@ RUN set -ex \
 
 VOLUME ${APPDIR}
 
-CMD [ "yarn", ${APPCMD} ]
+CMD [ "yarn", "${APPCMD}" ]

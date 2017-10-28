@@ -11,7 +11,15 @@ const defenv = {
 
 const env = Object.assign(defenv, process.env)
 
-gulp.task('build:clean', () => {
+const script = (name) => {
+  return gulp.src(name)
+    .pipe(plugin.debug({
+      title: `[${name}]`
+    }))
+    .pipe(plugin.shell('bash <%= file.path %>'))
+}
+
+gulp.task('clean', ['docker:clean'], () => {
   return gulp.src('dist')
     .pipe(plugin.debug({
       title: '[clean]'
@@ -19,17 +27,15 @@ gulp.task('build:clean', () => {
     .pipe(plugin.clean())
 })
 
-gulp.task('build:clean:docker', ['build:clean'], () => {
-  return gulp.src('docker-clean.sh')
-    .pipe(plugin.shell('bash <%= file.path %>'))
+gulp.task('docker:clean', () => {
+  return script('docker-clean.sh')
 })
 
-gulp.task('build:docker', ['build:clean:docker', 'build:ts'], () => {
-  return gulp.src('docker-build.sh')
-    .pipe(plugin.shell('bash <%= file.path %>'))
+gulp.task('build', ['build:ts'], () => {
+  return script('docker-build.sh')
 })
 
-gulp.task('build:ts', () => {
+gulp.task('build:ts', ['clean'], () => {
   return gulp.src('src/**/*.ts')
     .pipe(plugin.debug({
       title: '[.ts]'
@@ -38,5 +44,3 @@ gulp.task('build:ts', () => {
     .pipe(plugin.typescript('tsconfig.json'))
     .pipe(gulp.dest('dist'))
 })
-
-gulp.task('build', ['build:docker'])
