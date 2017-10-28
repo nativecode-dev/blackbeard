@@ -1,4 +1,5 @@
 import * as debug from 'debug'
+import { Registry, scrub } from '@nofrills/scrubs'
 
 export interface Logger {
   extend(namespace: string): Logger
@@ -53,7 +54,7 @@ export class DebugLogger implements Logger {
   }
 
   public debugJSON(object: any): void {
-    this.debug(JSON.stringify(object))
+    this.debug(JSON.stringify(scrub(object)))
   }
 
   public error(message: string, ...args: string[]): void {
@@ -61,7 +62,7 @@ export class DebugLogger implements Logger {
   }
 
   public errorJSON(object: any): void {
-    this.error(JSON.stringify(object))
+    this.error(JSON.stringify(scrub(object)))
   }
 
   public info(message: string, ...args: string[]): void {
@@ -69,7 +70,7 @@ export class DebugLogger implements Logger {
   }
 
   public infoJSON(object: any): void {
-    this.info(JSON.stringify(object))
+    this.info(JSON.stringify(scrub(object)))
   }
 
   public silly(message: string, ...args: string[]): void {
@@ -77,7 +78,7 @@ export class DebugLogger implements Logger {
   }
 
   public sillyJSON(object: any): void {
-    this.silly(JSON.stringify(object))
+    this.silly(JSON.stringify(scrub(object)))
   }
 
   public trace(message: string, ...args: string[]): void {
@@ -85,7 +86,7 @@ export class DebugLogger implements Logger {
   }
 
   public traceJSON(object: any): void {
-    this.trace(JSON.stringify(object))
+    this.trace(JSON.stringify(scrub(object)))
   }
 
   public warn(message: string, ...args: string[]): void {
@@ -93,7 +94,7 @@ export class DebugLogger implements Logger {
   }
 
   public warnJSON(object: any): void {
-    this.warn(JSON.stringify(object))
+    this.warn(JSON.stringify(scrub(object)))
   }
 }
 

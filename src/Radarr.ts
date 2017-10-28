@@ -63,9 +63,10 @@ export class Radarr extends Client implements Radarr {
   }
 
   private async init(): Promise<ServiceUri> {
-    return {
-      key: await this.vars.get('RADARR_APIKEY'),
-      url: await this.vars.get('RADARR_ENDPOINT', 'http://localhost:7878/api')
-    }
+    const key = await this.vars.get('RADARR_APIKEY')
+    const url = await this.vars.get('RADARR_ENDPOINT', 'http://localhost:7878/api')
+
+    this.log.trace(`set radarr to ${url}`)
+    return { key, url }
   }
 }

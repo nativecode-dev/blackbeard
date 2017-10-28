@@ -82,9 +82,10 @@ export class Sonarr extends Client {
   }
 
   private async init(): Promise<ServiceUri> {
-    return {
-      key: await this.vars.get('SONARR_APIKEY'),
-      url: await this.vars.get('SONARR_ENDPOINT', 'http://localhost:8989/api')
-    }
+    const key = await this.vars.get('SONARR_APIKEY')
+    const url = await this.vars.get('SONARR_ENDPOINT', 'http://localhost:8989/api')
+
+    this.log.trace(`set sonarr to ${url}`)
+    return { key, url }
   }
 }

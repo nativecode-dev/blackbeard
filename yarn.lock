@@ -2,6 +2,39 @@
 # yarn lockfile v1
 
 
+"@nofrills/collections@^0.10.1":
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/@nofrills/collections/-/collections-0.10.1.tgz#8968c88ecea138c561075ddef7ac48c20edca741"
+
+"@nofrills/lincoln-debug@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@nofrills/lincoln-debug/-/lincoln-debug-0.3.2.tgz#385f67423dea873ca0a441dcbfe2e1c6ca2ac882"
+  dependencies:
+    "@nofrills/lincoln" "^0.10.2"
+    debug "^2.6.8"
+
+"@nofrills/lincoln@^0.10.2":
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/@nofrills/lincoln/-/lincoln-0.10.2.tgz#3b92895ecef46d98c1ce71214129349685120e20"
+  dependencies:
+    "@nofrills/collections" "^0.10.1"
+    uuidjs "^3.5.3"
+
+"@nofrills/scrubs@^0.9.1":
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/@nofrills/scrubs/-/scrubs-0.9.1.tgz#79896650b75799ed00645796e69c99a63bbfd902"
+  dependencies:
+    "@nofrills/lincoln-debug" "^0.3.2"
+    "@nofrills/types" "^0.9.0"
+    lodash.merge "^4.6.0"
+
+"@nofrills/types@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@nofrills/types/-/types-0.9.0.tgz#e754d7b0baf4cd022c71dfdd11c87ebea9ba2989"
+  dependencies:
+    validator "^7.2.0"
+    zipcodes-regex "^1.0.1"
+
 "@types/chokidar@*":
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/@types/chokidar/-/chokidar-1.7.3.tgz#ca87a53aa596c01eb93237ab4055edf71dcb9ca6"
@@ -302,6 +335,12 @@ dateformat@^1.0.7-1.2.3:
 dateformat@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-2.2.0.tgz#4065e2013cf9fb916ddfd82efb506ad4c6769062"
+
+debug@^2.6.8:
+  version "2.6.9"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
+  dependencies:
+    ms "2.0.0"
 
 debug@^3.1.0:
   version "3.1.0"
@@ -676,6 +715,14 @@ graceful-fs@^4.0.0, graceful-fs@^4.1.2:
 graceful-fs@~1.2.0:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-1.2.3.tgz#15a4806a57547cb2d2dbf27f42e89a8c3451b364"
+
+gulp-changed@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/gulp-changed/-/gulp-changed-3.1.1.tgz#7cdd5621bacd29c9da151e27a70a8865dffc4415"
+  dependencies:
+    gulp-util "^3.0.0"
+    pify "^3.0.0"
+    through2 "^2.0.0"
 
 gulp-clean@^0.3.2:
   version "0.3.2"
@@ -1230,6 +1277,10 @@ lodash.mapvalues@^4.4.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.mapvalues/-/lodash.mapvalues-4.6.0.tgz#1bafa5005de9dd6f4f26668c30ca37230cc9689c"
 
+lodash.merge@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.0.tgz#69884ba144ac33fe699737a6086deffadd0f89c5"
+
 lodash.restparam@^3.0.0:
   version "3.6.1"
   resolved "https://registry.yarnpkg.com/lodash.restparam/-/lodash.restparam-3.6.1.tgz#936a4e309ef330a7645ed4145986c85ae5b20805"
@@ -1600,6 +1651,10 @@ pify@^2.0.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
 
+pify@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/pify/-/pify-3.0.0.tgz#e5a4acd2c101fdf3d9a4d07f0dbc4db49dd28176"
+
 pinkie-promise@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/pinkie-promise/-/pinkie-promise-2.0.1.tgz#2135d6dfa7a358c069ac9b178776288228450ffa"
@@ -1742,7 +1797,7 @@ resolve@^1.1.6, resolve@^1.1.7, resolve@^1.3.2:
   dependencies:
     path-parse "^1.0.5"
 
-rimraf@^2.2.8, rimraf@^2.6.2:
+rimraf@^2.2.8:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.2.tgz#2ed8150d24a16ea8651e6d6ef0f47c4158ce7a36"
   dependencies:
@@ -2052,6 +2107,10 @@ util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
 
+uuidjs@^3.5.3:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/uuidjs/-/uuidjs-3.6.1.tgz#5e669ddba6a975e6cffea8b948dd2c4dca002952"
+
 v8flags@^2.0.2:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/v8flags/-/v8flags-2.1.1.tgz#aab1a1fa30d45f88dd321148875ac02c0b55e5b4"
@@ -2074,6 +2133,10 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "~1.0.0"
     spdx-expression-parse "~1.0.0"
+
+validator@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-7.2.0.tgz#a63dcbaba51d4350bf8df20988e0d5a54d711791"
 
 vinyl-fs@^0.3.0:
   version "0.3.14"
@@ -2170,3 +2233,7 @@ yallist@^2.1.2:
 yn@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/yn/-/yn-2.0.0.tgz#e5adabc8acf408f6385fc76495684c88e6af689a"
+
+zipcodes-regex@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/zipcodes-regex/-/zipcodes-regex-1.0.1.tgz#18763d814245094ace277666b7a805bc7f9db74d"

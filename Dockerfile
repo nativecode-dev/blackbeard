@@ -3,18 +3,19 @@ LABEL AUTHOR "support@nativecode.com"
 
 ARG APPDIR=/app
 
+# Configuration args
 ARG RADARR_APIKEY=
 ARG RADARR_ENDPOINT="http://localhot:7878/api"
 ARG SONARR_APIKEY=
 ARG SONARR_ENDPOINT="http://localhot:8989/api"
-
-ENV APPDIR=${APPDIR}
-ENV DEBUG="nativecode:*"
-
+# Set args to environment
 ENV RADARR_APIKEY=${RADARR_APIKEY}
 ENV RADARR_ENDPOINT=${RADARR_ENDPOINT}
 ENV SONARR_APIKEY=${SONARR_APIKEY}
 ENV SONARR_ENDPOINT=${SONARR_ENDPOINT}
+# Producton environment variavles
+ENV DEBUG="nativecode:*"
+ENV NODE_ENV=production
 
 WORKDIR ${APPDIR}
 
@@ -36,10 +37,9 @@ RUN set -ex \
   && ./install.sh \
   && rm ./install.sh \
   # install packages
-  && yarn install --pure-lockfile \
+  && yarn install --production=true \
   # finalize
   && mkdir -p ${APPDIR}/config \
-  && export PATH="$HOME/.yarn/bin:$PATH" \
   ;
 
 COPY nas-config.json config/

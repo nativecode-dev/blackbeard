@@ -16,8 +16,7 @@
     "types": [
       "@types/node",
       "@types/node-fetch",
-      "@types/node-schedule",
-      "reflect-metadata"
+      "@types/node-schedule"
     ]
   },
   "exclude": [

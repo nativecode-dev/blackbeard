@@ -51,6 +51,7 @@ gulp.task('lint', () => {
 
 gulp.task('build:ts', ['clean', 'lint'], () => {
   return gulp.src('src/**/*.ts')
+    .pipe(plugin.changed('dist'))
     .pipe(plugin.debug({
       title: '[tsc]'
     }))

@@ -30,11 +30,11 @@ export class Config {
     const rootpath = await this.initialized
     const key = filename.toLowerCase()
     if (this.cache[key]) {
-      this.log.trace(`return cached instances for ${filename}`)
+      this.log.trace(`returning cached instance for ${filename}`)
       return this.cache[key]
     }
     const filepath = path.join(rootpath, filename)
-    this.log.trace(`loading ${filename}`)
+    this.log.trace(`loading instance from ${filepath}`)
     return this.cache[key] = await this.files.json<T>(filepath)
   }
 

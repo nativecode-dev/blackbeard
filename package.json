@@ -12,19 +12,20 @@
     "@types/node-schedule": "^1.2.1",
     "cross-env": "^5.1.0",
     "gulp": "^3.9.1",
+    "gulp-changed": "^3.1.1",
     "gulp-clean": "^0.3.2",
     "gulp-debug": "^3.1.0",
     "gulp-load-plugins": "^1.5.0",
     "gulp-shell": "^0.6.3",
     "gulp-tslint": "^8.1.2",
     "gulp-typescript": "^3.2.3",
-    "rimraf": "^2.6.2",
     "ts-node": "^3.3.0",
     "tslint": "^5.8.0",
     "tslint-config-standard": "^6.0.1",
     "typescript": "^2.5.3"
   },
   "dependencies": {
+    "@nofrills/scrubs": "^0.9.1",
     "async-throttle": "^1.1.0",
     "debug": "^3.1.0",
     "inversify": "^4.3.0",
@@ -40,6 +41,8 @@
     "dist-scheduler": "node run",
     "dist-start": "node scripts/run all",
     "docker": "cross-env DEBUG=nativecode:*,-*:trace ./docker-run.sh",
+    "docker-push": "./docker-push.sh",
+    "predocker-push": "gulp build",
     "unmonitor-movies": "cross-env DEBUG=nativecode:*,-*:trace ts-node src/scripts/run unmonitor-movies",
     "unmonitor-shows": "cross-env DEBUG=nativecode:*,-*:trace ts-node src/scripts/run unmonitor-shows"
   }
