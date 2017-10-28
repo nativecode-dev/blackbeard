@@ -31,6 +31,7 @@ export class Scheduler {
       try {
         const config = await this.config.load<JobConfig[]>(filename)
         const jobs = config.map((config: JobConfig) => this.job(config))
+        this.log.info(`${jobs.length} job(s) scheduled`)
         return resolve(Promise.all(jobs))
       } catch (error) {
         reject(error)

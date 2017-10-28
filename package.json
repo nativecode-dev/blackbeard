@@ -37,12 +37,11 @@
   "scripts": {
     "build": "gulp build",
     "clean": "gulp clean",
-    "dev-start": "cross-env DEBUG=nativecode:*,-*:trace node src/run all",
-    "dist-start": "node run",
-    "docker": "cross-env DEBUG=nativecode:*,-*:trace ./docker-run.sh",
+    "start": "node apps scheduler",
+    "startdev": "cross-env DEBUG=nativecode:* ts-node src/apps scheduler",
     "docker-push": "./docker-push.sh",
     "predocker-push": "cross-env DOCKER_PUSH=yes gulp build",
-    "unmonitor-movies": "cross-env DEBUG=nativecode:*,-*:trace ts-node src/scripts/run unmonitor-movies",
-    "unmonitor-shows": "cross-env DEBUG=nativecode:*,-*:trace ts-node src/scripts/run unmonitor-shows"
+    "docker-run": "cross-env DEBUG=nativecode:*,-*:trace ./docker-run.sh",
+    "predocker-run": "gulp build"
   }
 }
