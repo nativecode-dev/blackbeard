@@ -98,4 +98,4 @@ export class DebugLogger implements Logger {
   }
 }
 
-export const DefaultLogger: DebugLogger = DebugLogger.create('nativecode:nas-scripts')
+export const DefaultLogger: DebugLogger = DebugLogger.create('nativecode:blackbeard')

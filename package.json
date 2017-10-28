@@ -1,9 +1,10 @@
 {
-  "name": "nas-scripts",
-  "version": "1.0.0",
-  "main": "index.js",
-  "author": "Mike Pham <support@nativecode.com>",
+  "author": "Mike Pham <me@mikepham.com>",
+  "description": "Various, uh, tools...",
   "license": "MIT",
+  "main": "dist/run.js",
+  "name": "blackbeard",
+  "version": "1.0.0",
   "devDependencies": {
     "@types/debug": "^0.0.30",
     "@types/gulp": "^4.0.5",
@@ -36,10 +37,8 @@
   "scripts": {
     "build": "gulp build",
     "clean": "gulp clean",
-    "dev-scheduler": "cross-env DEBUG=nativecode:*,-*:trace node src/run all",
-    "dev-start": "cross-env DEBUG=nativecode:*,-*:trace node src/scripts/run all",
-    "dist-scheduler": "node run",
-    "dist-start": "node scripts/run all",
+    "dev-start": "cross-env DEBUG=nativecode:*,-*:trace node src/run all",
+    "dist-start": "node run",
     "docker": "cross-env DEBUG=nativecode:*,-*:trace ./docker-run.sh",
     "docker-push": "./docker-push.sh",
     "predocker-push": "gulp build",

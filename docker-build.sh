@@ -2,6 +2,9 @@
 
 source ./.env.sh
 
+DOCKER_VERSION=`echo $(expr $DOCKER_VERSION + 1)`
+echo $DOCKER_VERSION > .env.version
+
 $DOCKER build . \
   --build-arg RADARR_APIKEY=$RADARR_APIKEY \
   --build-arg RADARR_ENDPOINT=$RADARR_ENDPOINT \

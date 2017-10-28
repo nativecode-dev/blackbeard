@@ -14,12 +14,16 @@ ENV RADARR_ENDPOINT=${RADARR_ENDPOINT}
 ENV SONARR_APIKEY=${SONARR_APIKEY}
 ENV SONARR_ENDPOINT=${SONARR_ENDPOINT}
 # Producton environment variavles
+ENV APPDIR=${APPDIR}
 ENV DEBUG="nativecode:*"
 ENV NODE_ENV=production
 
 WORKDIR ${APPDIR}
 
 COPY dist .
+COPY docker-startup.sh .
+COPY nas-config.json .
+COPY nas-schedule.json .
 COPY package.json .
 COPY yarn.lock .
 
@@ -40,11 +44,9 @@ RUN set -ex \
   && yarn install --production=true \
   # finalize
   && mkdir -p ${APPDIR}/config \
+  && chmod +x docker-startup.sh \
   ;
-
-COPY nas-config.json config/
-COPY nas-schedule.json config/
 
 VOLUME ${APPDIR}/config
 
-CMD [ "yarn", "dist-scheduler" ]
+CMD [ "./docker-startup.sh" ]
