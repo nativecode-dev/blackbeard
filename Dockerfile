@@ -1,7 +1,6 @@
 FROM node:6-alpine
 LABEL AUTHOR "support@nativecode.com"
 
-ARG APPCMD=scheduler
 ARG APPDIR=/app
 
 ARG RADARR_APIKEY=
@@ -9,8 +8,8 @@ ARG RADARR_ENDPOINT="http://localhot:7878/api"
 ARG SONARR_APIKEY=
 ARG SONARR_ENDPOINT="http://localhot:8989/api"
 
-ENV APPCMD=${APPCMD}
 ENV APPDIR=${APPDIR}
+ENV DEBUG="nativecode:*"
 
 ENV RADARR_APIKEY=${RADARR_APIKEY}
 ENV RADARR_ENDPOINT=${RADARR_ENDPOINT}
@@ -22,8 +21,6 @@ WORKDIR ${APPDIR}
 COPY dist .
 COPY package.json .
 COPY yarn.lock .
-COPY nas-config.json .
-COPY nas-schedule.json .
 
 RUN set -ex \
   # setup
@@ -47,6 +44,7 @@ RUN set -ex \
 
 COPY nas-config.json config/
 COPY nas-schedule.json config/
+
 VOLUME ${APPDIR}/config
 
 CMD [ "yarn", "dist-scheduler" ]

@@ -34,10 +34,11 @@
   },
   "scripts": {
     "build": "gulp build",
+    "clean": "gulp clean",
     "dev-scheduler": "cross-env DEBUG=nativecode:*,-*:trace node src/run all",
     "dev-start": "cross-env DEBUG=nativecode:*,-*:trace node src/scripts/run all",
-    "dist-scheduler": "cross-env DEBUG=nativecode:* node run",
-    "dist-start": "cross-env DEBUG=nativecode:* node scripts/run all",
+    "dist-scheduler": "node run",
+    "dist-start": "node scripts/run all",
     "docker": "cross-env DEBUG=nativecode:*,-*:trace ./docker-run.sh",
     "unmonitor-movies": "cross-env DEBUG=nativecode:*,-*:trace ts-node src/scripts/run unmonitor-movies",
     "unmonitor-shows": "cross-env DEBUG=nativecode:*,-*:trace ts-node src/scripts/run unmonitor-shows"
