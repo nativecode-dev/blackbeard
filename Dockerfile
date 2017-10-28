@@ -22,6 +22,8 @@ WORKDIR ${APPDIR}
 COPY dist .
 COPY package.json .
 COPY yarn.lock .
+COPY nas-config.json .
+COPY nas-schedule.json .
 
 RUN set -ex \
   # upgrade and install packages

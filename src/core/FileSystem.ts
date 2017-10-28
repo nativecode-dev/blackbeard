@@ -15,6 +15,7 @@ export class FileSystem {
   constructor(logger: LoggerFactory) {
     this.log = logger.create(`service:filesystem`)
   }
+
   public exists(filepath: string): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       fs.exists(filepath, (exists: boolean) => resolve(exists))

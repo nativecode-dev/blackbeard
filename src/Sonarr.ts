@@ -1,25 +1,26 @@
 import 'reflect-metadata'
 import { injectable } from 'inversify'
-import { Client, Logger, LoggerFactory, Variables } from './core'
+import { Client, Logger, LoggerFactory, ServiceUri, Variables } from './core'
 import { Episode, QualityProfile, Series, SeriesSeason } from './models/sonarr'
 
 @injectable()
 export class Sonarr extends Client {
-  private readonly apikey: string
-  private readonly endpoint: string
+  private readonly initialized: Promise<ServiceUri>
+  private readonly vars: Variables
 
   constructor(logger: LoggerFactory, vars: Variables) {
     super(logger)
-    this.apikey = vars.get('SONARR_APIKEY')
-    this.endpoint = vars.get('SONARR_ENDPOINT', 'http://localhost:8989/api')
-    this.log.trace(`sonarr set to use ${this.endpoint}`)
+    this.vars = vars
+
+    this.initialized = this.init()
   }
 
-  public episodes(seriesId?: number): Promise<Episode[]> {
+  public async episodes(seriesId?: number): Promise<Episode[]> {
+    const api = await this.initialized
     if (seriesId) {
-      return this.get<Episode[]>(`${this.endpoint}/episode?seriesId=${seriesId}`)
+      return this.get<Episode[]>(`${api.url}/episode?seriesId=${seriesId}`)
     }
-    return this.get<Episode[]>(`${this.endpoint}/episode`)
+    return this.get<Episode[]>(`${api.url}/episode`)
   }
 
   public async toggleMonitor(seriesId: number, toggle: boolean): Promise<void> {
@@ -43,35 +44,47 @@ export class Sonarr extends Client {
     throw new Error(`season ${seasonNumber} not found for ${seriesId}`)
   }
 
-  public profiles(): Promise<QualityProfile[]> {
-    return this.get<QualityProfile[]>(`${this.endpoint}/profile`)
+  public async profiles(): Promise<QualityProfile[]> {
+    const api = await this.initialized
+    return this.get<QualityProfile[]>(`${api.url}/profile`)
   }
 
-  public show(seriesId: number): Promise<Series> {
-    return this.get<Series>(`${this.endpoint}/series/${seriesId}`)
+  public async show(seriesId: number): Promise<Series> {
+    const api = await this.initialized
+    return this.get<Series>(`${api.url}/series/${seriesId}`)
   }
 
   public async shows(): Promise<Series[]> {
-    const series = await this.get<Series[]>(`${this.endpoint}/series`)
+    const api = await this.initialized
+    const series = await this.get<Series[]>(`${api.url}/series`)
     return series.sort((a, b) => a.sortTitle < b.sortTitle ? -1 : 1)
   }
 
-  public update(series: Series): Promise<void> {
-    return this.put<Series, void>(`${this.endpoint}/series`, series)
+  public async update(series: Series): Promise<void> {
+    const api = await this.initialized
+    return this.put<Series, void>(`${api.url}/series`, series)
   }
 
   protected get name(): string {
     return 'sonarr'
   }
 
-  protected init<T>(body?: T): RequestInit {
+  protected async request<T>(body?: T): Promise<RequestInit> {
+    const api = await this.initialized
     return {
       body: JSON.stringify(body),
       headers: {
         'accept': 'application/json,text/json',
         'content-type': 'application/json',
-        'x-api-key': this.apikey,
+        'x-api-key': api.key,
       },
+    }
+  }
+
+  private async init(): Promise<ServiceUri> {
+    return {
+      key: await this.vars.get('SONARR_APIKEY'),
+      url: await this.vars.get('SONARR_ENDPOINT', 'http://localhost:8989/api')
     }
   }
 }

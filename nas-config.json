@@ -1,0 +1,12 @@
+{
+  "env": {
+    "RADARR_APIKEY": null,
+    "RADARR_ENDPOINT": null,
+    "SONARR_APIKEY": null,
+    "SONARR_ENDPOINT": null
+  },
+  "settings": {
+    "cache": "./cache",
+    "scheduler": "./nas-scheduler.json"
+  }
+}

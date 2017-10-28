@@ -13,28 +13,28 @@ export abstract class HTTP {
     this.logger = logger.create(`service:http:${this.name}`)
   }
 
-  public delete<TResponse>(url: string): Promise<TResponse> {
-    return this.send<TResponse>(url, this.init<void>(), 'DELETE')
+  public async delete<TResponse>(url: string): Promise<TResponse> {
+    return this.send<TResponse>(url, await this.request<void>(), 'DELETE')
   }
 
-  public get<TResponse>(url: string): Promise<TResponse> {
-    return this.send<TResponse>(url, this.init<void>(), 'GET')
+  public async get<TResponse>(url: string): Promise<TResponse> {
+    return this.send<TResponse>(url, await this.request<void>(), 'GET')
   }
 
-  public head<TResponse>(url: string): Promise<TResponse> {
-    return this.send<TResponse>(url, this.init<void>(), 'HEAD')
+  public async head<TResponse>(url: string): Promise<TResponse> {
+    return this.send<TResponse>(url, await this.request<void>(), 'HEAD')
   }
 
-  public patch<TRequest, TResponse>(url: string, body: TRequest): Promise<TResponse> {
-    return this.send<TResponse>(url, this.init<TRequest>(body), 'PATCH')
+  public async patch<TRequest, TResponse>(url: string, body: TRequest): Promise<TResponse> {
+    return this.send<TResponse>(url, await this.request<TRequest>(body), 'PATCH')
   }
 
-  public post<TRequest, TResponse>(url: string, body: TRequest): Promise<TResponse> {
-    return this.send<TResponse>(url, this.init<TRequest>(body), 'POST')
+  public async post<TRequest, TResponse>(url: string, body: TRequest): Promise<TResponse> {
+    return this.send<TResponse>(url, await this.request<TRequest>(body), 'POST')
   }
 
-  public put<TRequest, TResponse>(url: string, body: TRequest): Promise<TResponse> {
-    return this.send<TResponse>(url, this.init<TRequest>(body), 'PUT')
+  public async put<TRequest, TResponse>(url: string, body: TRequest): Promise<TResponse> {
+    return this.send<TResponse>(url, await this.request<TRequest>(body), 'PUT')
   }
 
   protected get log(): Logger {
@@ -42,7 +42,7 @@ export abstract class HTTP {
   }
 
   protected abstract get name(): string
-  protected abstract init<TRequest>(body?: TRequest): RequestInit
+  protected abstract request<TRequest>(body?: TRequest): Promise<RequestInit>
 
   private async send<T>(url: string, init: RequestInit, method: string = 'GET'): Promise<T> {
     this.log.trace(`sending request to ${url}`, JSON.stringify(init))

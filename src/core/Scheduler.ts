@@ -2,6 +2,7 @@ import 'reflect-metadata'
 
 import * as schedule from 'node-schedule'
 import { injectable } from 'inversify'
+import { Config } from './Config'
 import { FileSystem } from './FileSystem'
 import { Logger } from './Logger'
 import { LoggerFactory } from './LoggerFactory'
@@ -15,20 +16,20 @@ interface JobConfig {
 
 @injectable()
 export class Scheduler {
-  private readonly files: FileSystem
+  private readonly config: Config
   private readonly log: Logger
   private readonly scripts: Script[]
 
-  constructor(files: FileSystem, logger: LoggerFactory, scripts: ScriptFactory) {
-    this.files = files
+  constructor(config: Config, logger: LoggerFactory, scripts: ScriptFactory) {
+    this.config = config
     this.log = logger.create('service:scheduler')
     this.scripts = scripts.get()
   }
 
-  public async start(configfile: string): Promise<schedule.Job[]> {
+  public async start(filename: string): Promise<schedule.Job[]> {
     return new Promise<schedule.Job[]>(async (resolve, reject) => {
       try {
-        const config = await this.files.json<JobConfig[]>(configfile)
+        const config = await this.config.load<JobConfig[]>(filename)
         const jobs = config.map((config: JobConfig) => this.job(config))
         return resolve(Promise.all(jobs))
       } catch (error) {
