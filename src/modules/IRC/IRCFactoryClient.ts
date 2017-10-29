@@ -31,7 +31,7 @@ export class InternalIRCFactoryClient implements IRCFactoryClient {
     this.factory = factory
     this.handlers = {}
     this.interfaces = interfaces
-    this.log = logger.extend('irc-factory-client')
+    this.log = logger.extend('irc-client')
     this.entry = entry
     this.name = name
 
