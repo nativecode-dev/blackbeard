@@ -1,4 +1,4 @@
-import * as ircformatting from 'irc-formatting'
+import * as irc from 'irc-formatting'
 import { IRCInterfaces, IRCClientOptions } from 'irc-factory'
 import { Logger } from '../../core'
 import { DataMessage } from './DataMessage'
@@ -66,11 +66,11 @@ export class InternalIRCFactoryClient implements IRCFactoryClient {
 
   private privmsg = (data: DataMessage): void => {
     this.log.trace('privmsg', JSON.stringify(data))
-    if (data.body && data.body.username) {
-      const sender = data.body.username.toLowerCase()
+    if (data.message && data.message.username) {
+      const sender = data.message.username.toLowerCase()
       const filtered = this.entry.parser.filtering.username.toLowerCase()
       if (sender === filtered) {
-        const result = this.parser.parse(ircformatting.strip(data.body.message))
+        const result = this.parser.parse(irc.strip(data.message.message))
         this.log.traceJSON(result)
       }
     }

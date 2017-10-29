@@ -16,26 +16,26 @@ export class IRCParser {
     let matches = regex.exec(text)
     const values: string[] = []
     while (matches) {
+      this.log.traceJSON(matches)
       values.push(matches[1] || '')
       matches = regex.exec(text)
     }
 
-    this.log.traceJSON(matches)
-
     const record: IRCParserRecordMap = {}
-    values.forEach((value: string, index: number) => {
-      const property = this.options.filtering.properties[index]
-      const formatter = this.options.formatters[property]
-      record[property] = value
-      if (formatter) {
-        const replaced = value.replace(formatter.regex, formatter.replace)
-        const formatted = this.secrets(replaced, this.options.secrets)
-        record[property] = formatted
-      }
-    })
-
-    this.log.traceJSON(record)
+    values.map((value: string, index: number) => this.format(value, index, record))
     return record as IRCParserRecord
+  }
+
+  private format(value: string, index: number, record: IRCParserRecordMap): IRCParserRecordMap {
+    const property = this.options.filtering.properties[index]
+    const formatter = this.options.formatters[property]
+    record[property] = this.secrets(value, this.options.secrets)
+    if (formatter && value.match(formatter.regex)) {
+      const formatted = record[property] = this.secrets(record[property], this.options.secrets)
+      this.log.trace('formatted', property, value, formatted)
+    }
+    this.log.traceJSON(record)
+    return record
   }
 
   private secrets(value: string, secrets: IRCParserSecrets): string {
@@ -43,9 +43,10 @@ export class IRCParser {
       .reduce((_, name: string): string => {
         let secret = secrets[name]
         if (secret.toLowerCase().startsWith('env.')) {
-          const key = secret.replace('env.', '')
-          secret = process.env[key.toUpperCase()] || value
+          const key = secret.replace('env.', '').toUpperCase()
+          secret = process.env[key] || value
         }
+        this.log.trace('secret', name, secret)
         const regex = new RegExp(`{${name}}`, 'gm')
         return value = value.replace(regex, secret)
       })
