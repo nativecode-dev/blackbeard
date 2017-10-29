@@ -33,9 +33,9 @@ export class IRCParser {
         const regex = new RegExp(`\{${secret.name}\}`, 'gm')
         if (secret.value.toLowerCase().startsWith('env:')) {
           const env = secret.value.replace('env:', '').toUpperCase()
-          value = value.replace(regex, process.env[env] || value)
+          value = value.replace(regex, process.env[env] || secret.value)
         } else {
-          value = value.replace(regex, value)
+          value = value.replace(regex, secret.value)
         }
         this.log.trace('secret', secret.name, secret.value, value)
       })
