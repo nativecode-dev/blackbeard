@@ -1,5 +1,5 @@
 import { IRCParserOptions, IRCParserSecrets } from './IRCEntry'
-import { Logger, ObjectNavigator } from '../../core'
+import { Logger } from '../../core'
 
 export class IRCParser {
   private readonly log: Logger
@@ -32,8 +32,10 @@ export class IRCParser {
       .forEach((secret): void => {
         const regex = new RegExp(`\{${secret.name}\}`, 'gm')
         if (secret.value.toLowerCase().startsWith('env:')) {
-          const env = secret.value.replace('env:', '').toUpperCase()
-          value = value.replace(regex, process.env[env] || secret.value)
+          const envName = secret.value.replace('env:', '').toUpperCase()
+          const envValue = process.env[envName] || secret.value
+          this.log.trace('secret.env', envName, envValue)
+          value = value.replace(regex, envValue)
         } else {
           value = value.replace(regex, secret.value)
         }
