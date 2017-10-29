@@ -3,7 +3,8 @@
     "RADARR_APIKEY": null,
     "RADARR_ENDPOINT": null,
     "SONARR_APIKEY": null,
-    "SONARR_ENDPOINT": null
+    "SONARR_ENDPOINT": null,
+    "XSPEEDS_APIKEY": null
   },
   "settings": {
     "cache": "./cache",

@@ -10,6 +10,7 @@ $DOCKER build \
   --build-arg RADARR_ENDPOINT=$RADARR_ENDPOINT \
   --build-arg SONARR_APIKEY=$SONARR_APIKEY \
   --build-arg SONARR_ENDPOINT=$SONARR_ENDPOINT \
+  --build-arg XSPEEDS_APIKEY=$XSPEEDS_APIKEY \
   --rm \
   --tag $DOCKER_TAG \
   . \
