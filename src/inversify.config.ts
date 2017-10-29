@@ -2,6 +2,7 @@ import 'reflect-metadata'
 import * as process from 'process'
 import * as core from './core'
 import * as clients from './index'
+import * as modules from './modules'
 import * as scripts from './scripts'
 import { Container } from 'inversify'
 
@@ -21,5 +22,7 @@ container.bind<clients.Sonarr>(clients.Sonarr).toSelf()
 container.bind<core.Script>(core.ScriptType).to(scripts.UnMonitorCompletedMovies)
 container.bind<core.Script>(core.ScriptType).to(scripts.UnMonitorCompletedSeasons)
 container.bind<core.ScriptFactory>(core.ScriptFactory).toSelf()
+
+container.bind<modules.IrcFactory>(modules.IrcFactory).toSelf()
 
 export default container

@@ -53,8 +53,6 @@ export class FileSystem {
   }
 
   private promisify<T>(nodefn: NodeFunction<T>, ...args: any[]): Promise<T> {
-    this.log.trace(`promisifying ${nodefn.name}`)
-
     return new Promise((resolve, reject) => {
       const params = args.concat([(error: NodeJS.ErrnoException, result: T): void => {
         if (error) {

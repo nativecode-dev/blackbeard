@@ -185,6 +185,14 @@ async@^2.1.5:
   dependencies:
     lodash "^4.14.0"
 
+axon@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/axon/-/axon-1.0.0.tgz#b3237b78ba7492e8e7899e6d5918c5f6ea8bcfb5"
+  dependencies:
+    configurable "0.0.1"
+    debug "*"
+    escape-regexp "0.0.1"
+
 babel-code-frame@^6.22.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-code-frame/-/babel-code-frame-6.26.0.tgz#63fd43f7dc1e3bb7ce35947db8fe369a3f58c74b"
@@ -289,6 +297,10 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
 
+configurable@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/configurable/-/configurable-0.0.1.tgz#47d75b727b51b4eb84c1dadafe3f8240313833b1"
+
 convert-source-map@^1.1.1:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.5.0.tgz#9acd70851c6d5dfdd93d9282e5edf94a03ff46b5"
@@ -336,15 +348,15 @@ dateformat@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-2.2.0.tgz#4065e2013cf9fb916ddfd82efb506ad4c6769062"
 
-debug@^2.6.8:
-  version "2.6.9"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
+debug@*, debug@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   dependencies:
     ms "2.0.0"
 
-debug@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
+debug@^2.6.8:
+  version "2.6.9"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   dependencies:
     ms "2.0.0"
 
@@ -425,6 +437,10 @@ error-ex@^1.2.0:
   dependencies:
     is-arrayish "^0.2.1"
 
+escape-regexp@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/escape-regexp/-/escape-regexp-0.0.1.tgz#f44bda12d45bbdf9cb7f862ee7e4827b3dd32254"
+
 escape-string-regexp@^1.0.0, escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
@@ -436,6 +452,10 @@ esutils@^1.1.6:
 esutils@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.2.tgz#0abf4f1caa5bcb1f7a9d8acc6dea4faaa04bac9b"
+
+eventemitter2@0.4.13:
+  version "0.4.13"
+  resolved "https://registry.yarnpkg.com/eventemitter2/-/eventemitter2-0.4.13.tgz#0a8ab97f9c1b563361b8927f9e80606277509153"
 
 expand-brackets@^0.1.4:
   version "0.1.5"
@@ -920,6 +940,32 @@ inversify@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/inversify/-/inversify-4.3.0.tgz#d2ecd2ae18340e7f1ab5148a3e44b87080391366"
 
+irc-factory@^1.10.1:
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/irc-factory/-/irc-factory-1.10.1.tgz#7743fa69f1598a83bdf8cf2b6511d4cb84b62b15"
+  dependencies:
+    axon "1.0.0"
+    eventemitter2 "0.4.13"
+    irc-message "2.0.1"
+    irc-socket ircanywhere/irc-socket
+    json-stringify-safe "^5.0.0"
+    lodash "2.4.1"
+    pause-queue "~0.1.0"
+
+irc-formatting@^1.0.0-rc3:
+  version "1.0.0-rc3"
+  resolved "https://registry.yarnpkg.com/irc-formatting/-/irc-formatting-1.0.0-rc3.tgz#9520ea3d6a41b839394b21c511b59febeda55377"
+  dependencies:
+    zeropad "^1.1.0"
+
+irc-message@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/irc-message/-/irc-message-2.0.1.tgz#dc02759539a030c96af36ad6fc8fee9083df7cbc"
+
+"irc-socket@git://github.com/ircanywhere/irc-socket":
+  version "2.4.0"
+  resolved "git://github.com/ircanywhere/irc-socket#19343600ce38460c9c8d7b7b265ac23313153342"
+
 irregular-plurals@^1.0.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/irregular-plurals/-/irregular-plurals-1.4.0.tgz#2ca9b033651111855412f16be5d77c62a458a766"
@@ -1088,6 +1134,10 @@ json-stable-stringify@^1.0.0:
   resolved "https://registry.yarnpkg.com/json-stable-stringify/-/json-stable-stringify-1.0.1.tgz#9a759d39c5f2ff503fd5300646ed445f88c4f9af"
   dependencies:
     jsonify "~0.0.0"
+
+json-stringify-safe@^5.0.0:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
 
 jsonify@~0.0.0:
   version "0.0.0"
@@ -1331,6 +1381,10 @@ lodash.values@~2.4.1:
   dependencies:
     lodash.keys "~2.4.1"
 
+lodash@2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-2.4.1.tgz#5b7723034dda4d262e5a46fb2c58d7cc22f71420"
+
 lodash@^4.14.0, lodash@^4.17.4:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
@@ -1476,6 +1530,10 @@ multipipe@^0.1.0, multipipe@^0.1.2:
 natives@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/natives/-/natives-1.1.0.tgz#e9ff841418a6b2ec7a495e939984f78f163e6e31"
+
+negative-zero@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/negative-zero/-/negative-zero-1.0.0.tgz#9af422f36effb2dc582bcdc66b86bf1adba11605"
 
 node-fetch@^1.7.3:
   version "1.7.3"
@@ -1646,6 +1704,10 @@ path-type@^1.0.0:
     graceful-fs "^4.1.2"
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
+
+pause-queue@~0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/pause-queue/-/pause-queue-0.1.0.tgz#892eabab78c26a83d6ef5650e96cf7cd23670caa"
 
 pify@^2.0.0:
   version "2.3.0"
@@ -2233,6 +2295,12 @@ yallist@^2.1.2:
 yn@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/yn/-/yn-2.0.0.tgz#e5adabc8acf408f6385fc76495684c88e6af689a"
+
+zeropad@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/zeropad/-/zeropad-1.1.0.tgz#325f93eb2d0e016ff442d4e35bdd026ec2cda292"
+  dependencies:
+    negative-zero "^1.0.0"
 
 zipcodes-regex@^1.0.1:
   version "1.0.1"

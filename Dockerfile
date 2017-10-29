@@ -1,6 +1,7 @@
 FROM node:6-alpine
 LABEL AUTHOR "support@nativecode.com"
 
+ARG APPCMD="scheduler"
 ARG APPDIR=/app
 
 # Configuration args
@@ -14,6 +15,7 @@ ENV RADARR_ENDPOINT=${RADARR_ENDPOINT}
 ENV SONARR_APIKEY=${SONARR_APIKEY}
 ENV SONARR_ENDPOINT=${SONARR_ENDPOINT}
 # Producton environment variavles
+ENV APPCMD=${APPCMD}
 ENV APPDIR=${APPDIR}
 ENV DEBUG="nativecode:*"
 ENV NODE_ENV=production
@@ -34,7 +36,7 @@ RUN set -ex \
   # upgrade and install packages
   && apk update \
   && apk upgrade \
-  && apk add bash ca-certificates curl wget \
+  && apk add bash ca-certificates curl git wget \
   && update-ca-certificates \
   # download and install yarn
   && wget https://yarnpkg.com/install.sh \

@@ -26,13 +26,18 @@ export class Scheduler {
     this.scripts = scripts.get()
   }
 
-  public async start(filename: string): Promise<schedule.Job[]> {
-    return new Promise<schedule.Job[]>(async (resolve, reject) => {
+  public async start(filename: string): Promise<void> {
+    return new Promise<void>(async (resolve, reject) => {
       try {
         const config = await this.config.load<JobConfig[]>(filename)
         const jobs = config.map((config: JobConfig) => this.job(config))
         this.log.info(`${jobs.length} job(s) scheduled`)
-        return resolve(Promise.all(jobs))
+        process.addListener('SIGTERM', () => {
+          jobs.forEach(job => job.cancel())
+          process.exitCode = 0
+        })
+        await Promise.all(jobs)
+        resolve()
       } catch (error) {
         reject(error)
         throw error

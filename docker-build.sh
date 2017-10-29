@@ -5,6 +5,7 @@ source ./.env.sh
 echo "Building $DOCKER_TAG..."
 
 $DOCKER build \
+  --build-arg APPCMD=$APPCMD \
   --build-arg RADARR_APIKEY=$RADARR_APIKEY \
   --build-arg RADARR_ENDPOINT=$RADARR_ENDPOINT \
   --build-arg SONARR_APIKEY=$SONARR_APIKEY \

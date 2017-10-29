@@ -2,7 +2,7 @@
   "author": "Mike Pham <me@mikepham.com>",
   "description": "Various, uh, tools...",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "index.js",
   "name": "blackbeard",
   "version": "1.0.0",
   "devDependencies": {
@@ -30,6 +30,8 @@
     "async-throttle": "^1.1.0",
     "debug": "^3.1.0",
     "inversify": "^4.3.0",
+    "irc-factory": "^1.10.1",
+    "irc-formatting": "^1.0.0-rc3",
     "node-fetch": "^1.7.3",
     "node-schedule": "^1.2.5",
     "reflect-metadata": "^0.1.10"
@@ -37,12 +39,12 @@
   "scripts": {
     "build": "gulp build",
     "clean": "gulp clean",
-    "start": "node index.js scheduler",
-    "startdev": "cross-env DEBUG=nativecode:* ts-node src/index.ts scheduler",
+    "start": "node index.js",
+    "startdev": "cross-env DEBUG=nativecode:* APPCMD=ircwatch ts-node src/index.ts",
     "prestartdev": "yarn run build",
     "docker-push": "./docker-push.sh",
     "predocker-push": "cross-env DOCKER_PUSH=yes yarn run build",
-    "docker-run": "cross-env DEBUG=nativecode:*,-*:trace ./docker-run.sh",
+    "docker-run": "cross-env DEBUG=nativecode:*,-*:trace APPCMD=ircwatch ./docker-run.sh",
     "predocker-run": "yarn run build"
   }
 }
