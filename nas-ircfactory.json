@@ -30,8 +30,8 @@
         }
       },
       "secrets": {
-        "type": "rss",
-        "url": "env.APIKEY_XSPEEDS"
+        "secret_key": "env:APIKEY_XSPEEDS",
+        "type": "rss"
       }
     }
   }
