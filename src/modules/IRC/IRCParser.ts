@@ -29,7 +29,7 @@ export class IRCParser {
       record[property] = value
       if (formatter) {
         const replaced = value.replace(formatter.regex, formatter.replace)
-        const formatted = this.format(replaced, this.options.secrets)
+        const formatted = this.secrets(replaced, this.options.secrets)
         record[property] = formatted
       }
     })
@@ -38,15 +38,15 @@ export class IRCParser {
     return record as IRCParserRecord
   }
 
-  private format(value: string, secrets: IRCParserSecrets): string {
+  private secrets(value: string, secrets: IRCParserSecrets): string {
     return Object.keys(secrets)
       .reduce((_, name: string): string => {
-        const regex = new RegExp(`{${name}}`, 'gm')
-        const secret = secrets[name]
+        let secret = secrets[name]
         if (secret.toLowerCase().startsWith('env.')) {
-          const key = secret.substring(1)
-          return value = value.replace(regex, process.env[key.toUpperCase()] || value)
+          const key = secret.replace('env.', '')
+          secret = process.env[key.toUpperCase()] || value
         }
+        const regex = new RegExp(`{${name}}`, 'gm')
         return value = value.replace(regex, secret)
       })
   }
