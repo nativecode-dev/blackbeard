@@ -7,8 +7,9 @@ src/
 .dockerignore
 .env.sh
 .env.version
+docker-*.sh
 Dockerfile
-nas-config.json
-nas-schedule.json
+gulpfile.js
+nas-*.json
 tsconfig.json
 tslint.json
