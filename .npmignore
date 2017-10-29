@@ -1,0 +1,14 @@
+node_modules/
+src/
+
+*.js
+*.sh
+
+.dockerignore
+.env.sh
+.env.version
+Dockerfile
+nas-config.json
+nas-schedule.json
+tsconfig.json
+tslint.json
