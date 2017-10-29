@@ -15,10 +15,10 @@ interface ConfigFile {
 }
 
 export const Converters = {
-  date: (...args) => new Date(...args),
-  bool: value => Boolean(value),
-  num: value => Number(value),
-  str: value => String(value),
+  date: (...args: any[]) => new Date(...args),
+  bool: (value: any) => Boolean(value),
+  num: (value: any) => Number(value),
+  str: (value: any) => String(value),
 }
 
 @injectable()

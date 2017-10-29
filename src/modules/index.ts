@@ -1,1 +1,1 @@
-export * from './IRCFactory'
+export * from './IRC'

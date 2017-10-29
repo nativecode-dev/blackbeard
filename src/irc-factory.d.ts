@@ -1,15 +1,14 @@
 declare module 'irc-factory' {
-  import * as cp from 'child_process'
   import * as im from 'irc-message'
 
-  export interface Options {
+  export interface IRCOptions {
     automaticSetup: boolean
     events: string
     fork: boolean
     rpc: string
   }
 
-  export class Client {
+  export class IRCClient {
     public connection: any
     public key: string
     public options: any
@@ -17,7 +16,7 @@ declare module 'irc-factory' {
     constructor(key: string, options: any, socket: any)
   }
 
-  export interface ClientOptions {
+  export interface IRCClientOptions {
     nick: string
     port: number
     realname: string
@@ -28,7 +27,7 @@ declare module 'irc-factory' {
     user: string
   }
 
-  export interface Message extends im.IRCMessage {
+  export interface IRCMessage extends im.IRCMessage {
     hostname?: string
     nickname?: string
     raw: string
@@ -37,34 +36,22 @@ declare module 'irc-factory' {
   }
 
   export class Api {
-    public connect(options: Options): ApiInterfaces
-    public createClient(key: string, object: any, dummy: any): ApiClient
-    public destroyClient(key: string): boolean
+    public connect(options: IRCOptions): IRCInterfaces
     public emit(event: string, options: any): void
-    public fork(exitCode: number, options: Options): cp.ChildProcess
-    public setupServer(options: Options): void
   }
 
-  export interface ApiClient {
-    dummy: any
-    events: any
-    irc: Client
-    key: string
-    options: any
+  export type IRCEventCallback = (message: any) => void
+
+  export interface IRCEvents {
+    on(event: string, callback: IRCEventCallback): void
   }
 
-  export type ApiEventCallback = (message: any) => void
-
-  export interface ApiEvents {
-    on(event: string, callback: ApiEventCallback)
-  }
-
-  export interface ApiRpc {
+  export interface IRCRPC {
     emit(command: string, key: string, argument?: any, ...args: any[]): void
   }
 
-  export interface ApiInterfaces {
-    events: ApiEvents
-    rpc: ApiRpc
+  export interface IRCInterfaces {
+    events: IRCEvents
+    rpc: IRCRPC
   }
 }

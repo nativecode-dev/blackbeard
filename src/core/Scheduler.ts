@@ -26,10 +26,10 @@ export class Scheduler {
     this.scripts = scripts.get()
   }
 
-  public async start(filename: string): Promise<void> {
+  public async start(): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
       try {
-        const config = await this.config.load<JobConfig[]>(filename)
+        const config = await this.config.load<JobConfig[]>('nas-schedule.json')
         const jobs = config.map((config: JobConfig) => this.job(config))
         this.log.info(`${jobs.length} job(s) scheduled`)
         process.on('beforeExit', () => jobs.forEach(job => job.cancel()))

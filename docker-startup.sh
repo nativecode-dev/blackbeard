@@ -2,12 +2,12 @@
 
 YARN=`which yarn`
 
-if [ ! -f $APPDIR/config/nas-config.json ]; then
-  cp $APPDIR/nas-config.json $APPDIR/config/nas-config.json
-fi
-
-if [ ! -f $APPDIR/config/nas-schedule.json ]; then
-  cp $APPDIR/nas-schedule.json $APPDIR/config/nas-schedule.json
-fi
+for FILE in $APPDIR/nas-*.json
+do
+  NAME=$(basename $FILE)
+  if [ ! -f $APPDIR/config/$NAME ]; then
+    cp $NAME $APPDIR/config/$NAME
+  fi
+done
 
 $YARN run start $APPCMD

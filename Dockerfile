@@ -23,12 +23,11 @@ ENV NODE_ENV=production
 WORKDIR ${APPDIR}
 
 COPY .env.version VERSION
-COPY dist .
-COPY docker-startup.sh .
-COPY nas-config.json .
-COPY nas-schedule.json .
-COPY package.json .
-COPY yarn.lock .
+COPY dist ${APPDIR}/
+COPY docker-startup.sh ${APPDIR}/
+COPY nas-*.json ${APPDIR}/
+COPY package.json ${APPDIR}/
+COPY yarn.lock ${APPDIR}/
 
 RUN set -ex \
   # setup
