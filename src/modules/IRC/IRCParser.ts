@@ -1,4 +1,4 @@
-import { IRCParserOptions } from './IRCEntry'
+import { IRCParserOptions, IRCParserSecrets } from './IRCEntry'
 import { Logger, ObjectNavigator } from '../../core'
 
 export class IRCParser {
@@ -29,7 +29,7 @@ export class IRCParser {
       record[property] = value
       if (formatter) {
         const replaced = value.replace(formatter.regex, formatter.replace)
-        const formatted = this.format(replaced, this.options.formatters[property])
+        const formatted = this.format(replaced, this.options.secrets)
         record[property] = formatted
       }
     })
@@ -38,16 +38,16 @@ export class IRCParser {
     return record as IRCParserRecord
   }
 
-  private format(value: string, values: any): string {
-    return Object.keys(values)
+  private format(value: string, secrets: IRCParserSecrets): string {
+    return Object.keys(secrets)
       .reduce((_, name: string): string => {
         const regex = new RegExp(`{${name}}`, 'gm')
-        const replacement = values[name] as string
-        if (replacement && replacement.startsWith(':')) {
-          const key = replacement.substring(1)
-          return value = value.replace(regex, process.env[key.toUpperCase()] || values)
+        const secret = secrets[name]
+        if (secret.toLowerCase().startsWith('env.')) {
+          const key = secret.substring(1)
+          return value = value.replace(regex, process.env[key.toUpperCase()] || value)
         }
-        return value = value.replace(regex, values[name])
+        return value = value.replace(regex, secret)
       })
   }
 }

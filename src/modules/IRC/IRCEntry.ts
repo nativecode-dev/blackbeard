@@ -14,6 +14,7 @@ export interface IRCEntry {
 export interface IRCParserOptions {
   filtering: IRCParserFiltering
   formatters: IRCParserFormatters
+  secrets: IRCParserSecrets
 }
 
 export interface IRCParserFiltering {
@@ -29,4 +30,8 @@ export interface IRCParserFormatter {
 
 export interface IRCParserFormatters {
   [key: string]: IRCParserFormatter
+}
+
+export interface IRCParserSecrets {
+  [key: string]: string
 }

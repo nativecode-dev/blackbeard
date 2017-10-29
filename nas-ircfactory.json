@@ -28,6 +28,9 @@
           "regex": "https:\\/\\/www\\.xspeeds\\.eu\\/details.php\\?id=(\\d+)",
           "replace": "https://www.xspeeds.eu/download.php?id=$1&type={type}&secret_key={secret_key}"
         }
+      },
+      "secrets": {
+        "url": "env.APIKEY_XSPEEDS"
       }
     }
   }
