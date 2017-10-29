@@ -10,7 +10,6 @@ export interface DataBody {
 
 export interface DataMessage {
   event: string | string[]
-  keys: string[]
-  body: DataBody
-  username: string
+  keys?: string[]
+  body?: DataBody
 }

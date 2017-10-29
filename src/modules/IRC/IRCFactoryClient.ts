@@ -66,11 +66,13 @@ export class InternalIRCFactoryClient implements IRCFactoryClient {
 
   private privmsg = (data: DataMessage): void => {
     this.log.trace('privmsg', JSON.stringify(data))
-    const sender = data.username && data.username.toLowerCase()
-    const filterUser = this.entry.parser.filtering.username.toLowerCase()
-    if (sender === filterUser) {
-      const result = this.parser.parse(ircformatting.strip(data.body.message))
-      this.log.traceJSON(result)
+    if (data.body && data.body.username) {
+      const sender = data.body.username.toLowerCase()
+      const filtered = this.entry.parser.filtering.username.toLowerCase()
+      if (sender === filtered) {
+        const result = this.parser.parse(ircformatting.strip(data.body.message))
+        this.log.traceJSON(result)
+      }
     }
   }
 
