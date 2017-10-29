@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { injectable } from 'inversify'
 import { Client, Logger, LoggerFactory, ServiceUri, Variables } from './core'
-import { Episode, QualityProfile, Series, SeriesSeason } from './models/sonarr'
+import { Episode, QualityProfile, ReleaseInfo, Series, SeriesSeason } from './models/sonarr'
 
 @injectable()
 export class Sonarr extends Client {
@@ -21,6 +21,11 @@ export class Sonarr extends Client {
       return this.get<Episode[]>(`${api.url}/episode?seriesId=${seriesId}`)
     }
     return this.get<Episode[]>(`${api.url}/episode`)
+  }
+
+  public async release(release: ReleaseInfo): Promise<void> {
+    const api = await this.initialized
+    return this.put<ReleaseInfo, void>(`${api.url}/release/push`, release)
   }
 
   public async toggleMonitor(seriesId: number, toggle: boolean): Promise<void> {

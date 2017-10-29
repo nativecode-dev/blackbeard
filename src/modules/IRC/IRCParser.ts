@@ -22,34 +22,38 @@ export class IRCParser {
     }
 
     const record: IRCParserRecordMap = {}
-    values.map((value: string, index: number) => this.format(value, index, record))
+    values.map((value: string, index: number) => this.transform(value, index, record))
     return record as IRCParserRecord
   }
 
-  private format(value: string, index: number, record: IRCParserRecordMap): IRCParserRecordMap {
-    const property = this.options.filtering.properties[index]
-    const formatter = this.options.formatters[property]
-    record[property] = this.secrets(value, this.options.secrets)
-    if (formatter && value.match(formatter.regex)) {
-      const formatted = record[property] = this.secrets(record[property], this.options.secrets)
-      this.log.trace('formatted', property, value, formatted)
+  private secret(property: string, value: string, secrets: IRCParserSecrets): string {
+    let secret = secrets[property]
+    if (secret && secret.toLowerCase().startsWith('env.')) {
+      const key = secret.replace('env.', '').toUpperCase()
+      secret = process.env[key] || secret
+      this.log.trace('replace from env', value, secret)
+      return secret
     }
-    this.log.traceJSON(record)
-    return record
+    const regex = new RegExp(`{${property}}`, 'gm')
+    secret = value.replace(regex, secret)
+    this.log.trace('replace from regex', value, secret)
+    return secret
   }
 
-  private secrets(value: string, secrets: IRCParserSecrets): string {
-    return Object.keys(secrets)
-      .reduce((_, name: string): string => {
-        let secret = secrets[name]
-        if (secret.toLowerCase().startsWith('env.')) {
-          const key = secret.replace('env.', '').toUpperCase()
-          secret = process.env[key] || value
-        }
-        this.log.trace('secret', name, secret)
-        const regex = new RegExp(`{${name}}`, 'gm')
-        return value = value.replace(regex, secret)
-      })
+  private transform(value: string, index: number, record: IRCParserRecordMap): IRCParserRecordMap {
+    const property = this.options.filtering.properties[index]
+    const formatter = this.options.formatters[property]
+    if (formatter && formatter.regex) {
+      const regex = new RegExp(formatter.regex)
+      if (regex.test(value)) {
+        const formatted = record[property] = this.secret(property, formatter.replace, this.options.secrets)
+        this.log.trace('formatted', value, formatted)
+      }
+      this.log.traceJSON(record)
+    } else {
+      record[property] = this.secret(property, value, this.options.secrets)
+    }
+    return record
   }
 }
 

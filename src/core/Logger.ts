@@ -1,10 +1,20 @@
 import * as debug from 'debug'
 import { Registry, scrub } from '@nofrills/scrubs'
 
+export enum LogMessageType {
+  Debug = 'debug',
+  Error = 'error',
+  Fatal = 'fatal',
+  Info = 'info',
+  Silly = 'silly',
+  Trace = 'trace',
+  Warn = 'warn',
+}
+
 export interface Logger {
   extend(namespace: string): Logger
   debug(message: string, ...args: string[]): void
-  debugJSON(mobject: any): void
+  debugJSON(object: any): void
   error(message: string, ...args: string[]): void
   errorJSON(object: any): void
   info(message: string, ...args: string[]): void
@@ -15,6 +25,10 @@ export interface Logger {
   traceJSON(object: any): void
   warn(message: string, ...args: string[]): void
   warnJSON(object: any): void
+}
+
+interface DebugLogWriters {
+  [key: string]: debug.IDebugger
 }
 
 export class DebugLogger implements Logger {

@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { injectable } from 'inversify'
 import { Client, Logger, LoggerFactory, ServiceUri, Variables } from './core'
-import { Movie, MovieQuality } from './models/radarr'
+import { Movie, MovieQuality, ReleaseInfo } from './models/radarr'
 
 @injectable()
 export class Radarr extends Client implements Radarr {
@@ -32,6 +32,11 @@ export class Radarr extends Client implements Radarr {
   public async profiles(): Promise<MovieQuality[]> {
     const api = await this.initialized
     return this.get<MovieQuality[]>(`${api.url}/profile`)
+  }
+
+  public async release(release: ReleaseInfo): Promise<void> {
+    const api = await this.initialized
+    return this.put<ReleaseInfo, void>(`${api.url}/release/push`, release)
   }
 
   public async toggleMonitor(movieId: number, toggle: boolean): Promise<void> {
