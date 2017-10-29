@@ -1,6 +1,6 @@
+import 'node-fetch'
 import 'reflect-metadata'
 
-import * as fetch from 'node-fetch'
 import { injectable } from 'inversify'
 import { DefaultLogger, Logger } from './Logger'
 import { LoggerFactory } from './LoggerFactory'
@@ -45,24 +45,28 @@ export abstract class HTTP {
   protected abstract request<TRequest>(body?: TRequest): Promise<RequestInit>
 
   private async send<T>(url: string, init: RequestInit, method: string = 'GET'): Promise<T> {
-    this.log.trace(`sending request to ${url}`, JSON.stringify(init))
+    this.log.trace(`http.send:${method}:${url}`, JSON.stringify(init))
 
     if (init.body) {
       this.log.trace(JSON.stringify(init.body))
     }
 
-    const request = new fetch.Request(url, init)
-    const response = await fetch.default(request)
+    if (init.method === undefined) {
+      init.method = method
+    }
+
+    const request = new Request(url, init)
+    const response = await fetch(request)
 
     if (response.ok) {
-      this.log.trace(`${response.status}:${response.statusText} ${url}`)
+      this.log.trace(`http:${response.status}:[${response.statusText}]: ${url}`)
       try {
         return await response.json()
       } catch (error) {
-        this.log.error(error)
+        this.log.error(`http.error:${response.status}`, response.statusText, error)
       }
     }
 
-    throw new Error(`[${response.status}]: ${response.statusText} - Failed to ${init.method} from ${url}`)
+    throw new Error(`[${response.status}]: ${response.statusText} - ${method} request failed at ${url}`)
   }
 }

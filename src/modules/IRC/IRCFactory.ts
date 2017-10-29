@@ -4,8 +4,11 @@ import { Api, IRCInterfaces, IRCRPC, IRCClientOptions, IRCMessage, IRCOptions } 
 import { injectable } from 'inversify'
 import { Config, Converters, Logger, LoggerFactory, Variables } from '../../core'
 import { DataMessage } from './DataMessage'
-import { IRCEntries, IRCEntry } from './IRCEntry'
+import { Radarr, Sonarr } from '../../index'
+import { IRCEntries, IRCEntry, IRCParserClientKind } from './IRCEntry'
 import { IRCFactoryClient, InternalIRCFactoryClient } from './IRCFactoryClient'
+import { IRCParserRecord } from './IRCParser'
+import { Protocol, ReleaseInfo } from '../../models'
 
 interface IRCFactoryClients {
   [key: string]: IRCFactoryClient
@@ -23,16 +26,40 @@ export class IRCFactory {
   private readonly config: Config
   private readonly handlers: IRCFactoryHandlers
   private readonly log: Logger
+  private readonly radarr: Radarr
+  private readonly sonarr: Sonarr
   private readonly vars: Variables
 
-  constructor(config: Config, logger: LoggerFactory, vars: Variables) {
+  constructor(config: Config, logger: LoggerFactory, radarr: Radarr, sonarr: Sonarr, vars: Variables) {
     this.clients = {}
     this.config = config
     this.handlers = {}
     this.log = logger.create('irc-factory')
+    this.radarr = radarr
+    this.sonarr = sonarr
     this.vars = vars
 
     this.handlers.synchronize = this.synchronize
+  }
+
+  public publish(record: IRCParserRecord, category: IRCParserClientKind): Promise<void> {
+    const release: ReleaseInfo = {
+      downloadUrl: record.url,
+      title: record.title,
+      protocol: Protocol.Torrent,
+      publishDate: new Date().toISOString(),
+    }
+
+    switch (category) {
+      case IRCParserClientKind.Radarr:
+        return this.radarr.release(release)
+
+      case IRCParserClientKind.Sonarr:
+        return this.sonarr.release(release)
+
+      default:
+        return Promise.reject(`Invalid category: ${category}`)
+    }
   }
 
   public start(): Promise<void> {
@@ -80,6 +107,6 @@ export class IRCFactory {
 
   private synchronize = (name: string, entry: IRCEntry, interfaces: IRCInterfaces): void => {
     this.log.trace(`synchronize: ${name}`)
-    this.clients[name] = new InternalIRCFactoryClient(name, entry, interfaces, this.log)
+    this.clients[name] = new InternalIRCFactoryClient(name, entry, this, interfaces, this.log)
   }
 }

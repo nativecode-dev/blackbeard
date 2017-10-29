@@ -19,6 +19,14 @@
     },
     "parser": {
       "filtering": {
+        "category": {
+          "Blu-Ray": "radarr",
+          "HD Boxsets": "sonarr",
+          "Movies": "radarr",
+          "TV Boxsets": "sonarr",
+          "TV-HD": "sonarr",
+          "TV-SD": "sonarr"
+        },
         "pattern": "(?:New Torrent|Size|Category|Uploader|Link):\\s+\\((?:\\s+)([\\w\\s\\.\\-\\:\\/\\?\\=\\[\\]\\{\\}]+)(?:\\s+)\\)",
         "properties": ["title", "size", "category", "uploader", "url"],
         "username": "Announce"

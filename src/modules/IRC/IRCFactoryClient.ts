@@ -3,6 +3,7 @@ import { IRCInterfaces, IRCClientOptions } from 'irc-factory'
 import { Logger } from '../../core'
 import { DataMessage } from './DataMessage'
 import { IRCEntry } from './IRCEntry'
+import { IRCFactory } from './IRCFactory'
 import { IRCParser } from './IRCParser'
 
 export interface IRCFactoryClient {
@@ -18,6 +19,7 @@ interface IRCFactoryClientEvents {
 }
 
 export class InternalIRCFactoryClient implements IRCFactoryClient {
+  private readonly factory: IRCFactory
   private readonly handlers: IRCFactoryClientEvents
   private readonly interfaces: IRCInterfaces
   private readonly log: Logger
@@ -25,7 +27,8 @@ export class InternalIRCFactoryClient implements IRCFactoryClient {
   private readonly name: string
   private readonly parser: IRCParser
 
-  constructor(name: string, entry: IRCEntry, interfaces: IRCInterfaces, logger: Logger) {
+  constructor(name: string, entry: IRCEntry, factory: IRCFactory, interfaces: IRCInterfaces, logger: Logger) {
+    this.factory = factory
     this.handlers = {}
     this.interfaces = interfaces
     this.log = logger.extend('irc-factory-client')
@@ -64,14 +67,18 @@ export class InternalIRCFactoryClient implements IRCFactoryClient {
     }
   }
 
-  private privmsg = (data: DataMessage): void => {
+  private privmsg = async (data: DataMessage): Promise<void> => {
     this.log.trace('privmsg', JSON.stringify(data))
     if (data.message && data.message.username) {
       const sender = data.message.username.toLowerCase()
       const filtered = this.entry.parser.filtering.username.toLowerCase()
       if (sender === filtered) {
-        const result = this.parser.parse(irc.strip(data.message.message))
-        this.log.traceJSON(result)
+        const record = this.parser.parse(irc.strip(data.message.message))
+        const category = this.entry.parser.filtering.category[record.category]
+        if (category) {
+          await this.factory.publish(record, category)
+        }
+        this.log.traceJSON(record)
       }
     }
   }

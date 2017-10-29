@@ -25,7 +25,7 @@ export class Sonarr extends Client {
 
   public async release(release: ReleaseInfo): Promise<void> {
     const api = await this.initialized
-    return this.put<ReleaseInfo, void>(`${api.url}/release/push`, release)
+    return this.post<ReleaseInfo, void>(`${api.url}/release/push`, release)
   }
 
   public async toggleMonitor(seriesId: number, toggle: boolean): Promise<void> {

@@ -1,5 +1,10 @@
 import { IRCClientOptions, IRCOptions } from 'irc-factory'
 
+export enum IRCParserClientKind {
+  Radarr = 'radarr',
+  Sonarr = 'sonarr'
+}
+
 export interface IRCEntries {
   [key: string]: IRCEntry
 }
@@ -18,9 +23,14 @@ export interface IRCParserOptions {
 }
 
 export interface IRCParserFiltering {
+  category: IRCParserCategories
   pattern: string
   properties: string[]
   username: string
+}
+
+export interface IRCParserCategories {
+  [key: string]: IRCParserClientKind
 }
 
 export interface IRCParserFormatter {

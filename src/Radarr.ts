@@ -36,7 +36,7 @@ export class Radarr extends Client implements Radarr {
 
   public async release(release: ReleaseInfo): Promise<void> {
     const api = await this.initialized
-    return this.put<ReleaseInfo, void>(`${api.url}/release/push`, release)
+    return this.post<ReleaseInfo, void>(`${api.url}/release/push`, release)
   }
 
   public async toggleMonitor(movieId: number, toggle: boolean): Promise<void> {
