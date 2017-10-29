@@ -32,10 +32,7 @@ export class Scheduler {
         const config = await this.config.load<JobConfig[]>(filename)
         const jobs = config.map((config: JobConfig) => this.job(config))
         this.log.info(`${jobs.length} job(s) scheduled`)
-        process.addListener('SIGTERM', () => {
-          jobs.forEach(job => job.cancel())
-          process.exitCode = 0
-        })
+        process.on('beforeExit', () => jobs.forEach(job => job.cancel()))
         await Promise.all(jobs)
         resolve()
       } catch (error) {

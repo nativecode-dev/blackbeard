@@ -14,6 +14,13 @@ interface ConfigFile {
   }
 }
 
+export const Converters = {
+  date: (...args) => new Date(...args),
+  bool: value => Boolean(value),
+  num: value => Number(value),
+  str: value => String(value),
+}
+
 @injectable()
 export class Variables {
   private readonly config: Config
@@ -24,6 +31,11 @@ export class Variables {
     this.config = config
     this.initialized = this.init()
     this.log = logger.create('service:variables')
+  }
+
+  public async as<T>(name: string, defaultValue: T, converter: any) {
+    const value = await this.get(name, defaultValue.toString())
+    return converter(value) as T
   }
 
   public async get(name: string, defaultValue: string = '', fixcase: boolean = true): Promise<string> {

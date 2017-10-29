@@ -1,11 +1,12 @@
 declare module 'irc-factory' {
   import * as cp from 'child_process'
+  import * as im from 'irc-message'
 
   export interface Options {
     automaticSetup: boolean
-    events: number
+    events: string
     fork: boolean
-    rpc: number
+    rpc: string
   }
 
   export class Client {
@@ -14,6 +15,25 @@ declare module 'irc-factory' {
     public options: any
     public supported: any
     constructor(key: string, options: any, socket: any)
+  }
+
+  export interface ClientOptions {
+    nick: string
+    port: number
+    realname: string
+    retryCount: number
+    retryWait: number
+    secure: boolean
+    server: string
+    user: string
+  }
+
+  export interface Message extends im.IRCMessage {
+    hostname?: string
+    nickname?: string
+    raw: string
+    server?: string
+    username?: string
   }
 
   export class Api {
@@ -40,11 +60,11 @@ declare module 'irc-factory' {
   }
 
   export interface ApiRpc {
-    emit(command: string, argument: string, options: any): void
+    emit(command: string, key: string, argument?: any, ...args: any[]): void
   }
 
   export interface ApiInterfaces {
-    events: any
-    rpc: any
+    events: ApiEvents
+    rpc: ApiRpc
   }
 }

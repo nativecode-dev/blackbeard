@@ -10,7 +10,7 @@ import * as modules from './modules'
 function main(command: string): Promise<void> {
   switch (command || process.env.APPCMD) {
     case 'ircwatch':
-      return container.get<modules.IrcFactory>(modules.IrcFactory).start()
+      return container.get<modules.IRCFactory>(modules.IRCFactory).start()
 
     case 'scheduler':
       return container.get<core.Scheduler>(core.Scheduler).start('nas-schedule.json')

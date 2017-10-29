@@ -23,6 +23,6 @@ container.bind<core.Script>(core.ScriptType).to(scripts.UnMonitorCompletedMovies
 container.bind<core.Script>(core.ScriptType).to(scripts.UnMonitorCompletedSeasons)
 container.bind<core.ScriptFactory>(core.ScriptFactory).toSelf()
 
-container.bind<modules.IrcFactory>(modules.IrcFactory).toSelf()
+container.bind<modules.IRCFactory>(modules.IRCFactory).toSelf()
 
 export default container
