@@ -1,5 +1,6 @@
 import * as debug from 'debug'
-import { Registry, scrub } from '@nofrills/scrubs'
+
+const scrub = (object: any): any => object
 
 export enum LogMessageType {
   Debug = 'debug',

@@ -27,21 +27,19 @@ export class IRCParser {
   }
 
   private secret(value: string, secrets: IRCParserSecrets): string {
-    let result = value
     Object.keys(secrets)
       .map((name: string) => ({ name, value: secrets[name] }))
-      .map((secret): string => {
+      .forEach((secret): void => {
         const regex = new RegExp(`\{${secret.name}\}`, 'gm')
         if (secret.value.toLowerCase().startsWith('env:')) {
           const env = secret.value.replace('env:', '').toUpperCase()
-          this.log.trace('secret.regex', secret.name, value, result, env)
-          return result.replace(regex, process.env[env] || result)
+          value = value.replace(regex, process.env[env] || value)
+        } else {
+          value = value.replace(regex, value)
         }
-        return result.replace(regex, result)
+        this.log.trace('secret', secret.name, secret.value, value)
       })
-
-    this.log.trace('secret', value, result)
-    return result
+    return value
   }
 
   private transform(value: string, index: number, record: IRCParserRecordMap): IRCParserRecordMap {
@@ -50,13 +48,14 @@ export class IRCParser {
     if (formatter && formatter.regex) {
       const regex = new RegExp(formatter.regex)
       if (regex.test(value)) {
-        const formatted = record[property] = this.secret(formatter.replace, this.options.secrets)
-        this.log.trace('regex', value, formatted)
+        const replaced = value.replace(regex, formatter.replace)
+        const formatted = record[property] = this.secret(replaced, this.options.secrets)
+        this.log.trace('transform.regex', value, formatted)
       }
       this.log.traceJSON(record)
     } else {
       const formatted = record[property] = this.secret(value, this.options.secrets)
-      this.log.trace('replace', value, formatted)
+      this.log.trace('transform', value, formatted)
     }
     return record
   }
