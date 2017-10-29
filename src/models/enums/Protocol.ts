@@ -1,3 +1,4 @@
 export enum Protocol {
-  Torrent = 'torrent'
+  Torrent = 'torrent',
+  Usenet = 'usenet'
 }
