@@ -65,7 +65,7 @@ export class IRCFactory {
   public start(): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
       const api = new Api()
-      const config = await this.config.load<IRCEntries>('nas-ircfactory.json')
+      const config = await this.config.load<IRCEntries>('nas-ircwatch.json')
 
       Object.keys(config).forEach(key => {
         const entry = config[key]

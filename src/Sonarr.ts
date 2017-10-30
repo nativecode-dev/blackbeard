@@ -1,4 +1,6 @@
 import 'reflect-metadata'
+
+import * as fetch from 'node-fetch'
 import { injectable } from 'inversify'
 import { Client, Logger, LoggerFactory, ServiceUri, Variables } from './core'
 import { Episode, QualityProfile, ReleaseInfo, Series, SeriesSeason } from './models/sonarr'
@@ -74,7 +76,7 @@ export class Sonarr extends Client {
     return 'sonarr'
   }
 
-  protected async request<T>(body?: T): Promise<RequestInit> {
+  protected async request<T>(body?: T): Promise<fetch.RequestInit> {
     const api = await this.initialized
     return {
       body: JSON.stringify(body),

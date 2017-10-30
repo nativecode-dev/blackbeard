@@ -1,4 +1,6 @@
 import 'reflect-metadata'
+
+import * as fetch from 'node-fetch'
 import { injectable } from 'inversify'
 import { Client, Logger, LoggerFactory, ServiceUri, Variables } from './core'
 import { Movie, MovieQuality, ReleaseInfo } from './models/radarr'
@@ -55,7 +57,7 @@ export class Radarr extends Client implements Radarr {
     return 'radarr'
   }
 
-  protected async request<T>(body?: T): Promise<RequestInit> {
+  protected async request<T>(body?: T): Promise<fetch.RequestInit> {
     const api = await this.initialized
     return {
       body: JSON.stringify(body),
