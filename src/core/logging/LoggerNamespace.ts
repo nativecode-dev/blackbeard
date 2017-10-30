@@ -20,9 +20,15 @@ export class LoggerNamespace {
     return clone
   }
 
+  public create(namespace: string): LoggerNamespace {
+    const clone = new LoggerNamespace()
+    clone.namespace = namespace
+    return clone
+  }
+
   public extend(namespace: string): LoggerNamespace {
     const extension = new LoggerNamespace()
-    extension.namespace = `${this.namespace}:${namespace}`
+    extension.namespace = `${extension.namespace}:${namespace}`
     return extension
   }
 }

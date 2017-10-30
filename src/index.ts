@@ -16,16 +16,17 @@ async function main(command: string): Promise<void> {
     case 'ircwatch':
       await container.get<modules.IRCWatcher>(modules.IRCWatcher).start()
       process.exit(0)
-      return
+      break
 
     case 'scheduler':
       await container.get<modules.Scheduler>(modules.Scheduler).start()
       process.exit(0)
-      return
+      break
 
     default:
       console.log(`invalid parameter provided: "${command}"`)
       process.exit(-1)
+      break
   }
 }
 

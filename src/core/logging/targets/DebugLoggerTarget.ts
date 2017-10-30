@@ -23,8 +23,10 @@ export class DebugLoggerTarget extends BaseLoggerTarget {
 
   public extend(namespace: string): LoggerTarget {
     const target = new DebugLoggerTarget()
-    target.namespace = this.namespace.extend(namespace)
-    target.createTargets()
+    if (target.namespace.value !== namespace) {
+      target.namespace = target.namespace.create(namespace)
+      target.createTargets()
+    }
     return target
   }
 
@@ -39,7 +41,8 @@ export class DebugLoggerTarget extends BaseLoggerTarget {
 
   private createTargets(): void {
     Object.keys(LogMessageType).map(type => {
-      this.targets[type] = debug(`${this.namespace.value}:${type.toLowerCase()}`)
+      const namespace = `${this.namespace.value}:${type.toLowerCase()}`
+      this.targets[type] = debug(namespace)
     })
   }
 }
