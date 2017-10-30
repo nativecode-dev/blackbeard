@@ -13,7 +13,6 @@ container.bind<Container>(Container).toConstantValue(container)
 container.bind<core.Config>(core.Config).toSelf()
 container.bind<core.FileSystem>(core.FileSystem).toSelf()
 container.bind<core.LoggerFactory>(core.LoggerFactory).toSelf()
-container.bind<core.Scheduler>(core.Scheduler).toSelf()
 container.bind<core.Variables>(core.Variables).toSelf()
 
 container.bind<clients.Radarr>(clients.Radarr).toSelf()
@@ -24,5 +23,6 @@ container.bind<core.Script>(core.ScriptType).to(scripts.UnMonitorCompletedSeason
 container.bind<core.ScriptFactory>(core.ScriptFactory).toSelf()
 
 container.bind<modules.IRCFactory>(modules.IRCFactory).toSelf()
+container.bind<modules.Scheduler>(modules.Scheduler).toSelf()
 
 export default container

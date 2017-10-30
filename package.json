@@ -40,7 +40,7 @@
     "build": "gulp build",
     "clean": "gulp clean",
     "start": "clear && node index.js",
-    "startdev": "clear && cross-env DEBUG=nativecode:* APPCMD=ircwatch ts-node src/index.ts",
+    "startdev": "clear && cross-env DEBUG=nativecode:* APPCMD=scheduler ts-node src/index.ts",
     "prestartdev": "yarn run clean && gulp build:ts",
     "docker-push": "./docker-push.sh",
     "predocker-push": "cross-env DOCKER_PUSH=yes yarn run build",

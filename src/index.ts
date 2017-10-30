@@ -10,16 +10,17 @@ import * as modules from './modules'
 
 const SHUTDOWN = -1024
 
-function main(command: string): Promise<void> {
+async function main(command: string): Promise<void> {
   switch (command || process.env.APPCMD) {
     case 'ircwatch':
-      return container.get<modules.IRCFactory>(modules.IRCFactory).start()
-
+      await container.get<modules.IRCFactory>(modules.IRCFactory).start()
+      return
     case 'scheduler':
-      return container.get<core.Scheduler>(core.Scheduler).start()
+      await container.get<modules.Scheduler>(modules.Scheduler).start()
+      return
+    default:
+      process.exit(-1)
   }
-
-  return Promise.reject('did not pass valid startup parameter')
 }
 
 if (cluster.isMaster) {
