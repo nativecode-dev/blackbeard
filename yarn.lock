@@ -317,8 +317,8 @@ cron-parser@^2.4.0:
     moment-timezone "^0.5.0"
 
 cross-env@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-5.1.0.tgz#1f12d6b3777d5847dcf9cf39fbee3c6a76dd5058"
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-5.1.1.tgz#b6d8ab97f304c0f71dae7277b75fe424c08dfa74"
   dependencies:
     cross-spawn "^5.1.0"
     is-windows "^1.0.0"
@@ -962,9 +962,9 @@ irc-message@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/irc-message/-/irc-message-2.0.1.tgz#dc02759539a030c96af36ad6fc8fee9083df7cbc"
 
-irc-socket@ircanywhere/irc-socket:
+"irc-socket@git://github.com/ircanywhere/irc-socket":
   version "2.4.0"
-  resolved "https://codeload.github.com/ircanywhere/irc-socket/tar.gz/19343600ce38460c9c8d7b7b265ac23313153342"
+  resolved "git://github.com/ircanywhere/irc-socket#19343600ce38460c9c8d7b7b265ac23313153342"
 
 irregular-plurals@^1.0.0:
   version "1.4.0"

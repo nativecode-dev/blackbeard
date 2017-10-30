@@ -6,7 +6,8 @@ import { Config, Converters, Logger, LoggerType, Variables } from '../../core'
 import { DataMessage } from './DataMessage'
 import { Radarr, Sonarr } from '../../index'
 import { IRCEntries, IRCEntry, IRCParserClientKind } from './IRCEntry'
-import { IRCWatcherClient, InternalIRCFactoryClient } from './IRCWatcherClient'
+import { IRCWatcherClient } from './IRCWatcherClient'
+import { IRCWatcherClientImpl } from './IRCWatcherClientImpl'
 import { IRCParserRecord } from './IRCParser'
 import { Protocol, ReleaseInfo } from '../../models'
 
@@ -108,6 +109,6 @@ export class IRCWatcher {
 
   private synchronize = (name: string, entry: IRCEntry, interfaces: IRCInterfaces): void => {
     this.log.trace(`synchronize: ${name}`)
-    this.clients[name] = new InternalIRCFactoryClient(name, entry, this, interfaces, this.log)
+    this.clients[name] = new IRCWatcherClientImpl(name, entry, this, interfaces, this.log)
   }
 }

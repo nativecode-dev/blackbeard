@@ -28,7 +28,7 @@ export class LoggerNamespace {
 
   public extend(namespace: string): LoggerNamespace {
     const extension = new LoggerNamespace()
-    extension.namespace = `${extension.namespace}:${namespace}`
+    extension.namespace = `${this.namespace}:${namespace}`
     return extension
   }
 }
