@@ -36,7 +36,7 @@ export class IRCWatcher {
     this.handlers = {}
 
     this.config = config
-    this.log = logger.extend('irc-factory')
+    this.log = logger.extend('ircwatcher')
     this.radarr = radarr
     this.sonarr = sonarr
     this.vars = vars

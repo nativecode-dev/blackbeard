@@ -20,7 +20,7 @@ export class IRCWatcherClientImpl implements IRCWatcherClient {
     this.factory = factory
     this.handlers = {}
     this.interfaces = interfaces
-    this.log = logger.extend('irc-client')
+    this.log = logger.extend('client')
     this.entry = entry
     this.name = name
 

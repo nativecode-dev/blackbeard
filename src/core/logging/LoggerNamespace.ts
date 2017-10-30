@@ -7,7 +7,7 @@ export class LoggerNamespace {
   private namespace: string
 
   constructor() {
-    this.namespace = 'nativecode:blackbeard'
+    this.namespace = `nativecode:blackbeard:${process.pid}`
   }
 
   public get value(): string {
