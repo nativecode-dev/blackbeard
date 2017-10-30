@@ -1,7 +1,7 @@
 import container from '../inversify.config'
 
-import { injectable } from 'inversify'
-import { LoggerFactory } from '../core'
+import { inject, injectable } from 'inversify'
+import { Logger, LoggerType } from '../core'
 import { Movie, MovieQuality } from '../models/radarr'
 import { Radarr, Script } from '../index'
 
@@ -9,7 +9,7 @@ import { Radarr, Script } from '../index'
 export class UnMonitorCompletedMovies extends Script implements UnMonitorCompletedMovies {
   private readonly radarr: Radarr
 
-  constructor(logger: LoggerFactory, radarr: Radarr) {
+  constructor( @inject(LoggerType) logger: Logger, radarr: Radarr) {
     super(logger)
     this.radarr = radarr
   }

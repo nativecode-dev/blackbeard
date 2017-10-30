@@ -1,8 +1,8 @@
 import 'reflect-metadata'
 
 import * as schedule from 'node-schedule'
-import { injectable } from 'inversify'
-import { Config, FileSystem, Logger, LoggerFactory, Script, ScriptFactory } from '../../core'
+import { inject, injectable, multiInject } from 'inversify'
+import { Config, FileSystem, Logger, LoggerType, Script, ScriptType } from '../../core'
 
 interface JobConfig {
   schedule: schedule.RecurrenceRule | schedule.RecurrenceSpecDateRange | schedule.RecurrenceSpecObjLit
@@ -15,10 +15,10 @@ export class Scheduler {
   private readonly log: Logger
   private readonly scripts: Script[]
 
-  constructor(config: Config, logger: LoggerFactory, scripts: ScriptFactory) {
+  constructor(config: Config, @inject(LoggerType) logger: Logger, @multiInject(ScriptType) scripts: Script[]) {
     this.config = config
-    this.log = logger.create('service:scheduler')
-    this.scripts = scripts.get()
+    this.log = logger.extend('service:scheduler')
+    this.scripts = scripts
   }
 
   public start(): Promise<schedule.Job[]> {

@@ -1,8 +1,8 @@
 import 'reflect-metadata'
 
 import * as fetch from 'node-fetch'
-import { injectable } from 'inversify'
-import { Client, Logger, LoggerFactory, ServiceUri, Variables } from './core'
+import { inject, injectable } from 'inversify'
+import { Client, Logger, LoggerType, ServiceUri, Variables } from './core'
 import { Movie, MovieQuality, ReleaseInfo } from './models/radarr'
 
 @injectable()
@@ -10,7 +10,7 @@ export class Radarr extends Client implements Radarr {
   private readonly initialized: Promise<ServiceUri>
   private readonly vars: Variables
 
-  constructor(logger: LoggerFactory, vars: Variables) {
+  constructor( @inject(LoggerType) logger: Logger, vars: Variables) {
     super(logger)
     this.vars = vars
     this.initialized = this.init()

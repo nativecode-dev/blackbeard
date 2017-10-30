@@ -1,16 +1,15 @@
 import 'reflect-metadata'
 
 import * as fetch from 'node-fetch'
-import { injectable } from 'inversify'
-import { DefaultLogger, Logger } from './Logger'
-import { LoggerFactory } from './LoggerFactory'
+import { inject, injectable } from 'inversify'
+import { Logger, LoggerType } from './logging'
 
 @injectable()
 export abstract class HTTP {
   private readonly logger: Logger
 
-  constructor(logger: LoggerFactory) {
-    this.logger = logger.create(`service:http:${this.name}`)
+  constructor( @inject(LoggerType) logger: Logger) {
+    this.logger = logger.extend(`service:http:${this.name}`)
   }
 
   public async delete<TResponse>(url: string): Promise<TResponse> {

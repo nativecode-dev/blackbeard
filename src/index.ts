@@ -11,14 +11,20 @@ import * as modules from './modules'
 const SHUTDOWN = -1024
 
 async function main(command: string): Promise<void> {
-  switch (command || process.env.APPCMD) {
+  command = command || process.env.APPCMD || ''
+  switch (command) {
     case 'ircwatch':
-      await container.get<modules.IRCFactory>(modules.IRCFactory).start()
+      await container.get<modules.IRCWatcher>(modules.IRCWatcher).start()
+      process.exit(0)
       return
+
     case 'scheduler':
       await container.get<modules.Scheduler>(modules.Scheduler).start()
+      process.exit(0)
       return
+
     default:
+      console.log(`invalid parameter provided: "${command}"`)
       process.exit(-1)
   }
 }

@@ -1,10 +1,9 @@
 import 'reflect-metadata'
 
 import * as path from 'path'
-import { injectable } from 'inversify'
+import { inject, injectable } from 'inversify'
 import { FileSystem } from './FileSystem'
-import { Logger } from './Logger'
-import { LoggerFactory } from './LoggerFactory'
+import { Logger, LoggerType } from './logging'
 
 const ConfigCache: { [key: string]: any } = {}
 
@@ -14,9 +13,9 @@ export class Config {
   private readonly initialized: Promise<string>
   private readonly log: Logger
 
-  constructor(files: FileSystem, logger: LoggerFactory) {
+  constructor(files: FileSystem, @inject(LoggerType) logger: Logger) {
     this.files = files
-    this.log = logger.create('service:config')
+    this.log = logger.extend('service:config')
     this.initialized = this.init()
   }
 

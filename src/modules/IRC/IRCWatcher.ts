@@ -1,40 +1,41 @@
 import 'reflect-metadata'
 
 import { Api, IRCInterfaces, IRCRPC, IRCClientOptions, IRCMessage, IRCOptions } from 'irc-factory'
-import { injectable } from 'inversify'
-import { Config, Converters, Logger, LoggerFactory, Variables } from '../../core'
+import { inject, injectable } from 'inversify'
+import { Config, Converters, Logger, LoggerType, Variables } from '../../core'
 import { DataMessage } from './DataMessage'
 import { Radarr, Sonarr } from '../../index'
 import { IRCEntries, IRCEntry, IRCParserClientKind } from './IRCEntry'
-import { IRCFactoryClient, InternalIRCFactoryClient } from './IRCFactoryClient'
+import { IRCWatcherClient, InternalIRCFactoryClient } from './IRCWatcherClient'
 import { IRCParserRecord } from './IRCParser'
 import { Protocol, ReleaseInfo } from '../../models'
 
 interface IRCFactoryClients {
-  [key: string]: IRCFactoryClient
+  [key: string]: IRCWatcherClient
 }
 
-type IRCFactoryHandler = (name: string, entry: IRCEntry, interfaces: IRCInterfaces) => void
+type IRCWatcherHandler = (name: string, entry: IRCEntry, interfaces: IRCInterfaces) => void
 
-interface IRCFactoryHandlers {
-  [key: string]: IRCFactoryHandler
+interface IRCWatcherHandlers {
+  [key: string]: IRCWatcherHandler
 }
 
 @injectable()
-export class IRCFactory {
+export class IRCWatcher {
   private readonly clients: IRCFactoryClients
   private readonly config: Config
-  private readonly handlers: IRCFactoryHandlers
+  private readonly handlers: IRCWatcherHandlers
   private readonly log: Logger
   private readonly radarr: Radarr
   private readonly sonarr: Sonarr
   private readonly vars: Variables
 
-  constructor(config: Config, logger: LoggerFactory, radarr: Radarr, sonarr: Sonarr, vars: Variables) {
+  constructor(config: Config, @inject(LoggerType) logger: Logger, radarr: Radarr, sonarr: Sonarr, vars: Variables) {
     this.clients = {}
-    this.config = config
     this.handlers = {}
-    this.log = logger.create('irc-factory')
+
+    this.config = config
+    this.log = logger.extend('irc-factory')
     this.radarr = radarr
     this.sonarr = sonarr
     this.vars = vars
