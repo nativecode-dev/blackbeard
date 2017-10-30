@@ -19,6 +19,10 @@ export class Config {
     this.initialized = this.init()
   }
 
+  public get appname(): string {
+    return 'blackbeard'
+  }
+
   public async exists(filename: string): Promise<boolean> {
     const rootpath = await this.initialized
     const filepath = path.join(rootpath, filename)
@@ -29,7 +33,7 @@ export class Config {
     const rootpath = await this.initialized
     const key = filename.toLowerCase()
     if (ConfigCache[key]) {
-      this.log.trace(`returning cached instance for ${filename}`)
+      this.log.trace(`returning cached instance for "${filename}"`)
       return ConfigCache[key]
     }
     const filepath = path.join(rootpath, filename)
@@ -44,20 +48,20 @@ export class Config {
 
     const buffer = new Buffer(JSON.stringify(config))
     const filepath = path.join(rootpath, filename)
-    this.log.trace(`saving ${filename}`)
+    this.log.trace(`saving "${filename}"`)
     await this.files.fileWrite(filepath, buffer)
   }
 
   private async init(): Promise<string> {
-    if (process.env.NAS_DATAPATH) {
-      return process.env.NAS_DATAPATH as string
+    if (process.env.BLACKBEARD_PATH_CONFIG) {
+      return process.env.BLACKBEARD_PATH_CONFIG as string
     }
 
     const configpath = path.join(process.cwd(), 'config')
-    if (await this.files.exists(configpath) === false) {
-      return process.cwd()
+    if (await this.files.exists(configpath)) {
+      return configpath
     }
 
-    return configpath
+    return process.cwd()
   }
 }

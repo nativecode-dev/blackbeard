@@ -17,9 +17,11 @@
       "src/types"
     ],
     "types": [
+      "@types/lodash.merge",
       "@types/node",
       "@types/node-fetch",
-      "@types/node-schedule"
+      "@types/node-schedule",
+      "common-locations"
     ]
   },
   "exclude": [

@@ -2,7 +2,7 @@ import 'reflect-metadata'
 
 import { Api, IRCInterfaces, IRCRPC, IRCClientOptions, IRCMessage, IRCOptions } from 'irc-factory'
 import { inject, injectable } from 'inversify'
-import { Config, Converters, Logger, LoggerType, Variables } from '../../core'
+import { App, Converters, FileSystem, Logger, LoggerType, PlatformProvider, Variables } from '../../core'
 import { DataMessage } from './DataMessage'
 import { Radarr, Sonarr } from '../../index'
 import { IRCEntries, IRCEntry, IRCParserClientKind } from './IRCEntry'
@@ -22,26 +22,34 @@ interface IRCWatcherHandlers {
 }
 
 @injectable()
-export class IRCWatcher {
+export class IRCWatcher extends App {
   private readonly clients: IRCFactoryClients
-  private readonly config: Config
   private readonly handlers: IRCWatcherHandlers
-  private readonly log: Logger
   private readonly radarr: Radarr
   private readonly sonarr: Sonarr
   private readonly vars: Variables
 
-  constructor(config: Config, @inject(LoggerType) logger: Logger, radarr: Radarr, sonarr: Sonarr, vars: Variables) {
+  constructor(
+    files: FileSystem,
+    platform: PlatformProvider,
+    radarr: Radarr,
+    sonarr: Sonarr,
+    vars: Variables,
+    @inject(LoggerType) logger: Logger
+  ) {
+    super(files, logger, platform)
     this.clients = {}
     this.handlers = {}
 
-    this.config = config
-    this.log = logger.extend('module:ircwatcher')
     this.radarr = radarr
     this.sonarr = sonarr
     this.vars = vars
 
     this.handlers.synchronize = this.synchronize
+  }
+
+  protected get name(): string {
+    return 'ircwatcher'
   }
 
   public publish(record: IRCParserRecord, category: IRCParserClientKind): Promise<void> {
@@ -67,7 +75,7 @@ export class IRCWatcher {
   public start(): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
       const api = new Api()
-      const config = await this.config.load<IRCEntries>('nas-ircwatch.json')
+      const config = await this.config<IRCEntries>('ircwatch')
 
       Object.keys(config).forEach(key => {
         const entry = config[key]

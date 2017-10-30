@@ -48,7 +48,8 @@ export class FileSystem {
   public async json<T>(filepath: string): Promise<T> {
     const buffer = await this.fileRead(filepath)
     const text = buffer.toString('utf8')
-    return JSON.parse(text)
+    const json = JSON.parse(text)
+    return json
   }
 
   private promisify<T>(nodefn: NodeFunction<T>, ...args: any[]): Promise<T> {

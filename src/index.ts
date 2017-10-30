@@ -12,6 +12,7 @@ const SHUTDOWN = -1024
 
 async function main(command: string): Promise<void> {
   command = command || process.env.APPCMD || ''
+  console.log('running', command)
   switch (command) {
     case 'ircwatch':
       await container.get<modules.IRCWatcher>(modules.IRCWatcher).start()
@@ -47,7 +48,7 @@ if (cluster.isMaster) {
       })
   }
 
-  console.log(`forking ${process.argv[1]}`)
+  console.log(`forking ${process.argv[1]} ${process.argv.slice(2).join(' ')}`)
   createWorker()
 } else {
   main.apply(process, process.argv.slice(2))

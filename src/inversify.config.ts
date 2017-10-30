@@ -16,6 +16,7 @@ container.bind<Container>(Container).toConstantValue(container)
 // Core
 container.bind<core.Config>(core.Config).toSelf().inSingletonScope()
 container.bind<core.FileSystem>(core.FileSystem).toSelf().inSingletonScope()
+container.bind<core.PlatformProvider>(core.PlatformProvider).toSelf().inSingletonScope()
 container.bind<core.Variables>(core.Variables).toSelf().inSingletonScope()
 
 // Logging
