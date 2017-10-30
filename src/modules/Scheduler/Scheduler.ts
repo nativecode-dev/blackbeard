@@ -17,7 +17,7 @@ export class Scheduler {
 
   constructor(config: Config, @inject(LoggerType) logger: Logger, @multiInject(ScriptType) scripts: Script[]) {
     this.config = config
-    this.log = logger.extend('service:scheduler')
+    this.log = logger.extend('module:scheduler')
     this.scripts = scripts
   }
 

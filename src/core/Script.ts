@@ -12,7 +12,7 @@ export abstract class Script {
 
   constructor( @inject(LoggerType) logger: Logger) {
     const max = os.cpus().length
-    this.logger = logger.extend(`service:${this.name}`)
+    this.logger = logger.extend(this.name)
     this.throttler = throttle(max)
     this.logger.trace(`throttling set to ${max}`)
   }

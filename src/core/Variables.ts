@@ -29,7 +29,7 @@ export class Variables {
   constructor(config: Config, @inject(LoggerType) logger: Logger) {
     this.config = config
     this.initialized = this.init()
-    this.log = logger.extend('service:variables')
+    this.log = logger.extend('variables')
   }
 
   public async as<T>(name: string, defaultValue: T, converter: any) {

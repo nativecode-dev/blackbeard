@@ -12,7 +12,7 @@ export class FileSystem {
   private readonly log: Logger
 
   constructor( @inject(LoggerType) logger: Logger) {
-    this.log = logger.extend(`service:filesystem`)
+    this.log = logger.extend('filesystem')
   }
 
   public exists(filepath: string): Promise<boolean> {

@@ -15,7 +15,7 @@ export class Config {
 
   constructor(files: FileSystem, @inject(LoggerType) logger: Logger) {
     this.files = files
-    this.log = logger.extend('service:config')
+    this.log = logger.extend('config')
     this.initialized = this.init()
   }
 

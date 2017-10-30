@@ -41,11 +41,11 @@
     "clean": "gulp clean",
     "docker": "gulp docker",
     "start": "clear && node index.js",
-    "startdev": "clear && cross-env DEBUG=nativecode:* APPCMD=ircwatch ts-node src/index.ts",
+    "startdev": "clear && cross-env DEBUG=nativecode:* APPCMD=scheduler ts-node src/index.ts",
     "prestartdev": "yarn run build",
     "docker-push": "./docker-push.sh",
     "predocker-push": "cross-env DOCKER_PUSH=yes yarn run docker",
-    "docker-run": "cross-env DEBUG=nativecode:*,-*:trace APPCMD=ircwatch ./docker-run.sh",
+    "docker-run": "cross-env DEBUG=nativecode:*,-*:trace APPCMD=scheduler ./docker-run.sh",
     "predocker-run": "yarn run docker"
   }
 }
