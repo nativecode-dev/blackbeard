@@ -16,11 +16,11 @@ export abstract class BaseLoggerTarget implements LoggerTarget {
     return this.write(type, message, ...args)
   }
 
-  protected abstract write(type: LogMessageType, message: string, ...args: string[]): Promise<void>
-
   protected key(namespace: string, type: string): string {
     return `${namespace}:${type}`
   }
+
+  protected abstract write(type: LogMessageType, message: string, ...args: string[]): Promise<void>
 }
 
 export const BaseLoggerTargetType = Symbol('BaseLoggerTarget')

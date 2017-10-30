@@ -11,32 +11,35 @@ interface DebugLoggerTargets {
 
 @injectable()
 export class DebugLoggerTarget extends BaseLoggerTarget {
-  private readonly namespace: LoggerNamespace
   private readonly targets: DebugLoggerTargets
+  private namespace: LoggerNamespace
 
-  constructor(namespace: LoggerNamespace) {
+  constructor() {
     super()
-    this.namespace = namespace
+    this.namespace = new LoggerNamespace()
     this.targets = {}
-    this.ensureTargets()
+    this.createTargets()
   }
 
   public extend(namespace: string): LoggerTarget {
-    return new DebugLoggerTarget(this.namespace.extend(namespace))
+    const target = new DebugLoggerTarget()
+    target.namespace = this.namespace.extend(namespace)
+    target.createTargets()
+    return target
   }
 
   protected write(type: LogMessageType, message: string, ...args: string[]): Promise<void> {
     const key = this.key(this.namespace.value, type)
-    const writer = this.targets[key]
+    const writer = this.targets[type]
     if (writer) {
       writer(message, ...args)
     }
     return Promise.resolve()
   }
 
-  private ensureTargets(): void {
-    Object.keys(LogMessageType)
-      .filter(type => !this.targets[type])
-      .map(type => this.targets[type] = debug(`${this.namespace.value}:${type}`))
+  private createTargets(): void {
+    Object.keys(LogMessageType).map(type => {
+      this.targets[type] = debug(`${this.namespace.value}:${type.toLowerCase()}`)
+    })
   }
 }

@@ -1,9 +1,9 @@
 export enum LogMessageType {
-  Debug = 'debug',
-  Error = 'error',
-  Fatal = 'fatal',
-  Info = 'info',
-  Silly = 'silly',
-  Trace = 'trace',
-  Warn = 'warn',
+  Debug = 'Debug',
+  Error = 'Error',
+  Fatal = 'Fatal',
+  Info = 'Info',
+  Silly = 'Silly',
+  Trace = 'Trace',
+  Warn = 'Warn',
 }

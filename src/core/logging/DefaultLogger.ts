@@ -15,7 +15,7 @@ export class DefaultLogger implements Logger {
   constructor(namespace: LoggerNamespace, @multiInject(LoggerTargetType) targets: LoggerTarget[]) {
     this.factory = targets
     this.namespace = namespace
-    this.targets = targets.map(target => target.extend(namespace.value))
+    this.targets = targets.map(target => target.extend(this.namespace.value))
   }
 
   public extend(namespace: string): Logger {
