@@ -13,6 +13,9 @@
     "sourceMap": true,
     "strict": true,
     "target": "es2015",
+    "typeRoots": [
+      "src/types"
+    ],
     "types": [
       "@types/node",
       "@types/node-fetch",
