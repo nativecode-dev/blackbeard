@@ -18,5 +18,5 @@ fi
 # Export all the variables.
 export DOCKER=`which docker`
 export DOCKER_NAME="blackbeard"
-export DOCKER_REPO="mikepham/$DOCKER_NAME"
+export DOCKER_REPO="nativecode/$DOCKER_NAME"
 export DOCKER_TAG="$DOCKER_REPO:$DOCKER_VERSION"
