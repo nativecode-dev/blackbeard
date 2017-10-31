@@ -1,10 +1,9 @@
 import 'reflect-metadata'
 
 import * as path from 'path'
-import { injectable } from 'inversify'
+import { inject, injectable } from 'inversify'
 import { FileSystem } from './FileSystem'
-import { Logger } from './Logger'
-import { LoggerFactory } from './LoggerFactory'
+import { Logger, LoggerType } from './logging'
 
 const ConfigCache: { [key: string]: any } = {}
 
@@ -14,10 +13,14 @@ export class Config {
   private readonly initialized: Promise<string>
   private readonly log: Logger
 
-  constructor(files: FileSystem, logger: LoggerFactory) {
+  constructor(files: FileSystem, @inject(LoggerType) logger: Logger) {
     this.files = files
-    this.log = logger.create('service:config')
+    this.log = logger.extend('config')
     this.initialized = this.init()
+  }
+
+  public get appname(): string {
+    return 'blackbeard'
   }
 
   public async exists(filename: string): Promise<boolean> {
@@ -30,7 +33,7 @@ export class Config {
     const rootpath = await this.initialized
     const key = filename.toLowerCase()
     if (ConfigCache[key]) {
-      this.log.trace(`returning cached instance for ${filename}`)
+      this.log.trace(`returning cached instance for "${filename}"`)
       return ConfigCache[key]
     }
     const filepath = path.join(rootpath, filename)
@@ -45,20 +48,20 @@ export class Config {
 
     const buffer = new Buffer(JSON.stringify(config))
     const filepath = path.join(rootpath, filename)
-    this.log.trace(`saving ${filename}`)
+    this.log.trace(`saving "${filename}"`)
     await this.files.fileWrite(filepath, buffer)
   }
 
   private async init(): Promise<string> {
-    if (process.env.NAS_DATAPATH) {
-      return process.env.NAS_DATAPATH as string
+    if (process.env.BLACKBEARD_PATH_CONFIG) {
+      return process.env.BLACKBEARD_PATH_CONFIG as string
     }
 
     const configpath = path.join(process.cwd(), 'config')
-    if (await this.files.exists(configpath) === false) {
-      return process.cwd()
+    if (await this.files.exists(configpath)) {
+      return configpath
     }
 
-    return configpath
+    return process.cwd()
   }
 }

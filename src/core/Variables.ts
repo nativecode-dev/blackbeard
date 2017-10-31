@@ -1,10 +1,9 @@
 import 'reflect-metadata'
 
 import * as process from 'process'
-import { injectable } from 'inversify'
+import { inject, injectable } from 'inversify'
 import { Config } from './Config'
-import { Logger } from './Logger'
-import { LoggerFactory } from './LoggerFactory'
+import { Logger, LoggerType } from './logging'
 
 interface ConfigFile {
   env: NodeJS.ProcessEnv,
@@ -27,10 +26,10 @@ export class Variables {
   private readonly initialized: Promise<NodeJS.ProcessEnv>
   private readonly log: Logger
 
-  constructor(config: Config, logger: LoggerFactory) {
+  constructor(config: Config, @inject(LoggerType) logger: Logger) {
     this.config = config
     this.initialized = this.init()
-    this.log = logger.create('service:variables')
+    this.log = logger.extend('variables')
   }
 
   public async as<T>(name: string, defaultValue: T, converter: any) {

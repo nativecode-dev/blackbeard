@@ -31,7 +31,7 @@ gulp.task('docker:clean', () => {
   return script('docker-clean.sh')
 })
 
-gulp.task('build', ['build:ts'], () => {
+gulp.task('docker', ['build'], () => {
   return script('docker-build.sh')
 })
 
@@ -49,7 +49,7 @@ gulp.task('lint', () => {
     }))
 })
 
-gulp.task('build:ts', ['clean', 'lint'], () => {
+gulp.task('build', ['clean', 'lint'], () => {
   return gulp.src('src/**/*.ts')
     .pipe(plugin.changed('dist'))
     .pipe(plugin.debug({

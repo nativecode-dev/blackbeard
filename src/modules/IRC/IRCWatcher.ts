@@ -1,45 +1,55 @@
 import 'reflect-metadata'
 
 import { Api, IRCInterfaces, IRCRPC, IRCClientOptions, IRCMessage, IRCOptions } from 'irc-factory'
-import { injectable } from 'inversify'
-import { Config, Converters, Logger, LoggerFactory, Variables } from '../../core'
+import { inject, injectable } from 'inversify'
+import { App, Converters, FileSystem, Logger, LoggerType, PlatformProvider, Variables } from '../../core'
 import { DataMessage } from './DataMessage'
 import { Radarr, Sonarr } from '../../index'
 import { IRCEntries, IRCEntry, IRCParserClientKind } from './IRCEntry'
-import { IRCFactoryClient, InternalIRCFactoryClient } from './IRCFactoryClient'
+import { IRCWatcherClient } from './IRCWatcherClient'
+import { IRCWatcherClientImpl } from './IRCWatcherClientImpl'
 import { IRCParserRecord } from './IRCParser'
 import { Protocol, ReleaseInfo } from '../../models'
 
 interface IRCFactoryClients {
-  [key: string]: IRCFactoryClient
+  [key: string]: IRCWatcherClient
 }
 
-type IRCFactoryHandler = (name: string, entry: IRCEntry, interfaces: IRCInterfaces) => void
+type IRCWatcherHandler = (name: string, entry: IRCEntry, interfaces: IRCInterfaces) => void
 
-interface IRCFactoryHandlers {
-  [key: string]: IRCFactoryHandler
+interface IRCWatcherHandlers {
+  [key: string]: IRCWatcherHandler
 }
 
 @injectable()
-export class IRCFactory {
+export class IRCWatcher extends App {
   private readonly clients: IRCFactoryClients
-  private readonly config: Config
-  private readonly handlers: IRCFactoryHandlers
-  private readonly log: Logger
+  private readonly handlers: IRCWatcherHandlers
   private readonly radarr: Radarr
   private readonly sonarr: Sonarr
   private readonly vars: Variables
 
-  constructor(config: Config, logger: LoggerFactory, radarr: Radarr, sonarr: Sonarr, vars: Variables) {
+  constructor(
+    files: FileSystem,
+    platform: PlatformProvider,
+    radarr: Radarr,
+    sonarr: Sonarr,
+    vars: Variables,
+    @inject(LoggerType) logger: Logger
+  ) {
+    super(files, logger, platform)
     this.clients = {}
-    this.config = config
     this.handlers = {}
-    this.log = logger.create('irc-factory')
+
     this.radarr = radarr
     this.sonarr = sonarr
     this.vars = vars
 
     this.handlers.synchronize = this.synchronize
+  }
+
+  protected get name(): string {
+    return 'ircwatcher'
   }
 
   public publish(record: IRCParserRecord, category: IRCParserClientKind): Promise<void> {
@@ -65,7 +75,7 @@ export class IRCFactory {
   public start(): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
       const api = new Api()
-      const config = await this.config.load<IRCEntries>('nas-ircwatch.json')
+      const config = await this.config<IRCEntries>('ircwatch')
 
       Object.keys(config).forEach(key => {
         const entry = config[key]
@@ -107,6 +117,6 @@ export class IRCFactory {
 
   private synchronize = (name: string, entry: IRCEntry, interfaces: IRCInterfaces): void => {
     this.log.trace(`synchronize: ${name}`)
-    this.clients[name] = new InternalIRCFactoryClient(name, entry, this, interfaces, this.log)
+    this.clients[name] = new IRCWatcherClientImpl(name, entry, this, interfaces, this.log)
   }
 }

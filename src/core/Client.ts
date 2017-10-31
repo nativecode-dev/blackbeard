@@ -1,12 +1,12 @@
 import 'reflect-metadata'
 
-import { injectable } from 'inversify'
+import { inject, injectable } from 'inversify'
 import { HTTP } from './Http'
-import { LoggerFactory } from './LoggerFactory'
+import { Logger, LoggerType } from './logging'
 
 @injectable()
 export abstract class Client extends HTTP {
-  constructor(logger: LoggerFactory) {
+  constructor( @inject(LoggerType) logger: Logger) {
     super(logger)
   }
   protected onoff(value: boolean): string {

@@ -3,35 +3,24 @@ import { IRCInterfaces, IRCClientOptions } from 'irc-factory'
 import { Logger } from '../../core'
 import { DataMessage } from './DataMessage'
 import { IRCEntry } from './IRCEntry'
-import { IRCFactory } from './IRCFactory'
 import { IRCParser } from './IRCParser'
+import { IRCWatcher } from './IRCWatcher'
+import { IRCWatcherClient, IRCWatcherClientEvents } from './IRCWatcherClient'
 
-export interface IRCFactoryClient {
-  id: string
-  destroy(): void
-  process(event: string, data: DataMessage): void
-}
-
-type IRCFactoryClientEvent = (data: DataMessage) => void
-
-interface IRCFactoryClientEvents {
-  [key: string]: IRCFactoryClientEvent
-}
-
-export class InternalIRCFactoryClient implements IRCFactoryClient {
-  private readonly factory: IRCFactory
-  private readonly handlers: IRCFactoryClientEvents
+export class IRCWatcherClientImpl implements IRCWatcherClient {
+  private readonly factory: IRCWatcher
+  private readonly handlers: IRCWatcherClientEvents
   private readonly interfaces: IRCInterfaces
   private readonly log: Logger
   private readonly entry: IRCEntry
   private readonly name: string
   private readonly parser: IRCParser
 
-  constructor(name: string, entry: IRCEntry, factory: IRCFactory, interfaces: IRCInterfaces, logger: Logger) {
+  constructor(name: string, entry: IRCEntry, factory: IRCWatcher, interfaces: IRCInterfaces, logger: Logger) {
     this.factory = factory
     this.handlers = {}
     this.interfaces = interfaces
-    this.log = logger.extend('irc-client')
+    this.log = logger.extend('client')
     this.entry = entry
     this.name = name
 

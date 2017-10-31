@@ -1,4 +1,4 @@
 export * from './DataMessage'
 export * from './IRCEntry'
-export * from './IRCFactory'
-export * from './IRCFactoryClient'
+export * from './IRCWatcher'
+export * from './IRCWatcherClient'

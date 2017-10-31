@@ -1,9 +1,8 @@
 import 'reflect-metadata'
 
 import * as fs from 'fs'
-import { injectable } from 'inversify'
-import { Logger } from './Logger'
-import { LoggerFactory } from './LoggerFactory'
+import { inject, injectable } from 'inversify'
+import { Logger, LoggerType } from './logging'
 
 type NodeCallback<T> = (error: NodeJS.ErrnoException, result: T) => void
 type NodeFunction<T> = (...args: any[]) => void
@@ -12,8 +11,8 @@ type NodeFunction<T> = (...args: any[]) => void
 export class FileSystem {
   private readonly log: Logger
 
-  constructor(logger: LoggerFactory) {
-    this.log = logger.create(`service:filesystem`)
+  constructor( @inject(LoggerType) logger: Logger) {
+    this.log = logger.extend('filesystem')
   }
 
   public exists(filepath: string): Promise<boolean> {
@@ -49,7 +48,8 @@ export class FileSystem {
   public async json<T>(filepath: string): Promise<T> {
     const buffer = await this.fileRead(filepath)
     const text = buffer.toString('utf8')
-    return JSON.parse(text)
+    const json = JSON.parse(text)
+    return json
   }
 
   private promisify<T>(nodefn: NodeFunction<T>, ...args: any[]): Promise<T> {

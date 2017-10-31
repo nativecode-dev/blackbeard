@@ -1,13 +1,19 @@
 {
   "env": {
+    "BLACKBEARD_PATH": null,
+    "BLACKBEARD_PATH_CACHE": null,
+    "BLACKBEARD_PATH_CONFIG": null,
+    "BLACKBEARD_PATH_LOGS": null,
+    "BLACKBEARD_VERSION": null,
+    "BLACKBEARD_VERSION_DOCKER": null,
     "RADARR_APIKEY": null,
     "RADARR_ENDPOINT": null,
     "SONARR_APIKEY": null,
     "SONARR_ENDPOINT": null,
     "XSPEEDS_APIKEY": null
   },
-  "settings": {
-    "cache": "./cache",
-    "scheduler": "./nas-scheduler.json"
-  }
+  "modules": [
+    "ircwatch",
+    "scheduler"
+  ]
 }

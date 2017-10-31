@@ -1,8 +1,8 @@
 import 'reflect-metadata'
 
 import * as schedule from 'node-schedule'
-import { injectable } from 'inversify'
-import { Config, FileSystem, Logger, LoggerFactory, Script, ScriptFactory } from '../../core'
+import { inject, injectable, multiInject } from 'inversify'
+import { App, Config, FileSystem, Logger, LoggerType, PlatformProvider, Script, ScriptType } from '../../core'
 
 interface JobConfig {
   schedule: schedule.RecurrenceRule | schedule.RecurrenceSpecDateRange | schedule.RecurrenceSpecObjLit
@@ -10,28 +10,35 @@ interface JobConfig {
 }
 
 @injectable()
-export class Scheduler {
-  private readonly config: Config
-  private readonly log: Logger
+export class Scheduler extends App {
   private readonly scripts: Script[]
 
-  constructor(config: Config, logger: LoggerFactory, scripts: ScriptFactory) {
-    this.config = config
-    this.log = logger.create('service:scheduler')
-    this.scripts = scripts.get()
+  constructor(
+    config: Config,
+    files: FileSystem,
+    platform: PlatformProvider,
+    @inject(LoggerType) logger: Logger,
+    @multiInject(ScriptType) scripts: Script[]
+  ) {
+    super(files, logger, platform)
+    this.scripts = scripts
   }
 
-  public start(): Promise<schedule.Job[]> {
-    return new Promise<schedule.Job[]>(async (resolve, reject) => {
+  protected get name(): string {
+    return 'scheduler'
+  }
+
+  public start(): Promise<void> {
+    return new Promise<void>(async (resolve, reject) => {
       try {
-        const config = await this.config.load<JobConfig[]>('nas-scheduler.json')
-        const jobs = config.map((config: JobConfig) => this.job(config))
+        const configs = await this.configs<JobConfig>('scheduler')
+        const jobs = configs.map((config: JobConfig) => this.job(config))
         this.log.info(`${jobs.length} job(s) scheduled`)
         process.on('beforeExit', (): void => {
           jobs.forEach(job => job.cancel())
           resolve()
         })
-        return await Promise.all(jobs)
+        await Promise.all(jobs)
       } catch (error) {
         this.log.error(error)
         reject(error)
@@ -40,7 +47,7 @@ export class Scheduler {
   }
 
   private job(config: JobConfig): schedule.Job {
-    this.log.trace(`creating job to run script ${config.script}`)
+    this.log.trace(`creating job to run script "${config.script}"`)
     this.log.traceJSON(config.schedule)
 
     return schedule.scheduleJob(`job:${config.script}`, config.schedule, async () => {
