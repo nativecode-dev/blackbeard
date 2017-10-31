@@ -2,8 +2,8 @@ import 'reflect-metadata'
 
 import * as fetch from 'node-fetch'
 import { inject, injectable } from 'inversify'
-import { Client, Logger, LoggerType, ServiceUri, Variables } from './core'
-import { Movie, MovieQuality, ReleaseInfo } from './models/radarr'
+import { Client, Logger, LoggerType, ServiceUri, Variables } from './index'
+import { Movie, MovieQuality, ReleaseInfo } from '../models/radarr'
 
 @injectable()
 export class Radarr extends Client implements Radarr {

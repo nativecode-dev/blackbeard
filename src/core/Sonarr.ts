@@ -2,8 +2,8 @@ import 'reflect-metadata'
 
 import * as fetch from 'node-fetch'
 import { inject, injectable } from 'inversify'
-import { Client, Logger, LoggerType, ServiceUri, Variables } from './core'
-import { Episode, QualityProfile, ReleaseInfo, Series, SeriesSeason } from './models/sonarr'
+import { Client, Logger, LoggerType, ServiceUri, Variables } from './index'
+import { Episode, QualityProfile, ReleaseInfo, Series, SeriesSeason } from '../models/sonarr'
 
 @injectable()
 export class Sonarr extends Client {
