@@ -22,45 +22,42 @@ export abstract class Module {
     this.platform = platform.platform
   }
 
-  public config<T>(name: string): Promise<T> {
-    this.log.trace('app.config', name)
-    return this.filepaths(name)
-      .map(async filepath => {
-        if (await this.files.exists(filepath)) {
-          this.log.trace('app.config.found', filepath)
-          return await this.files.json<T>(filepath)
-        }
-        return {} as T
-      })
-      .reduce(async (previous: Promise<T>, current: Promise<T>): Promise<T> => {
-        const prev = await previous
-        const curr = await current
-        return merge(prev, curr)
-      }, Promise.resolve({} as T))
+  public config<T>(): Promise<T> {
+    this.log.trace('app.config', this.name)
+    return this.configPaths.map(async filepath => {
+      if (await this.files.exists(filepath)) {
+        this.log.trace('app.config.found', filepath)
+        return await this.files.json<T>(filepath)
+      }
+      return {} as T
+    }).reduce(async (previous: Promise<T>, current: Promise<T>): Promise<T> => {
+      const prev = await previous
+      const curr = await current
+      return merge(prev, curr)
+    }, Promise.resolve({} as T))
   }
 
-  public async configs<T>(name: string): Promise<T[]> {
-    this.log.trace('app.configs', name)
-    return this.filepaths(name)
-      .map(async filepath => {
-        if (await this.files.exists(filepath)) {
-          this.log.trace('app.configs.found', filepath)
-          return await this.files.json<T[]>(filepath)
-        }
-        return []
-      })
-      .reduce(async (previous: Promise<T[]>, current: Promise<T[]>): Promise<T[]> => {
-        const prev = await previous
-        const curr = await current
-        return prev.concat(curr)
-      }, Promise.resolve([]))
+  public async configs<T>(): Promise<T[]> {
+    this.log.trace('app.configs', this.name)
+    return this.configPaths.map(async filepath => {
+      if (await this.files.exists(filepath)) {
+        this.log.trace('app.configs.found', filepath)
+        return await this.files.json<T[]>(filepath)
+      }
+      return []
+    }).reduce(async (previous: Promise<T[]>, current: Promise<T[]>): Promise<T[]> => {
+      const prev = await previous
+      const curr = await current
+      return prev.concat(curr)
+    }, Promise.resolve([]))
   }
 
+  public abstract get name(): string
   public abstract start(...args: string[]): Promise<void>
-  protected abstract get name(): string
+  public abstract stop(): void
 
-  private filepaths(name: string): string[] {
-    const filename = `nas-${name}.json`
+  protected get configPaths(): string[] {
+    const filename = `nas-${this.name}.json`
     return [
       path.join(process.cwd(), filename),
       this.platform.config.user(filename),
@@ -69,3 +66,5 @@ export abstract class Module {
     ]
   }
 }
+
+export const ModuleType = Symbol('Module')

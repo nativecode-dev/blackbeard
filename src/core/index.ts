@@ -12,3 +12,6 @@ export * from './Script'
 export * from './ServiceUri'
 export * from './Sonarr'
 export * from './Variables'
+
+export type Reject = (reason?: any) => void
+export type Resolve<T> = (value?: T | PromiseLike<T> | undefined) => void

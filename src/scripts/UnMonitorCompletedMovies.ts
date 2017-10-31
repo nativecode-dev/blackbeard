@@ -6,7 +6,7 @@ import { Movie, MovieQuality } from '../models/radarr'
 import { Radarr, Script } from '../index'
 
 @injectable()
-export class UnMonitorCompletedMovies extends Script implements UnMonitorCompletedMovies {
+export class UnMonitorCompletedMovies extends Script {
   private readonly radarr: Radarr
 
   constructor( @inject(LoggerType) logger: Logger, radarr: Radarr) {

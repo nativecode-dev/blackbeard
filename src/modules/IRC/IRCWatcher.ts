@@ -47,7 +47,7 @@ export class IRCWatcher extends Module {
     this.handlers.synchronize = this.synchronize
   }
 
-  protected get name(): string {
+  public get name(): string {
     return 'ircwatcher'
   }
 
@@ -74,7 +74,7 @@ export class IRCWatcher extends Module {
   public start(): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
       const api = new Api()
-      const config = await this.config<IRCEntries>('ircwatch')
+      const config = await this.config<IRCEntries>()
 
       Object.keys(config).forEach(key => {
         const entry = config[key]

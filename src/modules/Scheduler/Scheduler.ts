@@ -2,7 +2,7 @@ import 'reflect-metadata'
 
 import * as schedule from 'node-schedule'
 import { inject, injectable, multiInject } from 'inversify'
-import { Config, FileSystem, Logger, LoggerType, Module, PlatformProvider, Script, ScriptType } from '../../core'
+import { Config, FileSystem, Logger, LoggerType, Module, PlatformProvider, Reject, Script, ScriptType } from '../../core'
 
 interface JobConfig {
   schedule: schedule.RecurrenceRule | schedule.RecurrenceSpecDateRange | schedule.RecurrenceSpecObjLit
@@ -12,6 +12,7 @@ interface JobConfig {
 @injectable()
 export class Scheduler extends Module {
   private readonly scripts: Script[]
+  private reject: Reject
 
   constructor(
     config: Config,
@@ -24,14 +25,15 @@ export class Scheduler extends Module {
     this.scripts = scripts
   }
 
-  protected get name(): string {
+  public get name(): string {
     return 'scheduler'
   }
 
   public start(): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
+      this.reject = reject
       try {
-        const configs = await this.configs<JobConfig>('scheduler')
+        const configs = await this.configs<JobConfig>()
         const jobs = configs.map((config: JobConfig) => this.job(config))
         this.log.info(`${jobs.length} job(s) scheduled`)
         process.on('beforeExit', (): void => {
@@ -46,8 +48,14 @@ export class Scheduler extends Module {
     })
   }
 
+  public stop(): void {
+    if (this.reject) {
+      this.reject('stop')
+    }
+  }
+
   private job(config: JobConfig): schedule.Job {
-    this.log.trace(`creating job to run script "${config.script}"`)
+    this.log.info(`creating job to run script "${config.script}"`)
     this.log.traceJSON(config.schedule)
 
     return schedule.scheduleJob(`job:${config.script}`, config.schedule, async () => {

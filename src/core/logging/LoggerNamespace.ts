@@ -3,12 +3,14 @@ import 'reflect-metadata'
 import * as os from 'os'
 import { injectable } from 'inversify'
 
+const hostname = os.hostname().toLowerCase()
+
 @injectable()
 export class LoggerNamespace {
   private namespace: string
 
   constructor() {
-    this.namespace = `nativecode:blackbeard:${os.hostname()}:${process.pid}`
+    this.namespace = `nativecode:blackbeard:${hostname}:${process.pid}`
   }
 
   public get value(): string {

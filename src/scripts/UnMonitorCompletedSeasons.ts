@@ -1,12 +1,11 @@
 import container from '../inversify.config'
 
 import { inject, injectable } from 'inversify'
-import { Logger, LoggerType } from '../core'
+import { Logger, LoggerType, Script, Sonarr } from '../core'
 import { Episode, Series, SeriesSeason } from '../models/sonarr'
-import { Script, Sonarr } from '../index'
 
 @injectable()
-export class UnMonitorCompletedSeasons extends Script implements UnMonitorCompletedSeasons {
+export class UnMonitorCompletedSeasons extends Script {
   private readonly sonarr: Sonarr
 
   constructor( @inject(LoggerType) logger: Logger, sonarr: Sonarr) {

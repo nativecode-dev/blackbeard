@@ -31,8 +31,8 @@ container.bind<clients.Radarr>(clients.Radarr).toSelf()
 container.bind<clients.Sonarr>(clients.Sonarr).toSelf()
 
 // Modules
-container.bind<modules.IRCWatcher>(modules.IRCWatcher).toSelf()
-container.bind<modules.Scheduler>(modules.Scheduler).toSelf()
+container.bind<core.Module>(core.ModuleType).to(modules.IRCWatcher).inSingletonScope()
+container.bind<core.Module>(core.ModuleType).to(modules.Scheduler).inSingletonScope()
 
 // Scripts
 container.bind<core.Script>(core.ScriptType).to(scripts.UnMonitorCompletedMovies)
