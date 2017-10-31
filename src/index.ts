@@ -6,8 +6,6 @@ import * as path from 'path'
 import * as core from './core'
 import * as modules from './modules'
 
-const SHUTDOWN = -1024
-
 async function main(command: string): Promise<void> {
   command = command || process.env.APPCMD || ''
   console.log('running', command)
@@ -35,11 +33,9 @@ if (cluster.isMaster) {
       .on('exit', (code: number, signal: string) => {
         /**
          * Crash protection is enabled by default, so if the
-         * app dies it will be restarted. However, to escape
-         * the crash protecion loop, return an exit code of
-         * "-1024" or fire a SIGNTERM.
+         * app dies it will be restarted.
          */
-        if (code !== 0 && (code !== SHUTDOWN || signal !== 'SIGTERM')) {
+        if (code !== 0 && signal !== 'SIGTERM') {
           console.log(`forking due to ${code}:${signal}`)
           createWorker()
         }
@@ -51,5 +47,5 @@ if (cluster.isMaster) {
 } else {
   main.apply(process, process.argv.slice(2))
     .catch((error: Error) => console.log(error))
-    .then(() => process.exit(SHUTDOWN))
+    .then(() => process.exit(5150))
 }
