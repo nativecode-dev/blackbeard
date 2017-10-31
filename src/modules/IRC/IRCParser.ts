@@ -1,5 +1,5 @@
 import { IRCParserOptions, IRCParserSecrets } from './IRCEntry'
-import { App, Logger } from '../../core'
+import { Logger } from '../../core'
 
 export class IRCParser {
   private readonly log: Logger

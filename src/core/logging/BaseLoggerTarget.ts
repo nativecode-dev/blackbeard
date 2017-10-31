@@ -1,8 +1,10 @@
 import 'reflect-metadata'
 
 import * as debug from 'debug'
-import { LoggerNamespace, LoggerTarget, LogMessageType } from './index'
 import { injectable } from 'inversify'
+import { LoggerNamespace } from './LoggerNamespace'
+import { LoggerTarget } from './LoggerTarget'
+import { LogMessageType } from './LogMessageType'
 
 @injectable()
 export abstract class BaseLoggerTarget implements LoggerTarget {

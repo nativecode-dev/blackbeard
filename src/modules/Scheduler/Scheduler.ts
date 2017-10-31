@@ -2,7 +2,7 @@ import 'reflect-metadata'
 
 import * as schedule from 'node-schedule'
 import { inject, injectable, multiInject } from 'inversify'
-import { App, Config, FileSystem, Logger, LoggerType, PlatformProvider, Script, ScriptType } from '../../core'
+import { Config, FileSystem, Logger, LoggerType, Module, PlatformProvider, Script, ScriptType } from '../../core'
 
 interface JobConfig {
   schedule: schedule.RecurrenceRule | schedule.RecurrenceSpecDateRange | schedule.RecurrenceSpecObjLit
@@ -10,7 +10,7 @@ interface JobConfig {
 }
 
 @injectable()
-export class Scheduler extends App {
+export class Scheduler extends Module {
   private readonly scripts: Script[]
 
   constructor(

@@ -1,15 +1,17 @@
 import 'reflect-metadata'
 
+import merge = require('lodash.merge')
+
 import * as path from 'path'
 import { Platform } from 'common-locations'
 import { injectable } from 'inversify'
+
 import { Logger } from './logging'
 import { FileSystem } from './FileSystem'
 import { PlatformProvider } from './PlatformProvider'
-import merge = require('lodash.merge')
 
 @injectable()
-export abstract class App {
+export abstract class Module {
   protected readonly log: Logger
   private readonly files: FileSystem
   private readonly platform: Platform

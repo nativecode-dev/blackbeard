@@ -2,9 +2,8 @@ import 'reflect-metadata'
 
 import { Api, IRCInterfaces, IRCRPC, IRCClientOptions, IRCMessage, IRCOptions } from 'irc-factory'
 import { inject, injectable } from 'inversify'
-import { App, Converters, FileSystem, Logger, LoggerType, PlatformProvider, Variables } from '../../core'
+import { Converters, FileSystem, Logger, LoggerType, Module, PlatformProvider, Radarr, Sonarr, Variables } from '../../core'
 import { DataMessage } from './DataMessage'
-import { Radarr, Sonarr } from '../../index'
 import { IRCEntries, IRCEntry, IRCParserClientKind } from './IRCEntry'
 import { IRCWatcherClient } from './IRCWatcherClient'
 import { IRCWatcherClientImpl } from './IRCWatcherClientImpl'
@@ -22,7 +21,7 @@ interface IRCWatcherHandlers {
 }
 
 @injectable()
-export class IRCWatcher extends App {
+export class IRCWatcher extends Module {
   private readonly clients: IRCFactoryClients
   private readonly handlers: IRCWatcherHandlers
   private readonly radarr: Radarr
