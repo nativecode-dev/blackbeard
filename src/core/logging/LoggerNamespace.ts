@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 
+import * as os from 'os'
 import { injectable } from 'inversify'
 
 @injectable()
@@ -7,7 +8,7 @@ export class LoggerNamespace {
   private namespace: string
 
   constructor() {
-    this.namespace = `nativecode:blackbeard:${process.pid}`
+    this.namespace = `nativecode:blackbeard:${os.hostname()}:${process.pid}`
   }
 
   public get value(): string {
