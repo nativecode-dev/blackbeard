@@ -2,8 +2,9 @@ import 'reflect-metadata'
 
 import * as path from 'path'
 import { inject, injectable } from 'inversify'
-import { FileSystem } from './FileSystem'
-import { Logger, LoggerType } from './logging'
+
+import { FileSystem } from '../io'
+import { Logger, LoggerType } from '../logging'
 
 const ConfigCache: { [key: string]: any } = {}
 

@@ -7,8 +7,8 @@ import { Platform } from 'common-locations'
 import { injectable } from 'inversify'
 
 import { Logger } from './logging'
-import { FileSystem } from './FileSystem'
-import { PlatformProvider } from './PlatformProvider'
+import { FileSystem } from './io'
+import { PlatformProvider } from './services'
 
 @injectable()
 export abstract class Module {

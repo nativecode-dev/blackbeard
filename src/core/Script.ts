@@ -3,6 +3,7 @@ import 'reflect-metadata'
 import * as throttle from 'async-throttle'
 import * as os from 'os'
 import { inject, injectable } from 'inversify'
+
 import { Logger, LoggerType } from './logging'
 
 @injectable()

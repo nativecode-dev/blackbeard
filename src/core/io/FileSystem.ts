@@ -2,7 +2,7 @@ import 'reflect-metadata'
 
 import * as fs from 'fs'
 import { inject, injectable } from 'inversify'
-import { Logger, LoggerType } from './logging'
+import { Logger, LoggerType } from '../logging'
 
 type NodeCallback<T> = (error: NodeJS.ErrnoException, result: T) => void
 type NodeFunction<T> = (...args: any[]) => void

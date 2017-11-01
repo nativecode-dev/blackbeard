@@ -2,8 +2,9 @@ import 'reflect-metadata'
 
 import * as process from 'process'
 import { inject, injectable } from 'inversify'
-import { Config } from './Config'
-import { Logger, LoggerType } from './logging'
+
+import { Config } from '../configuration'
+import { Logger, LoggerType } from '../logging'
 
 interface ConfigFile {
   env: NodeJS.ProcessEnv,

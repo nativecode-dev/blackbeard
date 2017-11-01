@@ -2,7 +2,7 @@ import 'reflect-metadata'
 
 import { inject, injectable } from 'inversify'
 
-import { HTTP } from './Http'
+import { HTTP } from './io'
 import { Logger, LoggerType } from './logging'
 
 @injectable()

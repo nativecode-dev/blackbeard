@@ -2,7 +2,8 @@ import 'reflect-metadata'
 
 import { Platform } from 'common-locations'
 import { injectable } from 'inversify'
-import { Config } from './Config'
+
+import { Config } from '../configuration'
 
 @injectable()
 export class PlatformProvider {

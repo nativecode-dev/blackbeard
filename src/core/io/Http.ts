@@ -2,7 +2,8 @@ import 'reflect-metadata'
 
 import * as fetch from 'node-fetch'
 import { inject, injectable } from 'inversify'
-import { Logger, LoggerType } from './logging'
+
+import { Logger, LoggerType } from '../logging'
 
 @injectable()
 export abstract class HTTP {
