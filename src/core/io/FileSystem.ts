@@ -3,6 +3,7 @@ import 'reflect-metadata'
 import * as fs from 'fs'
 import { inject, injectable } from 'inversify'
 import { Logger, LoggerType } from '../logging'
+import { PathTransformer } from '../transformation'
 
 type NodeCallback<T> = (error: NodeJS.ErrnoException, result: T) => void
 type NodeFunction<T> = (...args: any[]) => void
@@ -10,9 +11,11 @@ type NodeFunction<T> = (...args: any[]) => void
 @injectable()
 export class FileSystem {
   private readonly log: Logger
+  private readonly paths: PathTransformer
 
   constructor( @inject(LoggerType) logger: Logger) {
     this.log = logger.extend('filesystem')
+    this.paths = new PathTransformer()
   }
 
   public exists(filepath: string): Promise<boolean> {
@@ -49,7 +52,7 @@ export class FileSystem {
     const buffer = await this.fileRead(filepath)
     const text = buffer.toString('utf8')
     const json = JSON.parse(text)
-    return json
+    return this.paths.transformObject(json)
   }
 
   private promisify<T>(nodefn: NodeFunction<T>, ...args: any[]): Promise<T> {

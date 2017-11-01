@@ -2,32 +2,6 @@
 # yarn lockfile v1
 
 
-"@nofrills/collections@^0.10.1":
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/@nofrills/collections/-/collections-0.10.1.tgz#8968c88ecea138c561075ddef7ac48c20edca741"
-
-"@nofrills/lincoln-debug@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@nofrills/lincoln-debug/-/lincoln-debug-0.3.2.tgz#385f67423dea873ca0a441dcbfe2e1c6ca2ac882"
-  dependencies:
-    "@nofrills/lincoln" "^0.10.2"
-    debug "^2.6.8"
-
-"@nofrills/lincoln@^0.10.2":
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/@nofrills/lincoln/-/lincoln-0.10.2.tgz#3b92895ecef46d98c1ce71214129349685120e20"
-  dependencies:
-    "@nofrills/collections" "^0.10.1"
-    uuidjs "^3.5.3"
-
-"@nofrills/scrubs@^0.9.1":
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/@nofrills/scrubs/-/scrubs-0.9.1.tgz#79896650b75799ed00645796e69c99a63bbfd902"
-  dependencies:
-    "@nofrills/lincoln-debug" "^0.3.2"
-    "@nofrills/types" "^0.9.0"
-    lodash.merge "^4.6.0"
-
 "@nofrills/types@^0.9.0":
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/@nofrills/types/-/types-0.9.0.tgz#e754d7b0baf4cd022c71dfdd11c87ebea9ba2989"
@@ -223,6 +197,10 @@ bluebird@3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
 
+bluebird@3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
+
 brace-expansion@^1.0.0, brace-expansion@^1.1.7:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.8.tgz#c07b211c7c952ec1f8efd51a77ef0d1d3990a292"
@@ -386,7 +364,7 @@ debug@2.6.8:
   dependencies:
     ms "2.0.0"
 
-debug@^2.6.1, debug@^2.6.8:
+debug@^2.6.1:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   dependencies:
@@ -938,6 +916,24 @@ homedir-polyfill@^1.0.0, homedir-polyfill@^1.0.1:
 hosted-git-info@^2.1.4:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.5.0.tgz#6d60e34b3abbc8313062c3b798ef8d901a07af3c"
+
+hydra-cli@^1.4.8:
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/hydra-cli/-/hydra-cli-1.4.8.tgz#a698cb5647800654dad99b6e921d9bfc2442d98f"
+  dependencies:
+    bluebird "3.5.1"
+    hydra "1.4.18"
+
+hydra@1.4.18:
+  version "1.4.18"
+  resolved "https://registry.yarnpkg.com/hydra/-/hydra-1.4.18.tgz#cee9bd14dc22897b3059c531b90c19fffa694fea"
+  dependencies:
+    bluebird "3.5.0"
+    debug "2.6.8"
+    redis "2.7.1"
+    redis-url "1.2.1"
+    route-parser "0.0.5"
+    uuid "3.0.1"
 
 hydra@^1.4.27:
   version "1.4.27"
@@ -2257,10 +2253,6 @@ util-deprecate@~1.0.1:
 uuid@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.0.1.tgz#6544bba2dfda8c1cf17e629a3a305e2bb1fee6c1"
-
-uuidjs@^3.5.3:
-  version "3.6.1"
-  resolved "https://registry.yarnpkg.com/uuidjs/-/uuidjs-3.6.1.tgz#5e669ddba6a975e6cffea8b948dd2c4dca002952"
 
 v8flags@^2.0.2:
   version "2.1.1"

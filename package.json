@@ -21,13 +21,14 @@
     "gulp-shell": "^0.6.3",
     "gulp-tslint": "^8.1.2",
     "gulp-typescript": "^3.2.3",
+    "hydra-cli": "^1.4.8",
     "ts-node": "^3.3.0",
     "tslint": "^5.8.0",
     "tslint-config-standard": "^6.0.1",
     "typescript": "^2.5.3"
   },
   "dependencies": {
-    "@nofrills/scrubs": "^0.9.1",
+    "@nofrills/types": "^0.9.0",
     "async-throttle": "^1.1.0",
     "common-locations": "^3.0.2",
     "debug": "^3.1.0",
@@ -45,11 +46,11 @@
     "clean": "gulp clean",
     "docker": "gulp docker",
     "start": "clear && node index.js",
-    "startdev": "clear && cross-env DEBUG=nativecode:* APPCMD=ircwatch ts-node src/index.ts",
+    "startdev": "clear && cross-env DEBUG=nativecode:blackbeard:* APPCMD=scheduler ts-node src/index.ts",
     "prestartdev": "yarn run build",
     "docker-push": "./docker-push.sh",
     "predocker-push": "cross-env DOCKER_PUSH=yes yarn run docker",
-    "docker-run": "cross-env DEBUG=nativecode:*,-*:trace APPCMD=ircwatch ./docker-run.sh",
+    "docker-run": "cross-env DEBUG=nativecode:blackbeard:* APPCMD=scheduler ./docker-run.sh",
     "predocker-run": "yarn run docker"
   }
 }

@@ -19,6 +19,7 @@ export abstract class HydraModule extends Module {
       this.reject = reject
 
       const config = await this.configure()
+      this.log.traceJSON(config)
       try {
         const serviceConfig = await hydra.init(config, false)
         const service = await hydra.registerService()

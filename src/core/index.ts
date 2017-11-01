@@ -3,9 +3,12 @@ export * from './configuration'
 export * from './io'
 export * from './logging'
 export * from './services'
+export * from './transformation'
 
-export * from './Client'
+export * from './Chain'
 export * from './Module'
+export * from './ObjectMutator'
+export * from './Pipeline'
 export * from './Script'
 export * from './ServiceUri'
 

@@ -2,6 +2,7 @@ import 'reflect-metadata'
 
 import * as schedule from 'node-schedule'
 import { inject, injectable, multiInject } from 'inversify'
+
 import { Config, FileSystem, Logger, LoggerType, Module, PlatformProvider, Reject, Script, ScriptType } from '../../core'
 import { HydraModule, HydraModuleConfig } from '../../hydra'
 
