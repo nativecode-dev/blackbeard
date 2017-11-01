@@ -2,13 +2,16 @@ import 'reflect-metadata'
 
 import { Api, IRCInterfaces, IRCRPC, IRCClientOptions, IRCMessage, IRCOptions } from 'irc-factory'
 import { inject, injectable } from 'inversify'
-import { Converters, FileSystem, Logger, LoggerType, Module, PlatformProvider, Reject, Radarr, Sonarr, Variables } from '../../core'
+
+import { Converters, FileSystem, Logger, LoggerType, PlatformProvider, Reject, Radarr, Sonarr, Variables } from '../../core'
+import { HydraModule, HydraModuleConfig } from '../../hydra'
+import { Protocol, ReleaseInfo } from '../../models'
 import { DataMessage } from './DataMessage'
 import { IRCEntries, IRCEntry, IRCParserClientKind } from './IRCEntry'
 import { IRCWatcherClient } from './IRCWatcherClient'
+import { IRCWatcherConfig } from './IRCWatcherConfig'
 import { IRCWatcherClientImpl } from './IRCWatcherClientImpl'
 import { IRCParserRecord } from './IRCParser'
-import { Protocol, ReleaseInfo } from '../../models'
 
 interface IRCFactoryClients {
   [key: string]: IRCWatcherClient
@@ -21,13 +24,13 @@ interface IRCWatcherHandlers {
 }
 
 @injectable()
-export class IRCWatcher extends Module {
+export class IRCWatcher extends HydraModule {
   private readonly clients: IRCFactoryClients
   private readonly handlers: IRCWatcherHandlers
   private readonly radarr: Radarr
   private readonly sonarr: Sonarr
   private readonly vars: Variables
-  private reject: Reject
+  private watcherConfig: IRCWatcherConfig
 
   constructor(
     files: FileSystem,
@@ -72,15 +75,17 @@ export class IRCWatcher extends Module {
     }
   }
 
-  public start(): Promise<void> {
+  protected async configure(): Promise<HydraModuleConfig> {
+    this.watcherConfig = await this.getConfig<IRCWatcherConfig>()
+    return this.watcherConfig.module
+  }
+
+  protected run(...args: string[]): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
-      this.reject = reject
 
       const api = new Api()
-      const config = await this.getConfig<IRCEntries>()
-
-      Object.keys(config).forEach(key => {
-        const entry = config[key]
+      Object.keys(this.watcherConfig.servers).forEach(key => {
+        const entry = this.watcherConfig.servers[key]
         const interfaces = api.connect(entry.api)
         interfaces.events.on('message', (data: DataMessage): void => this.process(data, key, entry, interfaces))
       })
@@ -90,12 +95,6 @@ export class IRCWatcher extends Module {
         .forEach(client => client.destroy())
       )
     })
-  }
-
-  public stop(): void {
-    if (this.reject) {
-      this.reject('stop')
-    }
   }
 
   private process(data: DataMessage, key: string, entry: IRCEntry, interfaces: IRCInterfaces): void {
