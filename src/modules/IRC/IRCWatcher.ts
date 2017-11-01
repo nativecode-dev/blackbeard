@@ -117,8 +117,8 @@ export class IRCWatcher extends HydraModule {
         this.log.trace(`unconsumed event: ${event}`)
       }
     } catch (error) {
-      this.log.traceJSON(data)
       this.log.error(error)
+      this.log.errorJSON(data)
     }
   }
 

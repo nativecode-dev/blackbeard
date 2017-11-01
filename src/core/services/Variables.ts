@@ -43,10 +43,9 @@ export class Variables {
     const key = fixcase ? name.toUpperCase() : name
     if (env[key]) {
       const value = env[key]
-      this.log.trace(`reading variable ${name} from env: ${value}`)
+      this.log.trace(`reading variable ${name} from env: ${key}`)
       return value || defaultValue
     }
-    this.log.trace(`reading variable ${name} from default value: ${defaultValue}`)
     return defaultValue
   }
 

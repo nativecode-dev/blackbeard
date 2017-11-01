@@ -52,8 +52,8 @@ export class IRCWatcherClientImpl implements IRCWatcherClient {
         handler(data)
       }
     } catch (error) {
-      this.log.traceJSON(data)
       this.log.error(error)
+      this.log.errorJSON(data)
     }
   }
 
@@ -68,7 +68,6 @@ export class IRCWatcherClientImpl implements IRCWatcherClient {
         if (category) {
           await this.factory.publish(record, category)
         }
-        this.log.traceJSON(record)
       }
     }
   }

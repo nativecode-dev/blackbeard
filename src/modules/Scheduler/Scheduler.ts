@@ -60,7 +60,6 @@ export class Scheduler extends HydraModule {
 
   private job(config: JobConfig): schedule.Job {
     this.log.info(`creating job to run script "${config.script}"`)
-    this.log.traceJSON(config.schedule)
 
     return schedule.scheduleJob(`job:${config.script}`, config.schedule, async () => {
       const scripts = this.scripts

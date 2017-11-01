@@ -16,7 +16,6 @@ export class IRCParser {
     let matches = regex.exec(text)
     const values: string[] = []
     while (matches) {
-      this.log.traceJSON(matches)
       values.push(matches[1] || '')
       matches = regex.exec(text)
     }
@@ -51,13 +50,10 @@ export class IRCParser {
       const regex = new RegExp(formatter.regex)
       if (regex.test(value)) {
         const replaced = value.replace(regex, formatter.replace)
-        const formatted = record[property] = this.secret(replaced, this.options.secrets)
-        this.log.trace('transform.regex', value, formatted)
+        record[property] = this.secret(replaced, this.options.secrets)
       }
-      this.log.traceJSON(record)
     } else {
-      const formatted = record[property] = this.secret(value, this.options.secrets)
-      this.log.trace('transform', value, formatted)
+      record[property] = this.secret(value, this.options.secrets)
     }
     return record
   }

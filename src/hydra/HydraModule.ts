@@ -19,16 +19,13 @@ export abstract class HydraModule extends Module {
       this.reject = reject
 
       const config = await this.configure()
-      this.log.traceJSON(config)
+
       try {
         const serviceConfig = await hydra.init(config, false)
         const service = await hydra.registerService()
         hydra.on('message', (message: any) => {
           this.log.trace('message', message)
         })
-        this.log.traceJSON(config)
-        this.log.traceJSON(serviceConfig)
-        this.log.traceJSON(service)
         await this.run(...args)
       } catch (error) {
         this.log.error(error)

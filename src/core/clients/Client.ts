@@ -10,6 +10,7 @@ export abstract class Client extends HTTP {
   constructor( @inject(LoggerType) logger: Logger) {
     super(logger)
   }
+
   protected onoff(value: boolean): string {
     return value ? 'on' : 'off'
   }
