@@ -3,16 +3,22 @@ import 'reflect-metadata'
 import * as schedule from 'node-schedule'
 import { inject, injectable, multiInject } from 'inversify'
 import { Config, FileSystem, Logger, LoggerType, Module, PlatformProvider, Reject, Script, ScriptType } from '../../core'
+import { HydraModule, HydraModuleConfig } from '../../hydra'
 
 interface JobConfig {
   schedule: schedule.RecurrenceRule | schedule.RecurrenceSpecDateRange | schedule.RecurrenceSpecObjLit
   script: string
 }
 
+interface SchedulerConfig {
+  jobs: JobConfig[]
+  module: HydraModuleConfig
+}
+
 @injectable()
-export class Scheduler extends Module {
+export class Scheduler extends HydraModule {
   private readonly scripts: Script[]
-  private reject: Reject
+  private schedulerConfig: SchedulerConfig
 
   constructor(
     config: Config,
@@ -29,12 +35,15 @@ export class Scheduler extends Module {
     return 'scheduler'
   }
 
-  public start(): Promise<void> {
+  protected async configure(): Promise<HydraModuleConfig> {
+    this.schedulerConfig = await this.getConfig<SchedulerConfig>()
+    return this.schedulerConfig.module
+  }
+
+  protected run(...args: string[]): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
-      this.reject = reject
       try {
-        const configs = await this.configs<JobConfig>()
-        const jobs = configs.map((config: JobConfig) => this.job(config))
+        const jobs = this.schedulerConfig.jobs.map((config: JobConfig) => this.job(config))
         this.log.info(`${jobs.length} job(s) scheduled`)
         process.on('beforeExit', (): void => {
           jobs.forEach(job => job.cancel())
@@ -46,12 +55,6 @@ export class Scheduler extends Module {
         reject(error)
       }
     })
-  }
-
-  public stop(): void {
-    if (this.reject) {
-      this.reject('stop')
-    }
   }
 
   private job(config: JobConfig): schedule.Job {

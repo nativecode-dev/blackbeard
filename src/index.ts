@@ -27,9 +27,11 @@ if (cluster.isMaster) {
       .on('exit', (code: number, signal: string) => {
         /**
          * Crash protection is enabled by default, so if the
-         * app dies it will be restarted.
+         * app dies it will be restarted. Postive code values
+         * will restart the application while negative code
+         * values will exit all processes.
          */
-        if (code !== 0 && signal !== 'SIGTERM') {
+        if (code > 0 && signal !== 'SIGTERM') {
           console.log('fork', `${code}:${signal}`)
           createWorker()
         }

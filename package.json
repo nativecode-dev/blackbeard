@@ -31,6 +31,7 @@
     "async-throttle": "^1.1.0",
     "common-locations": "^3.0.2",
     "debug": "^3.1.0",
+    "hydra": "^1.4.27",
     "inversify": "^4.3.0",
     "irc-factory": "^1.10.1",
     "irc-formatting": "^1.0.0-rc3",

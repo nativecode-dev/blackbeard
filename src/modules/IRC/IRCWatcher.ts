@@ -2,7 +2,7 @@ import 'reflect-metadata'
 
 import { Api, IRCInterfaces, IRCRPC, IRCClientOptions, IRCMessage, IRCOptions } from 'irc-factory'
 import { inject, injectable } from 'inversify'
-import { Converters, FileSystem, Logger, LoggerType, Module, PlatformProvider, Radarr, Sonarr, Variables } from '../../core'
+import { Converters, FileSystem, Logger, LoggerType, Module, PlatformProvider, Reject, Radarr, Sonarr, Variables } from '../../core'
 import { DataMessage } from './DataMessage'
 import { IRCEntries, IRCEntry, IRCParserClientKind } from './IRCEntry'
 import { IRCWatcherClient } from './IRCWatcherClient'
@@ -27,6 +27,7 @@ export class IRCWatcher extends Module {
   private readonly radarr: Radarr
   private readonly sonarr: Sonarr
   private readonly vars: Variables
+  private reject: Reject
 
   constructor(
     files: FileSystem,
@@ -48,7 +49,7 @@ export class IRCWatcher extends Module {
   }
 
   public get name(): string {
-    return 'ircwatcher'
+    return 'ircwatch'
   }
 
   public publish(record: IRCParserRecord, category: IRCParserClientKind): Promise<void> {
@@ -73,8 +74,10 @@ export class IRCWatcher extends Module {
 
   public start(): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
+      this.reject = reject
+
       const api = new Api()
-      const config = await this.config<IRCEntries>()
+      const config = await this.getConfig<IRCEntries>()
 
       Object.keys(config).forEach(key => {
         const entry = config[key]
@@ -87,6 +90,12 @@ export class IRCWatcher extends Module {
         .forEach(client => client.destroy())
       )
     })
+  }
+
+  public stop(): void {
+    if (this.reject) {
+      this.reject('stop')
+    }
   }
 
   private process(data: DataMessage, key: string, entry: IRCEntry, interfaces: IRCInterfaces): void {

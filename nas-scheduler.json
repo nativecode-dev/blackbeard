@@ -1,15 +1,30 @@
-[{
-  "schedule": {
-    "dayOfWeek": [0, 1, 2, 3, 4, 5, 6],
-    "hour": 5,
-    "minute": 0
-  },
-  "script": "unmonitor-movies"
-}, {
-  "schedule": {
-    "dayOfWeek": [0, 1, 2, 3, 4, 5, 6],
-    "hour": 5,
-    "minute": 0
-  },
-  "script": "unmonitor-shows"
-}]
+{
+  "jobs": [{
+    "schedule": {
+      "dayOfWeek": [0, 1, 2, 3, 4, 5, 6],
+      "hour": 5,
+      "minute": 0
+    },
+    "script": "unmonitor-movies"
+  }, {
+    "schedule": {
+      "dayOfWeek": [0, 1, 2, 3, 4, 5, 6],
+      "hour": 5,
+      "minute": 0
+    },
+    "script": "unmonitor-shows"
+  }],
+  "module": {
+    "environment": "env:NODE_ENV",
+    "hydra": {
+      "serviceDescription": "scheduler",
+      "redis": {
+        "url": "env:REDIS"
+      },
+      "serviceIP": "",
+      "serviceName": "scheduler",
+      "servicePort": 4000,
+      "serviceType": "scheduler"
+    }
+  }
+}

@@ -22,7 +22,7 @@ export abstract class Module {
     this.platform = platform.platform
   }
 
-  public config<T>(): Promise<T> {
+  public getConfig<T>(): Promise<T> {
     this.log.trace('app.config', this.name)
     return this.configPaths.map(async filepath => {
       if (await this.files.exists(filepath)) {
@@ -37,7 +37,7 @@ export abstract class Module {
     }, Promise.resolve({} as T))
   }
 
-  public async configs<T>(): Promise<T[]> {
+  public async getConfigArray<T>(): Promise<T[]> {
     this.log.trace('app.configs', this.name)
     return this.configPaths.map(async filepath => {
       if (await this.files.exists(filepath)) {
