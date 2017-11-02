@@ -42,13 +42,10 @@ export class IRCWatcher extends HydraModule {
   ) {
     super(files, logger, platform)
     this.clients = {}
-    this.handlers = {}
-
+    this.handlers = { synchronize: this.synchronize }
     this.radarr = radarr
     this.sonarr = sonarr
     this.vars = vars
-
-    this.handlers.synchronize = this.synchronize
   }
 
   public get name(): string {
@@ -103,7 +100,8 @@ export class IRCWatcher extends HydraModule {
         const clientId = data.event[0]
         const event = data.event[1]
         const client = this.clients[key]
-        if (clientId === client.id) {
+        if (client && clientId === client.id) {
+          this.log.trace(`event.dispatch: ${client.id}:${event}`)
           client.process(event, data)
         }
         return
@@ -114,7 +112,7 @@ export class IRCWatcher extends HydraModule {
         const handler = this.handlers[event]
         handler(key, entry, interfaces)
       } else {
-        this.log.trace(`unconsumed event: ${event}`)
+        this.log.trace(`event.unconsumed: ${event}`)
       }
     } catch (error) {
       this.log.error(error)
@@ -123,7 +121,7 @@ export class IRCWatcher extends HydraModule {
   }
 
   private synchronize = (name: string, entry: IRCEntry, interfaces: IRCInterfaces): void => {
-    this.log.trace(`synchronize: ${name}`)
+    this.log.trace(`event.synchronize: ${name}@${entry.connection.server}`)
     this.clients[name] = new IRCWatcherClientImpl(name, entry, this, interfaces, this.log)
   }
 }

@@ -3,16 +3,16 @@ import * as path from 'path'
 import { Is } from '@nofrills/types'
 
 import { ObjectMutator, ObjectMutation } from '../ObjectMutator'
-import { Transformer } from './Transformers'
+import { Transformer } from './Transformer'
 
 export class PathTransformer extends Transformer {
   private readonly mutator: ObjectMutator
 
   constructor() {
     super()
+    this.mutator = new ObjectMutator(value => this.mutate(value))
     this.string(value => this.env(value))
     this.string(value => this.home(value))
-    this.mutator = new ObjectMutator(value => this.mutate(value))
   }
 
   public transformObject(value: any): any {

@@ -17,7 +17,7 @@
       "api": {
         "automaticSetup": true,
         "events": "tcp://127.0.0.1:31920",
-        "fork": true,
+        "fork": false,
         "rpc": "tcp://127.0.0.1:31930"
       },
       "channels": ["#announce"],

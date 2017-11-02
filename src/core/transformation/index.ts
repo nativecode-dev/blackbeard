@@ -1,2 +1,2 @@
 export * from './PathTransformer'
-export * from './Transformers'
+export * from './Transformer'

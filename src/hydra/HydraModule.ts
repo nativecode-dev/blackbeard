@@ -23,9 +23,8 @@ export abstract class HydraModule extends Module {
       try {
         const serviceConfig = await hydra.init(config, false)
         const service = await hydra.registerService()
-        hydra.on('message', (message: any) => {
-          this.log.trace('message', message)
-        })
+        this.log.trace(`registered hydra service: ${service.serviceName}@${service.serviceIP}:${service.servicePort}`)
+        hydra.on('message', (message: any) => this.log.trace('message', message))
         await this.run(...args)
       } catch (error) {
         this.log.error(error)

@@ -30,7 +30,7 @@ export class IRCWatcherClientImpl implements IRCWatcherClient {
 
     this.parser = new IRCParser(this.log, this.entry.parser)
 
-    this.log.trace(`creating irc client ${this.id}`)
+    this.log.trace(`creating irc client: ${this.id}`)
     this.interfaces.rpc.emit('createClient', this.id, entry.connection)
   }
 
@@ -45,10 +45,10 @@ export class IRCWatcherClientImpl implements IRCWatcherClient {
 
   public process(event: string, data: DataMessage): void {
     try {
-      this.log.trace('processing event', event)
+      this.log.trace('client.event', event)
       const handler = this.handlers[event]
       if (handler) {
-        this.log.trace('delegating event', event)
+        this.log.trace('client.event.dispatch', event)
         handler(data)
       }
     } catch (error) {
@@ -58,7 +58,7 @@ export class IRCWatcherClientImpl implements IRCWatcherClient {
   }
 
   private privmsg = async (data: DataMessage): Promise<void> => {
-    this.log.trace('privmsg', JSON.stringify(data))
+    this.log.trace('client.event.privmsg', JSON.stringify(data))
     if (data.message && data.message.username) {
       const sender = data.message.username.toLowerCase()
       const filtered = this.entry.parser.filtering.username.toLowerCase()
@@ -73,7 +73,7 @@ export class IRCWatcherClientImpl implements IRCWatcherClient {
   }
 
   private registered = (data: DataMessage): void => {
-    this.log.trace('joining', ...this.entry.channels)
+    this.log.trace('client.event.registered', ...this.entry.channels)
     this.interfaces.rpc.emit('call', this.id, 'join', this.entry.channels)
   }
 }
