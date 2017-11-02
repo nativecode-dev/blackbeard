@@ -2,7 +2,7 @@ import { strip } from 'irc-formatting'
 import { IRCInterfaces, IRCClientOptions } from 'irc-factory'
 
 import { Logger } from '../../core'
-import { DataMessage } from './DataMessage'
+import { DataMessage } from './messages'
 import { IRCEntry } from './IRCEntry'
 import { IRCParser } from './IRCParser'
 import { IRCWatcher } from './IRCWatcher'
