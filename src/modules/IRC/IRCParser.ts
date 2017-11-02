@@ -1,3 +1,4 @@
+import { strip } from 'irc-formatting'
 import { IRCParserOptions, IRCParserSecrets } from './IRCEntry'
 import { Logger } from '../../core'
 
@@ -11,13 +12,15 @@ export class IRCParser {
   }
 
   public parse(text: string): IRCParserRecord {
-    this.log.trace('parsing', text)
+    const stripped = strip(text)
+    this.log.trace('parsing', stripped)
+
     const regex = new RegExp(this.options.filtering.pattern, 'g')
-    let matches = regex.exec(text)
+    let matches = regex.exec(stripped)
     const values: string[] = []
     while (matches) {
       values.push(matches[1] || '')
-      matches = regex.exec(text)
+      matches = regex.exec(stripped)
     }
 
     const record: IRCParserRecordMap = {}

@@ -1,0 +1,12 @@
+{
+  "event": ["client:xspeeds", "privmsg"],
+  "message": {
+    "nickname": "Announce",
+    "username": "Announce",
+    "hostname": "XS-D43FFEDE.ams.lsw.cloudserver.yt",
+    "target": "#announce",
+    "message": "\u00039\u0002 xspeeds.eu\u0002 -\u000310 New Torrent: (\u000313 Eamonn.And.Ruth.S01E01.Do.Dubai.720p.HDTV.x264-BARGE\u000310 ) Size: (\u000313 852.41 MB\u000310 )  Category: (\u000313 TV-HD\u000310 ) Uploader: (\u000313 Xsbot2\u000310 ) Link: (\u000313 https://www.xspeeds.eu/details.php?id=805994\u000310 )",
+    "time": "2017-10-29T23:19:31.147Z",
+    "raw": ":Announce!Announce@XS-D43FFEDE.ams.lsw.cloudserver.yt PRIVMSG #announce :\u00039\u0002 xspeeds.eu\u0002 -\u000310 New Torrent: (\u000313 Eamonn.And.Ruth.S01E01.Do.Dubai.720p.HDTV.x264-BARGE\u000310 ) Size: (\u000313 852.41 MB\u000310 )  Category: (\u000313 TV-HD\u000310 ) Uploader: (\u000313 Xsbot2\u000310 ) Link: (\u000313 https://www.xspeeds.eu/details.php?id=805994\u000310 )"
+  }
+}

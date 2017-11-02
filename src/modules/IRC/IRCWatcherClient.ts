@@ -1,4 +1,4 @@
-import { DataMessage } from './DataMessage'
+import { DataMessage } from './messages'
 
 export interface IRCWatcherClient {
   id: string

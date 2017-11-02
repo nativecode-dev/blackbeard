@@ -4,6 +4,7 @@
     "diagnostics": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "isolatedModules": true,
     "lib": ["es2015"],
     "module": "commonjs",
     "moduleResolution": "node",

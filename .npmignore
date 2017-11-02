@@ -1,3 +1,5 @@
+.nyc_output/
+.vscode/
 node_modules/
 src/
 
@@ -7,6 +9,7 @@ src/
 .dockerignore
 .env.sh
 .env.version
+.travis.yml
 docker-*.sh
 Dockerfile
 gulpfile.js

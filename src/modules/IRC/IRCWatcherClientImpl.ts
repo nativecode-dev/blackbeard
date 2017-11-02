@@ -1,4 +1,3 @@
-import { strip } from 'irc-formatting'
 import { IRCInterfaces, IRCClientOptions } from 'irc-factory'
 
 import { Logger } from '../../core'
@@ -63,7 +62,7 @@ export class IRCWatcherClientImpl implements IRCWatcherClient {
       const sender = data.message.username.toLowerCase()
       const filtered = this.entry.parser.filtering.username.toLowerCase()
       if (sender === filtered) {
-        const record = this.parser.parse(strip(data.message.message))
+        const record = this.parser.parse(data.message.message)
         const category = this.entry.parser.filtering.category[record.category]
         if (category) {
           await this.factory.publish(record, category)

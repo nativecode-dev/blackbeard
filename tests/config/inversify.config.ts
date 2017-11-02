@@ -1,12 +1,12 @@
 import 'reflect-metadata'
 
 import * as process from 'process'
-import * as core from './core'
-import * as modules from './modules'
-import * as scripts from './scripts'
+import * as core from '../../src/core'
+import * as modules from '../../src/modules'
+import * as scripts from '../../src/scripts'
 
 import { Container } from 'inversify'
-import { DefaultLogger } from './core/logging/DefaultLogger'
+import { DefaultLogger } from '../../src/core/logging/DefaultLogger'
 
 const container = new Container()
 

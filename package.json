@@ -6,22 +6,29 @@
   "name": "blackbeard",
   "version": "1.1.0",
   "devDependencies": {
+    "@types/chai": "^4.0.4",
     "@types/debug": "^0.0.30",
     "@types/gulp": "^4.0.5",
     "@types/lodash.merge": "^4.6.3",
+    "@types/mocha": "^2.2.44",
     "@types/node": "^8.0.47",
     "@types/node-fetch": "^1.6.7",
     "@types/node-schedule": "^1.2.1",
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.0",
     "cross-env": "^5.1.0",
     "gulp": "^3.9.1",
     "gulp-changed": "^3.1.1",
     "gulp-clean": "^0.3.2",
     "gulp-debug": "^3.1.0",
     "gulp-load-plugins": "^1.5.0",
+    "gulp-mocha": "^4.3.1",
     "gulp-shell": "^0.6.3",
     "gulp-tslint": "^8.1.2",
     "gulp-typescript": "^3.2.3",
     "hydra-cli": "^1.4.8",
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0",
     "ts-node": "^3.3.0",
     "tslint": "^5.8.0",
     "tslint-config-standard": "^6.0.1",
@@ -41,10 +48,25 @@
     "node-schedule": "^1.2.5",
     "reflect-metadata": "^0.1.10"
   },
+  "nyc": {
+    "all": true,
+    "exclude": [
+      "tests/**/*.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "include": [
+      "src/**/*.ts"
+    ],
+    "instrument": true,
+    "sourceMap": true
+  },
   "scripts": {
     "build": "gulp build",
     "clean": "gulp clean",
     "docker": "gulp docker",
+    "test": "cross-env DEBUG= NODE_ENV=testing gulp test",
     "start": "clear && node index.js",
     "startdev": "clear && cross-env DEBUG=nativecode:blackbeard:* APPCMD=scheduler ts-node src/index.ts",
     "prestartdev": "yarn run build",
