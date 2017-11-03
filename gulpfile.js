@@ -60,7 +60,7 @@ gulp.task('lint', () => {
 })
 
 gulp.task('test', ['build'], () => {
-  return source('mocha', 'tests/specs/**/*.ts')
+  return source('mocha', 'tests/**/*.spec.ts')
     .pipe(plugin.mocha({
       bail: true,
       require: ['ts-node/register'],
