@@ -1,0 +1,23 @@
+{
+  "module": {
+    "environment": "env:NODE_ENV",
+    "hydra": {
+      "serviceDescription": "semantic",
+      "redis": {
+        "url": "env:REDIS"
+      },
+      "serviceIP": "",
+      "serviceName": "semantic",
+      "servicePort": 4000,
+      "serviceType": "semantic"
+    }
+  },
+  "settings": {
+    "couchbase": {
+      "bucket": "env:SEMANTIC_DATA_BUCKET",
+      "host": "env:SEMANTIC_DATA_HOST",
+      "username": "env:SEMANTIC_DATA_USERNAME",
+      "password": "env:SEMANTIC_DATA_PASSWORD"
+    }
+  }
+}
