@@ -7,6 +7,7 @@
   "version": "1.1.0",
   "devDependencies": {
     "@types/chai": "^4.0.4",
+    "@types/couchbase": "^2.1.30",
     "@types/debug": "^0.0.30",
     "@types/gulp": "^4.0.5",
     "@types/lodash.merge": "^4.6.3",
@@ -30,6 +31,7 @@
     "mocha": "^4.0.1",
     "nyc": "^11.3.0",
     "ts-node": "^3.3.0",
+    "tsconfig-paths": "^2.3.0",
     "tslint": "^5.8.0",
     "tslint-config-standard": "^6.0.1",
     "typescript": "^2.5.3"
@@ -38,6 +40,7 @@
     "@nofrills/types": "^0.9.0",
     "async-throttle": "^1.1.0",
     "common-locations": "^3.0.2",
+    "couchbase": "^2.4.1",
     "debug": "^3.1.0",
     "hydra": "^1.4.27",
     "inversify": "^4.3.0",
@@ -50,23 +53,27 @@
   },
   "nyc": {
     "all": true,
-    "exclude": [
-      "tests/**/*.ts"
-    ],
+    "check-coverage": true,
     "extension": [
-      ".ts"
+      "**/*.spec.ts"
     ],
     "include": [
       "src/**/*.ts"
     ],
     "instrument": true,
+    "report-dir": "coverage",
+    "reporter": [
+      "html",
+      "text",
+      "text-summary"
+    ],
     "sourceMap": true
   },
   "scripts": {
     "build": "gulp build",
     "clean": "gulp clean",
     "docker": "gulp docker",
-    "test": "cross-env DEBUG= NODE_ENV=testing gulp test",
+    "test": "cross-env DEBUG= NODE_ENV=testing NODE_PATH=. gulp test",
     "start": "clear && node index.js",
     "startdev": "clear && cross-env DEBUG=nativecode:blackbeard:* APPCMD=scheduler ts-node src/index.ts",
     "prestartdev": "yarn run build",

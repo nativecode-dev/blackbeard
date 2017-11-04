@@ -3,13 +3,13 @@ import 'mocha'
 import * as fs from 'fs'
 import * as path from 'path'
 
-import container from '../config/inversify.config'
+import container from '../../inversify.config'
 import { expect } from 'chai'
-import { Logger, LoggerType } from '../../src/core/logging'
-import { IRCParser } from '../../src/modules/IRC'
+import { Logger, LoggerType } from '../../core/logging'
+import { IRCParser } from '../../modules/IRC'
 
 const artifact = (filename: string): Promise<any> => {
-  const filepath = path.join(process.cwd(), 'tests/artifacts', filename)
+  const filepath = path.join(process.cwd(), 'artifacts', filename)
   return new Promise<any>((resolve, reject) => {
     fs.exists(filepath, exists => {
       if (exists) {

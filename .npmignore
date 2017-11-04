@@ -1,5 +1,7 @@
 .nyc_output/
 .vscode/
+artifacts/
+coverage/
 node_modules/
 src/
 

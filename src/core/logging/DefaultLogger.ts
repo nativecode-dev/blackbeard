@@ -22,7 +22,7 @@ export class DefaultLogger implements Logger {
     return new DefaultLogger(this.namespace.extend(namespace), this.factory)
   }
 
-  public debug(message: string, ...args: string[]): void {
+  public debug(message: string, ...args: any[]): void {
     this.targets.forEach(target => target.text(LogMessageType.Debug, message, ...args))
   }
 
@@ -30,7 +30,7 @@ export class DefaultLogger implements Logger {
     this.targets.forEach(target => target.object(LogMessageType.Debug, object))
   }
 
-  public error(message: string, ...args: string[]): void {
+  public error(message: string, ...args: any[]): void {
     this.targets.forEach(target => target.text(LogMessageType.Error, message, ...args))
   }
 
@@ -38,7 +38,7 @@ export class DefaultLogger implements Logger {
     this.targets.forEach(target => target.object(LogMessageType.Error, object))
   }
 
-  public fatal(message: string, ...args: string[]): void {
+  public fatal(message: string, ...args: any[]): void {
     this.targets.forEach(target => target.text(LogMessageType.Fatal, message, ...args))
   }
 
@@ -46,7 +46,7 @@ export class DefaultLogger implements Logger {
     this.targets.forEach(target => target.object(LogMessageType.Fatal, object))
   }
 
-  public info(message: string, ...args: string[]): void {
+  public info(message: string, ...args: any[]): void {
     this.targets.forEach(target => target.text(LogMessageType.Info, message, ...args))
   }
 
@@ -54,7 +54,7 @@ export class DefaultLogger implements Logger {
     this.targets.forEach(target => target.object(LogMessageType.Info, object))
   }
 
-  public silly(message: string, ...args: string[]): void {
+  public silly(message: string, ...args: any[]): void {
     this.targets.forEach(target => target.text(LogMessageType.Silly, message, ...args))
   }
 
@@ -62,7 +62,7 @@ export class DefaultLogger implements Logger {
     this.targets.forEach(target => target.object(LogMessageType.Silly, object))
   }
 
-  public trace(message: string, ...args: string[]): void {
+  public trace(message: string, ...args: any[]): void {
     this.targets.forEach(target => target.text(LogMessageType.Trace, message, ...args))
   }
 
@@ -70,7 +70,7 @@ export class DefaultLogger implements Logger {
     this.targets.forEach(target => target.object(LogMessageType.Trace, object))
   }
 
-  public warn(message: string, ...args: string[]): void {
+  public warn(message: string, ...args: any[]): void {
     this.targets.forEach(target => target.text(LogMessageType.Warn, message, ...args))
   }
 

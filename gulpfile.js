@@ -19,7 +19,7 @@ const script = (name) => {
 const source = (title, src) => {
   const pipeline = gulp.src(src)
 
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV !== 'production') {
     return pipeline
   }
 
@@ -60,11 +60,11 @@ gulp.task('lint', () => {
 })
 
 gulp.task('test', ['build'], () => {
-  return source('mocha', 'tests/**/*.spec.ts')
+  return source('mocha', '**/*.spec.ts')
     .pipe(plugin.mocha({
       bail: true,
-      require: ['ts-node/register'],
-      reporter: 'spec',
+      require: ['ts-node/register', 'tsconfig-paths/register'],
+      reporter: 'list',
       fullTrace: true,
       recursive: true
     }))
