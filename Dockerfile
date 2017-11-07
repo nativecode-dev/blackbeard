@@ -27,7 +27,7 @@ ENV NODE_ENV=production
 WORKDIR ${APPDIR}
 
 COPY .env.version VERSION
-COPY dist-service ${APPDIR}/
+COPY dist ${APPDIR}/
 COPY docker-startup.sh ${APPDIR}/
 COPY nas-*.json ${APPDIR}/
 COPY package.json ${APPDIR}/

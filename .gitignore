@@ -1,8 +1,7 @@
 .nyc_output/
 .vscode/
 coverage/
-dist-service/
-dist-web/
+dist/
 node_modules/
 
 *.log

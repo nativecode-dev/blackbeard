@@ -35,7 +35,7 @@ export class GulpFile {
 
   constructor() {
     this.plugins = gulpLoadPlugins<Plugins>()
-    this.target = gulp.dest('dist-service')
+    this.target = gulp.dest('dist')
   }
 
   @SequenceTask()
@@ -45,7 +45,7 @@ export class GulpFile {
 
   @Task()
   public clean(): NodeJS.ReadWriteStream {
-    return this.source('clean', './dist-*')
+    return this.source('clean', ['dist'])
       .pipe(this.plugins.clean())
   }
 
@@ -62,8 +62,8 @@ export class GulpFile {
   @Task('build:ts', ['lint:ts'])
   public compile(): NodeJS.ReadWriteStream {
     return this.source('tsc', 'src/**/*.ts')
-      .pipe(this.plugins.changed('dist-service'))
-      .pipe(this.plugins.typescript('tsconfig.json'))
+      .pipe(this.plugins.changed('dist'))
+      .pipe(this.plugins.typescript('tsconfig.gulp.json'))
       .pipe(this.target)
   }
 

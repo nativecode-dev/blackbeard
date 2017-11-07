@@ -6,12 +6,13 @@
     "diagnostics": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "isolatedModules": true,
-    "lib": ["es2015"],
+    "isolatedModules": false,
+    "jsx": "preserve",
+    "lib": ["dom", "es2015"],
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
-    "outDir": "dist-service",
+    "outDir": "dist",
     "paths": {
       "blackbeard/*": ["src/"],
       "blackbeard/clients": ["src/core/clients"],
@@ -52,9 +53,11 @@
       "@types/node-schedule",
       "@types/orchestrator",
       "@types/q",
+      "@types/react",
+      "@types/react-dom",
       "@types/rimraf",
       "@types/vinyl",
-      "common-locations"
+      "@types/webpack"
     ]
   },
   "exclude": [
