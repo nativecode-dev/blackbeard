@@ -30,13 +30,13 @@ const source = (title, src) => {
 
 gulp.task('build', ['clean', 'lint'], () => {
   return source('tsc', 'src/**/*.ts')
-    .pipe(plugin.changed('dist'))
+    .pipe(plugin.changed('dist-service'))
     .pipe(plugin.typescript('tsconfig.json'))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('dist-service'))
 })
 
 gulp.task('clean', ['docker:clean'], () => {
-  return source('[clean]', 'dist')
+  return source('[clean]', 'dist-service')
     .pipe(plugin.clean())
 })
 

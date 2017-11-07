@@ -1,7 +1,7 @@
 import * as cb from 'couchbase'
 
 import { Key, Keys } from './Couchbase'
-import { Reject, Resolve } from '../../core'
+import { Logger, Reject, Resolve } from '../../core'
 
 import { AsyncCluster } from './AsyncCluster'
 import { AsyncManager } from './AsyncManager'
@@ -20,10 +20,12 @@ export class AsyncBucket {
 
   private readonly bucket: cb.Bucket
   private readonly cluster: AsyncCluster
+  private readonly log: Logger
 
-  constructor(bucket: cb.Bucket, cluster: AsyncCluster) {
+  constructor(bucket: cb.Bucket, cluster: AsyncCluster, logger: Logger) {
     this.bucket = bucket
     this.cluster = cluster
+    this.log = logger.extend('bucket')
   }
 
   public get clientVersion(): string {
@@ -56,6 +58,7 @@ export class AsyncBucket {
 
   public get<T>(key: Key, options: any = {}): Promise<T> {
     return new Promise<T>((resolve, reject) => {
+      this.log.trace('get', key)
       this.bucket.get(key, options, this.result<T>(resolve, reject))
     })
   }
@@ -143,8 +146,10 @@ export class AsyncBucket {
   protected result<T>(resolve: Resolve<T>, reject: Reject): cb.Bucket.OpCallback {
     return (error: cb.CouchbaseError, result: T): void => {
       if (error) {
+        this.log.errorJSON(error)
         reject(error)
       } else {
+        this.log.traceJSON(result)
         resolve(result)
       }
     }
@@ -153,8 +158,10 @@ export class AsyncBucket {
   protected results<T>(resolve: Resolve<T[]>, reject: Reject): cb.Bucket.OpCallback {
     return (error: cb.CouchbaseError, results: T[]): void => {
       if (error) {
+        this.log.errorJSON(error)
         reject(error)
       } else {
+        this.log.traceJSON(results)
         resolve(results)
       }
     }
@@ -163,8 +170,10 @@ export class AsyncBucket {
   protected safeResult<T>(resolve: Resolve<T>): cb.Bucket.OpCallback {
     return (error: cb.CouchbaseError, result: T): void => {
       if (error) {
+        this.log.errorJSON(error)
         resolve(undefined)
       } else {
+        this.log.traceJSON(result)
         resolve(result)
       }
     }
@@ -173,8 +182,10 @@ export class AsyncBucket {
   protected safeResults<T>(resolve: Resolve<T[]>): cb.Bucket.OpCallback {
     return (error: cb.CouchbaseError, results: T[]): void => {
       if (error) {
+        this.log.errorJSON(error)
         resolve([])
       } else {
+        this.log.traceJSON(results)
         resolve(results)
       }
     }
@@ -183,6 +194,7 @@ export class AsyncBucket {
   protected safeVoid(resolve: Resolve<void>): cb.Bucket.OpCallback {
     return (error: cb.CouchbaseError) => {
       if (error) {
+        this.log.errorJSON(error)
         resolve()
       } else {
         resolve()
@@ -193,6 +205,7 @@ export class AsyncBucket {
   protected void(resolve: Resolve<void>, reject: Reject): cb.Bucket.OpCallback {
     return (error: cb.CouchbaseError) => {
       if (error) {
+        this.log.errorJSON(error)
         reject(error)
       } else {
         resolve()

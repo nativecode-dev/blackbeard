@@ -1,4 +1,4 @@
-import { Cluster, ClusterConstructorOptions } from 'couchbase'
+import { Cluster, ClusterConstructorOptions, CouchbaseError } from 'couchbase'
 import { Url } from 'url'
 
 import { AsyncBucket } from './AsyncBucket'
@@ -9,9 +9,10 @@ export class AsyncCluster {
   public readonly cluster: Cluster
   private readonly log: Logger
 
-  constructor(logger: Logger, url: string | Url, options?: ClusterConstructorOptions) {
-    this.cluster = new Cluster(url.toString(), options)
+  constructor(logger: Logger, url: string, options?: ClusterConstructorOptions) {
+    this.cluster = new Cluster(url, options)
     this.log = logger.extend('cluster')
+    this.log.trace('connection', url)
   }
 
   public manager(username?: string, password?: string): AsyncManager {
@@ -22,9 +23,15 @@ export class AsyncCluster {
   public openBucket(name?: string, password?: string): Promise<AsyncBucket> {
     return new Promise<AsyncBucket>((resolve, reject) => {
       this.log.trace('cluster.openBucket', name)
-      const bucket = this.cluster.openBucket(name, password, () => {
-        this.log.trace('cluster.openBucket.result', name)
-        resolve(new AsyncBucket(bucket, this))
+      const bucket = this.cluster.openBucket(name, password, (error: CouchbaseError, ...args: any[]) => {
+        if (error) {
+          this.log.errorJSON(error)
+          reject(error)
+        } else {
+          this.log.trace('cluster.openBucket.args', ...args)
+          this.log.trace('cluster.openBucket.result', name)
+          resolve(new AsyncBucket(bucket, this, this.log))
+        }
       })
     })
   }
