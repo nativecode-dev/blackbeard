@@ -6,28 +6,21 @@
     "diagnostics": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "isolatedModules": false,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
     "jsx": "preserve",
-    "lib": ["dom", "es2015"],
+    "lib": [
+      "dom",
+      "es2015"
+    ],
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
     "outDir": "dist",
-    "paths": {
-      "blackbeard/*": ["src/"],
-      "blackbeard/clients": ["src/core/clients"],
-      "blackbeard/core": ["src/core"],
-      "blackbeard/configuration": ["src/core/configuration"],
-      "blackbeard/datastore": ["src/datastore"],
-      "blackbeard/hydra": ["src/hydra"],
-      "blackbeard/io": ["src/core/i"],
-      "blackbeard/logging": ["src/core/logging"],
-      "blackbeard/models": ["src/models"],
-      "blackbeard/scripts": ["src/scripts"],
-      "blackbeard/services": ["src/core/services"],
-      "blackbeard/transform": ["src/core/transformation"]
-    },
     "pretty": true,
+    "rootDir": ".",
     "sourceMap": true,
     "strict": true,
     "strictNullChecks": true,
@@ -40,11 +33,14 @@
       "@types/couchbase",
       "@types/debug",
       "@types/glob",
+      "@types/gulp",
+      "@types/gulp-copy",
       "@types/gulp-debug",
       "@types/gulp-load-plugins",
       "@types/gulp-mocha",
       "@types/gulp-shell",
       "@types/gulp-tslint",
+      "@types/lodash",
       "@types/lodash.merge",
       "@types/minimatch",
       "@types/mocha",
@@ -56,16 +52,21 @@
       "@types/react",
       "@types/react-dom",
       "@types/rimraf",
+      "@types/source-map",
+      "@types/tapable",
+      "@types/through",
+      "@types/uglify-js",
       "@types/vinyl",
       "@types/webpack"
     ]
   },
   "exclude": [
     "node_modules",
-    "src/**/*.spec.ts"
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
   ],
   "include": [
-    "gulpfile.ts",
-    "src/**/*.ts"
+    "**/*.ts",
+    "**/*.tsx"
   ]
 }

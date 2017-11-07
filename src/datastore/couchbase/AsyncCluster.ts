@@ -1,5 +1,4 @@
 import { Cluster, ClusterConstructorOptions, CouchbaseError } from 'couchbase'
-import { Url } from 'url'
 
 import { AsyncBucket } from './AsyncBucket'
 import { AsyncManager } from './AsyncManager'

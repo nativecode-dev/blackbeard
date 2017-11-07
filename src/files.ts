@@ -93,5 +93,5 @@ export async function json<T>(filepath: string): Promise<T> {
 }
 
 export async function save<T>(filepath: string, data: T): Promise<void> {
-  await writefile(filepath, JSON.stringify(data))
+  await writefile(filepath, JSON.stringify(data, null, 2))
 }

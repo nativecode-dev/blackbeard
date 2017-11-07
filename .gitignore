@@ -5,3 +5,6 @@ dist/
 node_modules/
 
 *.log
+
+gulpfile.js
+update-tsconfig.js

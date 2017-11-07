@@ -1,5 +1,6 @@
 import 'mocha'
 
+import * as copy from 'gulp-copy'
 import * as gulp from 'gulp'
 import * as shell from 'gulp-shell'
 import * as tslint from 'gulp-tslint'
@@ -23,6 +24,7 @@ interface Plugins extends IGulpPlugins {
 
   changed(name: string): any
   clean(): any
+  copy(options?: copy.GulpCopyOptions): any
   debug(options?: IDebugOptions): any
   mocha(options: MochaSetupOptionsEx): any
   typescript(config: string): any
@@ -38,15 +40,29 @@ export class GulpFile {
     this.target = gulp.dest('dist')
   }
 
+  @Task()
+  public assets(): void {
+    return gulp.src('src/**/*.html')
+      .pipe(this.target)
+  }
+
   @SequenceTask()
   public build(): any {
-    return ['clean', 'build:ts']
+    return ['clean', 'compile']
   }
 
   @Task()
   public clean(): NodeJS.ReadWriteStream {
     return this.source('clean', ['dist'])
       .pipe(this.plugins.clean())
+  }
+
+  @Task('compile', ['lint'])
+  public compile(): NodeJS.ReadWriteStream {
+    return this.source('tsc', 'src/**/*.ts')
+      .pipe(this.plugins.changed('dist'))
+      .pipe(this.plugins.typescript('tsconfig.json'))
+      .pipe(this.target)
   }
 
   @Task('docker', ['build', 'docker-clean'])
@@ -59,15 +75,7 @@ export class GulpFile {
     return this.run('docker-clean.sh')
   }
 
-  @Task('build:ts', ['lint:ts'])
-  public compile(): NodeJS.ReadWriteStream {
-    return this.source('tsc', 'src/**/*.ts')
-      .pipe(this.plugins.changed('dist'))
-      .pipe(this.plugins.typescript('tsconfig.gulp.json'))
-      .pipe(this.target)
-  }
-
-  @Task('lint:ts')
+  @Task('lint')
   public lint(): NodeJS.ReadWriteStream {
     const plugin: tslint.PluginOptions = {
       formatter: 'prose',

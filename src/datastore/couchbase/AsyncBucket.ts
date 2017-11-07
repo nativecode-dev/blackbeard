@@ -144,7 +144,7 @@ export class AsyncBucket {
   }
 
   protected result<T>(resolve: Resolve<T>, reject: Reject): cb.Bucket.OpCallback {
-    return (error: cb.CouchbaseError, result: T): void => {
+    return (error, result): void => {
       if (error) {
         this.log.errorJSON(error)
         reject(error)
@@ -156,7 +156,7 @@ export class AsyncBucket {
   }
 
   protected results<T>(resolve: Resolve<T[]>, reject: Reject): cb.Bucket.OpCallback {
-    return (error: cb.CouchbaseError, results: T[]): void => {
+    return (error, results): void => {
       if (error) {
         this.log.errorJSON(error)
         reject(error)
@@ -168,7 +168,7 @@ export class AsyncBucket {
   }
 
   protected safeResult<T>(resolve: Resolve<T>): cb.Bucket.OpCallback {
-    return (error: cb.CouchbaseError, result: T): void => {
+    return (error, result): void => {
       if (error) {
         this.log.errorJSON(error)
         resolve(undefined)
@@ -180,7 +180,7 @@ export class AsyncBucket {
   }
 
   protected safeResults<T>(resolve: Resolve<T[]>): cb.Bucket.OpCallback {
-    return (error: cb.CouchbaseError, results: T[]): void => {
+    return (error, results): void => {
       if (error) {
         this.log.errorJSON(error)
         resolve([])
@@ -192,7 +192,7 @@ export class AsyncBucket {
   }
 
   protected safeVoid(resolve: Resolve<void>): cb.Bucket.OpCallback {
-    return (error: cb.CouchbaseError) => {
+    return error => {
       if (error) {
         this.log.errorJSON(error)
         resolve()
@@ -203,7 +203,7 @@ export class AsyncBucket {
   }
 
   protected void(resolve: Resolve<void>, reject: Reject): cb.Bucket.OpCallback {
-    return (error: cb.CouchbaseError) => {
+    return error => {
       if (error) {
         this.log.errorJSON(error)
         reject(error)

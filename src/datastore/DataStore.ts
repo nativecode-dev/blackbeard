@@ -2,7 +2,7 @@ import 'reflect-metadata'
 
 import { Bucket, Cluster, ClusterConstructorOptions, CouchbaseError } from 'couchbase'
 import { inject, injectable } from 'inversify'
-import { Url } from 'url'
+import * as URL from 'url'
 
 import { Logger, LoggerType, Reject, Resolve } from '../core'
 
@@ -26,18 +26,19 @@ export class DataStore {
     return this._connected
   }
 
-  public connect(url: Url): Promise<void> {
-    const bucket = url.path && url.path[0] === '/' ? url.path.substring(1) : '/'
-    const password = url.auth ? url.auth.split(':')[1] : ''
+  public connect(url: string): Promise<void> {
+    const uri = URL.parse(url)
+    const bucket = uri.path && uri.path[0] === '/' ? uri.path.substring(1) : '/'
+    const password = uri.auth ? uri.auth.split(':')[1] : ''
 
     return this.initialized = new Promise<void>((resolve, reject) => {
       try {
-        const uri = `${url.protocol}//${url.hostname}`
-        this.log.trace('connecting', uri, bucket)
-        this.cluster = new Cluster(uri)
+        const connection = `${uri.protocol}//${uri.hostname}`
+        this.log.trace('connecting', connection, bucket)
+        this.cluster = new Cluster(connection)
         this.bucket = this.cluster.openBucket(bucket, password, () => {
           this._connected = true
-          this.log.trace('connected', uri, bucket)
+          this.log.trace('connected', connection, bucket)
           resolve()
         })
       } catch (error) {
