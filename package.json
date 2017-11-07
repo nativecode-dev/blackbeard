@@ -87,7 +87,7 @@
     "build": "gulp build",
     "clean": "gulp clean",
     "docker": "gulp docker",
-    "test": "cross-env DEBUG=nativecode:* LCB_LOGLEVEL=5 NODE_ENV=testing NODE_PATH=. gulp test",
+    "test": "cross-env DEBUG= LCB_LOGLEVEL=5 NODE_ENV=testing NODE_PATH=. gulp test",
     "start": "clear && node index.js",
     "startdev": "clear && cross-env DEBUG=nativecode:blackbeard:* APPCMD=scheduler ts-node src/index.ts",
     "prestartdev": "yarn run build",

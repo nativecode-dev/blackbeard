@@ -1,5 +1,6 @@
+import 'mocha'
+
 import * as gulp from 'gulp'
-import * as gdebug from 'gulp-debug'
 import * as shell from 'gulp-shell'
 import * as tslint from 'gulp-tslint'
 import * as gulpLoadPlugins from 'gulp-load-plugins'
@@ -11,17 +12,9 @@ interface IDebugOptions {
   title: string
 }
 
-interface ITslintReport {
-  formatter: string
-}
-
-interface ITslintReportOptions {
-  allowWarnings: boolean
-  summarizeFailureOutput: boolean
-}
-
-interface ITslintResult extends gulp.Gulp {
-  report: (options: ITslintReportOptions) => any
+interface MochaSetupOptionsEx extends MochaSetupOptions {
+  fullTrace?: boolean
+  recursive?: boolean
 }
 
 interface Plugins extends IGulpPlugins {
@@ -31,6 +24,7 @@ interface Plugins extends IGulpPlugins {
   changed(name: string): any
   clean(): any
   debug(options?: IDebugOptions): any
+  mocha(options: MochaSetupOptionsEx): any
   typescript(config: string): any
 }
 
@@ -91,6 +85,18 @@ export class GulpFile {
       .pipe(this.plugins.tslint.report(report))
   }
 
+  @Task('test', ['build'])
+  public test(): NodeJS.ReadWriteStream {
+    return this.source('test', 'src/**/*.spec.ts')
+      .pipe(this.plugins.mocha({
+        bail: true,
+        fullTrace: true,
+        recursive: true,
+        reporter: 'list',
+        require: ['ts-node/register', 'tsconfig-paths/register'],
+      }))
+  }
+
   private run(filename: string): NodeJS.ReadWriteStream {
     return this.source(`bash:${filename}`, filename)
       .pipe(this.plugins.shell('bash <%= file.path %>'))
@@ -99,7 +105,7 @@ export class GulpFile {
   private source(title: string, sources: string | string[]): NodeJS.ReadWriteStream {
     const pipeline = gulp.src(sources)
 
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV !== 'production') {
       return pipeline
     }
 
