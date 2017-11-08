@@ -100,11 +100,11 @@
     "docker": "gulp docker",
     "test": "cross-env DEBUG= LCB_LOGLEVEL=5 NODE_ENV=testing NODE_PATH=. gulp test",
     "start": "clear && node index.js",
-    "startdev": "clear && cross-env DEBUG=nativecode:blackbeard:* APPCMD=scheduler ts-node src/index.ts",
+    "startdev": "clear && cross-env APPCMD=scheduler DEBUG=nativecode:blackbeard:* DOCKER_RUN=true ts-node src/index.ts",
     "prestartdev": "yarn run build",
     "docker-push": "./docker-push.sh",
     "predocker-push": "cross-env DOCKER_PUSH=yes yarn run docker",
-    "docker-run": "cross-env DEBUG=nativecode:blackbeard:* APPCMD=scheduler ./docker-run.sh",
+    "docker-run": "cross-env APPCMD=scheduler DEBUG=nativecode:blackbeard:* DOCKER_RUN=true ./docker-run.sh",
     "predocker-run": "yarn run docker",
     "update-tsconfig": "ts-node update-tsconfig.ts"
   }

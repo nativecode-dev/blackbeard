@@ -8,6 +8,7 @@ $DOCKER build \
   --build-arg APPCMD=$APPCMD \
   --build-arg RADARR_APIKEY=$RADARR_APIKEY \
   --build-arg RADARR_ENDPOINT=$RADARR_ENDPOINT \
+  --build-arg REDIS=$REDIS \
   --build-arg SONARR_APIKEY=$SONARR_APIKEY \
   --build-arg SONARR_ENDPOINT=$SONARR_ENDPOINT \
   --build-arg XSPEEDS_APIKEY=$XSPEEDS_APIKEY \
@@ -16,26 +17,32 @@ $DOCKER build \
   . \
 ;
 
-$DOCKER build \
-  --build-arg APPCMD=ircwatch \
-  --build-arg RADARR_APIKEY=$RADARR_APIKEY \
-  --build-arg RADARR_ENDPOINT=$RADARR_ENDPOINT \
-  --build-arg SONARR_APIKEY=$SONARR_APIKEY \
-  --build-arg SONARR_ENDPOINT=$SONARR_ENDPOINT \
-  --build-arg XSPEEDS_APIKEY=$XSPEEDS_APIKEY \
-  --rm \
-  --tag $DOCKER_REPO-ircwatch:$DOCKER_VERSION \
-  . \
-;
+if [[ -z "${DOCKER_RUN}" ]]; then
 
-$DOCKER build \
-  --build-arg APPCMD=scheduler \
-  --build-arg RADARR_APIKEY=$RADARR_APIKEY \
-  --build-arg RADARR_ENDPOINT=$RADARR_ENDPOINT \
-  --build-arg SONARR_APIKEY=$SONARR_APIKEY \
-  --build-arg SONARR_ENDPOINT=$SONARR_ENDPOINT \
-  --build-arg XSPEEDS_APIKEY=$XSPEEDS_APIKEY \
-  --rm \
-  --tag $DOCKER_REPO-scheduler:$DOCKER_VERSION \
-  . \
-;
+  $DOCKER build \
+    --build-arg APPCMD=ircwatch \
+    --build-arg RADARR_APIKEY=$RADARR_APIKEY \
+    --build-arg RADARR_ENDPOINT=$RADARR_ENDPOINT \
+    --build-arg REDIS=$REDIS \
+    --build-arg SONARR_APIKEY=$SONARR_APIKEY \
+    --build-arg SONARR_ENDPOINT=$SONARR_ENDPOINT \
+    --build-arg XSPEEDS_APIKEY=$XSPEEDS_APIKEY \
+    --rm \
+    --tag $DOCKER_REPO-ircwatch:$DOCKER_VERSION \
+    . \
+  ;
+
+  $DOCKER build \
+    --build-arg APPCMD=scheduler \
+    --build-arg RADARR_APIKEY=$RADARR_APIKEY \
+    --build-arg RADARR_ENDPOINT=$RADARR_ENDPOINT \
+    --build-arg REDIS=$REDIS \
+    --build-arg SONARR_APIKEY=$SONARR_APIKEY \
+    --build-arg SONARR_ENDPOINT=$SONARR_ENDPOINT \
+    --build-arg XSPEEDS_APIKEY=$XSPEEDS_APIKEY \
+    --rm \
+    --tag $DOCKER_REPO-scheduler:$DOCKER_VERSION \
+    . \
+  ;
+
+fi
