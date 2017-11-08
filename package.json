@@ -2,7 +2,7 @@
   "author": "Mike Pham <me@mikepham.com>",
   "description": "Various, uh, tools...",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/app-service/index.js",
   "name": "blackbeard",
   "version": "1.1.0",
   "devDependencies": {
@@ -15,6 +15,7 @@
     "@types/gulp-load-plugins": "^0.0.30",
     "@types/gulp-mocha": "^0.0.30",
     "@types/gulp-shell": "^0.0.30",
+    "@types/gulp-sourcemaps": "^0.0.31",
     "@types/gulp-tslint": "^3.6.31",
     "@types/lodash.merge": "^4.6.3",
     "@types/mocha": "^2.2.44",
@@ -40,6 +41,7 @@
     "gulp-load-plugins": "^1.5.0",
     "gulp-mocha": "^4.3.1",
     "gulp-shell": "^0.6.3",
+    "gulp-sourcemaps": "^2.6.1",
     "gulp-tslint": "^8.1.2",
     "gulp-typescript": "^3.2.3",
     "gulpclass": "^0.1.2",
@@ -93,6 +95,7 @@
   "scripts": {
     "build": "gulp build",
     "prebuild": "yarn run update-tsconfig",
+    "postbuild": "webpack",
     "clean": "gulp clean",
     "docker": "gulp docker",
     "test": "cross-env DEBUG= LCB_LOGLEVEL=5 NODE_ENV=testing NODE_PATH=. gulp test",
@@ -103,8 +106,6 @@
     "predocker-push": "cross-env DOCKER_PUSH=yes yarn run docker",
     "docker-run": "cross-env DEBUG=nativecode:blackbeard:* APPCMD=scheduler ./docker-run.sh",
     "predocker-run": "yarn run docker",
-    "webpack": "webpack",
-    "prewebpack": "yarn run clean",
     "update-tsconfig": "ts-node update-tsconfig.ts"
   }
 }

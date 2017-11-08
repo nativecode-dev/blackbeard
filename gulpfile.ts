@@ -3,6 +3,7 @@ import 'mocha'
 import * as copy from 'gulp-copy'
 import * as gulp from 'gulp'
 import * as shell from 'gulp-shell'
+import * as sourcemap from 'gulp-sourcemaps'
 import * as tslint from 'gulp-tslint'
 import * as gulpLoadPlugins from 'gulp-load-plugins'
 
@@ -33,15 +34,15 @@ interface Plugins extends IGulpPlugins {
 @Gulpclass()
 export class GulpFile {
   private readonly plugins: Plugins
-  private readonly target: any
+  private readonly target: NodeJS.ReadWriteStream
 
   constructor() {
     this.plugins = gulpLoadPlugins<Plugins>()
-    this.target = gulp.dest('dist')
+    this.target = gulp.dest('dist/app-service')
   }
 
   @Task()
-  public assets(): void {
+  public assets(): NodeJS.ReadWriteStream {
     return gulp.src('src/**/*.html')
       .pipe(this.target)
   }
@@ -61,7 +62,10 @@ export class GulpFile {
   public compile(): NodeJS.ReadWriteStream {
     return this.source('tsc', 'src/**/*.ts')
       .pipe(this.plugins.changed('dist'))
+      .pipe(sourcemap.init())
       .pipe(this.plugins.typescript('tsconfig.json'))
+      .js
+      .pipe(sourcemap.write('.'))
       .pipe(this.target)
   }
 
@@ -117,8 +121,7 @@ export class GulpFile {
       return pipeline
     }
 
-    return pipeline.pipe(this.plugins.debug({
-      title: `[${title}]`
-    }))
+    const options: IDebugOptions = { title: `[${title}]` }
+    return pipeline.pipe(this.plugins.debug(options))
   }
 }

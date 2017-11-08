@@ -8,7 +8,7 @@ const configuration: wb.Configuration = {
     inline: true,
     port: 3000,
   },
-  devtool: 'eval',
+  devtool: '#@source-map',
   module: {
     rules: [{
       include: path.resolve('src'),
@@ -18,12 +18,13 @@ const configuration: wb.Configuration = {
   },
   output: {
     filename: 'app.js',
-    path: path.resolve('dist'),
+    path: path.resolve('dist/app-web'),
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     modules: ['src', 'node_modules']
-  }
+  },
+  target: 'web'
 }
 
 export default configuration

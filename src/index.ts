@@ -1,5 +1,4 @@
 export { Radarr, Script, Sonarr } from './core'
-export * from './App'
 
 import container from './inversify.config'
 import * as cluster from 'cluster'
