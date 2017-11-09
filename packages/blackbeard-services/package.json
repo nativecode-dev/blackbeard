@@ -1,0 +1,7 @@
+{
+  "author": "support@nativecode.com",
+  "license": "MIT",
+  "main": "index.js",
+  "name": "blackbeard-services",
+  "version": "1.0.0"
+}

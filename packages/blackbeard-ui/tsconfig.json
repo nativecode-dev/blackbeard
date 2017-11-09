@@ -30,23 +30,9 @@
       "src/types"
     ],
     "types": [
-      "@types/chai",
-      "@types/couchbase",
-      "@types/debug",
-      "@types/gulp",
-      "@types/gulp-copy",
-      "@types/gulp-debug",
-      "@types/gulp-load-plugins",
-      "@types/gulp-mocha",
-      "@types/gulp-shell",
-      "@types/gulp-sourcemaps",
-      "@types/gulp-tslint",
-      "@types/lodash.merge",
-      "@types/mocha",
-      "@types/node",
-      "@types/node-fetch",
-      "@types/node-schedule",
-      "@types/rimraf"
+      "@types/react",
+      "@types/react-dom",
+      "@types/webpack"
     ]
   },
   "exclude": [

@@ -7,10 +7,8 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
+    "isolatedModules": false,
     "lib": [
-      "dom",
       "es2015"
     ],
     "module": "commonjs",
@@ -18,57 +16,19 @@
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "outDir": "dist",
     "pretty": true,
     "removeComments": true,
     "rootDir": ".",
     "sourceMap": true,
     "strict": true,
     "strictNullChecks": true,
-    "target": "es2015",
-    "typeRoots": [
-      "src/types"
-    ],
-    "types": [
-      "@types/chai",
-      "@types/couchbase",
-      "@types/debug",
-      "@types/glob",
-      "@types/gulp",
-      "@types/gulp-copy",
-      "@types/gulp-debug",
-      "@types/gulp-load-plugins",
-      "@types/gulp-mocha",
-      "@types/gulp-shell",
-      "@types/gulp-sourcemaps",
-      "@types/gulp-tslint",
-      "@types/lodash",
-      "@types/lodash.merge",
-      "@types/minimatch",
-      "@types/mocha",
-      "@types/node",
-      "@types/node-fetch",
-      "@types/node-schedule",
-      "@types/orchestrator",
-      "@types/q",
-      "@types/react",
-      "@types/react-dom",
-      "@types/rimraf",
-      "@types/source-map",
-      "@types/tapable",
-      "@types/through",
-      "@types/uglify-js",
-      "@types/vinyl",
-      "@types/webpack"
-    ]
+    "target": "es2015"
   },
   "exclude": [
     "node_modules",
-    "**/*.spec.ts",
-    "**/*.spec.tsx"
+    "packages"
   ],
   "include": [
-    "**/*.ts",
-    "**/*.tsx"
+    "*.ts"
   ]
 }
