@@ -1,10 +1,2 @@
-.nyc_output/
-.vscode/
-coverage/
-dist/
-node_modules/
-
-*.log
-
-gulpfile.js
-update-tsconfig.js
+**/node_modules/
+**/*.log
