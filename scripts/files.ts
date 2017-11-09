@@ -1,3 +1,4 @@
+import * as chalk from 'chalk'
 import * as fs from 'fs'
 import * as path from 'path'
 
@@ -7,10 +8,40 @@ export interface Stat {
   filename: string
 }
 
+export interface Log {
+  error(...args: any[]): void
+  start(...args: any[]): void
+  done(...args: any[]): void
+  task(...args: any[]): void
+}
+
+export function Logger(name: string): Log {
+  return {
+    error: (...args: any[]): void => {
+      console.log(chalk.default.bold.bgRedBright.whiteBright(`[${name}]`, ...args))
+    },
+    start: (...args: any[]): void => {
+      console.log(chalk.default.italic.dim.grey(`[${name}]`, ...args))
+    },
+    done: (...args: any[]): void => {
+      console.log(chalk.default.italic.dim.grey(`[${name}]`, ...args))
+    },
+    task: (...args: any[]): void => {
+      console.log(chalk.default.bold.blue(`[${name}]`, ...args))
+    }
+  }
+}
+
 export const exists = (filepath: string): Promise<boolean> => {
   return new Promise<boolean>((resolve, reject) => {
     fs.exists(filepath, (exists: boolean) => resolve(exists))
   })
+}
+
+export const noext = (filename: string): string => {
+  const basename = path.basename(filename)
+  const extname = path.extname(basename)
+  return basename.replace(extname, '')
 }
 
 export const readfile = (filepath: string): Promise<Buffer> => {

@@ -4,6 +4,8 @@ import * as files from './files'
 import * as path from 'path'
 import { Dictionary, GetRegistered, Registered, Updater, Workspace } from './registry'
 
+const log = files.Logger('scripts')
+
 const scripts = (command: string, ...args: string[]): Updater[] => {
   switch (command.toLowerCase()) {
     case 'all':
@@ -69,9 +71,9 @@ const main = async (...args: string[]): Promise<void> => {
     .map(async script => {
       const ws = await workspaces()
       return ws.map(async workspace => {
-        console.log(`running script [${script.name}] for workspace ${workspace.name}`)
+        log.start(`running script [${script.name}] for workspace ${workspace.name}`)
         await script.exec(workspace)
-        console.log(`completed script [${script.name}] for workspace ${workspace.name}`)
+        log.done(`completed script [${script.name}] for workspace ${workspace.name}`)
       })
     })
 

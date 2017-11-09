@@ -12,5 +12,9 @@
   ],
   "scripts": {
     "compile": "ts-node scripts"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.50",
+    "chalk": "^2.3.0"
   }
 }

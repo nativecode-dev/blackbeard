@@ -6,6 +6,7 @@ export interface NPM {
   author: string | string[] | Dictionary
   dependencies: Dictionary
   devDependencies: Dictionary
+  scripts: Dictionary
 }
 
 export interface Updater {

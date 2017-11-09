@@ -2,11 +2,17 @@ import * as files from '../files'
 import * as path from 'path'
 import { NPM, Register, Updater, Workspace } from '../registry'
 
+const ScriptName = files.noext(__filename)
+const log = files.Logger(ScriptName)
 const prefix = '@types'
 
+/*
+ * Updates the "types" property of "tsconfig.json" files by
+ * looking for types from @types.
+ **/
 class Script implements Updater {
   public get name(): string {
-    return 'tsconfig-types'
+    return ScriptName
   }
 
   public async exec(workspace: Workspace): Promise<void> {
@@ -23,11 +29,11 @@ class Script implements Updater {
         if (packages && packages.length) {
           tsconfig.compilerOptions.types = packages
           files.save(tsconfigfile, tsconfig)
-          console.log(`updated ${tsconfigfile} types`)
+          log.task('update', tsconfigfile)
         }
       }
     }
   }
 }
 
-Register('tsconfig-types', new Script())
+Register(ScriptName, new Script())
