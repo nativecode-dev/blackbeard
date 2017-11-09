@@ -38,7 +38,7 @@ export class GulpFile {
 
   constructor() {
     this.plugins = gulpLoadPlugins<Plugins>()
-    this.target = gulp.dest('dist/app-service')
+    this.target = gulp.dest('dist')
   }
 
   @Task()
