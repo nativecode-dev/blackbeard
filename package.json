@@ -7,5 +7,10 @@
   "private": true,
   "repository": "git@github.com:mikepham/blackbeard.git",
   "version": "1.1.0",
-  "workspaces": ["packages/*"]
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^2.5.1"
+  }
 }

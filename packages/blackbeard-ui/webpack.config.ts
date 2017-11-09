@@ -5,7 +5,7 @@ import * as wb from 'webpack'
 const npm = JSON.parse(fs.readFileSync(path.resolve('package.json')).toString())
 
 const configuration: wb.Configuration = {
-  context: path.resolve('srcweb'),
+  context: path.resolve('src'),
   devServer: {
     historyApiFallback: true,
     inline: true,
@@ -29,16 +29,15 @@ const configuration: wb.Configuration = {
     }]
   },
   output: {
-    chunkFilename: '[name]-chunk.js',
-    filename: '[name]-bundle.js',
-    path: path.resolve('dist/app-web'),
+    filename: '[name].js',
+    path: path.resolve('dist'),
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     modules: [
       path.resolve('src'),
-      path.resolve('srcweb'),
       path.resolve('node_modules'),
+      path.resolve('../../node_modules')
     ]
   },
   target: 'web'
