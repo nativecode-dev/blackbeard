@@ -68,7 +68,11 @@ const main = async (...args: string[]): Promise<void> => {
   const promises = scripts(command, ...args)
     .map(async script => {
       const ws = await workspaces()
-      ws.map(workspace => script(workspace))
+      return ws.map(async workspace => {
+        console.log(`running script [${script.name}] for workspace ${workspace.name}`)
+        await script.exec(workspace)
+        console.log(`completed script [${script.name}] for workspace ${workspace.name}`)
+      })
     })
 
   await Promise.all(promises)

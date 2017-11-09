@@ -8,7 +8,10 @@ export interface NPM {
   devDependencies: Dictionary
 }
 
-export type Updater = (workspace: Workspace) => Promise<void>
+export interface Updater {
+  name: string
+  exec(workspace: Workspace): Promise<void>
+}
 
 export type Updaters = {
   [key: string]: Updater

@@ -1,3 +1,3 @@
-export * from './package-info'
+export * from './tsconfig-types'
 
-import './package-info'
+import './tsconfig-types'
