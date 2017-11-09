@@ -4,6 +4,7 @@ artifacts/
 coverage/
 node_modules/
 src/
+srcweb/
 
 *.js
 *.sh

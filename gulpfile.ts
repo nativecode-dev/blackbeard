@@ -54,18 +54,17 @@ export class GulpFile {
 
   @Task()
   public clean(): NodeJS.ReadWriteStream {
-    return this.source('clean', ['dist'])
+    return this.src('clean', ['dist'])
       .pipe(this.plugins.clean())
   }
 
   @Task('compile', ['lint'])
   public compile(): NodeJS.ReadWriteStream {
-    return this.source('tsc', 'src/**/*.ts')
+    return this.src('tsc', ['src/**/*.ts', 'src/**/*.tsx'])
       .pipe(this.plugins.changed('dist'))
       .pipe(sourcemap.init())
       .pipe(this.plugins.typescript('tsconfig.json'))
-      .js
-      .pipe(sourcemap.write('.'))
+      .js.pipe(sourcemap.write('.'))
       .pipe(this.target)
   }
 
@@ -92,14 +91,14 @@ export class GulpFile {
       summarizeFailureOutput: true,
     }
 
-    return this.source('tslint', 'src/**/*.ts')
+    return this.src('tslint', 'src/**/*.ts')
       .pipe(this.plugins.tslint(plugin))
       .pipe(this.plugins.tslint.report(report))
   }
 
   @Task('test', ['build'])
   public test(): NodeJS.ReadWriteStream {
-    return this.source('test', 'src/**/*.spec.ts')
+    return this.src('test', 'src/**/*.spec.ts')
       .pipe(this.plugins.mocha({
         bail: true,
         fullTrace: true,
@@ -110,11 +109,11 @@ export class GulpFile {
   }
 
   private run(filename: string): NodeJS.ReadWriteStream {
-    return this.source(`bash:${filename}`, filename)
+    return this.src(`bash:${filename}`, filename)
       .pipe(this.plugins.shell('bash <%= file.path %>'))
   }
 
-  private source(title: string, sources: string | string[]): NodeJS.ReadWriteStream {
+  private src(title: string, sources: string | string[]): NodeJS.ReadWriteStream {
     const pipeline = gulp.src(sources)
 
     if (process.env.NODE_ENV !== 'production') {
