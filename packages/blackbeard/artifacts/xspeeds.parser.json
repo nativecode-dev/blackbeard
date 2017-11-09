@@ -1,0 +1,25 @@
+{
+  "filtering": {
+    "category": {
+      "Blu-Ray": "radarr",
+      "HD Boxsets": "sonarr",
+      "Movies": "radarr",
+      "TV Boxsets": "sonarr",
+      "TV-HD": "sonarr",
+      "TV-SD": "sonarr"
+    },
+    "pattern": "(?:New Torrent|Size|Category|Uploader|Link):\\s+\\((?:\\s+)([\\w\\s\\.\\-\\:\\/\\?\\=\\[\\]\\{\\}]+)(?:\\s+)\\)",
+    "properties": ["title", "size", "category", "uploader", "url"],
+    "username": "Announce"
+  },
+  "formatters": {
+    "url": {
+      "regex": "https:\\/\\/www\\.xspeeds\\.eu\\/details.php\\?id=(\\d+)",
+      "replace": "https://www.xspeeds.eu/download.php?id=$1&type={type}&secret_key={secret_key}"
+    }
+  },
+  "secrets": {
+    "secret_key": "env:XSPEEDS_APIKEY",
+    "type": "rss"
+  }
+}
