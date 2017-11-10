@@ -12,7 +12,10 @@
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "compile": "ts-node scripts"
+    "compile": "ts-node scripts",
+    "diff": "lerna diff",
+    "ls": "lerna ls",
+    "updated": "lerna updated"
   },
   "devDependencies": {
     "@types/node": "^8.0.50",

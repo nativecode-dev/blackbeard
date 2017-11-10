@@ -2,6 +2,7 @@ import * as cp from 'child_process'
 import * as files from '../files'
 import * as path from 'path'
 import { NPM, Register, Updater, Workspace } from '../registry'
+import { UpdateShell } from '../update-shell'
 
 const ScriptName = files.noext(__filename)
 
@@ -10,17 +11,21 @@ const log = files.Logger(ScriptName)
 /*
  * Runs each project's build task.
  **/
-class Script implements Updater {
-  public get name(): string {
-    return ScriptName
+class Script extends UpdateShell {
+  constructor() {
+    super(ScriptName)
   }
 
-  public async exec(workspace: Workspace): Promise<void> {
+  public async script(workspace: Workspace): Promise<void> {
     const npm = await files.json<NPM>(workspace.npm)
-    if (npm.scripts && npm.scripts.build) {
-      return new Promise<void>((resolve, reject) => {
-        const command = `cd ${workspace.basepath} && yarn build`
+
+    return new Promise<void>((resolve, reject) => {
+      if (npm.scripts && npm.scripts.build) {
+        const command = `cd ${workspace.basepath} && yarn test`
         const child = cp.exec(command)
+
+        child.stderr.pipe(process.stderr)
+        child.stdout.pipe(process.stdout)
 
         log.start('build.start', workspace.name)
 
@@ -33,8 +38,11 @@ class Script implements Updater {
           log.task('build.done', workspace.name)
           resolve()
         })
-      })
-    }
+      } else {
+        log.info(`project [${workspace.name}] does not contain a build script`)
+        resolve()
+      }
+    })
   }
 }
 

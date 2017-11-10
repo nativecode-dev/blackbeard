@@ -1,5 +1,7 @@
-export * from './build-project'
+export * from './project-build'
+export * from './project-tests'
 export * from './tsconfig-types'
 
-import './build-project'
+import './project-build'
+import './project-tests'
 import './tsconfig-types'

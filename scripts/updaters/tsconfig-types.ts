@@ -16,22 +16,13 @@ class Script implements Updater {
   }
 
   public async exec(workspace: Workspace): Promise<void> {
-    const tsconfigfile = workspace.configs['tsconfig.json']
+    const tsconfigfile = path.join(workspace.root, 'tsconfig.json')
+    const typesdir = path.join(workspace.root, 'node_modules')
 
-    if (tsconfigfile) {
+    if (await files.exists(tsconfigfile) && await files.exists(typesdir)) {
       const tsconfig = await files.json<any>(tsconfigfile)
-      const npm = await files.json<NPM>(workspace.npm)
-
-      if (npm.devDependencies) {
-        const packages = Object.keys(npm.devDependencies)
-          .filter(name => name.substring(0, prefix.length) === prefix)
-
-        if (packages && packages.length) {
-          tsconfig.compilerOptions.types = packages
-          files.save(tsconfigfile, tsconfig)
-          log.task('update', tsconfigfile)
-        }
-      }
+      const types = await files.listdirs(typesdir)
+      tsconfig.compilerOptions.types = types.map(type => `@types/${type}`)
     }
   }
 }

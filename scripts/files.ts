@@ -9,7 +9,9 @@ export interface Stat {
 }
 
 export interface Log {
+  debug(...args: any[]): void
   error(...args: any[]): void
+  info(...args: any[]): void
   start(...args: any[]): void
   done(...args: any[]): void
   task(...args: any[]): void
@@ -17,8 +19,14 @@ export interface Log {
 
 export function Logger(name: string): Log {
   return {
+    debug: (...args: any[]): void => {
+      console.log(...args)
+    },
     error: (...args: any[]): void => {
       console.log(chalk.default.bold.bgRedBright.whiteBright(`[${name}]`, ...args))
+    },
+    info: (...args: any[]): void => {
+      console.log(chalk.default.bold.italic.grey(`[${name}]`, ...args))
     },
     start: (...args: any[]): void => {
       console.log(chalk.default.italic.dim.grey(`[${name}]`, ...args))

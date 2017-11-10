@@ -58,6 +58,7 @@ const workspaces = async (): Promise<Workspace[]> => {
       configs: config,
       name: dirname,
       npm: path.join(dir, 'package.json'),
+      root: process.cwd(),
     }
   })
 
@@ -66,19 +67,23 @@ const workspaces = async (): Promise<Workspace[]> => {
 
 const main = async (...args: string[]): Promise<void> => {
   const command = args.length ? args[0] : 'list'
+  log.debug(args.length, ...args)
 
   const promises = scripts(command, ...args)
     .map(async script => {
       const ws = await workspaces()
       return ws.map(async workspace => {
-        log.start(`running script [${script.name}] for workspace ${workspace.name}`)
-        await script.exec(workspace)
-        log.done(`completed script [${script.name}] for workspace ${workspace.name}`)
+        try {
+          log.start('script.start', workspace.name, script.name)
+          await script.exec(workspace)
+          log.done('script.done', workspace.name, script.name)
+        } catch (error) {
+          log.error('error', workspace.name, script.name, error)
+        }
       })
     })
 
   await Promise.all(promises)
 }
 
-const args = process.argv.slice(2)
-main(...args)
+main(...process.argv.slice(2))

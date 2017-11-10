@@ -23,6 +23,7 @@ export interface Workspace {
   configs: Dictionary
   name: string
   npm: string
+  root: string
 }
 
 const registrations: Updaters = {}

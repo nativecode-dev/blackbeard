@@ -25,15 +25,7 @@
     "sourceMap": true,
     "strict": true,
     "strictNullChecks": true,
-    "target": "es2015",
-    "typeRoots": [
-      "src/types"
-    ],
-    "types": [
-      "@types/react",
-      "@types/react-dom",
-      "@types/webpack"
-    ]
+    "target": "es2015"
   },
   "exclude": [
     "node_modules",
