@@ -1,6 +1,6 @@
 import { strip } from 'irc-formatting'
+import { Logger } from 'blackbeard'
 import { IRCParserOptions, IRCParserSecrets } from './IRCEntry'
-import { Logger } from '../../core'
 
 export class IRCParser {
   private readonly log: Logger

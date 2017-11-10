@@ -41,7 +41,7 @@ export class GulpFile {
 
   constructor() {
     this.plugins = gulpLoadPlugins<Plugins>()
-    this.target = gulp.dest('lib')
+    this.target = gulp.dest('dist')
   }
 
   @SequenceTask()
@@ -51,14 +51,14 @@ export class GulpFile {
 
   @Task()
   public clean(): NodeJS.ReadWriteStream {
-    return this.src('clean', ['lib'])
+    return this.src('clean', ['dist'])
       .pipe(this.plugins.clean())
   }
 
   @Task('compile', ['lint'])
   public compile(): NodeJS.ReadWriteStream {
     const stream = this.src('tsc', ['src/**/*.ts', 'src/**/*.tsx'])
-      .pipe(this.plugins.changed('lib'))
+      .pipe(this.plugins.changed('dist'))
       .pipe(sourcemap.init())
       .pipe(this.plugins.typescript('tsconfig.json'))
 

@@ -2,16 +2,15 @@
   "author": "Mike Pham <me@mikepham.com>",
   "description": "Various, uh, tools...",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "./lib/index.js",
   "name": "blackbeard",
-  "types": "./lib"
+  "types": "./lib/index.d.ts",
   "version": "1.0.0",
   "devDependencies": {
     "@types/chai": "^4.0.4",
     "@types/couchbase": "^2.1.30",
     "@types/debug": "^0.0.30",
     "@types/gulp": "^3.8.34",
-    "@types/gulp-copy": "^0.0.3",
     "@types/gulp-debug": "^2.0.30",
     "@types/gulp-load-plugins": "^0.0.30",
     "@types/gulp-mocha": "^0.0.30",
@@ -32,7 +31,6 @@
     "gulp": "^3.9.1",
     "gulp-changed": "^3.1.1",
     "gulp-clean": "^0.3.2",
-    "gulp-copy": "^1.0.1",
     "gulp-debug": "^3.1.0",
     "gulp-load-plugins": "^1.5.0",
     "gulp-mocha": "^4.3.1",
@@ -59,14 +57,10 @@
     "debug": "^3.1.0",
     "hydra": "^1.4.27",
     "inversify": "^4.3.0",
-    "irc-factory": "^1.10.1",
-    "irc-formatting": "^1.0.0-rc3",
     "lodash.merge": "^4.6.0",
     "module": "^1.2.5",
     "node-fetch": "^1.7.3",
     "node-schedule": "^1.2.5",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
     "reflect-metadata": "^0.1.10",
     "yargs": "^10.0.3"
   },
@@ -91,14 +85,6 @@
   "scripts": {
     "build": "gulp build",
     "clean": "gulp clean",
-    "docker": "gulp docker",
-    "test": "cross-env DEBUG= LCB_LOGLEVEL=5 NODE_ENV=testing NODE_PATH=. gulp test",
-    "start": "clear && node index.js",
-    "startdev": "clear && cross-env APPCMD=scheduler DEBUG=nativecode:blackbeard:* DOCKER_RUN=true ts-node src/index.ts",
-    "prestartdev": "yarn run build",
-    "docker-push": "./docker-push.sh",
-    "predocker-push": "cross-env DOCKER_PUSH=yes yarn run docker",
-    "docker-run": "cross-env APPCMD=scheduler DEBUG=nativecode:blackbeard:* DOCKER_RUN=true ./docker-run.sh",
-    "predocker-run": "yarn run docker"
+    "test": "cross-env DEBUG= LCB_LOGLEVEL=5 NODE_ENV=testing NODE_PATH=. gulp test"
   }
 }

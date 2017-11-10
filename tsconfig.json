@@ -55,7 +55,8 @@
       "@types/uglify-js",
       "@types/vinyl",
       "@types/webpack",
-      "@types/yargs"
+      "@types/yargs",
+      "blackbeard"
     ]
   },
   "exclude": [

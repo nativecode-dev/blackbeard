@@ -1,6 +1,5 @@
 import 'mocha'
 
-import * as copy from 'gulp-copy'
 import * as gulp from 'gulp'
 import * as shell from 'gulp-shell'
 import * as sourcemap from 'gulp-sourcemaps'
@@ -28,7 +27,6 @@ interface Plugins extends IGulpPlugins {
 
   changed(name: string): any
   clean(): any
-  copy(options?: copy.GulpCopyOptions): any
   debug(options?: IDebugOptions): any
   mocha(options: MochaSetupOptionsEx): any
   typescript(config: string): any
@@ -67,16 +65,6 @@ export class GulpFile {
       .pipe(this.target)
   }
 
-  @Task('docker', ['build', 'docker-clean'])
-  public docker(): NodeJS.ReadWriteStream {
-    return this.run('docker-build.sh')
-  }
-
-  @Task('docker-clean')
-  public dockerClean(): NodeJS.ReadWriteStream {
-    return this.run('docker-clean.sh')
-  }
-
   @Task('lint')
   public lint(): NodeJS.ReadWriteStream {
     const plugin: tslint.PluginOptions = {
@@ -105,11 +93,6 @@ export class GulpFile {
         reporter: 'list',
         require: ['ts-node/register', 'tsconfig-paths/register'],
       }))
-  }
-
-  private run(filename: string): NodeJS.ReadWriteStream {
-    return this.src(`bash:${filename}`, filename)
-      .pipe(this.plugins.shell('bash <%= file.path %>'))
   }
 
   private src(title: string, sources: string | string[]): NodeJS.ReadWriteStream {

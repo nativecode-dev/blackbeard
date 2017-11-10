@@ -28,7 +28,7 @@ class Script extends UpdateScript {
           const tsconfig = await files.json<any>(tsconfigfile)
           const typedirs = await files.listdirs(typesdir)
           const types = typedirs.map(dir => path.basename(dir))
-          tsconfig.compilerOptions.types = types.map(type => `@types/${type}`)
+          tsconfig.compilerOptions.types = types.map(type => `@types/${type}`).concat(['blackbeard'])
           await files.save(tsconfigfile, tsconfig)
           this.log.task('updated', tsconfigfile)
           resolve()

@@ -3,15 +3,28 @@ import 'reflect-metadata'
 import { Api, IRCInterfaces, IRCRPC, IRCClientOptions, IRCMessage, IRCOptions } from 'irc-factory'
 import { inject, injectable } from 'inversify'
 
-import { Converters, FileSystem, Logger, LoggerType, PlatformProvider, Reject, Radarr, Sonarr, Variables } from '../../core'
-import { HydraModule, HydraModuleConfig } from '../../hydra'
-import { Protocol, ReleaseInfo } from '../../models'
 import { DataMessage } from './messages'
 import { IRCEntries, IRCEntry, IRCParserClientKind } from './IRCEntry'
 import { IRCWatcherClient } from './IRCWatcherClient'
 import { IRCWatcherConfig } from './IRCWatcherConfig'
 import { IRCWatcherClientImpl } from './IRCWatcherClientImpl'
 import { IRCParserRecord } from './IRCParser'
+
+import {
+  Converters,
+  FileSystem,
+  HydraModule,
+  HydraModuleConfig,
+  Logger,
+  LoggerType,
+  PlatformProvider,
+  Protocol,
+  ReleaseInfo,
+  Reject,
+  Radarr,
+  Sonarr,
+  Variables
+} from 'blackbeard'
 
 interface IRCFactoryClients {
   [key: string]: IRCWatcherClient

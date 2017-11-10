@@ -21,7 +21,7 @@ class Script extends UpdateShell {
     log.start('build.start', workspace.name)
 
     if (npm.scripts && npm.scripts.build) {
-      await this.run(workspace.basepath, 'yarn', 'build')
+      await this.run(workspace, 'yarn', 'build')
     }
 
     log.done('build.done', workspace.name)

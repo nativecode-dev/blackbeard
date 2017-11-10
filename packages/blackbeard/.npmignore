@@ -1,21 +1,6 @@
-.nyc_output/
-.vscode/
-artifacts/
-coverage/
 node_modules/
 src/
 
-*.js
-*.sh
-
-.babelrc
-.dockerignore
-.env.sh
-.env.version
-.travis.yml
-docker-*.sh
-Dockerfile
-gulpfile.js
-nas-*.json
+gulpfile.ts
 tsconfig.json
 tslint.json

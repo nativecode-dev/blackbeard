@@ -22,7 +22,7 @@ class Script extends UpdateShell {
 
     if (npm.scripts && npm.scripts.test) {
       try {
-        await this.run(workspace.basepath, 'yarn', 'test')
+        await this.run(workspace, 'yarn', 'test')
       } catch (error) {
         this.log.error(error)
       }

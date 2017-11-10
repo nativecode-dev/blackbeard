@@ -3,8 +3,18 @@ import 'reflect-metadata'
 import * as schedule from 'node-schedule'
 import { inject, injectable, multiInject } from 'inversify'
 
-import { Config, FileSystem, Logger, LoggerType, Module, PlatformProvider, Reject, Script, ScriptType } from '../../core'
-import { HydraModule, HydraModuleConfig } from '../../hydra'
+import {
+  Config,
+  FileSystem,
+  HydraModule,
+  HydraModuleConfig,
+  Logger, LoggerType,
+  Module,
+  PlatformProvider,
+  Reject,
+  Script,
+  ScriptType
+} from 'blackbeard'
 
 interface JobConfig {
   schedule: schedule.RecurrenceRule | schedule.RecurrenceSpecDateRange | schedule.RecurrenceSpecObjLit

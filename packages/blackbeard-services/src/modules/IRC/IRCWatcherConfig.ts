@@ -1,4 +1,4 @@
-import { HydraModuleConfig } from '../../hydra'
+import { HydraModuleConfig } from 'blackbeard'
 import { IRCEntries } from './IRCEntry'
 
 export interface IRCWatcherConfig {
