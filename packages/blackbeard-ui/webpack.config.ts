@@ -32,6 +32,10 @@ const configuration: wb.Configuration = {
     filename: '[name].js',
     path: path.resolve('dist'),
   },
+  plugins: [new wb.optimize.UglifyJsPlugin({
+    sourceMap: true,
+    include: /\.js$/,
+  })],
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     modules: [

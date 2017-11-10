@@ -12,9 +12,13 @@
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "compile": "ts-node scripts",
+    "postbootstrap": "ts-node scripts tsconfig-types",
+    "build": "ts-node scripts project-build",
+    "prebuild": "yarn run bootstrap",
     "diff": "lerna diff",
     "ls": "lerna ls",
+    "test": "ts-node scripts project-tests",
+    "pretest": "yarn run bootstrap",
     "updated": "lerna updated"
   },
   "devDependencies": {

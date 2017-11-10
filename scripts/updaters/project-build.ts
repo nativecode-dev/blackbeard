@@ -20,7 +20,7 @@ class Script extends UpdateShell {
     const npm = await files.json<NPM>(workspace.npm)
     log.start('build.start', workspace.name)
 
-    if (npm.scripts && npm.scripts.build && !npm.scripts.test) {
+    if (npm.scripts && npm.scripts.build) {
       await this.run(workspace.basepath, 'yarn', 'build')
     }
 

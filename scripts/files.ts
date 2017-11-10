@@ -17,25 +17,30 @@ export interface Log {
   task(...args: any[]): void
 }
 
-export function Logger(name: string): Log {
+export function Logger(name: string, category?: string): Log {
+  const cat = category ? `:${category}` : ''
+  const bold = (name: string) => chalk.default.bold(`[${name}${cat}]`)
+
   return {
     debug: (...args: any[]): void => {
-      console.log(chalk.default.bold.yellowBright(`[${name}]`, ...args))
+      if (process.env.NODE_ENV !== 'production') {
+        console.log(chalk.default.yellow.inverse(bold(name), ...args))
+      }
     },
     error: (...args: any[]): void => {
-      console.log(chalk.default.bold.bgRedBright.whiteBright(`[${name}]`, ...args))
+      console.log(chalk.default.red.inverse(bold(name), ...args))
     },
     info: (...args: any[]): void => {
-      console.log(chalk.default.bold.italic.grey(`[${name}]`, ...args))
+      console.log(chalk.default.grey.italic(bold(name), ...args))
     },
     start: (...args: any[]): void => {
-      console.log(chalk.default.italic.dim.grey(`[${name}]`, ...args))
+      console.log(chalk.default.grey.dim(bold(name), ...args))
     },
     done: (...args: any[]): void => {
-      console.log(chalk.default.italic.dim.grey(`[${name}]`, ...args))
+      console.log(chalk.default.grey.dim(bold(name), ...args))
     },
     task: (...args: any[]): void => {
-      console.log(chalk.default.bold.blue(`[${name}]`, ...args))
+      console.log(chalk.default.blue(bold(name), ...args))
     }
   }
 }
