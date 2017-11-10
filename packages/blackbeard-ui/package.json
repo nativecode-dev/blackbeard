@@ -2,7 +2,7 @@
   "author": "support@nativecode.com",
   "license": "MIT",
   "main": "index.js",
-  "name": "blackbeard-ui",
+  "name": "@blackbeard/ui",
   "version": "1.0.0",
   "devDependencies": {
     "@types/react": "^16.0.21",

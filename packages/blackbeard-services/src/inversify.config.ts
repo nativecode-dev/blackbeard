@@ -1,45 +1,42 @@
 import 'reflect-metadata'
 
 import * as process from 'process'
-import * as core from './core'
-import * as acb from './datastore/couchbase'
-import * as datastore from './datastore'
+import * as blackbeard from '@blackbeard/core'
 import * as modules from './modules'
-import * as scripts from './scripts'
 
 import { Container } from 'inversify'
-import { DefaultLogger } from './core/logging/DefaultLogger'
+import { DefaultLogger } from '@blackbeard/core'
 
 const container = new Container()
 
 container.bind<Container>(Container).toConstantValue(container)
 
 // Core
-container.bind<core.Config>(core.Config).toSelf().inSingletonScope()
-container.bind<core.FileSystem>(core.FileSystem).toSelf().inSingletonScope()
-container.bind<core.PlatformProvider>(core.PlatformProvider).toSelf().inSingletonScope()
-container.bind<core.Variables>(core.Variables).toSelf().inSingletonScope()
+container.bind<blackbeard.Config>(blackbeard.Config).toSelf().inSingletonScope()
+container.bind<blackbeard.FileSystem>(blackbeard.FileSystem).toSelf().inSingletonScope()
+container.bind<blackbeard.PlatformProvider>(blackbeard.PlatformProvider).toSelf().inSingletonScope()
+container.bind<blackbeard.Variables>(blackbeard.Variables).toSelf().inSingletonScope()
 
 // Logging
-container.bind<core.Logger>(core.LoggerType).to(DefaultLogger).inSingletonScope()
-container.bind<core.LoggerNamespace>(core.LoggerNamespace).toSelf()
+container.bind<blackbeard.Logger>(blackbeard.LoggerType).to(DefaultLogger).inSingletonScope()
+container.bind<blackbeard.LoggerNamespace>(blackbeard.LoggerNamespace).toSelf()
 
 // Logging targets
-container.bind<core.LoggerTarget>(core.LoggerTargetType).to(core.DebugLoggerTarget)
+container.bind<blackbeard.LoggerTarget>(blackbeard.LoggerTargetType).to(blackbeard.DebugLoggerTarget)
 
 // Clients
-container.bind<core.Radarr>(core.Radarr).toSelf()
-container.bind<core.Sonarr>(core.Sonarr).toSelf()
+container.bind<blackbeard.Radarr>(blackbeard.Radarr).toSelf()
+container.bind<blackbeard.Sonarr>(blackbeard.Sonarr).toSelf()
 
 // Modules
-container.bind<core.Module>(core.ModuleType).to(modules.IRCWatcher).inSingletonScope()
-container.bind<core.Module>(core.ModuleType).to(modules.Scheduler).inSingletonScope()
+container.bind<blackbeard.Module>(blackbeard.ModuleType).to(modules.IRCWatcher).inSingletonScope()
+container.bind<blackbeard.Module>(blackbeard.ModuleType).to(modules.Scheduler).inSingletonScope()
 
 // Scripts
-container.bind<core.Script>(core.ScriptType).to(scripts.UnMonitorCompletedMovies)
-container.bind<core.Script>(core.ScriptType).to(scripts.UnMonitorCompletedSeasons)
+container.bind<blackbeard.Script>(blackbeard.ScriptType).to(blackbeard.UnMonitorCompletedMovies)
+container.bind<blackbeard.Script>(blackbeard.ScriptType).to(blackbeard.UnMonitorCompletedSeasons)
 
-container.bind<datastore.DataStore>(datastore.DataStore).toSelf()
-container.bind<acb.CouchbaseFactory>(acb.CouchbaseFactory).toSelf()
+container.bind<datastore.DataStore>(blackbeard.DataStore).toSelf()
+container.bind<acb.CouchbaseFactory>(blackbeard.CouchbaseFactory).toSelf()
 
 export default container

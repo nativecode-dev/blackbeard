@@ -3,7 +3,7 @@
   "description": "Various, uh, tools...",
   "license": "MIT",
   "main": "./lib/index.js",
-  "name": "blackbeard",
+  "name": "@blackbeard/core",
   "types": "./lib/index.d.ts",
   "version": "1.0.0",
   "devDependencies": {

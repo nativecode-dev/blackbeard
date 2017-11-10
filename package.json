@@ -6,7 +6,7 @@
   "name": "blackbeard",
   "private": true,
   "repository": "git@github.com:mikepham/blackbeard.git",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "workspaces": [
     "packages/*"
   ],
@@ -17,7 +17,7 @@
     "prebuild": "yarn run bootstrap",
     "diff": "lerna diff",
     "ls": "lerna ls",
-    "test": "ts-node chest project-tests",
+    "test": "lerna exec --parallel -- yarn run test",
     "pretest": "yarn run bootstrap",
     "updated": "lerna updated"
   },

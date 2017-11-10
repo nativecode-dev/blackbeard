@@ -1,28 +1,16 @@
 {
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
     "declaration": false,
-    "diagnostics": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "forceConsistentCasingInFileNames": true,
     "isolatedModules": false,
     "lib": [
       "es2015"
     ],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "pretty": true,
-    "removeComments": true,
-    "rootDir": ".",
-    "sourceMap": true,
-    "strict": true,
-    "strictNullChecks": true,
-    "target": "es2015",
+    "paths": {
+      "@blackbeaerd/*": [
+        "./*/src"
+      ]
+    },
     "types": [
       "@types/chai",
       "@types/couchbase",

@@ -14,7 +14,7 @@ import {
   Reject,
   Script,
   ScriptType
-} from 'blackbeard'
+} from '@blackbeard/core'
 
 interface JobConfig {
   schedule: schedule.RecurrenceRule | schedule.RecurrenceSpecDateRange | schedule.RecurrenceSpecObjLit

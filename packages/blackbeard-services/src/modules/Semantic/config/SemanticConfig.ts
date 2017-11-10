@@ -1,4 +1,4 @@
-import { HydraModuleConfig } from 'blackbeard'
+import { HydraModuleConfig } from '@blackbeard/core'
 import { SemanticSettings } from './SemanticSettings'
 
 export interface SemanticConfig {

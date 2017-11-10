@@ -24,7 +24,7 @@ import {
   Radarr,
   Sonarr,
   Variables
-} from 'blackbeard'
+} from '@blackbeard/core'
 
 interface IRCFactoryClients {
   [key: string]: IRCWatcherClient
