@@ -4,6 +4,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "name": "blackbeard",
+  "types": "./lib"
   "version": "1.0.0",
   "devDependencies": {
     "@types/chai": "^4.0.4",
