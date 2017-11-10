@@ -6,6 +6,10 @@
   "version": "1.0.0",
   "dependencies": {
     "blackbeard": "^1.0.0",
-    "module": "^1.2.5"
+    "module": "^1.2.5",
+    "yargs": "^10.0.3"
+  },
+  "devDependencies": {
+    "@types/yargs": "^8.0.2"
   }
 }

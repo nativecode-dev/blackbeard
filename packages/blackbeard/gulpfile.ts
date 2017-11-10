@@ -4,8 +4,11 @@ import * as copy from 'gulp-copy'
 import * as gulp from 'gulp'
 import * as shell from 'gulp-shell'
 import * as sourcemap from 'gulp-sourcemaps'
+import * as ts from 'gulp-typescript'
 import * as tslint from 'gulp-tslint'
 import * as gulpLoadPlugins from 'gulp-load-plugins'
+
+import smerge = require('merge-stream')
 
 import { Gulpclass, SequenceTask, Task } from 'gulpclass'
 
@@ -60,11 +63,13 @@ export class GulpFile {
 
   @Task('compile', ['lint'])
   public compile(): NodeJS.ReadWriteStream {
-    return this.src('tsc', ['src/**/*.ts', 'src/**/*.tsx'])
+    const stream = this.src('tsc', ['src/**/*.ts', 'src/**/*.tsx'])
       .pipe(this.plugins.changed('dist'))
       .pipe(sourcemap.init())
       .pipe(this.plugins.typescript('tsconfig.json'))
-      .js.pipe(sourcemap.write('.'))
+
+    return smerge(stream, stream.js)
+      .pipe(sourcemap.write('.'))
       .pipe(this.target)
   }
 

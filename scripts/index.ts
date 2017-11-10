@@ -2,6 +2,7 @@ import './updaters'
 
 import * as files from './files'
 import * as path from 'path'
+import * as yargs from 'yargs'
 import { Dictionary, GetRegistered, Registered, Updater, Workspace } from './registry'
 
 const log = files.Logger('scripts')
@@ -81,5 +82,18 @@ const main = async (...args: string[]): Promise<void> => {
 
   await Promise.all(promises)
 }
+
+const args = yargs
+  .usage('$0 <script> [args]')
+  .options('script', {
+    array: true,
+    choices: Registered().concat(['all']),
+    default: 'all',
+    description: 'executes the provided list of scripts',
+  })
+  .help()
+  .argv
+
+console.log(args)
 
 main(...process.argv.slice(2))

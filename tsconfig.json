@@ -38,6 +38,7 @@
       "@types/gulp-tslint",
       "@types/lodash",
       "@types/lodash.merge",
+      "@types/merge-stream",
       "@types/minimatch",
       "@types/mocha",
       "@types/node",
@@ -53,7 +54,8 @@
       "@types/through",
       "@types/uglify-js",
       "@types/vinyl",
-      "@types/webpack"
+      "@types/webpack",
+      "@types/yargs"
     ]
   },
   "exclude": [
