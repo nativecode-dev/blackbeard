@@ -18,6 +18,14 @@ So if you're just looking for something where you can add, search, and manage me
 
 However, if your library is getting out of hand or you want to perform mass operations against videos, then continue on, brave soul!
 
+Supported Applications
+
+- `Plex`
+- `Radarr`
+- `Sonarr`
+- `NZBGet`
+- `Deluge`
+
 ## Architecture
 
 `blackbeard` is designed to be run in a distributed environment, but not necessarily remotely. The project is spit into several smaller projects that are responsible for their slice of work. Compromised of a set of microservices, `blackbeard` is designed from the ground-up to be distributed. You will normally only have one or two instances running at any given moment, but if you know you are going to be running a large operation against your media files, you can spin up additional instances as needed even if you already started said large job.
