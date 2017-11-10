@@ -18,31 +18,17 @@ class Script extends UpdateShell {
 
   public async script(workspace: Workspace): Promise<void> {
     const npm = await files.json<NPM>(workspace.npm)
+    log.start('tests.start', workspace.name)
 
-    return new Promise<void>((resolve, reject) => {
-      if (npm.scripts && npm.scripts.build) {
-        const command = `cd ${workspace.basepath} && yarn test`
-        const child = cp.exec(command)
-
-        child.stderr.pipe(process.stderr)
-        child.stdout.pipe(process.stdout)
-
-        log.start('build.start', workspace.name)
-
-        child.addListener('error', error => {
-          log.error('build.error', workspace.name)
-          reject(error)
-        })
-
-        child.addListener('exit', () => {
-          log.task('build.done', workspace.name)
-          resolve()
-        })
-      } else {
-        log.info(`project [${workspace.name}] does not contain a build script`)
-        resolve()
+    if (npm.scripts && npm.scripts.test) {
+      try {
+        await this.run(workspace.basepath, 'yarn', 'test')
+      } catch (error) {
+        this.log.error(error)
       }
-    })
+    }
+
+    log.done('tests.done', workspace.name)
   }
 }
 

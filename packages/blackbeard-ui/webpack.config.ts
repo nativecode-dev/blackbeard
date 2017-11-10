@@ -36,7 +36,8 @@ const configuration: wb.Configuration = {
     extensions: ['.ts', '.tsx', '.js'],
     modules: [
       path.resolve('src'),
-      path.resolve('node_modules')
+      path.resolve('node_modules'),
+      path.resolve('../../node_modules'),
     ]
   },
   target: 'web'

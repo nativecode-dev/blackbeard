@@ -63,5 +63,7 @@ declare module 'hydra' {
     use(...plugins: any[]): Promise<void>
   }
 
-  export = new IHydra()
+  const HYDRA: IHydra
+
+  export = HYDRA
 }

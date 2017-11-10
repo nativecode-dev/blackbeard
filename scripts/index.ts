@@ -11,10 +11,6 @@ const scripts = (command: string, ...args: string[]): Updater[] => {
     case 'all':
       return Registered().map(name => GetRegistered(name))
 
-    case 'list':
-      Registered().map(name => console.log(name))
-      return []
-
     default:
       return Registered()
         .filter(name => args.find(value => value === name))
@@ -66,8 +62,8 @@ const workspaces = async (): Promise<Workspace[]> => {
 }
 
 const main = async (...args: string[]): Promise<void> => {
-  const command = args.length ? args[0] : 'list'
-  log.debug(args.length, ...args)
+  const command = args.length ? args[0] : 'all'
+  log.debug('args', args.length, ...args)
 
   const promises = scripts(command, ...args)
     .map(async script => {

@@ -19,10 +19,12 @@ class Script extends UpdateShell {
   public async script(workspace: Workspace): Promise<void> {
     const npm = await files.json<NPM>(workspace.npm)
     log.start('build.start', workspace.name)
-    
-      if (npm.scripts && npm.scripts.build) {
-        await this.run(workspace.basepath, 'yarn', 'build')
-      }
+
+    if (npm.scripts && npm.scripts.build && !npm.scripts.test) {
+      await this.run(workspace.basepath, 'yarn', 'build')
+    }
+
+    log.done('build.done', workspace.name)
   }
 }
 

@@ -20,7 +20,7 @@ export interface Log {
 export function Logger(name: string): Log {
   return {
     debug: (...args: any[]): void => {
-      console.log(...args)
+      console.log(chalk.default.bold.yellowBright(`[${name}]`, ...args))
     },
     error: (...args: any[]): void => {
       console.log(chalk.default.bold.bgRedBright.whiteBright(`[${name}]`, ...args))
