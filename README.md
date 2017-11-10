@@ -1,6 +1,8 @@
 # blackbeard
 
-![blackbeard](assets/blackbeard-temp.png)
+<p align="center">
+  <img src="assets/blackbeard-temp.png">
+</p>
 
 `blackbeard` is a set of libraries and applications that form the basis for an advanced media management system. Designed for large media libraries that span in the terabytes and hardware capable of running a set of microservices is required first.
 
