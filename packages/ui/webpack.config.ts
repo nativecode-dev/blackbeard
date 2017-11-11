@@ -3,6 +3,8 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as wb from 'webpack'
 
+import { CheckerPlugin, TsConfigPathsPlugin } from 'awesome-typescript-loader'
+
 const BundlePlugin = wb.optimize.UglifyJsPlugin
 const IgnorePlugin = wb.IgnorePlugin
 
@@ -12,17 +14,20 @@ const Styles = new TextPlugin('[name].css')
 const npm = JSON.parse(fs.readFileSync(path.resolve('package.json')).toString())
 const optimize = process.env.NODE_ENV === 'production'
 
-const configuration: wb.Configuration = {
+export default {
   context: path.resolve('src'),
   devServer: {
     historyApiFallback: true,
     inline: true,
     port: 3000,
   },
-  devtool: '#@source-map',
+  devtool: 'source-map',
   entry: {
     app: './App.tsx',
     vendor: Object.keys(npm.dependencies),
+  },
+  externals: {
+    'node-fetch': 'fetch'
   },
   module: {
     rules: [{
@@ -39,14 +44,19 @@ const configuration: wb.Configuration = {
       }),
     }, {
       test: /\.tsx?$/,
-      use: ['babel-loader', 'ts-loader'],
+      use: ['babel-loader', 'awesome-typescript-loader'],
     }]
   },
   output: {
     filename: '[name].js',
+    library: '@nativecode/blackbeard.ui',
+    libraryTarget: 'commonjs2',
     path: path.resolve('dist'),
   },
   plugins: [
+    new CheckerPlugin(),
+    new TsConfigPathsPlugin(),
+    /*
     new BundlePlugin({
       beautify: optimize === false,
       compress: optimize,
@@ -54,8 +64,7 @@ const configuration: wb.Configuration = {
       mangle: optimize,
       sourceMap: optimize === false,
     }),
-    new IgnorePlugin(/\/module\//),
-    new IgnorePlugin(/\/node_fetch\//),
+    */
     Html,
     Styles,
   ],
@@ -69,5 +78,3 @@ const configuration: wb.Configuration = {
   },
   target: 'web'
 }
-
-export default configuration
