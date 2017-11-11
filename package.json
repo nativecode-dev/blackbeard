@@ -11,11 +11,11 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "lerna run build",
+    "build": "lerna run build --stream",
     "prebuild": "yarn run clean --quiet && lerna bootstrap",
     "postbuild": "ts-node chest tsconfig-types",
-    "clean": "lerna run clean",
-    "docker": "lerna run docker --scope=@blackbeard/services",
+    "clean": "lerna run clean --stream",
+    "docker": "lerna run docker --stream --scope=@blackbeard/services",
     "test": "lerna run test",
     "pretest": "yarn run build --quiet",
     "startdev": "cd packages/blackbeard-services && yarn startdev --quiet"
