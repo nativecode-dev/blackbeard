@@ -11,12 +11,12 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "lerna bootstrap && ts-node chest tsconfig-types && lerna run build --stream",
+    "build": "set -ex lerna bootstrap && lerna run build --stream && ts-node chest tsconfig-types",
     "clean": "lerna run clean --stream",
-    "docker": "lerna run build --stream --scope=@nativecode/blackbeard-services && lerna run docker --stream --scope=@nativecode/blackbeard-services",
-    "test": "lerna run test",
-    "dockerdev": "lerna run docker --stream --scropt=@nativecode/blackbeard-services && lerna run docker-run --stream --scope=@nativecode/blackbeard-services",
-    "startdev": "cd packages/blackbeard-services && yarn startdev --quiet"
+    "docker": "set -ex lerna run build --stream --scope @nativecode/blackbeard-services && lerna run docker --stream --scope=@nativecode/blackbeard-services",
+    "test": "lerna run test --stream",
+    "dockerdev": "set -ex lerna run docker --stream --scropt=@nativecode/blackbeard-services && lerna run docker-run --stream --scope=@nativecode/blackbeard-services",
+    "startdev": "set -ex lerna run startdev --stream --scope=@nativecode/blackbeard-services"
   },
   "devDependencies": {
     "@types/node": "^8.0.50",
