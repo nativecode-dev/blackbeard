@@ -5,7 +5,7 @@ import * as path from 'path'
 
 import container from '../../inversify.config'
 import { expect } from 'chai'
-import { Logger, LoggerType } from '@nativecode/blackbeard-core'
+import { Logger, LoggerType } from '@nativecode/blackbeard.core'
 import { IRCParser } from '../../modules/IRC'
 
 const artifact = (filename: string): Promise<any> => {

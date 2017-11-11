@@ -1,7 +1,11 @@
-import * as ExtractText from 'extract-text-webpack-plugin'
+import * as TextPlugin from 'extract-text-webpack-plugin'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as wb from 'webpack'
+
+const BundlePlugin = wb.optimize.UglifyJsPlugin
+const Html = new TextPlugin('[name].html')
+const Styles = new TextPlugin('[name].css')
 
 const npm = JSON.parse(fs.readFileSync(path.resolve('package.json')).toString())
 const optimize = process.env.NODE_ENV === 'production'
@@ -21,10 +25,13 @@ const configuration: wb.Configuration = {
   module: {
     rules: [{
       test: /\.html$/,
-      use: ['html-loader'],
+      use: Html.extract({
+        fallback: 'file-loader',
+        use: ['html-loader']
+      }),
     }, {
       test: /\.scss$/,
-      use: ExtractText.extract({
+      use: Styles.extract({
         fallback: 'style-loader',
         use: ['css-loader', 'sass-loader']
       }),
@@ -37,15 +44,17 @@ const configuration: wb.Configuration = {
     filename: '[name].js',
     path: path.resolve('dist'),
   },
-  plugins: [new wb.optimize.UglifyJsPlugin({
-    beautify: optimize === false,
-    compress: optimize,
-    include: /\.js$/,
-    mangle: optimize,
-    sourceMap: optimize === false,
-  }), new ExtractText({
-    filename: 'styles.css',
-  })],
+  plugins: [
+    new BundlePlugin({
+      beautify: optimize === false,
+      compress: optimize,
+      include: /\.js$/,
+      mangle: optimize,
+      sourceMap: optimize === false,
+    }),
+    Html,
+    Styles,
+  ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     modules: [

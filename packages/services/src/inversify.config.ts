@@ -1,11 +1,11 @@
 import 'reflect-metadata'
 
 import * as process from 'process'
-import * as blackbeard from '@nativecode/blackbeard-core'
+import * as blackbeard from '@nativecode/blackbeard.core'
 import * as modules from './modules'
 
 import { Container } from 'inversify'
-import { DefaultLogger } from '@nativecode/blackbeard-core'
+import { DefaultLogger } from '@nativecode/blackbeard.core'
 
 const container = new Container()
 

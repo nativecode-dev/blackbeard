@@ -1,9 +1,9 @@
-export { Radarr, Script, Sonarr } from '@nativecode/blackbeard-core'
+export { Radarr, Script, Sonarr } from '@nativecode/blackbeard.core'
 
 import container from './inversify.config'
 import * as cluster from 'cluster'
 import * as path from 'path'
-import * as core from '@nativecode/blackbeard-core'
+import * as core from '@nativecode/blackbeard.core'
 import * as modules from './modules'
 
 async function main(command: string): Promise<void> {

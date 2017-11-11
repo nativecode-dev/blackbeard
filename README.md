@@ -50,7 +50,7 @@ Comprises the core library which contains various clients and base types.
 - `scripts` contains some basic scripts.
 - `types` contains [TypeScript](https://www.typescriptlang.org) declaration files for libraries with no public type file available.
 
-## blackbeard-services
+## blackbeard.services
 
 Provides a set of services.
 
@@ -68,7 +68,7 @@ Planning Stages
 - `orchestrator` manages service deployments.
 - `transcode` performs media conversions.
 
-## blackbeard-ui
+## blackbeard.ui
 
 Provides a front-end to manage all of the service instances in addition to managing the media library. If you are running an `orchestrator` instance, you can create new instances either via a VM API call such as to an `ESX` or `Hyper-V` server.
 

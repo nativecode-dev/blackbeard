@@ -1,6 +1,6 @@
 import { IRCInterfaces, IRCClientOptions } from 'irc-factory'
 
-import { Logger } from '@nativecode/blackbeard-core'
+import { Logger } from '@nativecode/blackbeard.core'
 import { DataMessage } from './messages'
 import { IRCEntry } from './IRCEntry'
 import { IRCParser } from './IRCParser'

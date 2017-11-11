@@ -2,8 +2,6 @@ import 'reflect-metadata'
 
 import * as process from 'process'
 import * as core from './core'
-import * as acb from './datastore/couchbase'
-import * as datastore from './datastore'
 import * as scripts from './scripts'
 
 import { Container } from 'inversify'
@@ -33,8 +31,5 @@ container.bind<core.Sonarr>(core.Sonarr).toSelf()
 // Scripts
 container.bind<core.Script>(core.ScriptType).to(scripts.UnMonitorCompletedMovies)
 container.bind<core.Script>(core.ScriptType).to(scripts.UnMonitorCompletedSeasons)
-
-container.bind<datastore.DataStore>(datastore.DataStore).toSelf()
-container.bind<acb.CouchbaseFactory>(acb.CouchbaseFactory).toSelf()
 
 export default container

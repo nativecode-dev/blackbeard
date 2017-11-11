@@ -45,7 +45,7 @@
       "@types/vinyl",
       "@types/webpack",
       "@types/yargs",
-      "@nativecode/blackbeard-core"
+      "@nativecode/blackbeard.core"
     ]
   },
   "exclude": [
