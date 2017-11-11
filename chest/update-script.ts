@@ -15,8 +15,12 @@ export abstract class UpdateScript implements Updater {
     return this._name
   }
 
-  public exec(workspace: Workspace): Promise<void> {
-    return this.script(workspace)
+  public exec(rootpath: string): Promise<void> {
+    return Promise.resolve()
+  }
+
+  public workspace(workspace: Workspace): Promise<void> {
+    return Promise.resolve()
   }
 
   protected async npm<NPM>(basepath: string): Promise<NPM> {
@@ -28,6 +32,4 @@ export abstract class UpdateScript implements Updater {
 
     throw Error(`could not find 'package.json' in ${basepath}`)
   }
-
-  protected abstract script(workspace: Workspace): Promise<void>
 }

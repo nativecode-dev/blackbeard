@@ -12,23 +12,21 @@ const prefix = '@types'
  * looking for types from @types.
  **/
 class Script extends UpdateScript {
-  private promise: Promise<void>
-
   constructor() {
     super(ScriptName)
   }
 
-  public script(workspace: Workspace): Promise<void> {
-    return this.promise ? this.promise : new Promise<void>(async (resolve, reject) => {
-      const tsconfigfile = path.join(workspace.root, 'tsconfig.json')
-      const typesdir = path.join(workspace.root, 'node_modules', '@types')
+  public exec(rootpath: string): Promise<void> {
+    return new Promise<void>(async (resolve, reject) => {
+      const tsconfigfile = path.join(rootpath, 'tsconfig.json')
+      const typesdir = path.join(rootpath, 'node_modules', '@types')
 
       if (await files.exists(tsconfigfile) && await files.exists(typesdir)) {
         try {
           const tsconfig = await files.json<any>(tsconfigfile)
           const typedirs = await files.listdirs(typesdir)
           const types = typedirs.map(dir => path.basename(dir))
-          tsconfig.compilerOptions.types = types.map(type => `@types/${type}`) //.concat(['@nativecode/blackbeard.core'])
+          tsconfig.compilerOptions.types = types.map(type => `@types/${type}`)
           await files.save(tsconfigfile, tsconfig)
           this.log.task('updated', tsconfigfile)
           resolve()

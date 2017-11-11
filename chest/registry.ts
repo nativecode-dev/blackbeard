@@ -11,7 +11,8 @@ export interface NPM {
 
 export interface Updater {
   name: string
-  exec(workspace: Workspace): Promise<void>
+  exec(rootpath: string): Promise<void>
+  workspace(workspace: Workspace): Promise<void>
 }
 
 export type Updaters = {

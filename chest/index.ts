@@ -67,11 +67,12 @@ const main = async (...args: string[]): Promise<void> => {
 
   const promises = scripts(command, ...args)
     .map(async script => {
+      await script.exec(process.cwd())
       const ws = await workspaces()
       return ws.map(async workspace => {
         try {
           log.start('script.start', workspace.name, script.name)
-          await script.exec(workspace)
+          await script.workspace(workspace)
           log.done('script.done', workspace.name, script.name)
         } catch (error) {
           log.error('error', workspace.name, script.name, error)

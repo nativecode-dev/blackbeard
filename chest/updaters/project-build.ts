@@ -16,7 +16,7 @@ class Script extends UpdateShell {
     super(ScriptName)
   }
 
-  public async script(workspace: Workspace): Promise<void> {
+  public async workspace(workspace: Workspace): Promise<void> {
     const npm = await files.json<NPM>(workspace.npm)
     log.start('build.start', workspace.name)
 
