@@ -3,7 +3,7 @@
   "license": "MIT",
   "main": "./dist/index.js",
   "name": "@blackbeard/services",
-  "types": "./dist/index.d.ts",
+  "typings": "./dist/index.d.ts",
   "version": "1.0.0",
   "devDependencies": {
     "@types/chai": "^4.0.4",

@@ -13,11 +13,11 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "postbootstrap": "ts-node chest tsconfig-types",
-    "build": "ts-node chest project-build",
+    "build": "lerna run build",
     "prebuild": "yarn run bootstrap",
     "diff": "lerna diff",
     "ls": "lerna ls",
-    "test": "lerna exec --parallel -- yarn run test",
+    "test": "lerna run test",
     "pretest": "yarn run bootstrap",
     "updated": "lerna updated"
   },

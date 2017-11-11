@@ -23,8 +23,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const schedule = require("node-schedule");
 const inversify_1 = require("inversify");
-const blackbeard_1 = require("blackbeard");
-let Scheduler = class Scheduler extends blackbeard_1.HydraModule {
+const core_1 = require("@blackbeard/core");
+let Scheduler = class Scheduler extends core_1.HydraModule {
     constructor(config, files, platform, logger, scripts) {
         super(files, logger, platform);
         this.scripts = scripts;
@@ -67,9 +67,9 @@ let Scheduler = class Scheduler extends blackbeard_1.HydraModule {
 };
 Scheduler = __decorate([
     inversify_1.injectable(),
-    __param(3, inversify_1.inject(blackbeard_1.LoggerType)),
-    __param(4, inversify_1.multiInject(blackbeard_1.ScriptType)),
-    __metadata("design:paramtypes", [typeof (_a = typeof blackbeard_1.Config !== "undefined" && blackbeard_1.Config) === "function" && _a || Object, typeof (_b = typeof blackbeard_1.FileSystem !== "undefined" && blackbeard_1.FileSystem) === "function" && _b || Object, typeof (_c = typeof blackbeard_1.PlatformProvider !== "undefined" && blackbeard_1.PlatformProvider) === "function" && _c || Object, typeof (_d = typeof blackbeard_1.Logger !== "undefined" && blackbeard_1.Logger) === "function" && _d || Object, Array])
+    __param(3, inversify_1.inject(core_1.LoggerType)),
+    __param(4, inversify_1.multiInject(core_1.ScriptType)),
+    __metadata("design:paramtypes", [typeof (_a = typeof core_1.Config !== "undefined" && core_1.Config) === "function" && _a || Object, typeof (_b = typeof core_1.FileSystem !== "undefined" && core_1.FileSystem) === "function" && _b || Object, typeof (_c = typeof core_1.PlatformProvider !== "undefined" && core_1.PlatformProvider) === "function" && _c || Object, typeof (_d = typeof core_1.Logger !== "undefined" && core_1.Logger) === "function" && _d || Object, Array])
 ], Scheduler);
 exports.Scheduler = Scheduler;
 var _a, _b, _c, _d;

@@ -8,8 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const blackbeard_1 = require("blackbeard");
-class Semantic extends blackbeard_1.HydraModule {
+const core_1 = require("@blackbeard/core");
+class Semantic extends core_1.HydraModule {
     get name() {
         return 'semantic';
     }

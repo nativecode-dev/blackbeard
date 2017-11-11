@@ -25,8 +25,8 @@ const irc_factory_1 = require("irc-factory");
 const inversify_1 = require("inversify");
 const IRCEntry_1 = require("./IRCEntry");
 const IRCWatcherClientImpl_1 = require("./IRCWatcherClientImpl");
-const blackbeard_1 = require("blackbeard");
-let IRCWatcher = class IRCWatcher extends blackbeard_1.HydraModule {
+const core_1 = require("@blackbeard/core");
+let IRCWatcher = class IRCWatcher extends core_1.HydraModule {
     constructor(files, platform, radarr, sonarr, vars, logger) {
         super(files, logger, platform);
         this.synchronize = (name, entry, interfaces) => {
@@ -46,7 +46,7 @@ let IRCWatcher = class IRCWatcher extends blackbeard_1.HydraModule {
         const release = {
             downloadUrl: record.url,
             title: record.title,
-            protocol: blackbeard_1.Protocol.Torrent,
+            protocol: core_1.Protocol.Torrent,
             publishDate: new Date().toISOString(),
         };
         switch (category) {
@@ -106,8 +106,8 @@ let IRCWatcher = class IRCWatcher extends blackbeard_1.HydraModule {
 };
 IRCWatcher = __decorate([
     inversify_1.injectable(),
-    __param(5, inversify_1.inject(blackbeard_1.LoggerType)),
-    __metadata("design:paramtypes", [typeof (_a = typeof blackbeard_1.FileSystem !== "undefined" && blackbeard_1.FileSystem) === "function" && _a || Object, typeof (_b = typeof blackbeard_1.PlatformProvider !== "undefined" && blackbeard_1.PlatformProvider) === "function" && _b || Object, typeof (_c = typeof blackbeard_1.Radarr !== "undefined" && blackbeard_1.Radarr) === "function" && _c || Object, typeof (_d = typeof blackbeard_1.Sonarr !== "undefined" && blackbeard_1.Sonarr) === "function" && _d || Object, typeof (_e = typeof blackbeard_1.Variables !== "undefined" && blackbeard_1.Variables) === "function" && _e || Object, typeof (_f = typeof blackbeard_1.Logger !== "undefined" && blackbeard_1.Logger) === "function" && _f || Object])
+    __param(5, inversify_1.inject(core_1.LoggerType)),
+    __metadata("design:paramtypes", [typeof (_a = typeof core_1.FileSystem !== "undefined" && core_1.FileSystem) === "function" && _a || Object, typeof (_b = typeof core_1.PlatformProvider !== "undefined" && core_1.PlatformProvider) === "function" && _b || Object, typeof (_c = typeof core_1.Radarr !== "undefined" && core_1.Radarr) === "function" && _c || Object, typeof (_d = typeof core_1.Sonarr !== "undefined" && core_1.Sonarr) === "function" && _d || Object, typeof (_e = typeof core_1.Variables !== "undefined" && core_1.Variables) === "function" && _e || Object, typeof (_f = typeof core_1.Logger !== "undefined" && core_1.Logger) === "function" && _f || Object])
 ], IRCWatcher);
 exports.IRCWatcher = IRCWatcher;
 var _a, _b, _c, _d, _e, _f;

@@ -36,7 +36,7 @@ container.bind<blackbeard.Module>(blackbeard.ModuleType).to(modules.Scheduler).i
 container.bind<blackbeard.Script>(blackbeard.ScriptType).to(blackbeard.UnMonitorCompletedMovies)
 container.bind<blackbeard.Script>(blackbeard.ScriptType).to(blackbeard.UnMonitorCompletedSeasons)
 
-container.bind<datastore.DataStore>(blackbeard.DataStore).toSelf()
-container.bind<acb.CouchbaseFactory>(blackbeard.CouchbaseFactory).toSelf()
+container.bind<blackbeard.DataStore>(blackbeard.DataStore).toSelf()
+container.bind<blackbeard.CouchbaseFactory>(blackbeard.CouchbaseFactory).toSelf()
 
 export default container

@@ -8,13 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var blackbeard_1 = require("blackbeard");
-exports.Radarr = blackbeard_1.Radarr;
-exports.Script = blackbeard_1.Script;
-exports.Sonarr = blackbeard_1.Sonarr;
+var core_1 = require("@blackbeard/core");
+exports.Radarr = core_1.Radarr;
+exports.Script = core_1.Script;
+exports.Sonarr = core_1.Sonarr;
 const inversify_config_1 = require("./inversify.config");
 const cluster = require("cluster");
-const core = require("blackbeard/src/core");
+const core = require("@blackbeard/core");
 function main(command) {
     return __awaiter(this, void 0, void 0, function* () {
         command = (command || process.env.APPCMD || '').toLowerCase();

@@ -4,7 +4,7 @@
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@blackbeard/core",
-  "types": "./lib/index.d.ts",
+  "typings": "./lib/index.d.ts",
   "version": "1.0.0",
   "devDependencies": {
     "@types/chai": "^4.0.4",

@@ -13,7 +13,7 @@ const fs = require("fs");
 const path = require("path");
 const inversify_config_1 = require("../../inversify.config");
 const chai_1 = require("chai");
-const blackbeard_1 = require("blackbeard");
+const core_1 = require("@blackbeard/core");
 const IRC_1 = require("../../modules/IRC");
 const artifact = (filename) => {
     const filepath = path.join(process.cwd(), 'artifacts', filename);
@@ -39,7 +39,7 @@ describe('when parsing IRC messages', () => {
     it('should parse xspeeds announcements', () => __awaiter(this, void 0, void 0, function* () {
         const announce = yield artifact('xspeeds.announce.json');
         const options = yield artifact('xspeeds.parser.json');
-        const logger = inversify_config_1.default.get(blackbeard_1.LoggerType);
+        const logger = inversify_config_1.default.get(core_1.LoggerType);
         const parser = new IRC_1.IRCParser(logger, options);
         const record = parser.parse(announce.message.message);
         chai_1.expect(record.category).to.equal('TV-HD');
