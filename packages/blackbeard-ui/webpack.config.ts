@@ -1,3 +1,4 @@
+import * as ExtractText from 'extract-text-webpack-plugin'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as wb from 'webpack'
@@ -23,7 +24,10 @@ const configuration: wb.Configuration = {
       use: ['html-loader'],
     }, {
       test: /\.scss$/,
-      use: ['style-loader', 'css-loader', 'sass-loader'],
+      use: ExtractText.extract({
+        fallback: 'style-loader',
+        use: ['css-loader', 'sass-loader']
+      }),
     }, {
       test: /\.tsx?$/,
       use: ['babel-loader', 'ts-loader'],
@@ -39,6 +43,8 @@ const configuration: wb.Configuration = {
     include: /\.js$/,
     mangle: optimize,
     sourceMap: optimize === false,
+  }), new ExtractText({
+    filename: 'styles.css',
   })],
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],

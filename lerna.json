@@ -1,4 +1,9 @@
 {
+  "command": {
+    "publish": {
+      "allowBranch": "master"
+    }
+  },
   "npmClient": "yarn",
   "useWorkspaces": true,
   "lerna": "2.5.1",

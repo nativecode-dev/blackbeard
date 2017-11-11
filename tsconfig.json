@@ -15,6 +15,7 @@
       "@types/chai",
       "@types/couchbase",
       "@types/debug",
+      "@types/extract-text-webpack-plugin",
       "@types/glob",
       "@types/gulp",
       "@types/gulp-copy",
