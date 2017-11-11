@@ -1,5 +1,5 @@
 import { strip } from 'irc-formatting'
-import { Logger } from '@blackbeard/core'
+import { Logger } from '@nativecode/blackbeard-core'
 import { IRCParserOptions, IRCParserSecrets } from './IRCEntry'
 
 export class IRCParser {

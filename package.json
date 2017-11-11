@@ -15,7 +15,10 @@
     "prebuild": "yarn run clean --quiet && lerna bootstrap",
     "postbuild": "ts-node chest tsconfig-types",
     "clean": "lerna run clean --stream",
-    "docker": "lerna run docker --stream --scope=@blackbeard/services",
+    "docker": "lerna run docker --stream --scope=@nativecode/blackbeard-services",
+    "predocker": "lerna run build --stream --scope=@nativecode/blackbeard-services",
+    "dockerdev": "lerna run docker-run --stream --scope=@nativecode/blackbeard-services",
+    "predockerdev": "lerna run docker --stream --scropt=@nativecode/blackbeard-services",
     "test": "lerna run test",
     "pretest": "yarn run build --quiet",
     "startdev": "cd packages/blackbeard-services && yarn startdev --quiet"

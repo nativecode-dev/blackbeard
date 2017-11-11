@@ -1,4 +1,4 @@
-# @blackbeard/services
+# @nativecode/blackbeard/services
 
 # License
 © 2017 NativeCode Development <support@nativecode.com>

@@ -34,9 +34,9 @@ At the heart of how `blackbeard` achieves distributedness is [Hydra](https://git
 
 Currently, the project is split into three projects:
 
-- `@blackbeard/core`
-- `@blackbeard/services`
-- `@blackbeard/ui`
+- `@nativecode/blackbeard/core`
+- `@nativecode/blackbeard/services`
+- `@nativecode/blackbeard/ui`
 
 ## blackbeard
 

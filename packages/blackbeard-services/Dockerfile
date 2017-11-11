@@ -1,4 +1,4 @@
-FROM node:6-alpine
+FROM node:8-alpine
 LABEL AUTHOR "support@nativecode.com"
 
 ARG APPCMD="scheduler"
@@ -33,7 +33,6 @@ COPY dist ${APPDIR}/
 COPY docker-startup.sh ${APPDIR}/
 COPY nas-*.json ${APPDIR}/
 COPY package.json ${APPDIR}/
-COPY yarn.lock ${APPDIR}/
 
 RUN set -ex \
   # setup

@@ -2,7 +2,7 @@
   "author": "support@nativecode.com",
   "license": "MIT",
   "main": "./dist/index.js",
-  "name": "@blackbeard/services",
+  "name": "@naivecode/blackbeard-services",
   "private": true,
   "typings": "./dist/index.d.ts",
   "version": "1.0.0",
@@ -54,7 +54,7 @@
     "typescript": "^2.5.3"
   },
   "dependencies": {
-    "@blackbeard/core": "^1.0.0",
+    "@nativecode/blackbeard-core": "^1.0.0",
     "@nofrills/types": "^0.9.0",
     "async-throttle": "^1.1.0",
     "common-locations": "^3.0.2",
@@ -94,7 +94,7 @@
   "scripts": {
     "build": "gulp build",
     "clean": "gulp clean",
-    "docker": "gulp docker",
+    "docker": "sh ./docker-clean.sh && sh ./docker-build.sh",
     "test": "cross-env DEBUG= LCB_LOGLEVEL=5 NODE_ENV=testing NODE_PATH=. gulp test",
     "start": "clear && node index.js",
     "startdev": "clear && cross-env APPCMD=scheduler DEBUG=nativecode:blackbeard:* DOCKER_RUN=true ts-node src/index.ts",

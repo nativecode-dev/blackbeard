@@ -2,7 +2,7 @@
   "author": "support@nativecode.com",
   "license": "MIT",
   "main": "index.js",
-  "name": "@blackbeard/ui",
+  "name": "@nativecode/blackbeard-ui",
   "private": true,
   "version": "1.0.0",
   "devDependencies": {
