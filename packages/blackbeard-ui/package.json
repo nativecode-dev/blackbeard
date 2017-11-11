@@ -3,6 +3,7 @@
   "license": "MIT",
   "main": "index.js",
   "name": "@blackbeard/ui",
+  "private": true,
   "version": "1.0.0",
   "devDependencies": {
     "@types/react": "^16.0.21",

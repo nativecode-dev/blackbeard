@@ -4,6 +4,7 @@
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@blackbeard/core",
+  "private": false,
   "typings": "./lib/index.d.ts",
   "version": "1.0.0",
   "devDependencies": {
