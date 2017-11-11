@@ -4,7 +4,7 @@
   "main": "index.js",
   "name": "@nativecode/blackbeard-ui",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.1-1.0.0-alpha-1.0",
   "devDependencies": {
     "@types/react": "^16.0.21",
     "@types/react-dom": "^16.0.2",
