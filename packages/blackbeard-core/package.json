@@ -6,7 +6,7 @@
   "name": "@nativecode/blackbeard-core",
   "private": false,
   "typings": "./lib/index.d.ts",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "devDependencies": {
     "@types/chai": "^4.0.4",
     "@types/couchbase": "^2.1.30",
