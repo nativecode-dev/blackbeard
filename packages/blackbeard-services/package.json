@@ -2,7 +2,7 @@
   "author": "support@nativecode.com",
   "license": "MIT",
   "main": "./dist/index.js",
-  "name": "@naivecode/blackbeard-services",
+  "name": "@nativecode/blackbeard-services",
   "private": true,
   "typings": "./dist/index.d.ts",
   "version": "1.0.0-alpha.3",
