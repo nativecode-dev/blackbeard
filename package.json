@@ -15,6 +15,7 @@
     "postbootstrap": "ts-node chest tsconfig-types",
     "build": "lerna run build",
     "prebuild": "yarn run bootstrap",
+    "clean": "lerna run clean",
     "diff": "lerna diff",
     "ls": "lerna ls",
     "test": "lerna run test",

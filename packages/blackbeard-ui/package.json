@@ -34,7 +34,7 @@
     "build": "webpack",
     "prebuild": "yarn run clean",
     "clean": "rimraf dist",
-    "test": "echo No Available Tests"
+    "test": "echo 'No Available Tests'"
   },
   "dependencies": {
     "react": "^16.0.0",
