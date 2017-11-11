@@ -11,17 +11,13 @@
     "packages/*"
   ],
   "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "postbootstrap": "ts-node chest tsconfig-types",
     "build": "lerna run build",
-    "prebuild": "yarn run bootstrap",
+    "prebuild": "yarn run clean --quiet && lerna bootstrap",
+    "postbuild": "ts-node chest tsconfig-types",
     "clean": "lerna run clean",
-    "diff": "lerna diff",
-    "ls": "lerna ls",
     "test": "lerna run test",
-    "pretest": "yarn run bootstrap",
-    "updated": "lerna updated",
-    "startdev": "cd packages/blackbeard-services && yarn startdev"
+    "pretest": "yarn run build --quiet",
+    "startdev": "cd packages/blackbeard-services && yarn startdev --quiet"
   },
   "devDependencies": {
     "@types/node": "^8.0.50",

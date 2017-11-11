@@ -95,7 +95,7 @@ export class GulpFile {
       .pipe(this.plugins.tslint.report(report))
   }
 
-  @Task('test', ['build'])
+  @Task()
   public test(): NodeJS.ReadWriteStream {
     return this.src('test', 'src/**/*.spec.ts')
       .pipe(this.plugins.mocha({

@@ -3,6 +3,7 @@ import * as path from 'path'
 import * as wb from 'webpack'
 
 const npm = JSON.parse(fs.readFileSync(path.resolve('package.json')).toString())
+const optimize = process.env.NODE_ENV === 'production'
 
 const configuration: wb.Configuration = {
   context: path.resolve('src'),
@@ -33,8 +34,11 @@ const configuration: wb.Configuration = {
     path: path.resolve('dist'),
   },
   plugins: [new wb.optimize.UglifyJsPlugin({
-    sourceMap: true,
+    beautify: optimize === false,
+    compress: optimize,
     include: /\.js$/,
+    mangle: optimize,
+    sourceMap: optimize === false,
   })],
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
