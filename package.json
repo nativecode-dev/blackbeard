@@ -15,6 +15,7 @@
     "prebuild": "yarn run clean --quiet && lerna bootstrap",
     "postbuild": "ts-node chest tsconfig-types",
     "clean": "lerna run clean",
+    "docker": "lerna run docker --scope=@blackbeard/services",
     "test": "lerna run test",
     "pretest": "yarn run build --quiet",
     "startdev": "cd packages/blackbeard-services && yarn startdev --quiet"

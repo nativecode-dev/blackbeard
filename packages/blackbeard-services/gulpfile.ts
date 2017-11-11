@@ -108,8 +108,7 @@ export class GulpFile {
   }
 
   private run(filename: string): NodeJS.ReadWriteStream {
-    return this.src(`bash:${filename}`, filename)
-      .pipe(this.plugins.shell('bash <%= file.path %>'))
+    return this.src(`bash:${filename}`, filename).pipe(this.plugins.shell('sh <%= file.path %>'))
   }
 
   private src(title: string, sources: string | string[]): NodeJS.ReadWriteStream {
