@@ -13,8 +13,8 @@
   "scripts": {
     "build": "lerna run build --stream",
     "prebuild": "yarn run clean --quiet && lerna bootstrap",
-    "postbuild": "ts-node chest tsconfig-types",
     "clean": "lerna run clean --stream",
+    "postclean": "ts-node chest tsconfig-types",
     "docker": "lerna run docker --stream --scope=@nativecode/blackbeard-services",
     "predocker": "lerna run build --stream --scope=@nativecode/blackbeard-services",
     "dockerdev": "lerna run docker-run --stream --scope=@nativecode/blackbeard-services",
