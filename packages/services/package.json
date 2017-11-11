@@ -54,8 +54,8 @@
     "typescript": "^2.5.3"
   },
   "dependencies": {
-    "@nativecode/blackbeard.core": "^1.0.0-alpha.3",
-    "@nativecode/blackbeard.core.node": "^1.0.0-alpha.3",
+    "@nativecode/blackbeard.core": "^1.0.0-alpha",
+    "@nativecode/blackbeard.core.node": "^1.0.0-alpha",
     "@nofrills/types": "^0.9.0",
     "async-throttle": "^1.1.0",
     "common-locations": "^3.0.2",
