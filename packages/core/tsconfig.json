@@ -10,11 +10,11 @@
   },
   "exclude": [
     "node_modules",
-    "**/*.spec.ts",
-    "**/*.spec.tsx"
+    "src/**/*.spec.ts",
+    "src/**/*.spec.tsx"
   ],
   "include": [
-    "**/*.ts",
-    "**/*.tsx"
+    "src/**/*.ts",
+    "src/**/*.tsx"
   ]
 }
