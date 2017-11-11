@@ -1,4 +1,6 @@
 export * from './enums'
+export * from './radarr'
+export * from './sonarr'
 
 export * from './Image'
 export * from './MediaInfo'

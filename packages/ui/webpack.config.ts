@@ -4,6 +4,8 @@ import * as path from 'path'
 import * as wb from 'webpack'
 
 const BundlePlugin = wb.optimize.UglifyJsPlugin
+const IgnorePlugin = wb.IgnorePlugin
+
 const Html = new TextPlugin('[name].html')
 const Styles = new TextPlugin('[name].css')
 
@@ -52,6 +54,8 @@ const configuration: wb.Configuration = {
       mangle: optimize,
       sourceMap: optimize === false,
     }),
+    new IgnorePlugin(/\/module\//),
+    new IgnorePlugin(/\/node_fetch\//),
     Html,
     Styles,
   ],

@@ -1,7 +1,8 @@
 import 'reflect-metadata'
 
 import * as process from 'process'
-import * as blackbeard from '@nativecode/blackbeard.core'
+import * as core from '@nativecode/blackbeard.core'
+import * as server from '@nativecode/blackbeard.core.server'
 import * as modules from './modules'
 
 import { Container } from 'inversify'
@@ -12,31 +13,31 @@ const container = new Container()
 container.bind<Container>(Container).toConstantValue(container)
 
 // Core
-container.bind<blackbeard.Config>(blackbeard.Config).toSelf().inSingletonScope()
-container.bind<blackbeard.FileSystem>(blackbeard.FileSystem).toSelf().inSingletonScope()
-container.bind<blackbeard.PlatformProvider>(blackbeard.PlatformProvider).toSelf().inSingletonScope()
-container.bind<blackbeard.Variables>(blackbeard.Variables).toSelf().inSingletonScope()
+container.bind<server.Config>(server.Config).toSelf().inSingletonScope()
+container.bind<server.FileSystem>(server.FileSystem).toSelf().inSingletonScope()
+container.bind<server.PlatformProvider>(server.PlatformProvider).toSelf().inSingletonScope()
+container.bind<server.Variables>(server.Variables).toSelf().inSingletonScope()
 
 // Logging
-container.bind<blackbeard.Logger>(blackbeard.LoggerType).to(DefaultLogger).inSingletonScope()
-container.bind<blackbeard.LoggerNamespace>(blackbeard.LoggerNamespace).toSelf()
+container.bind<core.Logger>(core.LoggerType).to(DefaultLogger).inSingletonScope()
+container.bind<core.LoggerNamespace>(core.LoggerNamespace).toSelf()
 
 // Logging targets
-container.bind<blackbeard.LoggerTarget>(blackbeard.LoggerTargetType).to(blackbeard.DebugLoggerTarget)
+container.bind<core.LoggerTarget>(core.LoggerTargetType).to(server.DebugLoggerTarget)
 
 // Clients
-container.bind<blackbeard.Radarr>(blackbeard.Radarr).toSelf()
-container.bind<blackbeard.Sonarr>(blackbeard.Sonarr).toSelf()
+container.bind<core.Radarr>(core.Radarr).toSelf()
+container.bind<core.Sonarr>(core.Sonarr).toSelf()
 
 // Modules
-container.bind<blackbeard.Module>(blackbeard.ModuleType).to(modules.IRCWatcher).inSingletonScope()
-container.bind<blackbeard.Module>(blackbeard.ModuleType).to(modules.Scheduler).inSingletonScope()
+container.bind<server.Module>(server.ModuleType).to(modules.IRCWatcher).inSingletonScope()
+container.bind<server.Module>(server.ModuleType).to(modules.Scheduler).inSingletonScope()
 
 // Scripts
-container.bind<blackbeard.Script>(blackbeard.ScriptType).to(blackbeard.UnMonitorCompletedMovies)
-container.bind<blackbeard.Script>(blackbeard.ScriptType).to(blackbeard.UnMonitorCompletedSeasons)
+container.bind<server.Script>(server.ScriptType).to(server.UnMonitorCompletedMovies)
+container.bind<server.Script>(server.ScriptType).to(server.UnMonitorCompletedSeasons)
 
-container.bind<blackbeard.DataStore>(blackbeard.DataStore).toSelf()
-container.bind<blackbeard.CouchbaseFactory>(blackbeard.CouchbaseFactory).toSelf()
+container.bind<server.DataStore>(server.DataStore).toSelf()
+container.bind<server.CouchbaseFactory>(server.CouchbaseFactory).toSelf()
 
 export default container

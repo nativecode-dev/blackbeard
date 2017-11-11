@@ -1,5 +1,4 @@
-export * from './targets'
-
+export * from './BaseLoggerTarget'
 export * from './DefaultLogger'
 export * from './Logger'
 export * from './LoggerNamespace'

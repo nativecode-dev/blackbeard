@@ -1,15 +1,15 @@
-export { Radarr, Script, Sonarr } from '@nativecode/blackbeard.core'
-
 import container from './inversify.config'
+
 import * as cluster from 'cluster'
 import * as path from 'path'
 import * as core from '@nativecode/blackbeard.core'
+import * as server from '@nativecode/blackbeard.core.server'
 import * as modules from './modules'
 
 async function main(command: string): Promise<void> {
   command = (command || process.env.APPCMD || '').toLowerCase()
   console.log('running', command)
-  const mods = container.getAll<core.Module>(core.ModuleType)
+  const mods = container.getAll<server.Module>(server.ModuleType)
   const mod = mods.find(m => m.name === command)
   if (mod) {
     await mod.start()

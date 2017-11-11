@@ -11,20 +11,23 @@ import { IRCWatcherClientImpl } from './IRCWatcherClientImpl'
 import { IRCParserRecord } from './IRCParser'
 
 import {
-  Converters,
-  FileSystem,
-  HydraModule,
-  HydraModuleConfig,
   Logger,
   LoggerType,
-  PlatformProvider,
   Protocol,
   ReleaseInfo,
   Reject,
   Radarr,
   Sonarr,
-  Variables
 } from '@nativecode/blackbeard.core'
+
+import {
+  Converters,
+  FileSystem,
+  HydraModule,
+  HydraModuleConfig,
+  PlatformProvider,
+  Variables
+} from '@nativecode/blackbeard.core.server'
 
 interface IRCFactoryClients {
   [key: string]: IRCWatcherClient

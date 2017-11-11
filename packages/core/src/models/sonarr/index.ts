@@ -1,4 +1,4 @@
-export * from '../index'
+export * from '../enums'
 
 export * from './Episode'
 export * from './EpisodeFile'

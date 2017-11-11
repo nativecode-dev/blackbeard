@@ -1,4 +1,4 @@
-import { HydraModuleConfig } from '@nativecode/blackbeard.core'
+import { HydraModuleConfig } from '@nativecode/blackbeard.core.server'
 import { IRCEntries } from './IRCEntry'
 
 export interface IRCWatcherConfig {

@@ -4,18 +4,18 @@ import * as fetch from 'node-fetch'
 import { inject, injectable } from 'inversify'
 import { Logger, LoggerType } from '../logging'
 import { Client } from './Client'
+import { Environment } from '../Environment'
 import { ServiceUri } from '../ServiceUri'
-import { Variables } from '../services'
-import { Episode, QualityProfile, ReleaseInfo, Series, SeriesSeason } from '../../models/sonarr'
+import { Episode, QualityProfile, ReleaseInfo, Series, SeriesSeason } from '../../models'
 
 @injectable()
 export class Sonarr extends Client {
   private readonly initialized: Promise<ServiceUri>
-  private readonly vars: Variables
+  private readonly env: Environment
 
-  constructor( @inject(LoggerType) logger: Logger, vars: Variables) {
+  constructor( @inject(LoggerType) logger: Logger, env: Environment) {
     super(logger)
-    this.vars = vars
+    this.env = env
 
     this.initialized = this.init()
   }
@@ -92,8 +92,8 @@ export class Sonarr extends Client {
   }
 
   private async init(): Promise<ServiceUri> {
-    const key = await this.vars.get('SONARR_APIKEY')
-    const url = await this.vars.get('SONARR_ENDPOINT', 'http://localhost:8989/api')
+    const key = await this.env.var('SONARR_APIKEY')
+    const url = await this.env.var('SONARR_ENDPOINT', 'http://localhost:8989/api')
 
     this.log.trace(`set sonarr to ${url}`)
     return { key, url }

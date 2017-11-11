@@ -42,7 +42,6 @@
     "gulp-tslint": "^8.1.2",
     "gulp-typescript": "^3.2.3",
     "gulpclass": "^0.1.2",
-    "hydra-cli": "^1.4.8",
     "merge-stream": "^1.0.1",
     "mocha": "^4.0.1",
     "nyc": "^11.3.0",
@@ -54,17 +53,9 @@
   },
   "dependencies": {
     "@nofrills/types": "^0.9.0",
-    "async-throttle": "^1.1.0",
-    "common-locations": "^3.0.2",
-    "debug": "^3.1.0",
-    "hydra": "^1.4.27",
     "inversify": "^4.3.0",
-    "lodash.merge": "^4.6.0",
-    "module": "^1.2.5",
     "node-fetch": "^1.7.3",
-    "node-schedule": "^1.2.5",
-    "reflect-metadata": "^0.1.10",
-    "yargs": "^10.0.3"
+    "reflect-metadata": "^0.1.10"
   },
   "nyc": {
     "all": true,

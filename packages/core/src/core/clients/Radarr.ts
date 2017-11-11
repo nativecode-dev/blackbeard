@@ -4,18 +4,18 @@ import * as fetch from 'node-fetch'
 import { inject, injectable } from 'inversify'
 import { Logger, LoggerType } from '../logging'
 import { Client } from './Client'
+import { Environment } from '../Environment'
 import { ServiceUri } from '../ServiceUri'
-import { Variables } from '../services'
-import { Movie, MovieQuality, ReleaseInfo } from '../../models/radarr'
+import { Movie, MovieQuality, ReleaseInfo } from '../../models'
 
 @injectable()
 export class Radarr extends Client implements Radarr {
   private readonly initialized: Promise<ServiceUri>
-  private readonly vars: Variables
+  private readonly env: Environment
 
-  constructor( @inject(LoggerType) logger: Logger, vars: Variables) {
+  constructor( @inject(LoggerType) logger: Logger, env: Environment) {
     super(logger)
-    this.vars = vars
+    this.env = env
     this.initialized = this.init()
   }
 
@@ -73,8 +73,8 @@ export class Radarr extends Client implements Radarr {
   }
 
   private async init(): Promise<ServiceUri> {
-    const key = await this.vars.get('RADARR_APIKEY')
-    const url = await this.vars.get('RADARR_ENDPOINT', 'http://localhost:7878/api')
+    const key = await this.env.var('RADARR_APIKEY')
+    const url = await this.env.var('RADARR_ENDPOINT', 'http://localhost:7878/api')
 
     this.log.trace(`set radarr to ${url}`)
     return { key, url }

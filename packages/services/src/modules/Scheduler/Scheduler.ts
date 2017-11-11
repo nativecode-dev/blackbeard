@@ -4,17 +4,21 @@ import * as schedule from 'node-schedule'
 import { inject, injectable, multiInject } from 'inversify'
 
 import {
+  Logger,
+  LoggerType,
+  Reject,
+} from '@nativecode/blackbeard.core'
+
+import {
   Config,
   FileSystem,
   HydraModule,
   HydraModuleConfig,
-  Logger, LoggerType,
   Module,
   PlatformProvider,
-  Reject,
   Script,
   ScriptType
-} from '@nativecode/blackbeard.core'
+} from '@nativecode/blackbeard.core.server'
 
 interface JobConfig {
   schedule: schedule.RecurrenceRule | schedule.RecurrenceSpecDateRange | schedule.RecurrenceSpecObjLit
