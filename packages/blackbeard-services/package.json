@@ -5,7 +5,7 @@
   "name": "@naivecode/blackbeard-services",
   "private": true,
   "typings": "./dist/index.d.ts",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "devDependencies": {
     "@types/chai": "^4.0.4",
     "@types/couchbase": "^2.1.30",
