@@ -2,7 +2,7 @@ import 'reflect-metadata'
 
 import * as process from 'process'
 import * as core from '@nativecode/blackbeard.core'
-import * as server from '@nativecode/blackbeard.core.server'
+import * as server from '@nativecode/blackbeard.core.node'
 import * as modules from './modules'
 
 import { Container } from 'inversify'

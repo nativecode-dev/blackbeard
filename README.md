@@ -38,17 +38,21 @@ Currently, the project is split into three projects:
 - `@nativecode/blackbeard/services`
 - `@nativecode/blackbeard/ui`
 
-## blackbeard
+## blackbeard.core
 
-Comprises the core library which contains various clients and base types.
+Comprises the core library which contains various base types and models.
 
 - `core` contains core application services such as logging.
+- `models` contains model definitions.
+
+## blackbeard.core.node
+
+Provides implementations and features focused on the node runtime.
+
 - `datatore` contains data access clients such as to `couchbase`.
 - `hydra` contains classes that encapsulates [Hydra](https://github.com/flywheelsports/hydra) functionality.
-- `models` contains model definitions.
 - `modules` contains modules that can be run for a particular instance.
 - `scripts` contains some basic scripts.
-- `types` contains [TypeScript](https://www.typescriptlang.org) declaration files for libraries with no public type file available.
 
 ## blackbeard.services
 
@@ -57,7 +61,7 @@ Provides a set of services.
 Production Ready
 
 - `ircwatch` watches an IRC announce channel for specific links to push to `Radarr` or `Sonarr`.
-- `scheduler` runs scheduled jobs.
+- `scheduler` runs pre-defined scripts on a given schedule.
 
 Work In Progess
 
@@ -79,7 +83,7 @@ Provides a front-end to manage all of the service instances in addition to manag
 3. Run `yarn install` to the required root packages.
 4. Run `yarn build` to build the projects.
 
-Please see the [lerna](https://lernajs.io) [documentation](https://github.com/lerna/lerna/#commands) for additional commands.
+> Please see the [lerna](https://lernajs.io) [documentation](https://github.com/lerna/lerna/#commands) for additional commands.
 
 # Contributions
 

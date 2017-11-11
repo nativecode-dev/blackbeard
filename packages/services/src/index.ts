@@ -3,7 +3,7 @@ import container from './inversify.config'
 import * as cluster from 'cluster'
 import * as path from 'path'
 import * as core from '@nativecode/blackbeard.core'
-import * as server from '@nativecode/blackbeard.core.server'
+import * as server from '@nativecode/blackbeard.core.node'
 import * as modules from './modules'
 
 async function main(command: string): Promise<void> {

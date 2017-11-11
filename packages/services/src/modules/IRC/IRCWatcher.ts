@@ -27,7 +27,7 @@ import {
   HydraModuleConfig,
   PlatformProvider,
   Variables
-} from '@nativecode/blackbeard.core.server'
+} from '@nativecode/blackbeard.core.node'
 
 interface IRCFactoryClients {
   [key: string]: IRCWatcherClient

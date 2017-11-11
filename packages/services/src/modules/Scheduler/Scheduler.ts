@@ -18,7 +18,7 @@ import {
   PlatformProvider,
   Script,
   ScriptType
-} from '@nativecode/blackbeard.core.server'
+} from '@nativecode/blackbeard.core.node'
 
 interface JobConfig {
   schedule: schedule.RecurrenceRule | schedule.RecurrenceSpecDateRange | schedule.RecurrenceSpecObjLit

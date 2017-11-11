@@ -44,8 +44,7 @@
       "@types/uglify-js",
       "@types/vinyl",
       "@types/webpack",
-      "@types/yargs",
-      "@nativecode/blackbeard.core"
+      "@types/yargs"
     ]
   },
   "exclude": [
