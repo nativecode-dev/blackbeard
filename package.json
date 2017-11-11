@@ -19,7 +19,8 @@
     "ls": "lerna ls",
     "test": "lerna run test",
     "pretest": "yarn run bootstrap",
-    "updated": "lerna updated"
+    "updated": "lerna updated",
+    "startdev": "cd packages/blackbeard-services && yarn startdev"
   },
   "devDependencies": {
     "@types/node": "^8.0.50",
