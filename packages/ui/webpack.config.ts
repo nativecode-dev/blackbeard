@@ -1,3 +1,5 @@
+import * as HtmlWebpackPlugin from 'html-webpack-plugin'
+
 import * as TextPlugin from 'extract-text-webpack-plugin'
 import * as fs from 'fs'
 import * as path from 'path'
@@ -8,7 +10,6 @@ import { CheckerPlugin, TsConfigPathsPlugin } from 'awesome-typescript-loader'
 const BundlePlugin = wb.optimize.UglifyJsPlugin
 const IgnorePlugin = wb.IgnorePlugin
 
-const Html = new TextPlugin('[name].html')
 const Styles = new TextPlugin('[name].css')
 
 const npm = JSON.parse(fs.readFileSync(path.resolve('package.json')).toString())
@@ -31,12 +32,6 @@ export default {
   },
   module: {
     rules: [{
-      test: /\.html$/,
-      use: Html.extract({
-        fallback: 'file-loader',
-        use: ['html-loader']
-      }),
-    }, {
       test: /\.scss$/,
       use: Styles.extract({
         fallback: 'style-loader',
@@ -56,6 +51,10 @@ export default {
   plugins: [
     new CheckerPlugin(),
     new TsConfigPathsPlugin(),
+    new HtmlWebpackPlugin({
+      template: 'App.ejs',
+      title: 'blackbeard',
+    }),
     /*
     new BundlePlugin({
       beautify: optimize === false,
@@ -65,7 +64,6 @@ export default {
       sourceMap: optimize === false,
     }),
     */
-    Html,
     Styles,
   ],
   resolve: {

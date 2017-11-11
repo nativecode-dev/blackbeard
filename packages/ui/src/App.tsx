@@ -1,4 +1,3 @@
-import './app.html'
 import './styles/core.scss'
 
 import React from 'react'
