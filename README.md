@@ -10,7 +10,7 @@ We do plan in the future to release something more consumer-friendly. However, t
 
 # Why
 
-You might be asking yourself, "Do I really need another media manageent application?" and the honest answer is: you probably don't. `blackbeard` was born out of a personal need to manage my own media collection, which has become unwieldly over the years.
+You might be asking yourself, "Do I really need another media management application?" and the honest answer is: you probably don't. `blackbeard` was born out of a personal need to manage my own media collection, which has become unwieldly over the years.
 
 So what are some of the existing solutions out there? A lot of people use either [SickBeard](http://sickbeard.com) or the [Radarr](https://radarr.video)/[CouchPotato](https://couchpota.to) and [Sonarr](https://sonarr.tv)) combination. These are great tools and `blackbeard` is not meant to replace them. Rather, managing both seperately is a pain. There's also [Ombi](https://www.ombi.io), but I find it's still not entirely what I want. You see, I also need videos converted as well as a desire to crowdsource some sort of download verification system.
 
