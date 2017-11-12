@@ -28,15 +28,18 @@ ENV NODE_ENV=production
 
 WORKDIR ${APPDIR}
 
-COPY .env.version DOCKER_VERSION
-COPY dist ${APPDIR}/
+# Core files
+COPY .env.sh ${APPDIR}/env.sh
 COPY docker-startup.sh ${APPDIR}/docker-startup.sh
-COPY nas-*.json ${APPDIR}/
 COPY package.json ${APPDIR}/package.json
 COPY LICENSE ${APPDIR}/LICENSE
+# Bulk copy
+COPY dist ${APPDIR}/
+COPY nas-*.json ${APPDIR}/
 COPY README-*.md ${APPDIR}/
 
 RUN set -ex \
+  && source ./env.sh \
   # setup
   && touch ~/.profile \
   # upgrade and install packages
@@ -54,6 +57,8 @@ RUN set -ex \
   # finalize
   && mkdir -p ${APPDIR}/config \
   && chmod +x docker-startup.sh \
+  && echo $DOCKER_VERSION > /app/VERSION \
+  && rm ./env.sh \
   ;
 
 VOLUME ${APPDIR}/config
