@@ -26,6 +26,6 @@ if [ $BRANCH = "master" or $TRAVIS_BRANCH = "master" ]; then
 
 else
 
-  echo "Current branch ($BRANCH) is not master. Refusing to push docker images."
+  echo "Current branch ($BRANCH/$TRAVIS_BRANCH) is not master. Refusing to push docker images."
 
 fi
