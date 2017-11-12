@@ -4,7 +4,6 @@
   "main": "./dist/index.js",
   "name": "@nativecode/blackbeard.services",
   "private": true,
-  "typings": "./dist/index.d.ts",
   "version": "1.0.0-alpha",
   "devDependencies": {
     "@types/chai": "^4.0.4",
@@ -51,6 +50,7 @@
     "tsconfig-paths": "^2.3.0",
     "tslint": "^5.8.0",
     "tslint-config-standard": "^6.0.1",
+    "tsunit.external": "^2.0.11",
     "typescript": "^2.5.3"
   },
   "dependencies": {

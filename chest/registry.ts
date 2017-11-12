@@ -3,10 +3,12 @@ export interface Dictionary {
 }
 
 export interface NPM {
-  author: string | string[] | Dictionary
-  dependencies: Dictionary
-  devDependencies: Dictionary
-  scripts: Dictionary
+  author?: string | string[] | Dictionary
+  dependencies?: Dictionary
+  devDependencies?: Dictionary
+  name: string
+  scripts?: Dictionary
+  typings?: string
 }
 
 export interface Updater {

@@ -24,6 +24,7 @@
     "@types/mocha": "^2.2.44",
     "@types/node": "^8.0.47",
     "@types/node-fetch": "^1.6.7",
+    "@types/sinon": "^2.3.7",
     "chai": "^4.1.2",
     "coveralls": "^3.0.0",
     "cross-env": "^5.1.0",
@@ -41,10 +42,12 @@
     "merge-stream": "^1.0.1",
     "mocha": "^4.0.1",
     "nyc": "^11.3.0",
+    "sinon": "^4.1.2",
     "ts-node": "^3.3.0",
     "tsconfig-paths": "^2.3.0",
     "tslint": "^5.8.0",
     "tslint-config-standard": "^6.0.1",
+    "tsunit.external": "^2.0.11",
     "typescript": "^2.5.3"
   },
   "dependencies": {
