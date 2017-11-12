@@ -18,9 +18,9 @@ const optimize = process.env.NODE_ENV === 'production'
 export default {
   context: path.resolve('src'),
   devServer: {
-    historyApiFallback: true,
-    inline: true,
-    port: 3000,
+    contentBase: path.resolve('dist'),
+    compress: true,
+    port: 9000,
   },
   devtool: 'source-map',
   entry: {

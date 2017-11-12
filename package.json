@@ -14,6 +14,7 @@
     "clean": "lerna run clean",
     "docker": "lerna run build --scope @beard/services && lerna run docker --scope=@beard/services",
     "test": "lerna run test",
+    "devserver": "lerna run devserver --scope=@beard/ui",
     "dockerdev": "lerna run docker --scope=@beard/services && lerna run docker-run --scope=@beard/services",
     "startdev": "lerna run startdev --scope=@beard/services",
     "update-deps": "ts-node chest tsconfig-types"
