@@ -7,4 +7,4 @@ node_js:
 os:
   - linux
 after_success:
-  - ./packages/services/docker-push.sh
+  - cd packages/services && ./docker-push.sh
