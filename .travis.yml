@@ -1,0 +1,10 @@
+cache: yarn
+language: node_js
+node_js:
+  - node
+  - '8'
+  - '6'
+os:
+  - linux
+after_success:
+  - ./packages/services/docker-push.sh
