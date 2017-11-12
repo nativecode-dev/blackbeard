@@ -34,7 +34,7 @@ COPY docker-startup.sh ${APPDIR}/docker-startup.sh
 COPY nas-*.json ${APPDIR}/
 COPY package.json ${APPDIR}/package.json
 COPY LICENSE ${APPDIR}/LICENSE
-COPY README-${APPCMD}.md ${APPDIR}}/README.md
+COPY README-*.md ${APPDIR}/
 
 RUN set -ex \
   # setup
