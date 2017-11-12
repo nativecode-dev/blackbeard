@@ -2,7 +2,6 @@
   "author": "support@nativecode.com",
   "description": "It's me app, matey...yarrrrrrr...",
   "license": "MIT",
-  "main": "index.js",
   "name": "blackbeard",
   "private": true,
   "repository": "git@github.com:mikepham/blackbeard.git",

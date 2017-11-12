@@ -8182,10 +8182,6 @@ tslint@^5.8.0:
     tslib "^1.7.1"
     tsutils "^2.12.1"
 
-tsunit.external@^2.0.11:
-  version "2.0.11"
-  resolved "https://registry.yarnpkg.com/tsunit.external/-/tsunit.external-2.0.11.tgz#732641d537793c872993f9df72a01000568f9364"
-
 tsutils@^1.4.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-1.9.1.tgz#b9f9ab44e55af9681831d5f28d0aeeaf5c750cb0"

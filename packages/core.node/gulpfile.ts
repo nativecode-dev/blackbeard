@@ -90,7 +90,7 @@ export class GulpFile {
         bail: true,
         fullTrace: true,
         recursive: true,
-        reporter: 'list',
+        reporter: 'spec',
         require: ['ts-node/register', 'tsconfig-paths/register'],
       }))
   }

@@ -2,8 +2,8 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "declaration": true,
-    "isolatedModules": false,
+    "declaration": false,
+    "isolatedModules": true,
     "lib": [
       "es2015"
     ],
