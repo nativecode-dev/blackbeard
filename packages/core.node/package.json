@@ -1,0 +1,91 @@
+{
+  "author": "support@nativecode.com",
+  "description": "It's me app, matey...yarrrrrrr...",
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "name": "@beard/core.node",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "typings": "./lib/index.d.ts",
+  "version": "1.0.0-alpha.3",
+  "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/couchbase": "^2.1.30",
+    "@types/debug": "^0.0.30",
+    "@types/gulp": "^3.8.34",
+    "@types/gulp-debug": "^2.0.30",
+    "@types/gulp-load-plugins": "^0.0.30",
+    "@types/gulp-mocha": "^0.0.30",
+    "@types/gulp-sourcemaps": "^0.0.31",
+    "@types/gulp-tslint": "^3.6.31",
+    "@types/lodash.merge": "^4.6.3",
+    "@types/merge-stream": "^1.0.28",
+    "@types/mocha": "^2.2.44",
+    "@types/node": "^8.0.47",
+    "@types/node-fetch": "^1.6.7",
+    "@types/sinon": "^2.3.7",
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.0",
+    "cross-env": "^5.1.0",
+    "gulp": "^3.9.1",
+    "gulp-changed": "^3.1.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-debug": "^3.1.0",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-mocha": "^4.3.1",
+    "gulp-shell": "^0.6.3",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-tslint": "^8.1.2",
+    "gulp-typescript": "^3.2.3",
+    "gulpclass": "^0.1.2",
+    "lodash.merge": "^4.6.0",
+    "merge-stream": "^1.0.1",
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0",
+    "sinon": "^4.1.2",
+    "ts-node": "^3.3.0",
+    "tsconfig-paths": "^2.3.0",
+    "tslint": "^5.8.0",
+    "tslint-config-standard": "^6.0.1",
+    "typescript": "^2.5.3"
+  },
+  "dependencies": {
+    "@beard/core": "^1.0.0-alpha.3",
+    "async-throttle": "^1.1.0",
+    "couchbase": "^2.4.1",
+    "inversify": "^4.3.0",
+    "module": "^1.2.5",
+    "node-fetch": "^1.7.3",
+    "reflect-metadata": "^0.1.10"
+  },
+  "nyc": {
+    "all": true,
+    "check-coverage": true,
+    "extension": [
+      "src/**/*.spec.ts"
+    ],
+    "include": [
+      "src/**/*.ts"
+    ],
+    "instrument": true,
+    "report-dir": "coverage",
+    "reporter": [
+      "html",
+      "text",
+      "text-summary"
+    ],
+    "sourceMap": true
+  },
+  "scripts": {
+    "build": "gulp build",
+    "clean": "gulp clean",
+    "test": "cross-env DEBUG= LCB_LOGLEVEL=5 NODE_ENV=testing NODE_PATH=. gulp test"
+  },
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/blackbeard/issues"
+  },
+  "homepage": "https://github.com/nativecode-dev/blackbeard",
+  "repository": "git@github.com:nativecode-dev/blackbeard.git"
+}

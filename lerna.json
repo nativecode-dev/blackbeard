@@ -1,0 +1,29 @@
+{
+  "commands": {
+    "exec": {
+      "bail": true
+    },
+    "publish": {
+      "allowBranch": "master",
+      "ignore": [
+        "*.md",
+        "LICENSE"
+      ]
+    },
+    "run": {
+      "stream": true
+    }
+  },
+  "loglevel": "error",
+  "npmClient": "yarn",
+  "npmClientArgs": [
+    "--quiet"
+  ],
+  "useWorkspaces": true,
+  "lerna": "2.5.1",
+  "packages": [
+    "packages/*"
+  ],
+  "sort": true,
+  "version": "1.0.0-alpha.3"
+}

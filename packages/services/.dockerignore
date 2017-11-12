@@ -1,0 +1,4 @@
+**/*.d.ts
+**/*.map
+**/*.spec.js
+**/*.spec.ts

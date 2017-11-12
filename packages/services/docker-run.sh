@@ -1,0 +1,20 @@
+#!/bin/bash
+
+source .env.sh
+
+if [ $1 ]; then
+  APPCMD=$1
+fi
+
+$DOCKER run \
+  --name $DOCKER_NAME \
+  -e APPCMD=$APPCMD \
+  -e RADARR_APIKEY=$RADARR_APIKEY \
+  -e RADARR_ENDPOINT=$RADARR_ENDPOINT \
+  -e REDIS=$REDIS \
+  -e SONARR_APIKEY=$SONARR_APIKEY \
+  -e SONARR_ENDPOINT=$SONARR_ENDPOINT \
+  -e XSPEEDS_APIKEY=$XSPEEDS_APIKEY \
+  --rm \
+  $DOCKER_TAG \
+;

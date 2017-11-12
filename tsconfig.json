@@ -1,34 +1,64 @@
 {
   "compilerOptions": {
-    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "declaration": false,
     "diagnostics": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["es2015"],
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": false,
+    "lib": [
+      "es2015"
+    ],
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
-    "outDir": "dist",
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
     "pretty": true,
+    "removeComments": true,
+    "rootDir": ".",
     "sourceMap": true,
     "strict": true,
+    "strictNullChecks": true,
     "target": "es2015",
-    "typeRoots": [
-      "src/types"
-    ],
     "types": [
-      "@types/lodash.merge",
-      "@types/node",
-      "@types/node-fetch",
-      "@types/node-schedule",
-      "common-locations"
+      "@beard/core",
+      "@beard/core.node",
+      "@types/clean-css",
+      "@types/couchbase",
+      "@types/html-minifier",
+      "@types/merge-stream",
+      "@types/relateurl",
+      "ajv",
+      "any-promise",
+      "awesome-typescript-loader",
+      "camel-case",
+      "gulp-tslint",
+      "gulp-typescript",
+      "hash.js",
+      "iconv-lite",
+      "inversify",
+      "lower-case",
+      "moment",
+      "no-case",
+      "param-case",
+      "pretty-error",
+      "setprototypeof",
+      "source-map",
+      "tslib",
+      "tslint",
+      "typescript",
+      "upper-case"
     ]
   },
   "exclude": [
     "node_modules",
-    "src/**/*.spec.ts"
+    "packages"
   ],
   "include": [
-    "src/**/*.ts"
+    "*.ts",
+    "packages/**/*.ts"
   ]
 }
