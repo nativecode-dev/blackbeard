@@ -28,11 +28,13 @@ ENV NODE_ENV=production
 
 WORKDIR ${APPDIR}
 
-COPY .env.version VERSION
+COPY .env.version DOCKER_VERSION
 COPY dist ${APPDIR}/
-COPY docker-startup.sh ${APPDIR}/
+COPY docker-startup.sh ${APPDIR}/docker-startup.sh
 COPY nas-*.json ${APPDIR}/
-COPY package.json ${APPDIR}/
+COPY package.json ${APPDIR}/package.json
+COPY LICENSE ${APPDIR}/LICENSE
+COPY README-${APPCMD}.md ${APPDIR}}/README.md
 
 RUN set -ex \
   # setup

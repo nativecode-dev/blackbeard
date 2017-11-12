@@ -2,6 +2,7 @@ import 'reflect-metadata'
 
 import * as fetch from 'node-fetch'
 import { inject, injectable } from 'inversify'
+
 import { Logger, LoggerType } from '../logging'
 import { Client } from './Client'
 import { Environment, EnvironmentType } from '../Environment'

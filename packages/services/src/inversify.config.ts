@@ -5,7 +5,6 @@ import * as core from '@beard/core'
 import * as node from '@beard/core.node'
 
 import { Container } from 'inversify'
-import { DefaultLogger } from '@beard/core'
 
 import * as modules from './modules'
 
@@ -23,7 +22,7 @@ container.bind<node.PlatformProvider>(node.PlatformProvider).toSelf().inSingleto
 container.bind<node.Variables>(node.Variables).toSelf().inSingletonScope()
 
 // Logging
-container.bind<core.Logger>(core.LoggerType).to(DefaultLogger).inSingletonScope()
+container.bind<core.Logger>(core.LoggerType).to(core.DefaultLogger).inSingletonScope()
 container.bind<core.LoggerNamespace>(core.LoggerNamespace).toSelf()
 
 // Logging targets
