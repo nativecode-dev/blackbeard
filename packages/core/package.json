@@ -9,7 +9,7 @@
     "access": "public"
   },
   "typings": "./lib/index.d.ts",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "devDependencies": {
     "@types/chai": "^4.0.4",
     "@types/debug": "^0.0.30",
