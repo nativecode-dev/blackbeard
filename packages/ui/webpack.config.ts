@@ -72,6 +72,15 @@ export default {
       title: 'blackbeard',
     }),
     new TsConfigPathsPlugin(),
+    new wb.DefinePlugin({
+      env: {
+        RADARR_APIKEY: process.env.RADARR_APIKEY,
+        RADARR_ENDPOINT: process.env.RADARR_ENDPOINT,
+        SONARR_APIKEY: process.env.SONARR_APIKEY,
+        SONARR_ENDPOINT: process.env.SONARR_ENDPOINT,
+        XSPEEDS_APIKEY: process.env.XSPEEDS_APIKEY,
+      }
+    })
   ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
