@@ -102,5 +102,11 @@
     "predocker-push": "cross-env DOCKER_PUSH=yes yarn run docker",
     "docker-run": "cross-env APPCMD=scheduler DEBUG=nativecode:blackbeard:* DOCKER_RUN=true ./docker-run.sh",
     "predocker-run": "yarn run docker"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/blackbeard/issues"
+  },
+  "description": "It's me app, matey...yarrrrrrr...",
+  "homepage": "https://github.com/nativecode-dev/blackbeard",
+  "repository": "git@github.com:nativecode-dev/blackbeard.git"
 }

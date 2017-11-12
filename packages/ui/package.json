@@ -47,5 +47,11 @@
     "@beard/core": "^1.0.0-alpha.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/blackbeard/issues"
+  },
+  "description": "It's me app, matey...yarrrrrrr...",
+  "homepage": "https://github.com/nativecode-dev/blackbeard",
+  "repository": "git@github.com:nativecode-dev/blackbeard.git"
 }

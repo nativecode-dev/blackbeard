@@ -1,6 +1,6 @@
 {
-  "author": "Mike Pham <me@mikepham.com>",
-  "description": "Various, uh, tools...",
+  "author": "support@nativecode.com",
+  "description": "It's me app, matey...yarrrrrrr...",
   "license": "MIT",
   "main": "./lib/index.js",
   "name": "@beard/core",
@@ -77,5 +77,10 @@
     "build": "gulp build",
     "clean": "gulp clean",
     "test": "cross-env DEBUG= LCB_LOGLEVEL=5 NODE_ENV=testing NODE_PATH=. gulp test"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/blackbeard/issues"
+  },
+  "homepage": "https://github.com/nativecode-dev/blackbeard",
+  "repository": "git@github.com:nativecode-dev/blackbeard.git"
 }

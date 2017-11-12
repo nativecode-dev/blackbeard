@@ -1,27 +1,31 @@
 {
   "author": "support@nativecode.com",
+  "bugs": {
+    "url": "https://github.com/nativecode-dev/blackbeard/issues"
+  },
   "description": "It's me app, matey...yarrrrrrr...",
+  "devDependencies": {
+    "@types/node": "^8.0.50",
+    "@types/npm": "^2.0.29",
+    "chalk": "^2.3.0",
+    "lerna": "^2.5.1"
+  },
+  "homepage": "https://github.com/nativecode-dev/blackbeard",
   "license": "MIT",
   "name": "blackbeard",
   "private": true,
-  "repository": "git@github.com:mikepham/blackbeard.git",
-  "version": "1.0.0",
-  "workspaces": [
-    "packages/*"
-  ],
+  "repository": "git@github.com:nativecode-dev/blackbeard.git",
   "scripts": {
-    "build": "lerna bootstrap && lerna run build && ts-node chest tsconfig-types",
+    "build": "lerna bootstrap && lerna run build && ts-node chest typings",
     "clean": "lerna run clean",
     "docker": "lerna run build --scope @beard/services && lerna run docker --scope=@beard/services",
     "test": "lerna run test",
     "devserver": "lerna run devserver --scope=@beard/ui",
     "dockerdev": "lerna run docker --scope=@beard/services && lerna run docker-run --scope=@beard/services",
-    "startdev": "lerna run startdev --scope=@beard/services",
-    "update-deps": "ts-node chest tsconfig-types"
+    "startdev": "lerna run startdev --scope=@beard/services"
   },
-  "devDependencies": {
-    "@types/node": "^8.0.50",
-    "chalk": "^2.3.0",
-    "lerna": "^2.5.1"
-  }
+  "version": "1.0.0",
+  "workspaces": [
+    "packages/*"
+  ]
 }

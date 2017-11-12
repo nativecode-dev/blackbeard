@@ -147,6 +147,12 @@
   version "8.0.50"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.50.tgz#dc545448e128c88c4eec7cd64025fcc3b7604541"
 
+"@types/npm@^2.0.29":
+  version "2.0.29"
+  resolved "https://registry.yarnpkg.com/@types/npm/-/npm-2.0.29.tgz#013a2789d6b11039ebf8ee7a4b5dafed4350461c"
+  dependencies:
+    "@types/node" "*"
+
 "@types/orchestrator@*":
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/@types/orchestrator/-/orchestrator-0.3.2.tgz#cd15c6cea978a32b98e5054239cbcc78e55671f1"
