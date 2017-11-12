@@ -4,6 +4,8 @@ set -e
 
 . .env.sh
 
+TRAVIS_BRANCH=${TRAVIS_BRANCH:-$BRANCH}
+
 if [ $BRANCH = "master" ] || [ $TRAVIS_BRANCH = "master" ]; then
 
   # Create docker images first.
