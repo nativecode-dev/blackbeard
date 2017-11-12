@@ -6,5 +6,9 @@ node_js:
   - '6'
 os:
   - linux
+services:
+  - docker
+sudo: required
 after_success:
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   - cd packages/services && ./docker-push.sh

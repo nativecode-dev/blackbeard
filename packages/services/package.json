@@ -93,14 +93,14 @@
   "scripts": {
     "build": "gulp build",
     "clean": "gulp clean",
-    "docker": "sh ./docker-clean.sh && sh ./docker-build.sh",
+    "docker": "sh ./docker-build.sh",
     "test": "cross-env DEBUG= LCB_LOGLEVEL=5 NODE_ENV=testing NODE_PATH=. gulp test",
     "start": "clear && node index.js",
     "startdev": "cross-env APPCMD=scheduler DEBUG=nativecode:blackbeard:* ts-node src/index.ts",
     "prestartdev": "yarn run build",
     "docker-push": "cross-env DOCKER_PUSH=yes ./docker-push.sh",
-    "docker-run": "cross-env APPCMD=scheduler DEBUG=nativecode:blackbeard:* DOCKER_RUN=true ./docker-run.sh",
-    "predocker-run": "yarn run docker"
+    "docker-run": "cross-env APPCMD=scheduler DEBUG=nativecode:blackbeard:* DOCKER_RUN=true && ./docker-run.sh",
+    "predocker-run": "sh ./docker-clean.sh && yarn run docker"
   },
   "bugs": {
     "url": "https://github.com/nativecode-dev/blackbeard/issues"
