@@ -1,6 +1,5 @@
 import 'mocha'
 
-import * as copy from 'gulp-copy'
 import * as gulp from 'gulp'
 import * as shell from 'gulp-shell'
 import * as sourcemap from 'gulp-sourcemaps'
@@ -28,7 +27,6 @@ interface Plugins extends IGulpPlugins {
 
   changed(name: string): any
   clean(): any
-  copy(options?: copy.GulpCopyOptions): any
   debug(options?: IDebugOptions): any
   mocha(options: MochaSetupOptionsEx): any
   typescript(config: string): any
