@@ -44,6 +44,8 @@ Currently, the project is split into three projects:
 
 [![npm (scoped)](https://img.shields.io/npm/v/@beard/core.svg?style=flat-square)](https://www.npmjs.com/package/@beard/core)
 
+[![Travis](https://img.shields.io/travis/nativecode-dev/blackbeard.svg?style=flat-square&label=travis)](https://travis-ci.org/nativecode-dev/blackbeard)
+
 Comprises the core library which contains various base types and models.
 
 - `core` contains core application services such as logging.
@@ -52,6 +54,8 @@ Comprises the core library which contains various base types and models.
 ## blackbeard.core.node
 
 [![npm (scoped)](https://img.shields.io/npm/v/@beard/core.node.svg?style=flat-square)](https://www.npmjs.com/package/@beard/core.node)
+
+[![Travis](https://img.shields.io/travis/nativecode-dev/blackbeard.svg?style=flat-square&label=travis)](https://travis-ci.org/nativecode-dev/blackbeard)
 
 Provides implementations and features focused on the node runtime.
 
