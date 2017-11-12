@@ -9,7 +9,8 @@
       "dom",
       "es2015"
     ],
-    "target": "es5"
+    "target": "es5",
+    "types": []
   },
   "exclude": [
     "node_modules",
