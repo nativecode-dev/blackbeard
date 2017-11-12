@@ -33,9 +33,7 @@ class Script extends UpdateScript {
       const tsconfig = await files.json<any>(tsconfigfile)
 
       const dependencies = await Promise.all(packagedirs.map(async packagedir => await this.map(packagedir)))
-      const typings = dependencies.reduce((previous, current) => {
-        return previous.concat(current.filter(c => !!c.typings))
-      }, [])
+      const typings = dependencies.reduce((previous, current) => previous.concat(current.filter(c => !!c.typings)), [])
 
       tsconfig.compilerOptions.types = typings.map(typing => typing.npmname).sort()
       await files.save(tsconfigfile, tsconfig)
