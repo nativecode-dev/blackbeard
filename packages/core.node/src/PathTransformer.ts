@@ -2,7 +2,7 @@ import * as os from 'os'
 import * as path from 'path'
 import { Is } from '@nofrills/types'
 
-import { ObjectMutator, ObjectMutation, Transformer } from '@nativecode/blackbeard.core'
+import { ObjectMutator, ObjectMutation, Transformer } from '@beard/core'
 
 export class PathTransformer extends Transformer {
   private readonly mutator: ObjectMutator

@@ -1,6 +1,6 @@
 import { Cluster, ClusterManager, CreateBucketOptions } from 'couchbase'
 
-import { Logger } from '@nativecode/blackbeard.core'
+import { Logger } from '@beard/core'
 import { AsyncBucket } from './AsyncBucket'
 import { AsyncCluster } from './AsyncCluster'
 

@@ -7,7 +7,7 @@ import {
   Logger,
   LoggerType,
   Reject,
-} from '@nativecode/blackbeard.core'
+} from '@beard/core'
 
 import {
   Config,
@@ -18,7 +18,7 @@ import {
   PlatformProvider,
   Script,
   ScriptType
-} from '@nativecode/blackbeard.core.node'
+} from '@beard/core.node'
 
 interface JobConfig {
   schedule: schedule.RecurrenceRule | schedule.RecurrenceSpecDateRange | schedule.RecurrenceSpecObjLit

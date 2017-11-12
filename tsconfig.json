@@ -12,8 +12,8 @@
       ]
     },
     "types": [
-      "@nativecode/blackbeard.core",
-      "@nativecode/blackbeard.core.node",
+      "@beard/core",
+      "@beard/core.node",
       "@types/clean-css",
       "@types/couchbase",
       "@types/html-minifier",

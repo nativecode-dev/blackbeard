@@ -2,7 +2,7 @@ import 'reflect-metadata'
 
 import * as fs from 'fs'
 import { inject, injectable } from 'inversify'
-import { Logger, LoggerType } from '@nativecode/blackbeard.core'
+import { Logger, LoggerType } from '@beard/core'
 import { PathTransformer } from './PathTransformer'
 
 type NodeCallback<T> = (error: NodeJS.ErrnoException, result: T) => void

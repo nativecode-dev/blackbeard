@@ -2,7 +2,7 @@ import 'reflect-metadata'
 
 import hydra = require('hydra')
 
-import { Logger, Reject } from '@nativecode/blackbeard.core'
+import { Logger, Reject } from '@beard/core'
 import { injectable } from 'inversify'
 
 import { FileSystem } from '../FileSystem'

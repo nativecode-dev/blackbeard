@@ -2,7 +2,7 @@ import { Cluster, ClusterConstructorOptions, CouchbaseError } from 'couchbase'
 
 import { AsyncBucket } from './AsyncBucket'
 import { AsyncManager } from './AsyncManager'
-import { Logger } from '@nativecode/blackbeard.core'
+import { Logger } from '@beard/core'
 
 export class AsyncCluster {
   public readonly cluster: Cluster

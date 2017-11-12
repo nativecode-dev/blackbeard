@@ -1,4 +1,4 @@
-export * from '@nativecode/blackbeard.core'
+export * from '@beard/core'
 
 export * from './data'
 export * from './hydra'

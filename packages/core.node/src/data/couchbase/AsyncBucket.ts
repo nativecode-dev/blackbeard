@@ -1,7 +1,7 @@
 import * as cb from 'couchbase'
 
 import { Key, Keys } from './Couchbase'
-import { Logger, Reject, Resolve } from '@nativecode/blackbeard.core'
+import { Logger, Reject, Resolve } from '@beard/core'
 
 import { AsyncCluster } from './AsyncCluster'
 import { AsyncManager } from './AsyncManager'

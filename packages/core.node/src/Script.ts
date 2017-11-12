@@ -2,7 +2,7 @@ import 'reflect-metadata'
 
 import * as throttle from 'async-throttle'
 import * as os from 'os'
-import { Logger, LoggerType } from '@nativecode/blackbeard.core'
+import { Logger, LoggerType } from '@beard/core'
 import { inject, injectable } from 'inversify'
 
 @injectable()

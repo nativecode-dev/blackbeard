@@ -1,4 +1,4 @@
-import { HydraModule, HydraModuleConfig } from '@nativecode/blackbeard.core.node'
+import { HydraModule, HydraModuleConfig } from '@beard/core.node'
 import { SemanticConfig } from './config'
 
 export class Semantic extends HydraModule {

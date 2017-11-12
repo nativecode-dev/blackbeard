@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 
 import * as process from 'process'
-import { Logger, LoggerType } from '@nativecode/blackbeard.core'
+import { Logger, LoggerType } from '@beard/core'
 import { inject, injectable } from 'inversify'
 
 import { Config } from './Config'

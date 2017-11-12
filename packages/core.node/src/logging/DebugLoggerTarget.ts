@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 
 import * as debug from 'debug'
-import { BaseLoggerTarget, LoggerNamespace, LoggerTarget, LogMessageType } from '@nativecode/blackbeard.core'
+import { BaseLoggerTarget, LoggerNamespace, LoggerTarget, LogMessageType } from '@beard/core'
 import { injectable } from 'inversify'
 
 interface DebugLoggerTargets {

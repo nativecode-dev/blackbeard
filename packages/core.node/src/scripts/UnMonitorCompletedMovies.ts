@@ -1,4 +1,4 @@
-import { Movie, MovieQuality, Logger, LoggerType, Radarr } from '@nativecode/blackbeard.core'
+import { Movie, MovieQuality, Logger, LoggerType, Radarr } from '@beard/core'
 import { inject, injectable } from 'inversify'
 
 import { Script } from '../Script'

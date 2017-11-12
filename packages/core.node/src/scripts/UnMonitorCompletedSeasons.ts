@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify'
-import { Episode, Logger, LoggerType, Series, SeriesSeason, Sonarr } from '@nativecode/blackbeard.core'
+import { Episode, Logger, LoggerType, Series, SeriesSeason, Sonarr } from '@beard/core'
 
 import { Script } from '../Script'
 

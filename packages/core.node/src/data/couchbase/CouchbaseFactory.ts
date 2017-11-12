@@ -3,7 +3,7 @@ import 'reflect-metadata'
 import * as cb from 'couchbase'
 import { inject, injectable } from 'inversify'
 
-import { Logger, LoggerType } from '@nativecode/blackbeard.core'
+import { Logger, LoggerType } from '@beard/core'
 import { AsyncCluster } from './AsyncCluster'
 
 @injectable()

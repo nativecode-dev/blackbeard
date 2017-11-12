@@ -1,4 +1,4 @@
-# @nativecode/blackbeard.core.node
+# @beard/core.node
 
 # License
 © 2017 NativeCode Development <support@nativecode.com>

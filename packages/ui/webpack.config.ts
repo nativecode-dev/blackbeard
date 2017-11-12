@@ -44,7 +44,7 @@ export default {
   },
   output: {
     filename: '[name].js',
-    library: '@nativecode/blackbeard.ui',
+    library: '@beard/ui',
     libraryTarget: 'commonjs2',
     path: path.resolve('dist'),
   },

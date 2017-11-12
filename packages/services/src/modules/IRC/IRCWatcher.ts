@@ -18,7 +18,7 @@ import {
   Reject,
   Radarr,
   Sonarr,
-} from '@nativecode/blackbeard.core'
+} from '@beard/core'
 
 import {
   Converters,
@@ -27,7 +27,7 @@ import {
   HydraModuleConfig,
   PlatformProvider,
   Variables
-} from '@nativecode/blackbeard.core.node'
+} from '@beard/core.node'
 
 interface IRCFactoryClients {
   [key: string]: IRCWatcherClient

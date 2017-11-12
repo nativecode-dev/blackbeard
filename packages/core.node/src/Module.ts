@@ -6,7 +6,7 @@ import * as path from 'path'
 import { Platform } from 'common-locations'
 import { injectable } from 'inversify'
 
-import { Logger } from '@nativecode/blackbeard.core'
+import { Logger } from '@beard/core'
 import { FileSystem } from './FileSystem'
 import { PlatformProvider } from './PlatformProvider'
 

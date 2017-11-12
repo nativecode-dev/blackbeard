@@ -3,7 +3,7 @@ import 'mocha'
 import * as path from 'path'
 import * as sinon from 'sinon'
 
-import { Logger } from '@nativecode/blackbeard.core'
+import { Logger } from '@beard/core'
 import { expect } from 'chai'
 import { FileSystem } from './FileSystem'
 
@@ -46,6 +46,6 @@ describe('when accessing the file system', () => {
     const logger = sinon.createStubInstance<Logger>(TestLogger)
     const sut = new FileSystem(logger)
     const pkg = await sut.json<any>(path.join(process.cwd(), 'package.json'))
-    expect(pkg.name).to.equal('@nativecode/blackbeard.core.node')
+    expect(pkg.name).to.equal('@beard/core.node')
   })
 })

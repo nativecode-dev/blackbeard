@@ -2,7 +2,7 @@
   "author": "support@nativecode.com",
   "license": "MIT",
   "main": "./dist/index.js",
-  "name": "@nativecode/blackbeard.services",
+  "name": "@beard/services",
   "private": true,
   "version": "1.0.0-alpha",
   "devDependencies": {
@@ -53,8 +53,8 @@
     "typescript": "^2.5.3"
   },
   "dependencies": {
-    "@nativecode/blackbeard.core": "^1.0.0-alpha",
-    "@nativecode/blackbeard.core.node": "^1.0.0-alpha",
+    "@beard/core": "^1.0.0-alpha",
+    "@beard/core.node": "^1.0.0-alpha",
     "@nofrills/types": "^0.9.0",
     "async-throttle": "^1.1.0",
     "common-locations": "^3.0.2",

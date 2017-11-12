@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 
 import * as URL from 'url'
-import { Logger, LoggerType, Reject, Resolve } from '@nativecode/blackbeard.core'
+import { Logger, LoggerType, Reject, Resolve } from '@beard/core'
 import { Bucket, Cluster, ClusterConstructorOptions, CouchbaseError } from 'couchbase'
 import { inject, injectable } from 'inversify'
 

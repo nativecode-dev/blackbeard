@@ -12,10 +12,10 @@
   "scripts": {
     "build": "lerna bootstrap && lerna run build && ts-node chest tsconfig-types",
     "clean": "lerna run clean",
-    "docker": "lerna run build --scope @nativecode/blackbeard.services && lerna run docker --scope=@nativecode/blackbeard.services",
+    "docker": "lerna run build --scope @beard/services && lerna run docker --scope=@beard/services",
     "test": "lerna run test",
-    "dockerdev": "lerna run docker --scope=@nativecode/blackbeard.services && lerna run docker-run --scope=@nativecode/blackbeard.services",
-    "startdev": "lerna run startdev --scope=@nativecode/blackbeard.services",
+    "dockerdev": "lerna run docker --scope=@beard/services && lerna run docker-run --scope=@beard/services",
+    "startdev": "lerna run startdev --scope=@beard/services",
     "update-deps": "ts-node chest tsconfig-types"
   },
   "devDependencies": {
