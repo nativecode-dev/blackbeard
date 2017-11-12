@@ -9,7 +9,7 @@
     "access": "public"
   },
   "typings": "./lib/index.d.ts",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "devDependencies": {
     "@types/chai": "^4.0.4",
     "@types/couchbase": "^2.1.30",
@@ -52,7 +52,7 @@
     "typescript": "^2.5.3"
   },
   "dependencies": {
-    "@beard/core": "^1.0.0-alpha.1",
+    "@beard/core": "^1.0.0-alpha.2",
     "async-throttle": "^1.1.0",
     "couchbase": "^2.4.1",
     "inversify": "^4.3.0",
