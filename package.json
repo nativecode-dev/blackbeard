@@ -6,7 +6,6 @@
   "description": "It's me app, matey...yarrrrrrr...",
   "devDependencies": {
     "@types/node": "^8.0.50",
-    "@types/npm": "^2.0.29",
     "chalk": "^2.3.0",
     "lerna": "^2.5.1"
   },
@@ -19,6 +18,8 @@
     "build": "lerna bootstrap && lerna run build && ts-node chest typings",
     "clean": "lerna run clean",
     "docker": "lerna run build --scope @beard/services && lerna run docker --scope=@beard/services",
+    "docker-push": "lerna run docker-push --scope=@beard/services",
+    "docker-run": "lerna run docker-run --scope=@beard/services",
     "test": "lerna run test",
     "devserver": "lerna run devserver --scope=@beard/ui",
     "dockerdev": "lerna run docker --scope=@beard/services && lerna run docker-run --scope=@beard/services",

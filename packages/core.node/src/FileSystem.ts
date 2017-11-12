@@ -55,6 +55,11 @@ export class FileSystem {
     return this.paths.transformObject(json)
   }
 
+  public save<T>(filepath: string, data: T): Promise<void> {
+    const buffer = new Buffer(JSON.stringify(data))
+    return this.fileWrite(filepath, buffer)
+  }
+
   private promisify<T>(nodefn: NodeFunction<T>, ...args: any[]): Promise<T> {
     return new Promise((resolve, reject) => {
       const params = args.concat([(error: NodeJS.ErrnoException, result: T): void => {

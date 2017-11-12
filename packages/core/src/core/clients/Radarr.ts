@@ -4,7 +4,7 @@ import * as fetch from 'node-fetch'
 import { inject, injectable } from 'inversify'
 import { Logger, LoggerType } from '../logging'
 import { Client } from './Client'
-import { Environment } from '../Environment'
+import { Environment, EnvironmentType } from '../Environment'
 import { ServiceUri } from '../ServiceUri'
 import { Movie, MovieQuality, ReleaseInfo } from '../../models'
 
@@ -13,7 +13,7 @@ export class Radarr extends Client implements Radarr {
   private readonly initialized: Promise<ServiceUri>
   private readonly env: Environment
 
-  constructor( @inject(LoggerType) logger: Logger, env: Environment) {
+  constructor( @inject(LoggerType) logger: Logger, @inject(EnvironmentType) env: Environment) {
     super(logger)
     this.env = env
     this.initialized = this.init()
