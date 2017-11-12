@@ -2,7 +2,7 @@
 
 set -e
 
-source .env.sh
+. .env.sh
 
 if [ $BRANCH = "master" ] || [ $TRAVIS_BRANCH = "master" ]; then
 

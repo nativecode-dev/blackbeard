@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source .env.sh
+. .env.sh
 
 if [ $1 ]; then
   APPCMD=$1

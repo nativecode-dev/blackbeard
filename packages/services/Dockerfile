@@ -39,7 +39,7 @@ COPY nas-*.json ${APPDIR}/
 COPY README-*.md ${APPDIR}/
 
 RUN set -ex \
-  && source ./env.sh \
+  && . ./env.sh \
   # setup
   && touch ~/.profile \
   # upgrade and install packages

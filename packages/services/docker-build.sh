@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./.env.sh
+. ./.env.sh
 
 echo "Building $DOCKER_TAG..."
 
