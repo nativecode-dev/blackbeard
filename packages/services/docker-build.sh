@@ -11,7 +11,7 @@ $DOCKER build \
   . \
 ;
 
-if [ -z "${DOCKER_RUN}" ]; then
+if [[ $DOCKER_RUN = "false" ]]; then
 
   $DOCKER build \
     --build-arg APPCMD=ircwatch \

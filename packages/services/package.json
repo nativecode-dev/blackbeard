@@ -99,7 +99,7 @@
     "startdev": "cross-env APPCMD=scheduler DEBUG=nativecode:blackbeard:* ts-node src/index.ts",
     "prestartdev": "yarn run build",
     "docker-push": "cross-env DOCKER_PUSH=yes ./docker-push.sh",
-    "docker-run": "cross-env APPCMD=scheduler DEBUG=nativecode:blackbeard:* DOCKER_RUN=true && ./docker-run.sh",
+    "docker-run": "cross-env APPCMD=scheduler DEBUG=nativecode:blackbeard:* DOCKER_RUN=yes && ./docker-run.sh",
     "predocker-run": "sh ./docker-clean.sh && yarn run docker"
   },
   "bugs": {
