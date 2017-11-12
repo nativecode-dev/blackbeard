@@ -86,8 +86,7 @@ Provides a front-end to manage all of the service instances in addition to manag
 
 1. Install [lerna](https://lernajs.io) globally. If you are using [yarn](https://yarnpkg.com), just type: `yarn global add lerna`
 2. Run `git clone https://github.com/nativecode-dev/blackbeard`
-3. Run `yarn install` to the required root packages.
-4. Run `yarn build` to build the projects.
+3. Run `yarn build` to download packages and build the projects.
 
 > Please see the [lerna](https://lernajs.io) [documentation](https://github.com/lerna/lerna/#commands) for additional commands.
 
