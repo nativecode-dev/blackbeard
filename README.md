@@ -28,6 +28,10 @@ Supported Applications
 - [NZBGet](https://nzbget.net)
 - [Deluge](http://deluge-torrent.org)
 
+# Why @beard
+
+Blackbeard. Pirates. November. Yeah, `@beard` just made sense because it was a) short b) not taken and c) I started this project in November 2017, otherwise known as the start of man-beard season.
+
 # Architecture
 
 `blackbeard` is designed to be run in a distributed environment, but not necessarily remotely. The project is spit into several smaller projects that are responsible for their slice of work. Compromised of a set of microservices, `blackbeard` is designed from the ground-up to be distributed. You will normally only have one or two instances running at any given moment, but if you know you are going to be running a large operation against your media files, you can spin up additional instances as needed even if you already started said large job.

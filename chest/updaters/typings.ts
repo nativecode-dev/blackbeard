@@ -58,7 +58,7 @@ class Script extends UpdateScript {
             filepath: scope,
             npmname: npm.name,
             scope: dirname,
-            typings: npm.typings,
+            typings: npm.types || npm.typings,
           }
         }))
     }
@@ -72,7 +72,7 @@ class Script extends UpdateScript {
         filename: 'package.json',
         filepath: packagedir,
         npmname: npm.name,
-        typings: npm.typings,
+        typings: npm.types || npm.typings,
       }]
     }
 

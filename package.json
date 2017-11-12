@@ -22,6 +22,7 @@
     "docker-run": "lerna run docker-run --scope=@beard/services",
     "test": "lerna run test",
     "devserver": "lerna run devserver --scope=@beard/ui",
+    "predevserver": "yarn run build",
     "dockerdev": "lerna run docker --scope=@beard/services && lerna run docker-run --scope=@beard/services",
     "startdev": "lerna run startdev --scope=@beard/services"
   },

@@ -1,4 +1,5 @@
-import React from 'react'
+import * as React from 'react'
+import * as core from '@beard/core'
 
 export interface MoviesProps {
   visible?: boolean

@@ -8,6 +8,7 @@ import * as wb from 'webpack'
 import { CheckerPlugin, TsConfigPathsPlugin } from 'awesome-typescript-loader'
 
 const BundlePlugin = wb.optimize.UglifyJsPlugin
+const DefinePlugin = wb.DefinePlugin
 const IgnorePlugin = wb.IgnorePlugin
 
 const Styles = new TextPlugin('[name].css')
@@ -44,26 +45,31 @@ export default {
   },
   output: {
     filename: '[name].js',
-    library: '@beard/ui',
-    libraryTarget: 'commonjs2',
     path: path.resolve('dist'),
   },
   plugins: [
     new CheckerPlugin(),
     new TsConfigPathsPlugin(),
     new HtmlWebpackPlugin({
+      appMountId: 'app',
+      cache: true,
+      inject: false,
+      minify: {
+        caseSensitive: true,
+        collapseBooleanAttributes: true,
+        collapseInlineTagWhitespace: true,
+        collapseWhitespace: false,
+        keepClosingSlash: true,
+        minifyCSS: true,
+        minifyJS: true,
+        minifyURLs: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+      },
       template: 'App.ejs',
       title: 'blackbeard',
     }),
-    /*
-    new BundlePlugin({
-      beautify: optimize === false,
-      compress: optimize,
-      include: /\.js$/,
-      mangle: optimize,
-      sourceMap: optimize === false,
-    }),
-    */
     Styles,
   ],
   resolve: {

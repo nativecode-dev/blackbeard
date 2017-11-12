@@ -14,6 +14,7 @@ export interface NPM {
   private?: boolean
   repository?: string | { type: string, url: string }
   scripts?: Dictionary
+  types?: string,
   typings?: string
   version: string
   workspace?: string[]
