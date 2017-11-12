@@ -1,12 +1,20 @@
 {
   "commands": {
+    "exec": {
+      "bail": true
+    },
     "publish": {
-      "allowBranch": "master"
+      "allowBranch": "master",
+      "ignore": [
+        "*.md",
+        "LICENSE"
+      ]
     },
     "run": {
       "stream": true
     }
   },
+  "loglevel": "error",
   "npmClient": "yarn",
   "npmClientArgs": [
     "--quiet"
@@ -16,5 +24,6 @@
   "packages": [
     "packages/*"
   ],
+  "sort": true,
   "version": "1.0.0-alpha.0"
 }

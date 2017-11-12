@@ -1,5 +1,7 @@
 # blackbeard
 
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg?style=flat-square)](https://lernajs.io/)
+
 <p align="center">
   <img src="assets/blackbeard-temp.png">
 </p>
@@ -40,12 +42,16 @@ Currently, the project is split into three projects:
 
 ## blackbeard.core
 
+[![npm (scoped)](https://img.shields.io/npm/v/@beard/core.svg?style=flat-square)](https://www.npmjs.com/package/@beard/core)
+
 Comprises the core library which contains various base types and models.
 
 - `core` contains core application services such as logging.
 - `models` contains model definitions.
 
 ## blackbeard.core.node
+
+[![npm (scoped)](https://img.shields.io/npm/v/@beard/core.node.svg?style=flat-square)](https://www.npmjs.com/package/@beard/core.node)
 
 Provides implementations and features focused on the node runtime.
 
