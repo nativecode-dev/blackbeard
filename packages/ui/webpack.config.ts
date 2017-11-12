@@ -1,15 +1,12 @@
 import * as HtmlWebpackPlugin from 'html-webpack-plugin'
 
+import * as BundlePlugin from 'uglifyjs-webpack-plugin'
 import * as TextPlugin from 'extract-text-webpack-plugin'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as wb from 'webpack'
 
 import { CheckerPlugin, TsConfigPathsPlugin } from 'awesome-typescript-loader'
-
-const BundlePlugin = wb.optimize.UglifyJsPlugin
-const DefinePlugin = wb.DefinePlugin
-const IgnorePlugin = wb.IgnorePlugin
 
 const Styles = new TextPlugin('[name].css')
 
@@ -40,7 +37,7 @@ export default {
       }),
     }, {
       test: /\.tsx?$/,
-      use: ['babel-loader', 'awesome-typescript-loader'],
+      use: ['awesome-typescript-loader'],
     }]
   },
   output: {
@@ -48,8 +45,12 @@ export default {
     path: path.resolve('dist'),
   },
   plugins: [
+    Styles,
+    new BundlePlugin({
+      extractComments: optimize,
+      parallel: optimize,
+    }),
     new CheckerPlugin(),
-    new TsConfigPathsPlugin(),
     new HtmlWebpackPlugin({
       appMountId: 'app',
       cache: true,
@@ -70,7 +71,7 @@ export default {
       template: 'App.ejs',
       title: 'blackbeard',
     }),
-    Styles,
+    new TsConfigPathsPlugin(),
   ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],

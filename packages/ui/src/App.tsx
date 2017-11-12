@@ -2,16 +2,20 @@ import './styles/core.scss'
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
+import { Provider } from 'inversify-react'
 
+import Container from './inversify.config'
 import { Movies } from './components'
 
-export default class App extends React.Component {
+export class App extends React.Component {
   public render() {
     return (
-      <div className='appspace'>
-        <Movies />
-        {this.props.children}
-      </div>
+      <Provider container={Container}>
+        <div className='appspace'>
+          <Movies />
+          {this.props.children}
+        </div>
+      </Provider>
     )
   }
 }

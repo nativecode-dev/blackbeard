@@ -11,8 +11,8 @@ export interface ButtonProps {
   type: ButtonType
 }
 
-export class Button extends React.Component<ButtonProps> {
+export default class Button extends React.Component<ButtonProps> {
   public render() {
-    return (<button type={this.props.type}>{this.props.text}</button>)
+    return <button type={this.props.type}>{this.props.text}</button>
   }
 }

@@ -2,15 +2,16 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "declaration": false,
-    "isolatedModules": true,
-    "jsx": "react",
+    "declaration": true,
+    "isolatedModules": false,
     "lib": [
       "dom",
       "es2015"
     ],
-    "module": "commonjs",
-    "target": "es5",
+    "noImplicitAny": true,
+    "typeRoots": [
+      "src/types"
+    ],
     "types": []
   },
   "exclude": [

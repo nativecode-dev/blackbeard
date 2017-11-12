@@ -25,6 +25,7 @@
     "target": "es2015",
     "types": [
       "@beard/core",
+      "@beard/core.browser",
       "@beard/core.node",
       "@nofrills/types",
       "@types/clean-css",
@@ -44,6 +45,7 @@
       "hash.js",
       "iconv-lite",
       "inversify",
+      "inversify-react",
       "is-plain-object",
       "isobject",
       "lower-case",
