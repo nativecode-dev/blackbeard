@@ -4,7 +4,7 @@ set -e
 
 source .env.sh
 
-if [ $BRANCH = "master" or $TRAVIS_BRANCH = "master" ]; then
+if [ $BRANCH = "master" ] || [ $TRAVIS_BRANCH = "master" ]; then
 
   # Create docker images first.
   yarn run docker
