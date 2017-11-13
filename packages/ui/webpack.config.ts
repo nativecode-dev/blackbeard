@@ -43,7 +43,7 @@ const plugins = [
   }),
   new TsConfigPathsPlugin(),
   new wb.optimize.CommonsChunkPlugin({
-    name: 'vendor',
+    name: 'bundle',
   })
 ].concat(production ? [
   new BundlePlugin(),
@@ -69,8 +69,8 @@ export default {
   devtool: 'source-map',
   entry: {
     app: './App.tsx',
-    manager: './AppManager.tsx',
-    vendor: Object.keys(npm.dependencies),
+    //    manager: './AppManager.tsx',
+    bundle: Object.keys(npm.dependencies),
   },
   module: {
     rules: [{
@@ -85,7 +85,13 @@ export default {
     }, {
       test: /\.json$/,
       use: ['json-loader']
-    }]
+    }],
+    exprContextCritical: false,
+  },
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
   },
   output: {
     filename: production ? '[name].min.[hash].js' : '[name].js',
@@ -100,5 +106,8 @@ export default {
       path.resolve('../../node_modules'),
     ]
   },
-  target: 'web'
+  stats: {
+    warningsFilter: ['the request of a dependency is an expression'],
+  },
+  target: 'web',
 }

@@ -1,6 +1,7 @@
 import './Movies.scss'
 
 import * as Core from '@beard/core'
+import * as Browser from '@beard/core.browser'
 import * as React from 'react'
 import { resolve } from 'inversify-react'
 
@@ -13,13 +14,13 @@ export class Movies extends React.Component<MoviesProps> {
   private readonly radarr: Core.Radarr
 
   public async componentDidMount() {
-    const movies = await this.radarr.movies()
-    this.setState(movies)
+    this.setState({})
   }
 
   public render() {
     return (
       <div id='movies'>
+        <h1>Movies</h1>
         {this.props.children}
       </div>
     )

@@ -1,5 +1,10 @@
 {
   "author": "support@nativecode.com",
+  "browser": {
+    "fs": false,
+    "net": false,
+    "tls": false
+  },
   "license": "MIT",
   "main": "index.js",
   "name": "@beard/ui",
@@ -40,7 +45,7 @@
     "prebuild": "yarn run clean",
     "clean": "rimraf dist",
     "test": "echo 'No Available Tests'",
-    "devserver": "webpack-dev-server"
+    "devserver": "webpack-dev-server --open"
   },
   "dependencies": {
     "@beard/core": "^1.0.0-alpha.3",
