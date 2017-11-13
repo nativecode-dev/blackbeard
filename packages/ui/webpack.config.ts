@@ -1,21 +1,25 @@
 import * as HtmlWebpackPlugin from 'html-webpack-plugin'
 
 import * as BundlePlugin from 'uglifyjs-webpack-plugin'
-import * as TextPlugin from 'extract-text-webpack-plugin'
+import * as ExtractTextPlugin from 'extract-text-webpack-plugin'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as wb from 'webpack'
 
-import { CheckerPlugin, TsConfigPathsPlugin } from 'awesome-typescript-loader'
+import CssNano = require('cssnano')
+import OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
-const Styles = new TextPlugin('[name].css')
+import { CheckerPlugin, TsConfigPathsPlugin } from 'awesome-typescript-loader'
 
 const npm = JSON.parse(fs.readFileSync(path.resolve('package.json')).toString())
 const production = process.env.NODE_ENV === 'production'
 
+console.log('environment:', process.env.NODE_ENV)
+
+const Styles = new ExtractTextPlugin(production ? '[name].min.[hash].css' : '[name].css')
+
 const plugins = [
   Styles,
-  new BundlePlugin(),
   new CheckerPlugin(),
   new HtmlWebpackPlugin({
     appMountId: 'app',
@@ -34,11 +38,23 @@ const plugins = [
       removeRedundantAttributes: true,
       useShortDoctype: true,
     },
-    template: 'App.ejs',
+    template: 'react.ejs',
     title: 'blackbeard',
   }),
   new TsConfigPathsPlugin(),
-]
+].concat(production ? [
+  new BundlePlugin(),
+  new OptimizeCssAssetsPlugin({
+    assetNameRegExp: /\.css$/g,
+    cssProcessor: CssNano,
+    cssProcessorOptions: {
+      discardComments: {
+        removeAll: true
+      }
+    },
+    canPrint: true
+  }),
+] : [])
 
 export default {
   context: path.resolve('src'),
@@ -50,6 +66,7 @@ export default {
   devtool: 'source-map',
   entry: {
     app: './App.tsx',
+    manager: './AppManager.tsx',
     vendor: Object.keys(npm.dependencies),
   },
   module: {
@@ -68,7 +85,7 @@ export default {
     }]
   },
   output: {
-    filename: production ? '[name].[hash].js' : '[name].js',
+    filename: production ? '[name].min.[hash].js' : '[name].js',
     path: path.resolve('dist'),
   },
   plugins,

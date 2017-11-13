@@ -7,7 +7,7 @@ import { Logger, LoggerType } from '../logging'
 import { Client } from './Client'
 import { Environment, EnvironmentType } from '../Environment'
 import { ServiceUri } from '../ServiceUri'
-import { Movie, MovieQuality, ReleaseInfo } from '../../models'
+import { Movie, MovieQuality, ReleaseInfo } from '../models'
 
 @injectable()
 export class Radarr extends Client implements Radarr {

@@ -26,6 +26,7 @@ container.bind<core.Logger>(core.LoggerType).to(core.DefaultLogger).inSingletonS
 container.bind<core.LoggerNamespace>(core.LoggerNamespace).toSelf()
 
 // Logging targets
+container.bind<core.LoggerTarget>(core.LoggerTargetType).to(core.ConsoleLoggerTarget)
 container.bind<core.LoggerTarget>(core.LoggerTargetType).to(node.DebugLoggerTarget)
 
 // Clients

@@ -1,3 +1,5 @@
+import './Button.scss'
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 
@@ -13,6 +15,6 @@ export interface ButtonProps {
 
 export default class Button extends React.Component<ButtonProps> {
   public render() {
-    return <button type={this.props.type}>{this.props.text}</button>
+    return <button className='bb-button' type={this.props.type}>{this.props.text}</button>
   }
 }

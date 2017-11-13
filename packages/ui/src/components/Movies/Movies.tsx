@@ -1,3 +1,5 @@
+import './Movies.scss'
+
 import * as Core from '@beard/core'
 import * as React from 'react'
 import { resolve } from 'inversify-react'

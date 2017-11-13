@@ -1,7 +1,10 @@
 import 'reflect-metadata'
 
 import * as debug from 'debug'
-import { BaseLoggerTarget, LoggerNamespace, LoggerTarget, LogMessageType } from '@beard/core'
+import { BaseLoggerTarget } from './BaseLoggerTarget'
+import { LoggerNamespace } from './LoggerNamespace'
+import { LoggerTarget } from './LoggerTarget'
+import { LogMessageType } from './LogMessageType'
 import { injectable } from 'inversify'
 
 type ConsoleLogMethod = (...args: any[]) => void
@@ -35,7 +38,7 @@ export class ConsoleLoggerTarget extends BaseLoggerTarget {
     const key = this.key(this.namespace.value, type)
     const writer = this.targets[type]
     if (writer) {
-      writer(message, ...args)
+      writer(this.namespace.value, message, ...args)
     }
     return Promise.resolve()
   }
@@ -43,9 +46,7 @@ export class ConsoleLoggerTarget extends BaseLoggerTarget {
   private createTargets(): void {
     Object.keys(LogMessageType).map(type => {
       const namespace = `${this.namespace.value}:${type.toLowerCase()}`
-      this.targets[type] = (...args: any[]): void => {
-        console.log(...args)
-      }
+      this.targets[type] = (...args: any[]): void => console.log(...args)
     })
   }
 }
