@@ -34,19 +34,22 @@ Blackbeard. Pirates. November. Yeah, `@beard` just made sense because it was a) 
 
 # Architecture
 
+[![Travis](https://img.shields.io/travis/nativecode-dev/blackbeard.svg?style=flat-square&label=travis)](https://travis-ci.org/nativecode-dev/blackbeard)
+
 `blackbeard` is designed to be run in a distributed environment, but not necessarily remotely. The project is spit into several smaller projects that are responsible for their slice of work. Compromised of a set of microservices, `blackbeard` is designed from the ground-up to be distributed. You will normally only have one or two instances running at any given moment, but if you know you are going to be running a large operation against your media files, you can spin up additional instances as needed even if you already started said large job.
 
 At the heart of how `blackbeard` achieves distributedness is [Hydra](https://github.com/flywheelsports/hydra), a great framework for creating services that are self-disoverable as well as has built-in support for load balancing. All of `blackbeard`'s communications is handled via [Hydra](https://github.com/flywheelsports/hydra) and is a core feature of every derived `HydraModule`. 
 
-Currently, the project is split into three projects:
+Currently, the project is split into multiple projects in a monorepo:
 
-- `@nativecode/blackbeard/core`
-- `@nativecode/blackbeard/services`
-- `@nativecode/blackbeard/ui`
+- `@beard/core`
+- `@beard/core.browser`
+- `@beard/core.node`
+- `@beard/services`
+- `@beard/ui`
 
-## blackbeard.core
+## @beard/core
 
-[![Travis](https://img.shields.io/travis/nativecode-dev/blackbeard.svg?style=flat-square&label=travis)](https://travis-ci.org/nativecode-dev/blackbeard)
 [![npm (scoped)](https://img.shields.io/npm/v/@beard/core.svg?style=flat-square)](https://www.npmjs.com/package/@beard/core)
 
 Comprises the core library which contains various base types and models.
@@ -54,9 +57,12 @@ Comprises the core library which contains various base types and models.
 - `core` contains core application services such as logging.
 - `models` contains model definitions.
 
-## blackbeard.core.node
+## @beard/core.browser
 
-[![Travis](https://img.shields.io/travis/nativecode-dev/blackbeard.svg?style=flat-square&label=travis)](https://travis-ci.org/nativecode-dev/blackbeard)
+[![npm (scoped)](https://img.shields.io/npm/v/@beard/core.browser.svg?style=flat-square)](https://www.npmjs.com/package/@beard/core.browser)
+
+## @beard/core.node
+
 [![npm (scoped)](https://img.shields.io/npm/v/@beard/core.node.svg?style=flat-square)](https://www.npmjs.com/package/@beard/core.node)
 
 Provides implementations and features focused on the node runtime.
@@ -66,7 +72,7 @@ Provides implementations and features focused on the node runtime.
 - `modules` contains modules that can be run for a particular instance.
 - `scripts` contains some basic scripts.
 
-## blackbeard.services
+## @beard/services
 
 Provides a set of services.
 
@@ -84,9 +90,19 @@ Planning Stages
 - `orchestrator` manages service deployments.
 - `transcode` performs media conversions.
 
-## blackbeard.ui
+## @beard/ui
 
 Provides a front-end to manage all of the service instances in addition to managing the media library. If you are running an `orchestrator` instance, you can create new instances either via a VM API call such as to an `ESX` or `Hyper-V` server.
+
+## Docker Images
+
+- https://hub.docker.com/r/nativecode/blackbeard/
+- https://hub.docker.com/r/nativecode/blackbeard-ircwatch/
+- https://hub.docker.com/r/nativecode/blackbeard-scheduler/
+
+# Versioning
+
+Due to the project being a monorepo with many child projects, all versions incremented regardless of whether the child project has changes. This may change in the future, but for now it makes the most sense. All published `npm` packages and `docker` images are version matched.
 
 # Developer Setup
 

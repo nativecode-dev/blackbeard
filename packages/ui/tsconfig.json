@@ -13,7 +13,7 @@
     "paths": {
       "controls": ["./controls/*"]
     },
-    "target": "es5",
+    "target": "es2015",
     "types": []
   },
   "exclude": [
