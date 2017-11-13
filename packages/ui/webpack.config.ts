@@ -42,6 +42,9 @@ const plugins = [
     title: 'blackbeard',
   }),
   new TsConfigPathsPlugin(),
+  new wb.optimize.CommonsChunkPlugin({
+    name: 'vendor',
+  })
 ].concat(production ? [
   new BundlePlugin(),
   new OptimizeCssAssetsPlugin({
