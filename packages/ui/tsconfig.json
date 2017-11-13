@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "declaration": false,
     "isolatedModules": true,
     "jsx": "react",
@@ -10,6 +10,9 @@
       "es2015"
     ],
     "module": "commonjs",
+    "paths": {
+      "controls": ["./controls/*"]
+    },
     "target": "es5",
     "types": []
   },

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
+    "baseUrl": "./packages",
     "declaration": false,
     "diagnostics": true,
     "emitDecoratorMetadata": true,
@@ -16,6 +16,15 @@
     "noImplicitAny": false,
     "noImplicitReturns": true,
     "noImplicitThis": true,
+    "paths": {
+      "*": [
+        "./core/src/*",
+        "./core.browser/src/*",
+        "./core.node/src/*",
+        "./services/src/*",
+        "./ui/src/*"
+      ]
+    },
     "pretty": true,
     "removeComments": true,
     "rootDir": ".",
@@ -43,6 +52,7 @@
       "gulp-tslint",
       "gulp-typescript",
       "hash.js",
+      "hoist-non-react-statics",
       "iconv-lite",
       "inversify",
       "inversify-react",
@@ -55,9 +65,11 @@
       "portfinder",
       "postcss",
       "pretty-error",
+      "redux",
       "reflect-metadata",
       "setprototypeof",
       "source-map",
+      "symbol-observable",
       "tslib",
       "tslint",
       "tweetnacl",

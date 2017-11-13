@@ -18,28 +18,44 @@ console.log('environment:', process.env.NODE_ENV)
 
 const Styles = new ExtractTextPlugin(production ? '[name].min.[hash].css' : '[name].css')
 
-const plugins = [
+const minify = {
+  caseSensitive: true,
+  collapseBooleanAttributes: true,
+  collapseInlineTagWhitespace: true,
+  collapseWhitespace: false,
+  keepClosingSlash: true,
+  minifyCSS: true,
+  minifyJS: true,
+  minifyURLs: true,
+  removeComments: true,
+  removeRedundantAttributes: true,
+  useShortDoctype: true,
+}
+
+const plugins: any[] = [
   Styles,
   new CheckerPlugin(),
   new HtmlWebpackPlugin({
     appMountId: 'app',
     cache: true,
+    chunk: 'app',
+    excludeChunks: ['manager'],
     inject: false,
-    minify: {
-      caseSensitive: true,
-      collapseBooleanAttributes: true,
-      collapseInlineTagWhitespace: true,
-      collapseWhitespace: false,
-      keepClosingSlash: true,
-      minifyCSS: true,
-      minifyJS: true,
-      minifyURLs: true,
-      removeComments: true,
-      removeRedundantAttributes: true,
-      useShortDoctype: true,
-    },
+    filename: 'app.html',
+    minify,
     template: 'react.ejs',
     title: 'blackbeard',
+  }),
+  new HtmlWebpackPlugin({
+    appMountId: 'app',
+    cache: true,
+    chunk: 'manager',
+    excludeChunks: ['app'],
+    inject: false,
+    filename: 'manager.html',
+    minify,
+    template: 'react.ejs',
+    title: 'blackbeard-manager',
   }),
   new TsConfigPathsPlugin(),
   new wb.optimize.CommonsChunkPlugin({
@@ -64,12 +80,20 @@ export default {
   devServer: {
     contentBase: path.resolve('dist'),
     compress: true,
+    open: true,
+    openPage: 'app.html',
+    overlay: {
+      errors: true,
+      warnings: false,
+    },
     port: 9000,
+    stats: 'errors-only',
+    watchContentBase: true,
   },
   devtool: 'source-map',
   entry: {
     app: './App.tsx',
-    //    manager: './AppManager.tsx',
+    manager: './AppManager.tsx',
     bundle: Object.keys(npm.dependencies),
   },
   module: {
