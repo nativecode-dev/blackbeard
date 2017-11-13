@@ -1,11 +1,15 @@
 export * from './clients'
 export * from './logging'
 
+export * from './AppConfig'
+export * from './AppConfigProvider'
 export * from './Chain'
 export * from './Environment'
+export * from './EnvironmentAppConfigProvider'
 export * from './Http'
 export * from './ObjectMutator'
 export * from './Pipeline'
+export * from './PipelineAsync'
 export * from './ServiceUri'
 export * from './Transformer'
 

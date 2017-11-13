@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 
-import * as fetch from 'node-fetch'
+import fetch, { Request, RequestInit } from 'node-fetch'
 import { inject, injectable } from 'inversify'
 
 import { Logger, LoggerType } from './logging'
@@ -42,16 +42,16 @@ export abstract class HTTP {
   }
 
   protected abstract get name(): string
-  protected abstract request<TRequest>(body?: TRequest): Promise<fetch.RequestInit>
+  protected abstract request<TRequest>(body?: TRequest): Promise<RequestInit>
 
-  private async send<T>(url: string, init: fetch.RequestInit, method: string = 'GET'): Promise<T> {
+  private async send<T>(url: string, init: RequestInit, method: string = 'GET'): Promise<T> {
     if (init.method === undefined) {
       init.method = method
     }
     this.log.trace(`http.send:${method}:${url}`, JSON.stringify(init))
 
-    const request = new fetch.Request(url, init)
-    const response = await fetch.default(request)
+    const request = new Request(url, init)
+    const response = await fetch(request)
 
     if (response.ok) {
       this.log.trace(`http:${response.status}:[${response.statusText}]: ${url}`)

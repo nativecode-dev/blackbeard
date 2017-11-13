@@ -11,7 +11,34 @@ import { CheckerPlugin, TsConfigPathsPlugin } from 'awesome-typescript-loader'
 const Styles = new TextPlugin('[name].css')
 
 const npm = JSON.parse(fs.readFileSync(path.resolve('package.json')).toString())
-const optimize = process.env.NODE_ENV === 'production'
+const production = process.env.NODE_ENV === 'production'
+
+const plugins = [
+  Styles,
+  new BundlePlugin(),
+  new CheckerPlugin(),
+  new HtmlWebpackPlugin({
+    appMountId: 'app',
+    cache: true,
+    inject: false,
+    minify: {
+      caseSensitive: true,
+      collapseBooleanAttributes: true,
+      collapseInlineTagWhitespace: true,
+      collapseWhitespace: false,
+      keepClosingSlash: true,
+      minifyCSS: true,
+      minifyJS: true,
+      minifyURLs: true,
+      removeComments: true,
+      removeRedundantAttributes: true,
+      useShortDoctype: true,
+    },
+    template: 'App.ejs',
+    title: 'blackbeard',
+  }),
+  new TsConfigPathsPlugin(),
+]
 
 export default {
   context: path.resolve('src'),
@@ -25,9 +52,6 @@ export default {
     app: './App.tsx',
     vendor: Object.keys(npm.dependencies),
   },
-  externals: {
-    'node-fetch': 'fetch'
-  },
   module: {
     rules: [{
       test: /\.scss$/,
@@ -38,50 +62,16 @@ export default {
     }, {
       test: /\.tsx?$/,
       use: ['awesome-typescript-loader'],
+    }, {
+      test: /\.json$/,
+      use: ['json-loader']
     }]
   },
   output: {
-    filename: '[name].js',
+    filename: production ? '[name].[hash].js' : '[name].js',
     path: path.resolve('dist'),
   },
-  plugins: [
-    Styles,
-    new BundlePlugin({
-      extractComments: optimize,
-      parallel: optimize,
-    }),
-    new CheckerPlugin(),
-    new HtmlWebpackPlugin({
-      appMountId: 'app',
-      cache: true,
-      inject: false,
-      minify: {
-        caseSensitive: true,
-        collapseBooleanAttributes: true,
-        collapseInlineTagWhitespace: true,
-        collapseWhitespace: false,
-        keepClosingSlash: true,
-        minifyCSS: true,
-        minifyJS: true,
-        minifyURLs: true,
-        removeComments: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true,
-      },
-      template: 'App.ejs',
-      title: 'blackbeard',
-    }),
-    new TsConfigPathsPlugin(),
-    new wb.DefinePlugin({
-      env: {
-        RADARR_APIKEY: process.env.RADARR_APIKEY,
-        RADARR_ENDPOINT: process.env.RADARR_ENDPOINT,
-        SONARR_APIKEY: process.env.SONARR_APIKEY,
-        SONARR_ENDPOINT: process.env.SONARR_ENDPOINT,
-        XSPEEDS_APIKEY: process.env.XSPEEDS_APIKEY,
-      }
-    })
-  ],
+  plugins,
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     modules: [

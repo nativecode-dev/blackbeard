@@ -22,4 +22,9 @@ container.bind<core.LoggerTarget>(core.LoggerTargetType).to(browser.ConsoleLogge
 container.bind<core.Radarr>(core.Radarr).toSelf()
 container.bind<core.Sonarr>(core.Sonarr).toSelf()
 
+// AppConfig
+container.bind<core.AppConfig>(core.AppConfig).toSelf().inSingletonScope()
+container.bind<core.AppConfigProvider>(core.AppConfigProviderType).to(browser.BrowserAppConfigProvider).inSingletonScope()
+container.bind<core.AppConfigProvider>(core.AppConfigProviderType).to(core.EnvironmentAppConfigProvider).inSingletonScope()
+
 export default container

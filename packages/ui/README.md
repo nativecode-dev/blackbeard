@@ -1,4 +1,4 @@
-# @nativecode/blackbeard/ui
+# @beard/ui
 
 # License
 © 2017 NativeCode Development <support@nativecode.com>

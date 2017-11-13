@@ -3,6 +3,10 @@ export type PipelineHandler<T> = (value: T) => T
 export class Pipeline<T> {
   private readonly handlers: PipelineHandler<T>[] = []
 
+  constructor(...handlers: PipelineHandler<T>[]) {
+    this.handlers = handlers
+  }
+
   public add(handler: PipelineHandler<T>): Pipeline<T> {
     this.handlers.push(handler)
     return this

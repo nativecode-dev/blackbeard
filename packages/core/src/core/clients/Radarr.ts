@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 
-import * as fetch from 'node-fetch'
+import fetch, { RequestInit } from 'node-fetch'
 import { inject, injectable } from 'inversify'
 
 import { Logger, LoggerType } from '../logging'
@@ -61,7 +61,7 @@ export class Radarr extends Client implements Radarr {
     return 'radarr'
   }
 
-  protected async request<T>(body?: T): Promise<fetch.RequestInit> {
+  protected async request<T>(body?: T): Promise<RequestInit> {
     const api = await this.initialized
     return {
       body: JSON.stringify(body),

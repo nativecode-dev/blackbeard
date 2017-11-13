@@ -10,8 +10,9 @@ export class Movies extends React.Component<MoviesProps> {
   @resolve(Core.Radarr)
   private readonly radarr: Core.Radarr
 
-  public componentDidMount() {
-    console.log(this.radarr)
+  public async componentDidMount() {
+    const movies = await this.radarr.movies()
+    this.setState(movies)
   }
 
   public render() {

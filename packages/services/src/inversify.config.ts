@@ -32,6 +32,10 @@ container.bind<core.LoggerTarget>(core.LoggerTargetType).to(node.DebugLoggerTarg
 container.bind<core.Radarr>(core.Radarr).toSelf()
 container.bind<core.Sonarr>(core.Sonarr).toSelf()
 
+// AppConfig
+container.bind<core.AppConfig>(core.AppConfig).toSelf().inSingletonScope()
+container.bind<core.AppConfigProvider>(core.AppConfigProviderType).to(core.EnvironmentAppConfigProvider).inSingletonScope()
+
 // Modules
 container.bind<node.Module>(node.ModuleType).to(modules.IRCWatcher).inSingletonScope()
 container.bind<node.Module>(node.ModuleType).to(modules.Scheduler).inSingletonScope()
