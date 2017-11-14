@@ -2,6 +2,12 @@
 # yarn lockfile v1
 
 
+"@beard/chest@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@beard/chest/-/chest-1.1.0.tgz#c7c718973cf2d98929c4bce87fdb250e22444104"
+  dependencies:
+    chalk "^2.3.0"
+
 "@gulp-sourcemaps/identity-map@1.X":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@gulp-sourcemaps/identity-map/-/identity-map-1.0.1.tgz#cfa23bc5840f9104ce32a65e74db7e7a974bbee1"

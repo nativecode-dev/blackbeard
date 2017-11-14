@@ -102,7 +102,7 @@ Provides a front-end to manage all of the service instances in addition to manag
 
 # Versioning
 
-Due to the project being a monorepo with many child projects, all versions incremented regardless of whether the child project has changes. This may change in the future, but for now it makes the most sense. All published `npm` packages and `docker` images are version matched.
+Due to the project being a monorepo with many child projects, all versions are incremented regardless of whether the child project has changes. This may change in the future, but for now it makes the most sense. All published `npm` packages and `docker` images are version matched.
 
 # Developer Setup
 

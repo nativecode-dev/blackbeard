@@ -1,2 +1,0 @@
-import './typings'
-import './package'
