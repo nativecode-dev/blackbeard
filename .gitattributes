@@ -2,4 +2,5 @@
 
 # Shell scripts
 *.sh eol=lf
+*.ts eol=lf
 *.version eol=lf
