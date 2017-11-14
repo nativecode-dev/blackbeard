@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@beard/chest@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@beard/chest/-/chest-1.1.0.tgz#c7c718973cf2d98929c4bce87fdb250e22444104"
+"@beard/chest@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@beard/chest/-/chest-1.1.2.tgz#a25f3c18d5f66dc46473e059b69f9ebb7ba0bb6e"
   dependencies:
     chalk "^2.3.0"
 
