@@ -1,0 +1,6 @@
+node_modules/
+src/
+
+gulpfile.ts
+tsconfig.json
+tslint.json
