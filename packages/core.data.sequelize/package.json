@@ -3,7 +3,7 @@
   "description": "It's me app, matey...yarrrrrrr...",
   "license": "MIT",
   "main": "./lib/index.js",
-  "name": "@beard/core.data",
+  "name": "@beard/core.data.sequelize",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -24,6 +24,7 @@
     "@types/mocha": "^2.2.44",
     "@types/node": "^8.0.47",
     "@types/node-fetch": "^1.6.7",
+    "@types/sequelize": "^4.0.79",
     "@types/sinon": "^2.3.7",
     "chai": "^4.1.2",
     "coveralls": "^3.0.0",
@@ -51,8 +52,10 @@
   },
   "dependencies": {
     "@beard/core": "^1.0.0-alpha.3",
+    "@beard/core.data": "^1.0.0-alpha.3",
     "inversify": "^4.3.0",
-    "reflect-metadata": "^0.1.10"
+    "reflect-metadata": "^0.1.10",
+    "sequelize": "^4.22.6"
   },
   "nyc": {
     "all": true,

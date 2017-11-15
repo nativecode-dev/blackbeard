@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "declaration": true,
+    "isolatedModules": false,
+    "lib": [
+      "es2015"
+    ],
+    "noImplicitAny": true,
+    "typeRoots": [],
+    "types": []
+  },
+  "exclude": [
+    "node_modules",
+    "src/**/*.spec.ts",
+    "src/**/*.spec.tsx"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ]
+}

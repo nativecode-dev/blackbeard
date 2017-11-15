@@ -1,6 +1,7 @@
 node_modules/
 src/
 
+.gitignore
 gulpfile.ts
 tsconfig.json
 tslint.json
