@@ -3,7 +3,7 @@
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg?style=flat-square)](https://lernajs.io/)
 
 <p align="center">
-  <img src="assets/blackbeard-temp.png">
+  <img src="blackbeard-temp.png">
 </p>
 
 `blackbeard` is a set of libraries and applications that form the basis for an advanced media management system. Designed for large media libraries that span in the terabytes and hardware capable of running a set of microservices is required first.
