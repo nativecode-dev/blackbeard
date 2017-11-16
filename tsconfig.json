@@ -16,15 +16,6 @@
     "noImplicitAny": false,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "paths": {
-      "*": [
-        "./core/src/*",
-        "./core.browser/src/*",
-        "./core.node/src/*",
-        "./services/src/*",
-        "./ui/src/*"
-      ]
-    },
     "pretty": true,
     "removeComments": true,
     "rootDir": ".",
