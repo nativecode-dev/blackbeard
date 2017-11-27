@@ -54,6 +54,6 @@ export class Variables {
       const config = await this.config.load<ConfigFile>('nas-config.json')
       return Object.assign(config.env, process.env)
     }
-    return process.env
+    return {}
   }
 }

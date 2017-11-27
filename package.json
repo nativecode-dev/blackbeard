@@ -5,7 +5,7 @@
   },
   "description": "It's me app, matey...yarrrrrrr...",
   "devDependencies": {
-    "@beard/chest": "^2.0.0-alpha-4",
+    "@beard/chest": "^2.0.2",
     "@types/node": "^8.0.50",
     "chalk": "^2.3.0",
     "lerna": "^2.5.1"
@@ -16,7 +16,8 @@
   "private": true,
   "repository": "git@github.com:nativecode-dev/blackbeard.git",
   "scripts": {
-    "build": "lerna bootstrap && lerna run build && chest",
+    "build": "lerna bootstrap && lerna run build",
+    "postbuild": "chest typings packages",
     "clean": "lerna run clean",
     "docker": "lerna run build --scope @beard/services && lerna run docker --scope=@beard/services",
     "docker-push": "lerna run docker-push --scope=@beard/services",
