@@ -5,7 +5,7 @@
   },
   "description": "It's me app, matey...yarrrrrrr...",
   "devDependencies": {
-    "@beard/chest": "^2.0.2",
+    "@beard/chest": "^2.2.0",
     "@types/node": "^8.0.50",
     "chalk": "^2.3.0",
     "lerna": "^2.5.1"
