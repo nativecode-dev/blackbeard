@@ -5,10 +5,17 @@
   },
   "description": "It's me app, matey...yarrrrrrr...",
   "devDependencies": {
-    "@beard/chest": "^2.2.0",
+    "@beard/chest": "^2.2.1",
+    "@types/chai": "^4.0.6",
+    "@types/mocha": "^2.2.44",
     "@types/node": "^8.0.50",
+    "chai": "^4.1.2",
     "chalk": "^2.3.0",
-    "lerna": "^2.5.1"
+    "coveralls": "^3.0.0",
+    "lerna": "^2.5.1",
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0",
+    "ts-node": "^3.3.0"
   },
   "homepage": "https://github.com/nativecode-dev/blackbeard",
   "license": "MIT",
