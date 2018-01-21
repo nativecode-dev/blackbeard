@@ -187,21 +187,21 @@
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.0.7.tgz#afd4c610f16f6386d320e0738ec38ba7d3431917"
 
-"@types/react-dom@^16.0.2":
+"@types/react-dom@^16.0.1", "@types/react-dom@^16.0.2":
   version "16.0.3"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.0.3.tgz#8accad7eabdab4cca3e1a56f5ccb57de2da0ff64"
   dependencies:
     "@types/node" "*"
     "@types/react" "*"
 
-"@types/react-redux@^5.0.12":
+"@types/react-redux@^5.0.12", "@types/react-redux@^5.0.9":
   version "5.0.14"
   resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-5.0.14.tgz#f3fc30dcbb2d20455a714f591cc27f77b4df09bb"
   dependencies:
     "@types/react" "*"
     redux "^3.6.0"
 
-"@types/react@*", "@types/react@^16.0.21":
+"@types/react@*", "@types/react@^16.0.10", "@types/react@^16.0.21":
   version "16.0.34"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.34.tgz#7a8f795afd8a404a9c4af9539b24c75d3996914e"
 
@@ -3852,12 +3852,6 @@ invariant@^2.0.0, invariant@^2.2.2:
   dependencies:
     loose-envify "^1.0.0"
 
-inversify-react@^0.2.2:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/inversify-react/-/inversify-react-0.2.4.tgz#e9b6760b5e0201f6dd7cd0d62a5cdd387ef595da"
-  dependencies:
-    prop-types "^15.6.0"
-
 inversify@^4.3.0, inversify@^4.5.1:
   version "4.9.0"
   resolved "https://registry.yarnpkg.com/inversify/-/inversify-4.9.0.tgz#caa01f5856cfa0499aaaed9b1a635ef0c4a9f4d3"
@@ -6504,6 +6498,19 @@ react-dom@^16.0.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
+react-inversify@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-inversify/-/react-inversify-1.2.1.tgz#dda73b1903f1192264ef17df2a56498f1a82ed9a"
+  dependencies:
+    "@types/react" "^16.0.10"
+    "@types/react-dom" "^16.0.1"
+    "@types/react-redux" "^5.0.9"
+    inversify "^4.3.0"
+    react "^16.0.0"
+    react-dom "^16.0.0"
+    react-redux "^5.0.6"
+    reflect-metadata "^0.1.10"
+
 react-redux@^5.0.6:
   version "5.0.6"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.6.tgz#23ed3a4f986359d68b5212eaaa681e60d6574946"
@@ -8042,10 +8049,6 @@ typedarray@^0.0.6, typedarray@~0.0.5:
 typescript@^2.5.3, typescript@^2.6.1:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.6.2.tgz#3c5b6fd7f6de0914269027f03c0946758f7673a4"
-
-typescript@^2.7.0-dev.20180120:
-  version "2.7.0-dev.20180120"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.7.0-dev.20180120.tgz#64470f65617bc9cdd95b23dcedf210f83aa73771"
 
 ua-parser-js@^0.7.9:
   version "0.7.17"

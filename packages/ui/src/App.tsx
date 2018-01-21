@@ -3,9 +3,10 @@ import './App.scss'
 import * as Browser from '@beard/core.browser'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { Provider } from 'inversify-react'
 
 import Container from './inversify.config'
+
+import { Provider } from 'react-inversify'
 import { Movies } from './components'
 
 export class App extends React.Component {

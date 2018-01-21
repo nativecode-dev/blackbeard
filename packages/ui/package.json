@@ -24,7 +24,6 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^2.30.1",
     "inversify": "^4.5.1",
-    "inversify-react": "^0.2.2",
     "json-loader": "^0.5.7",
     "node-sass": "^4.6.0",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
@@ -53,6 +52,7 @@
     "@beard/core.browser": "^1.0.0-alpha.3",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-inversify": "^1.2.1",
     "react-redux": "^5.0.6"
   },
   "bugs": {

@@ -2,9 +2,10 @@ import './AppManager.scss'
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { Provider } from 'inversify-react'
 
 import Container from './inversify.config'
+
+import { Provider } from 'react-inversify'
 
 export class AppManager extends React.Component {
   public render() {
