@@ -1,3 +1,3 @@
-export * from './Movies/Movies'
-export * from './Settings/Settings'
-export * from './Shows/Shows'
+export * from './Card/Card'
+export * from './Login/Login'
+export * from './Modal/Modal'

@@ -6,23 +6,15 @@ export enum ButtonType {
   Submit = 'submit',
 }
 
-export interface ButtonDispatchers {
-  click: (event: React.MouseEvent<HTMLButtonElement>) => void
-}
-
 export interface ButtonProps {
   text: string
   type: ButtonType
 }
 
-export class Button extends React.Component<ButtonProps, ButtonDispatchers> {
+export class Button extends React.Component<ButtonProps> {
   public render() {
     return (
-      <button
-        className='bb-button'
-        onClick={this.state.click}
-        type={this.props.type}
-      >
+      <button className='bb-button' type={this.props.type}>
         {this.props.text}
       </button>
     )

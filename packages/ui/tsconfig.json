@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "declaration": false,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "jsx": "react",
     "lib": [
       "dom",

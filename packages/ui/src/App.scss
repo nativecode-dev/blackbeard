@@ -1,1 +1,7 @@
-@import './_core.scss'
+@import './_core.scss';
+body {
+    background-color: rgb(50, 50, 150);
+    #app {
+        margin: 3em;
+    }
+}

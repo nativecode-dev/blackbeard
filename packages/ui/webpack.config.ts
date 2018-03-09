@@ -98,16 +98,19 @@ export default {
   },
   module: {
     rules: [{
-      test: /\.scss$/,
+      test: /\.png$/i,
+      use: ['img-loader'],
+    }, {
+      test: /\.scss$/i,
       use: Styles.extract({
         fallback: 'style-loader',
         use: ['css-loader', 'sass-loader']
       }),
     }, {
-      test: /\.tsx?$/,
+      test: /\.tsx?$/i,
       use: ['awesome-typescript-loader'],
     }, {
-      test: /\.json$/,
+      test: /\.json$/i,
       use: ['json-loader']
     }],
     exprContextCritical: false,

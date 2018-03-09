@@ -1,16 +1,18 @@
 import './AppManager.scss'
 
+import * as app from './appstate'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 
-import Container from './inversify.config'
+import container from './inversify.config'
 
-import { Provider } from 'react-inversify'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 
 export class AppManager extends React.Component {
   public render() {
     return (
-      <Provider container={Container}>
+      <Provider store={createStore<app.AppState>(app.appstate, {})}>
         <div className='appspace'>
           {this.props.children}
         </div>
