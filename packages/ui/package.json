@@ -44,7 +44,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "prebuild": "yarn run clean",
+    "prebuild": "yarn && yarn run clean",
     "clean": "rimraf dist",
     "test": "echo 'No Available Tests'",
     "devserver": "webpack-dev-server"
