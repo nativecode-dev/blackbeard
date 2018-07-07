@@ -1,8 +1,6 @@
 import { Cluster, ClusterManager, CreateBucketOptions } from 'couchbase'
 
 import { Logger } from '@beard/core'
-import { AsyncBucket } from './AsyncBucket'
-import { AsyncCluster } from './AsyncCluster'
 
 export class AsyncManager {
   private readonly log: Logger

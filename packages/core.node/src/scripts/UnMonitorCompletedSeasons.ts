@@ -39,7 +39,6 @@ export class UnMonitorCompletedSeasons extends Script {
   }
 
   private async processSeason(sonarr: Sonarr, series: Series, season: SeriesSeason, episodes: Episode[]): Promise<void> {
-    const key = `${series.id}`
     const seriesId = series.id
     const seasonNumber = season.seasonNumber
 

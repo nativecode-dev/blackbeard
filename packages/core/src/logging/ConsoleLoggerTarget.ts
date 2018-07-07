@@ -1,6 +1,5 @@
 import 'reflect-metadata'
 
-import * as debug from 'debug'
 import { BaseLoggerTarget } from './BaseLoggerTarget'
 import { LoggerNamespace } from './LoggerNamespace'
 import { LoggerTarget } from './LoggerTarget'
@@ -35,7 +34,6 @@ export class ConsoleLoggerTarget extends BaseLoggerTarget {
   }
 
   protected write(type: LogMessageType, message: string, ...args: string[]): Promise<void> {
-    const key = this.key(this.namespace.value, type)
     const writer = this.targets[type]
     if (writer) {
       writer(this.namespace.value, message, ...args)
@@ -45,7 +43,6 @@ export class ConsoleLoggerTarget extends BaseLoggerTarget {
 
   private createTargets(): void {
     Object.keys(LogMessageType).map(type => {
-      const namespace = `${this.namespace.value}:${type.toLowerCase()}`
       this.targets[type] = (...args: any[]): void => console.log(...args)
     })
   }

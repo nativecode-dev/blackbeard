@@ -1,4 +1,4 @@
-import { Image, Quality, Rating } from '../../models'
+import { Image, Rating } from '../../models'
 import { MovieFile } from './MovieFile'
 import { MovieTitle } from './MovieTitle'
 

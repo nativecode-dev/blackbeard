@@ -6,15 +6,12 @@ import { inject, injectable, multiInject } from 'inversify'
 import {
   Logger,
   LoggerType,
-  Reject,
 } from '@beard/core'
 
 import {
-  Config,
   FileSystem,
   HydraModule,
   HydraModuleConfig,
-  Module,
   PlatformProvider,
   Script,
   ScriptType
@@ -33,10 +30,9 @@ interface SchedulerConfig {
 @injectable()
 export class Scheduler extends HydraModule {
   private readonly scripts: Script[]
-  private schedulerConfig: SchedulerConfig
+  private schedulerConfig: SchedulerConfig | undefined
 
   constructor(
-    config: Config,
     files: FileSystem,
     platform: PlatformProvider,
     @inject(LoggerType) logger: Logger,
@@ -57,6 +53,11 @@ export class Scheduler extends HydraModule {
 
   protected run(...args: string[]): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
+      if (this.schedulerConfig === undefined) {
+        reject('not configured')
+        return
+      }
+
       try {
         const jobs = this.schedulerConfig.jobs.map((config: JobConfig) => this.job(config))
         this.log.info(`${jobs.length} job(s) scheduled`)

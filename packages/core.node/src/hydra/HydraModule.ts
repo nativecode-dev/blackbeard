@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 
-import hydra = require('hydra')
+import * as hydra from 'hydra'
 
 import { Logger, Reject } from '@beard/core'
 import { injectable } from 'inversify'
@@ -12,7 +12,7 @@ import { PlatformProvider } from '../PlatformProvider'
 
 @injectable()
 export abstract class HydraModule extends Module {
-  private reject: Reject
+  private reject: Reject | undefined
   constructor(files: FileSystem, logger: Logger, platform: PlatformProvider) {
     super(files, logger, platform)
   }
@@ -24,7 +24,6 @@ export abstract class HydraModule extends Module {
       const config = await this.configure()
 
       try {
-        const serviceConfig = await hydra.init(config, false)
         const service = await hydra.registerService()
         this.log.trace(`registered hydra service: ${service.serviceName}@${service.serviceIP}:${service.servicePort}`)
         hydra.on('message', (message: any) => this.log.trace('message', message))

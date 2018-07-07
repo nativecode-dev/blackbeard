@@ -1,10 +1,7 @@
 import container from './inversify.config'
 
 import * as cluster from 'cluster'
-import * as path from 'path'
-import * as core from '@beard/core'
 import * as server from '@beard/core.node'
-import * as modules from './modules'
 
 async function main(command: string): Promise<void> {
   command = (command || process.env.APPCMD || '').toLowerCase()
@@ -27,7 +24,7 @@ if (cluster.isMaster) {
       .on('exit', (code: number, signal: string) => {
         /**
          * Crash protection is enabled by default, so if the
-         * app dies it will be restarted. Postive code values
+         * app dies it will be restarted. Positive code values
          * will restart the application while negative code
          * values will exit all processes.
          */

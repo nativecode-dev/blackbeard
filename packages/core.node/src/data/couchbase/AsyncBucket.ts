@@ -9,14 +9,14 @@ import { AsyncManager } from './AsyncManager'
 export type QueryResponse = cb.Bucket.N1qlQueryResponse | cb.Bucket.ViewQueryResponse
 
 export class AsyncBucket {
-  public configThrottle: number
-  public connectionTimeout: number
-  public durabilityInterval: number
-  public durabilityTimeout: number
-  public managementTimeout: number
-  public nodeConnectionTimeout: number
-  public operationTimeout: number
-  public viewTimeout: number
+  public configThrottle?: number
+  public connectionTimeout?: number
+  public durabilityInterval?: number
+  public durabilityTimeout?: number
+  public managementTimeout?: number
+  public nodeConnectionTimeout?: number
+  public operationTimeout?: number
+  public viewTimeout?: number
 
   private readonly bucket: cb.Bucket
   private readonly cluster: AsyncCluster

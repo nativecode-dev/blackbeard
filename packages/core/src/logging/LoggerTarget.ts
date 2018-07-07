@@ -1,4 +1,3 @@
-import { LoggerNamespace } from './LoggerNamespace'
 import { LogMessageType } from './LogMessageType'
 
 export interface LoggerTarget {

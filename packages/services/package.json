@@ -53,22 +53,22 @@
   "dependencies": {
     "@beard/core": "^1.0.0-alpha.3",
     "@beard/core.node": "^1.0.0-alpha.3",
-    "@nofrills/types": "^0.9.0",
+    "@nofrills/types": "^3.1.4",
     "async-throttle": "^1.1.0",
     "common-locations": "^3.0.2",
-    "couchbase": "^2.4.1",
+    "couchbase": "^2.4.6",
     "debug": "^3.1.0",
-    "hydra": "^1.4.27",
-    "inversify": "^4.3.0",
+    "hydra": "^1.6.8",
+    "inversify": "^4.13.0",
     "irc-factory": "^1.10.1",
     "irc-formatting": "^1.0.0-rc3",
-    "lodash.merge": "^4.6.0",
+    "lodash.merge": "^4.6.1",
     "module": "^1.2.5",
     "node-schedule": "^1.2.5",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "reflect-metadata": "^0.1.10",
-    "yargs": "^10.0.3"
+    "yargs": "^12.0.1"
   },
   "nyc": {
     "all": true,
@@ -91,6 +91,7 @@
   "scripts": {
     "build": "gulp build",
     "clean": "gulp clean",
+    "lint": "gulp lint",
     "docker": "sh ./docker-build.sh",
     "test": "cross-env DEBUG= LCB_LOGLEVEL=5 NODE_ENV=testing NODE_PATH=. gulp test",
     "start": "clear && node index.js",

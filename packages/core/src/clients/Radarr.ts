@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 
-import fetch, { RequestInit } from 'node-fetch'
+import { RequestInit } from 'node-fetch'
 import { inject, injectable } from 'inversify'
 
 import { Logger, LoggerType } from '../logging'

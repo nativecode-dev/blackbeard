@@ -1,8 +1,6 @@
 import 'reflect-metadata'
 
-import * as debug from 'debug'
 import { injectable } from 'inversify'
-import { LoggerNamespace } from './LoggerNamespace'
 import { LoggerTarget } from './LoggerTarget'
 import { LogMessageType } from './LogMessageType'
 

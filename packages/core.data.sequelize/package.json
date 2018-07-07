@@ -53,9 +53,9 @@
   "dependencies": {
     "@beard/core": "^1.0.0-alpha.3",
     "@beard/core.data": "^1.0.0-alpha.3",
-    "inversify": "^4.3.0",
+    "inversify": "^4.13.0",
     "reflect-metadata": "^0.1.10",
-    "sequelize": "^4.22.6"
+    "sequelize": "^4.38.0"
   },
   "nyc": {
     "all": true,
@@ -78,6 +78,7 @@
   "scripts": {
     "build": "gulp build",
     "clean": "gulp clean",
+    "lint": "gulp lint",
     "test": "cross-env DEBUG= LCB_LOGLEVEL=5 NODE_ENV=testing NODE_PATH=. gulp test"
   },
   "bugs": {

@@ -1,20 +1,16 @@
 import 'reflect-metadata'
 
 import * as fs from 'fs'
-import { inject, injectable } from 'inversify'
-import { Logger, LoggerType } from '@beard/core'
+import { injectable } from 'inversify'
 import { PathTransformer } from './PathTransformer'
 
-type NodeCallback<T> = (error: NodeJS.ErrnoException, result: T) => void
-type NodeFunction<T> = (...args: any[]) => void
+type NodeFunction = (...args: any[]) => void
 
 @injectable()
 export class FileSystem {
-  private readonly log: Logger
   private readonly paths: PathTransformer
 
-  constructor( @inject(LoggerType) logger: Logger) {
-    this.log = logger.extend('filesystem')
+  constructor() {
     this.paths = new PathTransformer()
   }
 
@@ -60,7 +56,7 @@ export class FileSystem {
     return this.fileWrite(filepath, buffer)
   }
 
-  private promisify<T>(nodefn: NodeFunction<T>, ...args: any[]): Promise<T> {
+  private promisify<T>(nodefn: NodeFunction, ...args: any[]): Promise<T> {
     return new Promise((resolve, reject) => {
       const params = args.concat([(error: NodeJS.ErrnoException, result: T): void => {
         if (error) {

@@ -2,7 +2,7 @@ import { HydraModule, HydraModuleConfig } from '@beard/core.node'
 import { SemanticConfig } from './config'
 
 export class Semantic extends HydraModule {
-  private semanticConfig: SemanticConfig
+  private semanticConfig: SemanticConfig | undefined
 
   public get name(): string {
     return 'semantic'

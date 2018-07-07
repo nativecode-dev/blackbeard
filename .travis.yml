@@ -1,12 +1,21 @@
 cache: yarn
 language: node_js
 node_js:
+  - 'node'
   - '8'
 os:
   - linux
-services:
-  - docker
-sudo: required
-after_success:
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-  - cd packages/services && ./docker-push.sh
+stages:
+  - test
+  - name: deploy
+    if: (branch = "master" OR branch = "master-lts" OR branch = "develop") AND type != pull_request AND tag IS blank
+jobs:
+  include:
+    - stage: deploy
+      node_js: '8'
+      os: linux
+      script:
+        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+        - yarn run test
+      after_success:
+        - cd packages/services && ./docker-push.sh

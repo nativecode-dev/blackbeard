@@ -1,5 +1,3 @@
-import { ChainAsyncHandler } from './ChainAsync'
-
 export interface AppConfigProvider {
   handler(key: string): Promise<any>
 }

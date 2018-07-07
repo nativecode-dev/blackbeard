@@ -3,7 +3,6 @@ import 'mocha'
 import * as gulp from 'gulp'
 import * as shell from 'gulp-shell'
 import * as sourcemap from 'gulp-sourcemaps'
-import * as ts from 'gulp-typescript'
 import * as tslint from 'gulp-tslint'
 import * as gulpLoadPlugins from 'gulp-load-plugins'
 
@@ -58,7 +57,7 @@ export class GulpFile {
     const stream = this.src('tsc', ['src/**/*.ts', 'src/**/*.tsx'])
       .pipe(this.plugins.changed('dist'))
       .pipe(sourcemap.init())
-      .pipe(this.plugins.typescript('tsconfig.json'))
+      .pipe(this.plugins.typescript('tsconfig.build.json'))
 
     return smerge(stream, stream.js)
       .pipe(sourcemap.write('.'))

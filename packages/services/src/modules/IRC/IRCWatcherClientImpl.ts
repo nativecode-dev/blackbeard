@@ -1,4 +1,4 @@
-import { IRCInterfaces, IRCClientOptions } from 'irc-factory'
+import { IRCInterfaces } from 'irc-factory'
 
 import { Logger } from '@beard/core'
 import { DataMessage } from './messages'

@@ -30,7 +30,6 @@ export class DebugLoggerTarget extends BaseLoggerTarget {
   }
 
   protected write(type: LogMessageType, message: string, ...args: string[]): Promise<void> {
-    const key = this.key(this.namespace.value, type)
     const writer = this.targets[type]
     if (writer) {
       writer(message, ...args)

@@ -15,7 +15,7 @@ interface ConfigFile {
 }
 
 export const Converters = {
-  date: (...args: any[]) => new Date(...args),
+  date: (...args: any[]) => new Date(args[0]),
   bool: (value: any) => Boolean(value),
   num: (value: any) => Number(value),
   str: (value: any) => String(value),

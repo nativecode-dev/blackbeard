@@ -1,6 +1,5 @@
 import 'reflect-metadata'
 
-import * as process from 'process'
 import * as core from '@beard/core'
 import * as node from '@beard/core.node'
 

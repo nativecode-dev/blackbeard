@@ -1,10 +1,10 @@
 import 'reflect-metadata'
 
-import { Api, IRCInterfaces, IRCRPC, IRCClientOptions, IRCMessage, IRCOptions } from 'irc-factory'
+import { Api, IRCInterfaces } from 'irc-factory'
 import { inject, injectable } from 'inversify'
 
 import { DataMessage } from './messages'
-import { IRCEntries, IRCEntry, IRCParserClientKind } from './IRCEntry'
+import { IRCEntry, IRCParserClientKind } from './IRCEntry'
 import { IRCWatcherClient } from './IRCWatcherClient'
 import { IRCWatcherConfig } from './IRCWatcherConfig'
 import { IRCWatcherClientImpl } from './IRCWatcherClientImpl'
@@ -15,18 +15,15 @@ import {
   LoggerType,
   Protocol,
   ReleaseInfo,
-  Reject,
   Radarr,
   Sonarr,
 } from '@beard/core'
 
 import {
-  Converters,
   FileSystem,
   HydraModule,
   HydraModuleConfig,
   PlatformProvider,
-  Variables
 } from '@beard/core.node'
 
 interface IRCFactoryClients {
@@ -45,15 +42,13 @@ export class IRCWatcher extends HydraModule {
   private readonly handlers: IRCWatcherHandlers
   private readonly radarr: Radarr
   private readonly sonarr: Sonarr
-  private readonly vars: Variables
-  private watcherConfig: IRCWatcherConfig
+  private watcherConfig: IRCWatcherConfig | undefined
 
   constructor(
     files: FileSystem,
     platform: PlatformProvider,
     radarr: Radarr,
     sonarr: Sonarr,
-    vars: Variables,
     @inject(LoggerType) logger: Logger
   ) {
     super(files, logger, platform)
@@ -61,7 +56,6 @@ export class IRCWatcher extends HydraModule {
     this.handlers = { synchronize: this.synchronize }
     this.radarr = radarr
     this.sonarr = sonarr
-    this.vars = vars
   }
 
   public get name(): string {
@@ -95,17 +89,26 @@ export class IRCWatcher extends HydraModule {
 
   protected run(...args: string[]): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
+      if (this.watcherConfig === undefined) {
+        reject('not configured')
+        return
+      }
 
       const api = new Api()
-      Object.keys(this.watcherConfig.servers).forEach(key => {
-        const entry = this.watcherConfig.servers[key]
+      const config = this.watcherConfig
+      Object.keys(config.servers).forEach(key => {
+        const entry = config.servers[key]
         const interfaces = api.connect(entry.api)
         interfaces.events.on('message', (data: DataMessage): void => this.process(data, key, entry, interfaces))
       })
 
-      process.on('beforeExit', () => Object.keys(this.clients)
-        .map(key => this.clients[key])
-        .forEach(client => client.destroy())
+      process.on('beforeExit', () => {
+        Object.keys(this.clients)
+          .map(key => this.clients[key])
+          .forEach(client => client.destroy())
+
+        resolve()
+      }
       )
     })
   }

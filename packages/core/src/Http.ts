@@ -10,7 +10,7 @@ export abstract class HTTP {
   private readonly logger: Logger
 
   constructor( @inject(LoggerType) logger: Logger) {
-    this.logger = logger.extend(`${this.name}:http`)
+    this.logger = logger.extend('http')
   }
 
   public async delete<TResponse>(url: string): Promise<TResponse> {

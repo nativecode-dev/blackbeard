@@ -12,7 +12,7 @@ export abstract class Script {
 
   constructor( @inject(LoggerType) logger: Logger) {
     const max = os.cpus().length
-    this.logger = logger.extend(this.name)
+    this.logger = logger
     this.throttler = throttle(max)
     this.logger.trace(`throttling set to ${max}`)
   }
@@ -25,7 +25,7 @@ export abstract class Script {
     return this.logger
   }
 
-  protected throttle<T>(callback: () => Promise<T>): Promise<T> {
+  protected throttle<T>(callback: (...args: any[]) => Promise<T>): Promise<T> {
     return this.throttler(async (...args: any[]) => await callback(...args))
   }
 

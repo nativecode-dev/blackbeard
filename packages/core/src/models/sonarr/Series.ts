@@ -1,7 +1,6 @@
 import { SeriesStatus, SeriesType } from './enums'
 import { Image, Rating } from '../../models'
 import { SeriesSeason } from './SeriesSeason'
-import { SeriesStatistics } from './SeriesStatistics'
 import { SeriesTitle } from './SeriesTitle'
 
 export interface Series {

@@ -1,78 +1,14 @@
 {
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
     "baseUrl": "./packages",
-    "declaration": false,
-    "diagnostics": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": false,
-    "lib": [
-      "es2015"
-    ],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noImplicitAny": false,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "pretty": true,
-    "removeComments": true,
-    "rootDir": ".",
-    "sourceMap": true,
-    "strict": true,
-    "strictNullChecks": true,
-    "target": "es2015",
-    "types": [
-      "@beard/chest",
-      "@beard/core",
-      "@beard/core.browser",
-      "@beard/core.data",
-      "@beard/core.node",
-      "@nofrills/types",
-      "@types/chai",
-      "@types/couchbase",
-      "@types/debug",
-      "@types/extract-text-webpack-plugin",
-      "@types/gulp",
-      "@types/gulp-debug",
-      "@types/gulp-load-plugins",
-      "@types/gulp-mocha",
-      "@types/gulp-shell",
-      "@types/gulp-sourcemaps",
-      "@types/gulp-tslint",
-      "@types/html-webpack-plugin",
-      "@types/lodash.merge",
-      "@types/merge-stream",
-      "@types/mocha",
-      "@types/node",
-      "@types/node-fetch",
-      "@types/node-schedule",
-      "@types/react",
-      "@types/react-dom",
-      "@types/react-redux",
-      "@types/sequelize",
-      "@types/sinon",
-      "@types/webpack",
-      "@types/yargs",
-      "awesome-typescript-loader",
-      "chalk",
-      "common-locations",
-      "gulp-tslint",
-      "gulp-typescript",
-      "inversify",
-      "inversify-react",
-      "reflect-metadata",
-      "tslint",
-      "typescript"
-    ]
-  },
-  "exclude": [
-    "node_modules",
-    "packages"
-  ],
-  "include": [
-    "*.ts",
-    "packages/**/*.ts"
-  ]
+    "paths": {
+      "async-throttle": ["./core.node/types/async-throttle.d.ts"],
+      "hydra": ["./core.node/types/hydra.d.ts"],
+      "irc-factory": ["./services/types/irc-factory.d.ts"],
+      "irc-formatting": ["./services/types/irc-formatting.d.ts"],
+      "irc-message": ["./services/types/irc-message.d.ts"],
+      "@beard/*": ["./*/src"]
+    }
+  }
 }

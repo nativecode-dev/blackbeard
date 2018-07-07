@@ -7,7 +7,7 @@ import { Logger, LoggerType } from '../logging'
 import { Client } from './Client'
 import { Environment, EnvironmentType } from '../Environment'
 import { ServiceUri } from '../ServiceUri'
-import { Episode, QualityProfile, ReleaseInfo, Series, SeriesSeason } from '../models'
+import { Episode, QualityProfile, ReleaseInfo, Series } from '../models'
 
 @injectable()
 export class Sonarr extends Client {

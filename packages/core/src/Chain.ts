@@ -2,7 +2,6 @@ export type ChainHandler<T, R> = (value: T, next: ChainHandlerLink<T, R>) => R
 export type ChainHandlerLink<T, R> = (value: T) => R
 export type ChainHandlers<T, R> = Array<ChainHandler<T, R>>
 
-type Handler<T, R> = ChainHandler<T, R>
 type Link<T, R> = ChainHandlerLink<T, R>
 
 export class Chain<T, R> {

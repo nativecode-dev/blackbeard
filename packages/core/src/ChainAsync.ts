@@ -2,7 +2,6 @@ export type ChainAsyncHandler<T, R> = (value: T, next: ChainAsyncHandlerLink<T, 
 export type ChainAsyncHandlerLink<T, R> = (value: T) => Promise<R>
 export type ChainAsyncHandlers<T, R> = Array<ChainAsyncHandler<T, R>>
 
-type Handler<T, R> = ChainAsyncHandler<T, R>
 type Link<T, R> = ChainAsyncHandlerLink<T, R>
 
 export class ChainAsync<T, R> {

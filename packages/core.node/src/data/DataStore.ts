@@ -2,7 +2,7 @@ import 'reflect-metadata'
 
 import * as URL from 'url'
 import { Logger, LoggerType, Reject, Resolve } from '@beard/core'
-import { Bucket, Cluster, ClusterConstructorOptions, CouchbaseError } from 'couchbase'
+import { Bucket, Cluster, CouchbaseError } from 'couchbase'
 import { inject, injectable } from 'inversify'
 
 export type Model<T> = T | undefined
@@ -12,12 +12,12 @@ export type ModelResultCallback<T> = (error: ModelError, data: T) => void
 @injectable()
 export class DataStore {
   private readonly log: Logger
-  private bucket: Bucket
-  private cluster: Cluster
-  private initialized: Promise<void>
-  private _connected: boolean
+  private bucket: Bucket | undefined
+  private cluster: Cluster | undefined
+  private initialized: Promise<void> | undefined
+  private _connected: boolean = false
 
-  constructor( @inject(LoggerType) logger: Logger) {
+  constructor(@inject(LoggerType) logger: Logger) {
     this.log = logger.extend('datastore')
   }
 
@@ -56,21 +56,30 @@ export class DataStore {
   public async fetch<T>(key: string): Promise<Model<T>> {
     await this.initialized
     return new Promise<T>((resolve, reject) => {
-      this.bucket.get(key, this.result<T>(resolve, reject))
+      if (this.bucket) {
+        this.bucket.get(key, this.result<T>(resolve, reject))
+      }
+      reject()
     })
   }
 
   public async remove<T>(key: string): Promise<Model<T>> {
     await this.initialized
     return new Promise<T>((resolve, reject) => {
-      this.bucket.remove(key, this.result<T>(resolve, reject))
+      if (this.bucket) {
+        this.bucket.remove(key, this.result<T>(resolve, reject))
+      }
+      reject()
     })
   }
 
   public async save<T>(key: string, model: T): Promise<T> {
     await this.initialized
     return new Promise<T>((resolve, reject) => {
-      this.bucket.upsert(key, model, this.result<T>(resolve, reject))
+      if (this.bucket) {
+        this.bucket.upsert(key, model, this.result<T>(resolve, reject))
+      }
+      reject()
     })
   }
 

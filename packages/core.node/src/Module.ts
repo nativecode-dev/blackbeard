@@ -17,7 +17,7 @@ export abstract class Module {
   private readonly platform: Platform
 
   constructor(files: FileSystem, logger: Logger, platform: PlatformProvider) {
-    this.log = logger.extend(this.name)
+    this.log = logger
     this.files = files
     this.platform = platform.platform
   }

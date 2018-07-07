@@ -50,9 +50,9 @@
     "typescript": "^2.5.3"
   },
   "dependencies": {
-    "@nofrills/types": "^0.9.0",
-    "inversify": "^4.3.0",
-    "node-fetch": "^1.7.3",
+    "@nofrills/types": "^3.1.4",
+    "inversify": "^4.13.0",
+    "node-fetch": "^2.1.2",
     "reflect-metadata": "^0.1.10"
   },
   "nyc": {
@@ -76,6 +76,7 @@
   "scripts": {
     "build": "gulp build",
     "clean": "gulp clean",
+    "lint": "gulp lint",
     "test": "cross-env DEBUG= LCB_LOGLEVEL=5 NODE_ENV=testing NODE_PATH=. gulp test"
   },
   "bugs": {

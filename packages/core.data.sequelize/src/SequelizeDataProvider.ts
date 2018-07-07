@@ -1,6 +1,4 @@
-import { DataProvider, Filter, Model, Operator, Query } from '@beard/core.data'
-
-import { SequelizeQuery } from './SequelizeQuery'
+import { DataProvider, Model } from '@beard/core.data'
 
 export class SequelizeDataProvider implements DataProvider {
   public query<SequelizeQuery, TModel extends Model>(query: SequelizeQuery): Promise<TModel[]> {
